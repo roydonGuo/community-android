@@ -12,30 +12,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="80dp"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp">
+        android:layout_marginBottom="@dimen/dimen_100dp"
+        android:paddingLeft="@dimen/dimen_40dp"
+        android:paddingRight="@dimen/dimen_40dp">
 
         <Button
             android:id="@+id/button_login"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/dimen_100dp"
+            android:layout_height="@dimen/dimen_40dp"
             android:layout_alignParentLeft="true"
             android:background="@drawable/shape_login_button"
             android:drawableLeft="@drawable/baseline_login_24"
             android:text="@string/login"
-            android:textSize="16sp" />
+            android:textSize="@dimen/dimen_16sp" />
 
         <Button
             android:id="@+id/button_register"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/dimen_100dp"
+            android:layout_height="@dimen/dimen_40dp"
             android:layout_alignParentRight="true"
             android:background="@drawable/shape_login_button"
             android:text="@string/register"
             android:textColor="@color/white"
-            android:textSize="16sp" />
-
+            android:textSize="@dimen/dimen_16sp" />
 
     </RelativeLayout>
 

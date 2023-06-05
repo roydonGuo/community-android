@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dimen_300dp">300dp</dimen>
+    <dimen name="dimen_250dp">250dp</dimen>
+    <dimen name="dimen_200dp">200dp</dimen>
+    <dimen name="dimen_100dp">100dp</dimen>
+    <dimen name="dimen_90dp">90dp</dimen>
+    <dimen name="dimen_80dp">80dp</dimen>
+    <dimen name="dimen_50dp">50dp</dimen>
+    <dimen name="dimen_40dp">40dp</dimen>
+    <dimen name="dimen_30dp">30dp</dimen>
+    <dimen name="dimen_20dp">20dp</dimen>
+    <dimen name="dimen_18dp">18dp</dimen>
+    <dimen name="dimen_16dp">16dp</dimen>
+    <dimen name="dimen_10dp">10dp</dimen>
+    <dimen name="dimen_3dp">3dp</dimen>
+
+    <!-- 字体大小 -->
+    <dimen name="dimen_22sp">22sp</dimen>
+    <dimen name="dimen_18sp">18sp</dimen>
+    <!-- 著字体大小16sp -->
+    <dimen name="dimen_16sp">16sp</dimen>
+    <dimen name="dimen_12sp">12sp</dimen>
+
+    <!-- icon图标-->
+    <dimen name="dimen_icon_64dp">64dp</dimen>
+    <dimen name="dimen_icon_32dp">32dp</dimen>
+    <dimen name="dimen_icon_24dp">24dp</dimen>
+    <dimen name="dimen_icon_16dp">16dp</dimen>
+
+</resources>

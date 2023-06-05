@@ -10,27 +10,27 @@
     <!-- 背景图 -->
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="@dimen/dimen_250dp"
         android:scaleType="fitXY"
         android:src="@mipmap/login_background" />
 
     <!-- 注册框 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginTop="200dp"
+        android:layout_height="@dimen/dimen_300dp"
+        android:layout_marginTop="@dimen/dimen_200dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_height="@dimen/dimen_200dp"
+            android:layout_marginLeft="@dimen/dimen_20dp"
+            android:layout_marginRight="@dimen/dimen_20dp"
             android:background="@drawable/shape_login_form"
             android:gravity="center"
             android:orientation="vertical"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp">
+            android:paddingLeft="@dimen/dimen_30dp"
+            android:paddingRight="@dimen/dimen_30dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,28 +39,28 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/dimen_icon_24dp"
+                    android:layout_height="@dimen/dimen_icon_24dp"
                     android:src="@mipmap/icon_username" />
 
                 <EditText
                     android:id="@+id/et_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="@dimen/dimen_20dp"
                     android:background="@null"
                     android:hint="@string/username_hint"
                     android:text=""
-                    android:textColor="#000000"
-                    android:textColorHint="#bcbcbc"
-                    android:textSize="18sp" />
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/dimen_18sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_height="@dimen/dimen_3dp"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:layout_marginBottom="@dimen/dimen_20dp"
                 android:background="@color/element" />
 
             <LinearLayout
@@ -70,22 +70,22 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/dimen_icon_24dp"
+                    android:layout_height="@dimen/dimen_icon_24dp"
                     android:src="@mipmap/icon_password" />
 
                 <EditText
                     android:id="@+id/et_password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="@dimen/dimen_20dp"
                     android:background="@null"
                     android:hint="@string/password_hint"
                     android:inputType="textPassword"
                     android:text=""
-                    android:textColor="#000000"
-                    android:textColorHint="#bcbcbc"
-                    android:textSize="18sp" />
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/dimen_18sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -98,14 +98,14 @@
             <Button
                 android:id="@+id/btn_login"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginRight="30dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:layout_marginLeft="@dimen/dimen_30dp"
+                android:layout_marginTop="@dimen/dimen_50dp"
+                android:layout_marginRight="@dimen/dimen_30dp"
                 android:background="@drawable/shape_login_button_big"
                 android:text="@string/register"
                 android:textColor="@color/white"
-                android:textSize="22sp" />
+                android:textSize="@dimen/dimen_22sp" />
         </LinearLayout>
 
     </LinearLayout>
