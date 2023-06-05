@@ -9,4 +9,8 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="element">#409EFF</color>
+
+    <!-- login-form -->
+    <color name="login_form_background">#E9EDF1</color>
+
 </resources>
