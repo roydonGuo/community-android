@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * @author roydon
  * @date 2023/6/6 2:30
  */
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     public Context context;
 
@@ -21,7 +21,16 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = this;
+        setContentView(initLayout());
+        initView();
+        initData();
     }
+
+    protected abstract int initLayout();
+
+    protected abstract void initView();
+
+    protected abstract void initData();
 
     // 短toast
     public void showShortToast(String msg) {
@@ -45,14 +54,14 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected void insertVal(String key, String val) {
-        SharedPreferences sp = getSharedPreferences("sp_user", MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences("sp_roydon", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putString(key, val);
         editor.commit();
     }
 
     protected String findByKey(String key) {
-        SharedPreferences sp = getSharedPreferences("sp_user", MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences("sp_roydon", MODE_PRIVATE);
         return sp.getString(key, "");
     }
 

@@ -16,4 +16,6 @@
     <color name="login_form_background">#ADE9EDF1</color>
     <color name="login_edittext_background">#7EC4C7CA</color>
 
+    <color name="divider">#e8e7e7</color>
+
 </resources>

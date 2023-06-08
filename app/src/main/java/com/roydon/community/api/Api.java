@@ -43,7 +43,7 @@ public class Api {
     }
 
     public void postRequest(Context context, final HttpCallback callback) {
-        SharedPreferences sp = context.getSharedPreferences("sp_user", MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences("sp_roydon", MODE_PRIVATE);
         String token = sp.getString("token", "");
         JSONObject jsonObject = new JSONObject(mParams);
         String jsonStr = jsonObject.toString();
@@ -69,7 +69,7 @@ public class Api {
     }
 
     public void getRequest(Context context, final HttpCallback callback) {
-        SharedPreferences sp = context.getSharedPreferences("sp_ttit", MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences("sp_roydon", MODE_PRIVATE);
         String token = sp.getString("token", "");
         String url = getAppendUrl(requestUrl, mParams);
         Request request = new Request.Builder().url(url).addHeader("token", token).get().build();
