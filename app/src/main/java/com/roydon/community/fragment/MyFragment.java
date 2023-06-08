@@ -1,20 +1,14 @@
 package com.roydon.community.fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+
 import com.roydon.community.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MyFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MyFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -34,18 +28,11 @@ public class MyFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment MyFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MyFragment newInstance(String param1, String param2) {
-        MyFragment fragment = new MyFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public static MyFragment newInstance() {
+        return new MyFragment();
     }
 
     @Override
