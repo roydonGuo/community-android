@@ -4,36 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/shape_login_register_background"
     tools:context=".activity.RegisterActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_300dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
         <!-- 背景图 -->
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_250dp"
+            android:layout_height="@dimen/dimen_200dp"
             android:scaleType="fitXY"
             android:src="@mipmap/login_background" />
         <!-- 页面标题 -->
         <TextView
             android:id="@+id/tv_login_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_20dp"
-            android:layout_marginTop="@dimen/dimen_50dp"
+            android:layout_marginTop="@dimen/dimen_189dp"
+            android:gravity="center"
             android:text="@string/register"
             android:textColor="@color/black"
-            android:textSize="@dimen/dimen_22sp" />
+            android:textSize="@dimen/dimen_18sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <!-- 注册框 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_310dp"
-        android:layout_marginTop="@dimen/dimen_200dp"
+        android:layout_marginTop="@dimen/dimen_220dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -131,7 +132,8 @@
                 android:background="@drawable/shape_login_button_big"
                 android:text="@string/register"
                 android:textColor="@color/white"
-                android:textSize="@dimen/dimen_18sp" />
+                android:textSize="@dimen/dimen_18sp"
+                android:textStyle="bold" />
 
             <!--去登录-->
             <TextView

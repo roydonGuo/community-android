@@ -2,8 +2,11 @@
 <resources>
     <dimen name="dimen_310dp">310dp</dimen>
     <dimen name="dimen_300dp">300dp</dimen>
+    <dimen name="dimen_270dp">270dp</dimen>
     <dimen name="dimen_250dp">250dp</dimen>
+    <dimen name="dimen_220dp">220dp</dimen>
     <dimen name="dimen_200dp">200dp</dimen>
+    <dimen name="dimen_189dp">189dp</dimen>
     <dimen name="dimen_100dp">100dp</dimen>
     <dimen name="dimen_90dp">90dp</dimen>
     <dimen name="dimen_80dp">80dp</dimen>

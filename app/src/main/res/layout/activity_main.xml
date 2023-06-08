@@ -23,7 +23,8 @@
             android:layout_alignParentLeft="true"
             android:background="@drawable/shape_login_button"
             android:text="@string/login"
-            android:textSize="@dimen/dimen_16sp" />
+            android:textSize="@dimen/dimen_16sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/button_register"
@@ -33,7 +34,8 @@
             android:background="@drawable/shape_login_button"
             android:text="@string/register"
             android:textColor="@color/white"
-            android:textSize="@dimen/dimen_16sp" />
+            android:textSize="@dimen/dimen_16sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
