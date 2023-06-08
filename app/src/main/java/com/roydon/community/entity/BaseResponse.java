@@ -1,15 +1,13 @@
 package com.roydon.community.entity;
 
-public class LoginResponse {
+public class BaseResponse {
 
     /**
-     * "msg": "操作成功",
-     * "code": 200,
-     * "token": "eyJhbGciOi..."
+     * msg : success
+     * code : 200
      */
     private String msg;
     private int code;
-    private String token;
 
     public String getMsg() {
         return msg;
@@ -25,13 +23,5 @@ public class LoginResponse {
 
     public void setCode(int code) {
         this.code = code;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 }
