@@ -9,7 +9,7 @@
     tools:context=".activity.HomeActivity">
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/vp_2"
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="84dp" />
 
