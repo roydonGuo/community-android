@@ -74,7 +74,7 @@
                     android:text=""
                     android:textColor="@color/black"
                     android:textColorHint="@color/grey"
-                    android:textSize="@dimen/dimen_12sp" />
+                    android:textSize="@dimen/dimen_16sp" />
             </LinearLayout>
             <!-- 分割线 -->
             <View
@@ -111,7 +111,7 @@
                     android:text=""
                     android:textColor="@color/black"
                     android:textColorHint="@color/grey"
-                    android:textSize="@dimen/dimen_12sp" />
+                    android:textSize="@dimen/dimen_16sp" />
             </LinearLayout>
         </LinearLayout>
 
