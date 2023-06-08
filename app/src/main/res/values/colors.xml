@@ -13,6 +13,7 @@
     <color name="element">#409EFF</color>
 
     <!-- login-form -->
-    <color name="login_form_background">#E9EDF1</color>
+    <color name="login_form_background">#ADE9EDF1</color>
+    <color name="login_edittext_background">#7EC4C7CA</color>
 
 </resources>

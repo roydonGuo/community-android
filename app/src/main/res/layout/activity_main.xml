@@ -22,7 +22,6 @@
             android:layout_height="@dimen/dimen_40dp"
             android:layout_alignParentLeft="true"
             android:background="@drawable/shape_login_button"
-            android:drawableLeft="@drawable/baseline_login_24"
             android:text="@string/login"
             android:textSize="@dimen/dimen_16sp" />
 

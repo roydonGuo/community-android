@@ -8,7 +8,7 @@
                 android:left="2dp"
                 android:right="2dp"
                 android:top="2dp" />
-            <corners android:radius="20dp" />
+            <corners android:radius="25dp" />
         </shape>
     </item>
     <!-- 中心背景 -->
@@ -17,8 +17,8 @@
             android:shape="rectangle"
             android:useLevel="false">
             <!-- 实心 -->
-            <solid android:color="@color/login_form_background" />
-            <corners android:radius="20dp" />
+            <solid android:color="@color/login_edittext_background" />
+            <corners android:radius="25dp" />
             <padding
                 android:bottom="10dp"
                 android:left="10dp"

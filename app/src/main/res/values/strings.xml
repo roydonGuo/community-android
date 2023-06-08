@@ -3,8 +3,12 @@
     <string name="main_text_size">16sp</string>
     <!-- 登录注册按钮-->
     <string name="login">登录</string>
+    <string name="to_login">去登录</string>
     <string name="register">注册</string>
     <!-- 登录框 -->
     <string name="username_hint">请输入账号</string>
     <string name="password_hint">请输入密码</string>
+    <!-- 登录标题 -->
+    <string name="username_password_login">账号密码登录</string>
+    <string name="sms_login">手机短信登录</string>
 </resources>
