@@ -1,6 +1,6 @@
 package com.roydon.community.activity;
 
-import android.os.Bundle;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,14 +27,19 @@ public class LoginActivity extends BaseActivity {
     private Button btnLogin;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    protected int initLayout() {
+        return R.layout.activity_login;
+    }
 
+    @Override
+    protected void initView() {
         etUsername = findViewById(R.id.et_username);
         etPassword = findViewById(R.id.et_password);
         btnLogin = findViewById(R.id.btn_login);
+    }
 
+    @Override
+    protected void initData() {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,9 +47,6 @@ public class LoginActivity extends BaseActivity {
                 String username = etUsername.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
                 login(username, password);
-                //                navigateToWithFlag(HomeActivity.class,
-                //                        Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-
             }
         });
     }
@@ -63,8 +65,7 @@ public class LoginActivity extends BaseActivity {
                 if (loginResponse.getCode() == 200) {
                     String token = loginResponse.getToken();
                     insertVal("token", token);
-//                    navigateToWithFlag(HomeActivity.class,
-//                            Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    navigateToWithFlag(HomeActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     runOnUiThread(() -> {
                         showLongToast("登录成功" + token);
                     });
@@ -74,7 +75,6 @@ public class LoginActivity extends BaseActivity {
                     });
                 }
             }
-
             @Override
             public void onFailure(Exception e) {
 
