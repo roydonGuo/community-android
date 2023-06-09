@@ -84,13 +84,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="110dp"
-        android:background="@color/black">
+        android:background="@color/white"
+        app:srlAccentColor="@android:color/white"
+        app:srlEnablePreviewInEditMode="true"
+        app:srlPrimaryColor="#59B8FF">
 
-        <com.roydon.community.view.FixedViewPager
-            android:id="@+id/fixedViewPager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+<!--        <com.roydon.community.view.FixedViewPager-->
+<!--            android:id="@+id/fixedViewPager"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1" />-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
