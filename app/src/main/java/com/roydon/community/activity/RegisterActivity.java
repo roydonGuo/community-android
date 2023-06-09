@@ -1,9 +1,11 @@
 package com.roydon.community.activity;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.roydon.community.BaseActivity;
 import com.roydon.community.R;
@@ -19,6 +21,7 @@ public class RegisterActivity extends BaseActivity {
     private EditText etUsername;
     private EditText etPassword;
     private Button btnRegister;
+    private TextView btnToLogin;
 
     @Override
     protected int initLayout() {
@@ -30,6 +33,7 @@ public class RegisterActivity extends BaseActivity {
         etUsername = findViewById(R.id.et_username);
         etPassword = findViewById(R.id.et_password);
         btnRegister = findViewById(R.id.btn_register);
+        btnToLogin = findViewById(R.id.tv_to_login);
     }
 
     @Override
@@ -40,6 +44,12 @@ public class RegisterActivity extends BaseActivity {
                 String account = etUsername.getText().toString().trim();
                 String pwd = etPassword.getText().toString().trim();
                 register(account, pwd);
+            }
+        });
+        btnToLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigateToWithFlag(LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             }
         });
     }

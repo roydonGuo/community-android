@@ -23,8 +23,8 @@ import java.util.ArrayList;
 public class HomeActivity extends BaseActivity {
 
     private String[] mTitles = {"首页", "新闻", "商城", "我的"};
-    private int[] mIconUnselectIds = {R.mipmap.home_unselect, R.mipmap.collect_unselect, R.mipmap.home_unselect, R.mipmap.collect_unselect};
-    private int[] mIconSelectIds = {R.mipmap.home_selected, R.mipmap.collect_selected, R.mipmap.home_selected, R.mipmap.collect_selected};
+    private int[] mIconUnselectIds = {R.mipmap.tab_home_unselect, R.mipmap.tab_news_unselect, R.mipmap.tab_mall_unselect, R.mipmap.tab_my_unselect};
+    private int[] mIconSelectIds = {R.mipmap.tab_home_select, R.mipmap.tab_news_select, R.mipmap.tab_mall_select, R.mipmap.tab_my_select};
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private ViewPager viewPager;

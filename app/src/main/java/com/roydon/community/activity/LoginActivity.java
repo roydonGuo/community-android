@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.roydon.community.BaseActivity;
@@ -25,6 +26,7 @@ public class LoginActivity extends BaseActivity {
     private EditText etUsername;
     private EditText etPassword;
     private Button btnLogin;
+    private TextView tvToRegister;
 
     @Override
     protected int initLayout() {
@@ -36,6 +38,7 @@ public class LoginActivity extends BaseActivity {
         etUsername = findViewById(R.id.et_username);
         etPassword = findViewById(R.id.et_password);
         btnLogin = findViewById(R.id.btn_login);
+        tvToRegister = findViewById(R.id.tv_to_register);
     }
 
     @Override
@@ -47,6 +50,12 @@ public class LoginActivity extends BaseActivity {
                 String username = etUsername.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
                 login(username, password);
+            }
+        });
+        tvToRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigateToWithFlag(RegisterActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             }
         });
     }
@@ -75,6 +84,7 @@ public class LoginActivity extends BaseActivity {
                     });
                 }
             }
+
             @Override
             public void onFailure(Exception e) {
 

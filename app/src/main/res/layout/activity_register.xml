@@ -62,7 +62,7 @@
                 <ImageView
                     android:layout_width="@dimen/dimen_icon_16dp"
                     android:layout_height="@dimen/dimen_icon_16dp"
-                    android:src="@mipmap/icon_username" />
+                    android:src="@mipmap/icon_login_username" />
 
                 <EditText
                     android:id="@+id/et_username"
@@ -98,7 +98,7 @@
                 <ImageView
                     android:layout_width="@dimen/dimen_icon_16dp"
                     android:layout_height="@dimen/dimen_icon_16dp"
-                    android:src="@mipmap/icon_password" />
+                    android:src="@mipmap/icon_login_password" />
 
                 <EditText
                     android:id="@+id/et_password"
