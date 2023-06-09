@@ -1,10 +1,13 @@
 package com.roydon.community.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +23,7 @@ import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
 import com.roydon.community.entity.AppNews;
 import com.roydon.community.entity.NewsCategoryRes;
+import com.roydon.community.entity.NewsListRes;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -53,6 +57,19 @@ public class NewsFragment extends BaseFragment {
     public NewsFragment() {
     }
 
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+                    newsAdapter.setDatas(newsList);
+                    newsAdapter.notifyDataSetChanged();
+                    break;
+            }
+        }
+    };
+
     public static NewsFragment newInstance() {
         return new NewsFragment();
     }
@@ -65,7 +82,7 @@ public class NewsFragment extends BaseFragment {
     @Override
     protected void initView() {
         // 绑定fixedViewPager待渲染数据
-        viewPager = mRootView.findViewById(R.id.fixedViewPager);
+//        viewPager = mRootView.findViewById(R.id.fixedViewPager);
         // 绑定顶部分类导航
         slidingTabLayout = mRootView.findViewById(R.id.slidingTabLayout);
     }
@@ -73,11 +90,11 @@ public class NewsFragment extends BaseFragment {
     @Override
     protected void initData() {
         this.getNewsCategoryList();
-//        linearLayoutManager = new LinearLayoutManager(getActivity());
-//        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        recyclerView.setLayoutManager(linearLayoutManager);
-//        newsAdapter = new NewsAdapter(getActivity());
-//        recyclerView.setAdapter(newsAdapter);
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        newsAdapter = new NewsAdapter(getActivity());
+        recyclerView.setAdapter(newsAdapter);
 //        newsAdapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(Serializable obj) {
@@ -89,64 +106,65 @@ public class NewsFragment extends BaseFragment {
 //                navigateToWithBundle(WebActivity.class, bundle);
 //            }
 //        });
-//        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
-//            @Override
-//            public void onRefresh(RefreshLayout refreshlayout) {
-//                pageNum = 1;
-//                getNewsList(true);
-//            }
-//        });
-//        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-//            @Override
-//            public void onLoadMore(RefreshLayout refreshlayout) {
-//                pageNum++;
-//                getNewsList(false);
-//            }
-//        });
-//        getNewsList(true);
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                pageNum = 1;
+                getNewsList(true);
+            }
+        });
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshlayout) {
+                pageNum++;
+                getNewsList(false);
+            }
+        });
+        getNewsList(true);
     }
-//    private void getNewsList(final boolean isRefresh){
-//        HashMap<String, Object> params = new HashMap<>();
-//        params.put("page", pageNum);
-//        params.put("limit", ApiConfig.PAGE_SIZE);
-//        Api.config(ApiConfig.NEWS_LIST, params).getRequest(getActivity(), new TtitCallback() {
-//            @Override
-//            public void onSuccess(final String res) {
-//                if (isRefresh) {
-//                    refreshLayout.finishRefresh(true);
-//                } else {
-//                    refreshLayout.finishLoadMore(true);
-//                }
-//                NewsListResponse response = new Gson().fromJson(res, NewsListResponse.class);
-//                if (response != null && response.getCode() == 0) {
-//                    List<NewsEntity> list = response.getPage().getList();
-//                    if (list != null && list.size() > 0) {
-//                        if (isRefresh) {
-//                            datas = list;
-//                        } else {
-//                            datas.addAll(list);
-//                        }
-//                        mHandler.sendEmptyMessage(0);
-//                    } else {
-//                        if (isRefresh) {
-//                            showToastSync("暂时无数据");
-//                        } else {
-//                            showToastSync("没有更多数据");
-//                        }
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Exception e) {
-//                if (isRefresh) {
-//                    refreshLayout.finishRefresh(true);
-//                } else {
-//                    refreshLayout.finishLoadMore(true);
-//                }
-//            }
-//        });
-//    }
+
+    private void getNewsList(final boolean isRefresh) {
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("pageNum", pageNum);
+        params.put("pageSize", ApiConfig.PAGE_SIZE);
+        Api.config(ApiConfig.NEWS_LIST, params).getRequest(getActivity(), new HttpCallback() {
+            @Override
+            public void onSuccess(final String res) {
+                if (isRefresh) {
+                    refreshLayout.finishRefresh(true);
+                } else {
+                    refreshLayout.finishLoadMore(true);
+                }
+                NewsListRes response = new Gson().fromJson(res, NewsListRes.class);
+                if (response != null && response.getCode() == 200) {
+                    List<AppNews> list = response.getRows();
+                    if (list != null && list.size() > 0) {
+                        if (isRefresh) {
+                            newsList = list;
+                        } else {
+                            newsList.addAll(list);
+                        }
+                        mHandler.sendEmptyMessage(0);
+                    } else {
+                        if (isRefresh) {
+                            showShortToastSync("暂时无数据");
+                        } else {
+                            showShortToastSync("没有更多数据");
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                if (isRefresh) {
+                    refreshLayout.finishRefresh(true);
+                } else {
+                    refreshLayout.finishLoadMore(true);
+                }
+            }
+        });
+    }
 
     /**
      * 新闻分类集合
@@ -168,9 +186,9 @@ public class NewsFragment extends BaseFragment {
                                     mTitles[i] = data.get(i).getDictLabel();
                                     mFragments.add(NewsFragment.newInstance(data.get(i).getDictCode()));
                                 }
-                                viewPager.setOffscreenPageLimit(mFragments.size());
-                                viewPager.setAdapter(new HomeAdapter(getFragmentManager(), mTitles, mFragments));
-                                slidingTabLayout.setViewPager(viewPager);
+//                                viewPager.setOffscreenPageLimit(mFragments.size());
+//                                viewPager.setAdapter(new HomeAdapter(getFragmentManager(), mTitles, mFragments));
+//                                slidingTabLayout.setViewPager(viewPager);
                             }
                         }
                     }
