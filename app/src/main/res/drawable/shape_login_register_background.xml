@@ -18,9 +18,9 @@
      -->
     <gradient
         android:angle="270"
-        android:centerColor="#7CD5EEFF"
+        android:centerColor="#88AAFBF6"
         android:endColor="#9CB9D2FD"
-        android:startColor="#65DAF2FF"
+        android:startColor="#FFFFFF"
         android:type="linear" />
     <!--
         startColor：渐变颜色的开始值。
