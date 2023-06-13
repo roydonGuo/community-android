@@ -1,36 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="263dp"
-    android:background="#ffffff">
+    android:layout_height="250dp"
+    android:layout_margin="5dp"
+    android:background="@drawable/shape_index_function">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CS+吃鸡+守望先锋，真正的大杂烩！"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="世界强国为什么这么重视巡航导弹？"
             android:textColor="#222222"
             android:textSize="16sp" />
 
-        <ImageView
-            android:id="@+id/thumb"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="190dp"
-            android:layout_marginTop="7dp"
-            android:scaleType="fitXY"
-            android:src="@mipmap/avatar_ganyu" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="5dp">
+
+            <ImageView
+                android:id="@+id/thumb"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY"
+                android:src="@mipmap/avatar_ganyu" />
+        </androidx.cardview.widget.CardView>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
+            android:layout_marginTop="5dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -45,8 +58,8 @@
                 android:id="@+id/author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="9dp"
-                android:text="游戏早知道 ."
+                android:layout_marginLeft="5dp"
+                android:text="新闻"
                 android:textColor="#777777"
                 android:textSize="13sp" />
 
@@ -54,7 +67,7 @@
                 android:id="@+id/comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="9dp"
+                android:layout_marginLeft="5dp"
                 android:text="1评论 ."
                 android:textColor="#777777"
                 android:textSize="13sp" />
@@ -63,7 +76,7 @@
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="9dp"
+                android:layout_marginLeft="5dp"
                 android:text="1小时前"
                 android:textColor="#777777"
                 android:textSize="13sp" />
