@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+      startColor：渐变颜色的开始值。
+      centerColor：渐变颜色的中间值。【此为可选参数】
+      endColor：渐变颜色的结束值。
+      type：渐变类型。linear：线性渐变。radial：圆形渐变。sweep：扫描渐变。
+      angle：渐变的角度，默认为0。【此为可选参数】
+          0：从左往右开始渐变。
+          45：从左下角往右上角开始渐变。
+          90：从下往上开始渐变。
+          135：从右下角往左上角开始渐变。
+          180：从右往左开始渐变。
+          225：从右上角往左下角开始渐变。
+          270：从上往下开始渐变。
+          315：从左上角往右下角开始渐变。
+          360：从左往右开始渐变。
+     -->
+    <gradient
+        android:angle="270"
+        android:centerColor="#88AAFBF6"
+        android:endColor="#9CB9D2FD"
+        android:startColor="#FFFFFF"
+        android:type="linear" />
+    <!--
+        startColor：渐变颜色的开始值。
+        centerColor：渐变颜色的中间值。【此为可选参数】
+        endColor：渐变颜色的结束值。
+        gradientRadius：渐变颜色的半径。
+        centerX：渐变中心所在显示区域的水平方向的相对位置，取值为：0~1.0，默认为0.5，表示水平居中。【此为可选参数】
+        centerY：渐变中心所在显示区域的垂直方向的相对位置，取值为：0~1.0，默认为0.5，表示垂直居中。【此为可选参数】
+        type：渐变类型。linear：线性渐变。radial：圆形渐变。sweep：扫描渐变。
+     -->
+<!--    <gradient-->
+<!--        android:centerColor="#44EADB"-->
+<!--        android:centerX="0.5"-->
+<!--        android:centerY="0.5"-->
+<!--        android:endColor="#4FD3FB"-->
+<!--        android:gradientRadius="200dp"-->
+<!--        android:startColor="#FFFFFF"-->
+<!--        android:type="radial" />-->
+    <!--
+        startColor：渐变颜色的开始值。
+        centerColor：渐变颜色的中间值。【此为可选参数】
+        endColor：渐变颜色的结束值。
+        centerX：渐变中心所在显示区域的水平方向的相对位置，取值为：0~1.0，默认为0.5，表示水平居中。【此为可选参数】
+        centerY：渐变中心所在显示区域的垂直方向的相对位置，取值为：0~1.0，默认为0.5，表示垂直居中。【此为可选参数】
+        type：渐变类型。linear：线性渐变。radial：圆形渐变。sweep：扫描渐变。
+     -->
+<!--    <gradient-->
+<!--        android:centerColor="#FF0000"-->
+<!--        android:centerX="0.5"-->
+<!--        android:centerY="0.5"-->
+<!--        android:endColor="#003300"-->
+<!--        android:startColor="#FFFFFF"-->
+<!--        android:type="sweep" />-->
+</shape>

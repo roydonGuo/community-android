@@ -1,18 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/ganyu"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- 登录、注册按钮 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dimen_100dp"
+        android:paddingLeft="@dimen/dimen_40dp"
+        android:paddingRight="@dimen/dimen_40dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/button_login"
+            android:layout_width="@dimen/dimen_100dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/shape_login_button"
+            android:text="@string/login"
+            android:textSize="@dimen/dimen_16sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_register"
+            android:layout_width="@dimen/dimen_100dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/shape_login_button"
+            android:text="@string/register"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_16sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
