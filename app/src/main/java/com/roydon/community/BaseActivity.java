@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Looper;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -40,6 +41,20 @@ public abstract class BaseActivity extends AppCompatActivity {
     // 长toast
     public void showLongToast(String msg) {
         Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+    }
+
+    // 短toast
+    public void showSyncShortToast(String msg) {
+        Looper.prepare();
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+        Looper.loop();
+    }
+
+    // 长toast
+    public void showSyncLongToast(String msg) {
+        Looper.prepare();
+        Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+        Looper.loop();
     }
 
     //页面跳转
