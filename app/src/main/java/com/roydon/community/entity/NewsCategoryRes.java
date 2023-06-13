@@ -6,33 +6,35 @@ import java.util.List;
 public class NewsCategoryRes implements Serializable {
     /**
      * {
-     *     "msg": "操作成功",
-     *     "code": 200,
-     *     "data": [
-     *         {
-     *             "dictCode": 42,
-     *             "dictLabel": "热点"
-     *         },
-     *         {
-     *             "dictCode": 32,
-     *             "dictLabel": "财经"
-     *         }
-     *     ]
+     * "msg": "操作成功",
+     * "code": 200,
+     * "data": [
+     * {
+     * "dictCode": 42,
+     * "dictLabel": "热点"
+     * },
+     * {
+     * "dictCode": 32,
+     * "dictLabel": "财经"
+     * }
+     * ]
      * }
      */
     private String msg;
     private int code;
     private List<DataBean> data;
 
-    public static class DataBean{
+    public static class DataBean {
         private Long dictCode;
-        private String  dictLabel;
+        private String dictValue;
+        private String dictLabel;
 
         public DataBean() {
         }
 
-        public DataBean(Long dictCode, String dictLabel) {
+        public DataBean(Long dictCode, String dictValue, String dictLabel) {
             this.dictCode = dictCode;
+            this.dictValue = dictValue;
             this.dictLabel = dictLabel;
         }
 
@@ -42,6 +44,14 @@ public class NewsCategoryRes implements Serializable {
 
         public void setDictCode(Long dictCode) {
             this.dictCode = dictCode;
+        }
+
+        public String getDictValue() {
+            return dictValue;
+        }
+
+        public void setDictValue(String dictValue) {
+            this.dictValue = dictValue;
         }
 
         public String getDictLabel() {
