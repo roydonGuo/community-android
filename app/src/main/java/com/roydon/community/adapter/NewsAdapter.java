@@ -44,7 +44,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        int type = Integer.parseInt(datas.get(position).getNewsType());
+        int type = datas.get(position).getViewNum();
         return type;
     }
 
@@ -55,7 +55,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             View view = LayoutInflater.from(mContext).inflate(R.layout.news_item_one, parent, false);
             return new ViewHolderOne(view);
         } else {
-            View view = LayoutInflater.from(mContext).inflate(R.layout.news_item_three, parent, false);
+            View view = LayoutInflater.from(mContext).inflate(R.layout.news_item_two, parent, false);
             return new ViewHolderTwo(view);
         }
     }
