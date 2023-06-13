@@ -66,7 +66,7 @@ public class RegisterActivity extends BaseActivity {
         HashMap<String, Object> params = new HashMap<String, Object>();
         params.put("username", account);
         params.put("password", pwd);
-        Api.config(ApiConfig.REGISTER, params).postRequest(this, new HttpCallback() {
+        Api.build(ApiConfig.REGISTER, params).postRequest(this, new HttpCallback() {
             @Override
             public void onSuccess(final String res) {
                 runOnUiThread(() -> {
