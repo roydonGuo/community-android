@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.roydon.community.activity.LoginActivity;
+import com.roydon.community.constants.Constants;
+import com.roydon.community.constants.HttpStatus;
 import com.roydon.community.utils.StringUtil;
 
 import org.json.JSONException;
@@ -35,20 +37,57 @@ public class Api {
     public Api() {
     }
 
-    public static Api config(String url, HashMap<String, Object> params) {
+    public static Api build(String url, HashMap<String, Object> params) {
         client = new OkHttpClient.Builder().build();
         requestUrl = ApiConfig.BASE_URl + url;
         mParams = params;
         return api;
     }
 
+    /**
+     * post请求
+     *
+     * @param context
+     * @param callback
+     */
     public void postRequest(Context context, final HttpCallback callback) {
-        SharedPreferences sp = context.getSharedPreferences("sp_roydon", MODE_PRIVATE);
-        String token = sp.getString("token", "");
         JSONObject jsonObject = new JSONObject(mParams);
         String jsonStr = jsonObject.toString();
         RequestBody requestBodyJson = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonStr);
-        //第三步创建Rquest
+        //第三步创建Request
+        Request request = new Request.Builder().url(requestUrl).addHeader("contentType", "application/json;charset=UTF-8").post(requestBodyJson).build();
+        //第四步创建call回调对象
+        final Call call = client.newCall(request);
+        //第五步发起请求
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("onFailure", e.getMessage());
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (StringUtil.isNotNull(response.body())) {
+                    final String result = response.body().string();
+                    callback.onSuccess(result);
+                }
+            }
+        });
+    }
+    /**
+     * post请求with token
+     *
+     * @param context
+     * @param callback
+     */
+    public void postRequestWithToken(Context context, final HttpCallback callback) {
+        SharedPreferences sp = context.getSharedPreferences("sp_roydon", MODE_PRIVATE);
+        String token = sp.getString(Constants.TOKEN, "");
+        JSONObject jsonObject = new JSONObject(mParams);
+        String jsonStr = jsonObject.toString();
+        RequestBody requestBodyJson = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonStr);
+        //第三步创建Request
         Request request = new Request.Builder().url(requestUrl).addHeader("contentType", "application/json;charset=UTF-8").addHeader("token", token).post(requestBodyJson).build();
         //第四步创建call回调对象
         final Call call = client.newCall(request);
@@ -62,17 +101,23 @@ public class Api {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                final String result = response.body().string();
-                callback.onSuccess(result);
+                if (StringUtil.isNotNull(response.body())) {
+                    final String result = response.body().string();
+                    callback.onSuccess(result);
+                }
             }
         });
     }
 
+    /**
+     * get请求
+     *
+     * @param context
+     * @param callback
+     */
     public void getRequest(Context context, final HttpCallback callback) {
-        SharedPreferences sp = context.getSharedPreferences("sp_roydon", MODE_PRIVATE);
-        String token = sp.getString("token", "");
         String url = getAppendUrl(requestUrl, mParams);
-        Request request = new Request.Builder().url(url).addHeader("token", token).get().build();
+        Request request = new Request.Builder().url(url).get().build();
         Call call = client.newCall(request);
         call.enqueue(new Callback() {
             @Override
@@ -83,18 +128,61 @@ public class Api {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                final String result = response.body().string();
-                try {
-                    JSONObject jsonObject = new JSONObject(result);
-                    String code = jsonObject.getString("code");
-                    if (code.equals("401")) {
-                        Intent in = new Intent(context, LoginActivity.class);
-                        context.startActivity(in);
+                if (StringUtil.isNotNull(response.body())) {
+                    final String result = response.body().string();
+                    Log.e("onSuccess", result);
+                    try {
+                        JSONObject jsonObject = new JSONObject(result);
+                        int code = (int) jsonObject.get("code");
+                        if (code == HttpStatus.UNAUTHORIZED) {
+                            Intent in = new Intent(context, LoginActivity.class);
+                            context.startActivity(in);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    callback.onSuccess(result);
                 }
-                callback.onSuccess(result);
+            }
+        });
+    }
+
+    /**
+     * get请求WithToken
+     *
+     * @param context
+     * @param callback
+     */
+    public void getRequestWithToken(Context context, final HttpCallback callback) {
+        SharedPreferences sp = context.getSharedPreferences("sp_roydon", MODE_PRIVATE);
+        String token = sp.getString(Constants.TOKEN, "");
+        String url = getAppendUrl(requestUrl, mParams);
+        Request request = new Request.Builder().url(url).addHeader(Constants.AUTHORIZATION, token).get().build();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("onFailure", e.getMessage());
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (StringUtil.isNotNull(response.body())) {
+                    final String result = response.body().string();
+                    Log.e("onSuccess", result);
+                    try {
+                        JSONObject jsonObject = new JSONObject(result);
+                        int code = (int) jsonObject.get("code");
+                        if (code == HttpStatus.UNAUTHORIZED) {
+                            Intent in = new Intent(context, LoginActivity.class);
+                            context.startActivity(in);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    callback.onSuccess(result);
+                }
             }
         });
     }
