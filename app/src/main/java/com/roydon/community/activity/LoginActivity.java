@@ -13,7 +13,7 @@ import com.roydon.community.R;
 import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
-import com.roydon.community.entity.LoginBody;
+import com.roydon.community.constants.Constants;
 import com.roydon.community.entity.LoginResponse;
 
 import java.util.HashMap;
@@ -46,7 +46,6 @@ public class LoginActivity extends BaseActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                showShortToast("登录中...");
                 String username = etUsername.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
                 login(username, password);
@@ -64,8 +63,7 @@ public class LoginActivity extends BaseActivity {
         HashMap<String, Object> params = new HashMap<>();
         params.put("username", username);
         params.put("password", password);
-        LoginBody loginBody = new LoginBody(etUsername.toString(), etPassword.toString());
-        Api.config(ApiConfig.LOGIN, params).postRequest(this, new HttpCallback() {
+        Api.build(ApiConfig.LOGIN, params).postRequest(this, new HttpCallback() {
             @Override
             public void onSuccess(final String res) {
                 Log.e("onSuccess", res);
@@ -73,10 +71,10 @@ public class LoginActivity extends BaseActivity {
                 LoginResponse loginResponse = gson.fromJson(res, LoginResponse.class);
                 if (loginResponse.getCode() == 200) {
                     String token = loginResponse.getToken();
-                    insertVal("token", token);
+                    insertVal(Constants.TOKEN, token);
                     navigateToWithFlag(HomeActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     runOnUiThread(() -> {
-                        showLongToast("登录成功" + token);
+                        showLongToast("登录成功");
                     });
                 } else {
                     runOnUiThread(() -> {
