@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.roydon.community.R;
-import com.roydon.community.entity.AppNews;
+import com.roydon.community.domain.entity.AppNews;
 import com.roydon.community.view.CircleTransform;
 import com.squareup.picasso.Picasso;
 
@@ -68,8 +68,8 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ViewHolderOne vh = (ViewHolderOne) holder;
             vh.title.setText(newsEntity.getNewsTitle());
             vh.author.setText(newsEntity.getSource());
-            vh.comment.setText(newsEntity.getViewNum() + "浏览 .");
-            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            vh.comment.setText(". " + newsEntity.getViewNum() + "浏览 .");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             vh.time.setText(sdf.format(newsEntity.getPostTime()));
             vh.appNews = newsEntity;
             Picasso.with(mContext)
@@ -84,8 +84,8 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ViewHolderTwo vh = (ViewHolderTwo) holder;
             vh.title.setText(newsEntity.getNewsTitle());
             vh.author.setText(newsEntity.getSource());
-            vh.comment.setText(newsEntity.getViewNum() + "浏览 .");
-            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            vh.comment.setText(". " + newsEntity.getViewNum() + "浏览 .");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             vh.time.setText(sdf.format(newsEntity.getPostTime()));
             vh.appNews = newsEntity;
             Picasso.with(mContext)
