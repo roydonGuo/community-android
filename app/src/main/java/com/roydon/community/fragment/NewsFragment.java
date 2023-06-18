@@ -10,7 +10,7 @@ import com.roydon.community.adapter.HomeAdapter;
 import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
-import com.roydon.community.entity.NewsCategoryRes;
+import com.roydon.community.domain.vo.NewsCategoryRes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
