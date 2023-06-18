@@ -1,4 +1,4 @@
-package com.roydon.community.entity;
+package com.roydon.community.domain.entity;
 
 import java.io.Serializable;
 import java.util.Date;
