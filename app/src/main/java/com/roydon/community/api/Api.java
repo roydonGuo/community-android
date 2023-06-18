@@ -37,6 +37,12 @@ public class Api {
     public Api() {
     }
 
+    public static Api buildNoParams(String url) {
+        client = new OkHttpClient.Builder().build();
+        requestUrl = ApiConfig.BASE_URl + url;
+        return api;
+    }
+
     public static Api build(String url, HashMap<String, Object> params) {
         client = new OkHttpClient.Builder().build();
         requestUrl = ApiConfig.BASE_URl + url;
@@ -75,6 +81,7 @@ public class Api {
             }
         });
     }
+
     /**
      * post请求with token
      *
@@ -83,12 +90,16 @@ public class Api {
      */
     public void postRequestWithToken(Context context, final HttpCallback callback) {
         SharedPreferences sp = context.getSharedPreferences("sp_roydon", MODE_PRIVATE);
-        String token = sp.getString(Constants.TOKEN, "");
+        String token = Constants.TOKEN_PREFIX + sp.getString(Constants.TOKEN, "");
         JSONObject jsonObject = new JSONObject(mParams);
         String jsonStr = jsonObject.toString();
         RequestBody requestBodyJson = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonStr);
         //第三步创建Request
-        Request request = new Request.Builder().url(requestUrl).addHeader("contentType", "application/json;charset=UTF-8").addHeader("token", token).post(requestBodyJson).build();
+        Request request = new Request.Builder()
+                .url(requestUrl)
+                .addHeader("contentType", "application/json;charset=UTF-8")
+                .addHeader(Constants.AUTHORIZATION, token)
+                .post(requestBodyJson).build();
         //第四步创建call回调对象
         final Call call = client.newCall(request);
         //第五步发起请求
@@ -155,9 +166,12 @@ public class Api {
      */
     public void getRequestWithToken(Context context, final HttpCallback callback) {
         SharedPreferences sp = context.getSharedPreferences("sp_roydon", MODE_PRIVATE);
-        String token = sp.getString(Constants.TOKEN, "");
+        String token = Constants.TOKEN_PREFIX + sp.getString(Constants.TOKEN, "");
         String url = getAppendUrl(requestUrl, mParams);
-        Request request = new Request.Builder().url(url).addHeader(Constants.AUTHORIZATION, token).get().build();
+        Request request = new Request.Builder()
+                .url(url)
+                .addHeader(Constants.AUTHORIZATION, token)
+                .get().build();
         Call call = client.newCall(request);
         call.enqueue(new Callback() {
             @Override
@@ -204,4 +218,5 @@ public class Api {
         }
         return url;
     }
+
 }
