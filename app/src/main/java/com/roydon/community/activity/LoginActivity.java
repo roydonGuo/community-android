@@ -14,7 +14,7 @@ import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
 import com.roydon.community.constants.Constants;
-import com.roydon.community.entity.LoginResponse;
+import com.roydon.community.domain.vo.LoginResponse;
 
 import java.util.HashMap;
 
