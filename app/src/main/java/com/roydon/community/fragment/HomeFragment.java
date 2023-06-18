@@ -81,24 +81,23 @@ public class HomeFragment extends BaseFragment {
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
-                getBannerNiticeList(true);
+                getBannerNoticeList(true);
             }
         });
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshlayout) {
-                getBannerNiticeList(false);
+                getBannerNoticeList(false);
             }
         });
-        getBannerNiticeList(true);
-
+        getBannerNoticeList(true);
 
     }
 
     /**
      * 集合
      */
-    private void getBannerNiticeList(final boolean isRefresh) {
+    private void getBannerNoticeList(final boolean isRefresh) {
         HashMap<String, Object> params = new HashMap<>();
         params.put("pageNum", 1);
         params.put("pageSize", 5);
@@ -118,7 +117,7 @@ public class HomeFragment extends BaseFragment {
                         if (isRefresh) {
                             mUrls = list.stream().map(AppBannerNotice::getNoticeImgUrl).collect(Collectors.toList());
                         } else {
-                            mUrls.addAll(null);
+                            mUrls.addAll(list.stream().map(AppBannerNotice::getNoticeImgUrl).collect(Collectors.toList()));
                         }
                         mHandler.sendEmptyMessage(0);
                     } else {

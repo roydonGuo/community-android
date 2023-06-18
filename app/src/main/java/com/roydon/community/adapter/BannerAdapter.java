@@ -17,6 +17,13 @@ public class BannerAdapter extends PagerAdapter {
     private Context mContext;
     private List<String> mUrls;
 
+    public BannerAdapter() {
+    }
+
+    public BannerAdapter(Context mContext) {
+        this.mContext = mContext;
+    }
+
     public BannerAdapter(Context context, List<String> urls) {
         mContext = context;
         mUrls = urls;
