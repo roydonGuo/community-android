@@ -22,7 +22,7 @@
             android:id="@+id/tv_login_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_189dp"
+            android:layout_marginTop="@dimen/dimen_200dp"
             android:gravity="center"
             android:text="@string/username_password_login"
             android:textColor="@color/black"
@@ -77,7 +77,7 @@
                     android:textSize="@dimen/dimen_16sp" />
             </LinearLayout>
             <!-- 分割线 -->
-            <View
+            <Space
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_3dp"
                 android:layout_marginTop="@dimen/dimen_10dp"
