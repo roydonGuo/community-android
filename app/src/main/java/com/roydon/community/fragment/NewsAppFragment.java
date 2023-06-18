@@ -1,5 +1,6 @@
 package com.roydon.community.fragment;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
@@ -9,16 +10,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.roydon.community.R;
+import com.roydon.community.activity.NewsDetailActivity;
 import com.roydon.community.adapter.NewsAdapter;
 import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
-import com.roydon.community.entity.AppNews;
-import com.roydon.community.entity.NewsListRes;
+import com.roydon.community.domain.entity.AppNews;
+import com.roydon.community.domain.vo.NewsListRes;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -73,18 +76,15 @@ public class NewsAppFragment extends BaseFragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         newsAdapter = new NewsAdapter(getActivity());
         recyclerView.setAdapter(newsAdapter);
-//        newsAdapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(Serializable obj) {
-////                showToast("点击");
-//                AppNews newsEntity = (AppNews) obj;
-//                String url = "http://192.168.31.32:8089/newsDetail?title=" + newsEntity.getNewsId();
-//                Bundle bundle = new Bundle();
-//                bundle.putString("url", url);
-//                navigateToWithBundle(WebActivity.class, bundle);
-//            }
-//        });
-
+        newsAdapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Serializable obj) {
+                AppNews newsEntity = (AppNews) obj;
+                Bundle bundle = new Bundle();
+                bundle.putString("newsId", newsEntity.getNewsId());
+                navigateToWithBundle(NewsDetailActivity.class, bundle);
+            }
+        });
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
