@@ -1,4 +1,4 @@
-package com.roydon.community.entity;
+package com.roydon.community.domain.entity;
 
 import com.flyco.tablayout.listener.CustomTabEntity;
 
