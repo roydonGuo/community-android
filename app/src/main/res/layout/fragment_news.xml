@@ -58,7 +58,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:background="@null"
-                    android:hint="搜索"
+                    android:hint="新闻搜索"
                     android:textColor="@color/black"
                     android:textColorHint="#737373"
                     android:textSize="15sp" />
@@ -70,11 +70,12 @@
             android:id="@+id/slidingTabLayout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            tl:tl_indicator_color="#fdf299"
+            android:background="#7E33CAF8"
+            tl:tl_indicator_color="@color/text_select_color"
             tl:tl_indicator_corner_radius="2dp"
-            tl:tl_indicator_height="3dp"
-            tl:tl_indicator_width="18dp"
-            tl:tl_textSelectColor="#fdf299"
+            tl:tl_indicator_height="4dp"
+            tl:tl_indicator_width="30dp"
+            tl:tl_textSelectColor="@color/text_select_color"
             tl:tl_textUnselectColor="#ffffff"
             tl:tl_textsize="16sp" />
 

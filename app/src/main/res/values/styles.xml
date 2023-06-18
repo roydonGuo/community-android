@@ -1,0 +1,24 @@
+<resources>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item><!--透明背景-->
+    </style>
+
+    <declare-styleable name="SunAnimationView">
+        <attr name="sun_circle_color" format="color"/>
+        <attr name="sun_font_color" format="color"/>
+        <attr name="sun_font_size" format="dimension"/>
+        <attr name="sun_circle_radius" format="integer"/>
+        <attr name="type" format="boolean"/>
+    </declare-styleable>
+
+    <!-- 圆角图片 -->
+    <style name="roundedImageStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10dp</item>
+    </style>
+
+</resources>

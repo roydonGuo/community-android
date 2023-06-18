@@ -58,10 +58,6 @@
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#f1f1f1" />
         <!--NestedScrollView 里面只能包裹一个大的布局，
         当这个布局长度超出手机展示的部分就可以滚动，
         其中overScrollMode="never"隐藏掉滚动条到顶部和底部时的水波纹-->
@@ -157,10 +153,10 @@
 
                         <ImageView
                             android:id="@+id/iv_focus"
-                            android:layout_width="20dp"
+                            android:layout_width="16dp"
                             android:layout_height="match_parent"
                             android:layout_gravity="center_vertical|right"
-                            android:src="@mipmap/icon_more" />
+                            android:src="@mipmap/icon_right" />
                     </LinearLayout>
                 </LinearLayout>
 

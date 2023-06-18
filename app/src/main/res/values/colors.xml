@@ -11,6 +11,7 @@
     <color name="grey">#808080</color>
 
     <color name="element">#409EFF</color>
+    <color name="text_select_color">#ffd700</color>
 
     <!-- login-form -->
     <color name="login_form_background">#ADE9EDF1</color>

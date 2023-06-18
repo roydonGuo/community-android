@@ -1,4 +1,4 @@
-package com.roydon.community.entity;
+package com.roydon.community.domain.vo;
 
 public class BaseResponse {
 
@@ -8,6 +8,14 @@ public class BaseResponse {
      */
     private String msg;
     private int code;
+
+    public BaseResponse() {
+    }
+
+    public BaseResponse(String msg, int code) {
+        this.msg = msg;
+        this.code = code;
+    }
 
     public String getMsg() {
         return msg;

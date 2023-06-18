@@ -1,4 +1,6 @@
-package com.roydon.community.entity;
+package com.roydon.community.domain.vo;
+
+import com.roydon.community.domain.entity.AppNews;
 
 import java.util.List;
 

@@ -19,4 +19,9 @@ public class ApiConfig {
     public static final String NEWS_LIST = "/app/news/list"; //新闻list
     public static final String NEWS_DETAIL = "/app/news/detail"; //新闻detail
 
+    /**
+     * 轮播公告
+     */
+    public static final String BANNER_NOTICE_LIST = "/app/notice/list"; //新闻分类
+
 }
