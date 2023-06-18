@@ -2,15 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
-    android:layout_margin="5dp"
-    android:background="@drawable/shape_index_function">
+    android:layout_height="240dp"
+    android:layout_margin="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_margin="5dp"
         android:orientation="vertical">
 
         <TextView
@@ -20,8 +18,8 @@
             android:ellipsize="end"
             android:lines="1"
             android:text="世界强国为什么这么重视巡航导弹？"
-            android:textColor="#222222"
-            android:textSize="16sp" />
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -49,8 +47,8 @@
 
             <ImageView
                 android:id="@+id/header"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:scaleType="fitXY"
                 android:src="@mipmap/avatar_ganyu" />
 
@@ -61,7 +59,7 @@
                 android:layout_marginLeft="5dp"
                 android:text="新闻"
                 android:textColor="#777777"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/comment"
@@ -70,7 +68,7 @@
                 android:layout_marginLeft="5dp"
                 android:text="1评论 ."
                 android:textColor="#777777"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/time"
@@ -79,7 +77,7 @@
                 android:layout_marginLeft="5dp"
                 android:text="1小时前"
                 android:textColor="#777777"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 
