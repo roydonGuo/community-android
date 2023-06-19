@@ -87,14 +87,14 @@ public class NewsAppFragment extends BaseFragment {
         });
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
-            public void onRefresh(RefreshLayout refreshLayout) {
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 pageNum = 1;
                 getNewsList(true);
             }
         });
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
-            public void onLoadMore(RefreshLayout refreshlayout) {
+            public void onLoadMore(@NonNull RefreshLayout refreshlayout) {
                 pageNum++;
                 getNewsList(false);
             }

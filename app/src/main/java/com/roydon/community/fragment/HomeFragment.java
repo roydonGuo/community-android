@@ -80,13 +80,13 @@ public class HomeFragment extends BaseFragment {
 
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
-            public void onRefresh(RefreshLayout refreshLayout) {
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 getBannerNoticeList(true);
             }
         });
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
-            public void onLoadMore(RefreshLayout refreshlayout) {
+            public void onLoadMore(@NonNull RefreshLayout refreshlayout) {
                 getBannerNoticeList(false);
             }
         });
@@ -116,10 +116,8 @@ public class HomeFragment extends BaseFragment {
                     if (list != null && list.size() > 0) {
                         if (isRefresh) {
                             mUrls = list.stream().map(AppBannerNotice::getNoticeImgUrl).collect(Collectors.toList());
-                        } else {
-                            mUrls.addAll(list.stream().map(AppBannerNotice::getNoticeImgUrl).collect(Collectors.toList()));
+                            mHandler.sendEmptyMessage(0);
                         }
-                        mHandler.sendEmptyMessage(0);
                     } else {
                         if (isRefresh) {
                             showShortToastSync("暂时无轮播数据");
