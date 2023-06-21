@@ -24,4 +24,8 @@ public class ApiConfig {
      */
     public static final String BANNER_NOTICE_LIST = "/app/notice/list"; //新闻分类
 
+    /**
+     * mall-goods
+     */
+    public static final String MALL_GOODS_LIST = "/app/mallGoods/list"; //商品集合
 }

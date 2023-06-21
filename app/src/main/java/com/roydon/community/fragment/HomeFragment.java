@@ -19,8 +19,6 @@ import com.roydon.community.domain.entity.AppBannerNotice;
 import com.roydon.community.domain.vo.BannerNoticeListRes;
 import com.roydon.community.view.SobViewPager;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -67,9 +65,8 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        refreshLayout = mRootView.findViewById(R.id.refreshLayout);
+//        refreshLayout = mRootView.findViewById(R.id.refreshLayout);
         sobViewPager = mRootView.findViewById(R.id.sob_looper);
-        mDotLayout = mRootView.findViewById(R.id.dot_layout);
     }
 
     @Override
@@ -78,24 +75,24 @@ public class HomeFragment extends BaseFragment {
         mBannerAdapter = new BannerAdapter(getContext(), mUrls);
         sobViewPager.setAdapter(mBannerAdapter);
 
-        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                getBannerNoticeList(true);
-            }
-        });
-        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore(@NonNull RefreshLayout refreshlayout) {
-                getBannerNoticeList(false);
-            }
-        });
+//        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+//            @Override
+//            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+//                getBannerNoticeList(true);
+//            }
+//        });
+//        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+//            @Override
+//            public void onLoadMore(@NonNull RefreshLayout refreshlayout) {
+//                getBannerNoticeList(false);
+//            }
+//        });
         getBannerNoticeList(true);
 
     }
 
     /**
-     * 集合
+     * 轮播图集合
      */
     private void getBannerNoticeList(final boolean isRefresh) {
         HashMap<String, Object> params = new HashMap<>();
@@ -105,11 +102,11 @@ public class HomeFragment extends BaseFragment {
         Api.build(ApiConfig.BANNER_NOTICE_LIST, params).getRequestWithToken(getActivity(), new HttpCallback() {
             @Override
             public void onSuccess(final String res) {
-                if (isRefresh) {
-                    refreshLayout.finishRefresh(true);
-                } else {
-                    refreshLayout.finishLoadMore(true);
-                }
+//                if (isRefresh) {
+//                    refreshLayout.finishRefresh(true);
+//                } else {
+//                    refreshLayout.finishLoadMore(true);
+//                }
                 BannerNoticeListRes response = new Gson().fromJson(res, BannerNoticeListRes.class);
                 if (response != null && response.getCode() == 200) {
                     List<AppBannerNotice> list = response.getRows();

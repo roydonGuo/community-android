@@ -29,12 +29,14 @@
 
                 <ImageView
                     android:id="@+id/iv_return"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:padding="10dp"
+                    android:background="@drawable/shape_background_icon_black"
                     android:layout_gravity="center_vertical|left"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
-                    android:src="@mipmap/icon_left" />
+                    app:srcCompat="@mipmap/icon_left" />
 
                 <TextView
                     android:id="@+id/tv_city"
@@ -84,7 +86,7 @@
                         android:id="@+id/tv_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="世界强国为什么这么重视巡航导弹？"
+                        android:text="环球网资讯"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -113,7 +115,7 @@
                                 android:id="@+id/iv_source_avatar"
                                 android:layout_width="48dp"
                                 android:layout_height="48dp"
-                                android:src="@mipmap/avatar_ganyu" />
+                                android:src="@mipmap/avatar_ganyu"/>
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -174,9 +176,9 @@
                         android:id="@+id/tv_content"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
                         android:layout_margin="@dimen/text_margin"
-                        android:text="@string/large_text" />
+                        android:text=""
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
 

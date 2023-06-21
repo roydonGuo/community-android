@@ -114,6 +114,7 @@ public class Api {
             public void onResponse(Call call, Response response) throws IOException {
                 if (StringUtil.isNotNull(response.body())) {
                     final String result = response.body().string();
+                    Log.e("onSuccess", result);
                     callback.onSuccess(result);
                 }
             }

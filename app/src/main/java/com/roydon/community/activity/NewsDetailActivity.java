@@ -45,12 +45,14 @@ public class NewsDetailActivity extends BaseActivity {
         tvContent = findViewById(R.id.tv_content);
         ivSourceAvatar = findViewById(R.id.iv_source_avatar);
         ivReturn = findViewById(R.id.iv_return);
+
         // 实例化
 //        mWebView = findViewById(R.id.webView);
     }
 
     @Override
     protected void initData() {
+//        LoadingDialog.getInstance(this).show();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             newsId = bundle.getString("newsId");
@@ -81,7 +83,6 @@ public class NewsDetailActivity extends BaseActivity {
                     finish();
                 }
             }
-
             @Override
             public void onFailure(Exception e) {
 
@@ -97,6 +98,7 @@ public class NewsDetailActivity extends BaseActivity {
                 AppNews appNews = (AppNews) msg.obj;
                 Log.e("onSuccess", appNews.getNewsId());
                 newsDetailShow(appNews);
+//                LoadingDialog.getInstance(getApplicationContext()).dismiss();
             }
         }
     };

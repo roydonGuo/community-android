@@ -3,6 +3,7 @@ package com.roydon.community.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -128,8 +129,10 @@ public class NewsAppFragment extends BaseFragment {
                         mHandler.sendEmptyMessage(0);
                     } else {
                         if (isRefresh) {
+                            Log.e("getNewsList", "暂时无数据");
                             showShortToastSync("暂时无数据");
                         } else {
+                            Log.e("getNewsList", "没有更多数据");
                             showShortToastSync("没有更多数据");
                         }
                     }

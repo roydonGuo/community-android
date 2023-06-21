@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class NewsFragment extends BaseFragment {
+public class NewsFragment extends BaseLazyLoadFragment {
 
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private String[] mTitles;
@@ -42,8 +42,33 @@ public class NewsFragment extends BaseFragment {
     }
 
     @Override
-    protected void initData() {
+    protected void lazyLoad() {
         getNewsCategoryList();
+    }
+
+    @Override
+    protected void visibleReLoad() {
+
+    }
+
+    @Override
+    protected void inVisibleRelease() {
+
+    }
+
+    @Override
+    protected void resume() {
+
+    }
+
+    @Override
+    protected void pause() {
+
+    }
+
+    @Override
+    protected void initData() {
+//        getNewsCategoryList();
     }
 
     /**
@@ -74,7 +99,6 @@ public class NewsFragment extends BaseFragment {
                     }
                 });
             }
-
             @Override
             public void onFailure(Exception e) {
             }
