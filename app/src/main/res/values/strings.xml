@@ -16,4 +16,7 @@
     <string name="large_text">本文章为原创，谢绝任何媒体转载图片大小V1导弹是比较落后的，采用机械装置决定飞行的方向和时间，从而决定导弹的攻击点。</string>
     <string name="action_settings">Settings</string>
     <string name="add_good">上架商品</string>
+    <string name="cart_less_label">-</string>
+    <string name="cart_add_label">+</string>
+    <string name="cart_goods_count_init">1</string>
 </resources>

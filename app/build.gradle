@@ -113,7 +113,9 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'com.zhy:base-rvadapter:3.0.3'
-
+// zhihu图片选择库
+//    implementation "com.github.leavesCZY:Matisse:1.0.0-beta03"
+//    implementation 'com.zhihu.android:matisse:0.5.3-beta3'
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.3'
@@ -159,6 +161,7 @@ dependencies {
     // banner轮播图https://github.com/youth5201314/banner
     // 轮播图库
     implementation 'io.github.youth5201314:banner:2.2.2'
+
 //    implementation 'skin.support:skin-support:4.0.5'                   // skin-support
 //    implementation 'skin.support:skin-support-appcompat:4.0.5'         // skin-support 基础控件支持
 }

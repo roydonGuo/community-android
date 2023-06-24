@@ -1,4 +1,4 @@
-package com.roydon.community.fragment;
+package com.roydon.community.activity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -6,24 +6,24 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.roydon.community.BaseActivity;
 import com.roydon.community.R;
-import com.roydon.community.activity.CartActivity;
-import com.roydon.community.activity.GoodDetailActivity;
-import com.roydon.community.adapter.MallGoodAdapter;
+import com.roydon.community.adapter.CartAdapter;
 import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
-import com.roydon.community.domain.entity.MallGoodsVO;
-import com.roydon.community.domain.vo.MallGoodsRes;
+import com.roydon.community.domain.entity.MallUserCartVO;
+import com.roydon.community.domain.vo.MallUserCartListRes;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -32,22 +32,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MallFragment extends BaseFragment {
+public class CartActivity extends BaseActivity {
 
     private RefreshLayout refreshLayout;
-    private RecyclerView rvMallGoods;
-    private int pageNum = 1;
-    private MallGoodAdapter mallGoodAdapter;
+    private RecyclerView rvMallCart;
     private LinearLayoutManager linearLayoutManager;
-    private List<MallGoodsVO> goodsList = new ArrayList<>();
-    private ImageView ivMallCart;
+    private int pageNum = 1;
+    private CartAdapter cartAdapter;
 
-    public MallFragment() {
-    }
+    private List<MallUserCartVO> cartList = new ArrayList<>();
 
-    public static MallFragment newInstance() {
-        return new MallFragment();
-    }
+    private TextView tvGoodTitle, tvGoodPrice;
+    private Button btnGoodsCount;
+    private TextView less, add;
+    private ImageView ivGoodsImage, ivReturn;
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
@@ -56,8 +54,8 @@ public class MallFragment extends BaseFragment {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0:
-                    mallGoodAdapter.setDatas(goodsList);
-                    mallGoodAdapter.notifyDataSetChanged();
+                    cartAdapter.setDatas(cartList);
+                    cartAdapter.notifyDataSetChanged();
                     break;
             }
         }
@@ -65,33 +63,40 @@ public class MallFragment extends BaseFragment {
 
     @Override
     protected int initLayout() {
-        return R.layout.fragment_mall;
+        return R.layout.activity_cart;
     }
 
     @Override
     protected void initView() {
-        rvMallGoods = mRootView.findViewById(R.id.rv_mall_goods);
-        refreshLayout = mRootView.findViewById(R.id.rl_goods);
-        ivMallCart = mRootView.findViewById(R.id.iv_mall_cart);
+        refreshLayout = findViewById(R.id.refreshLayout);
+        rvMallCart = findViewById(R.id.rv_mall_cart);
+        ivGoodsImage = findViewById(R.id.iv_goods_img);
+        tvGoodTitle = findViewById(R.id.tv_goods_title);
+        tvGoodPrice = findViewById(R.id.tv_goods_price);
+        ivReturn = findViewById(R.id.iv_return);
+        btnGoodsCount = findViewById(R.id.btn_goods_count);
+        less = findViewById(R.id.tv_goods_less);
+        add = findViewById(R.id.tv_goods_add);
     }
 
     @Override
     protected void initData() {
-        // 首页瀑布流列表
-//        linearLayoutManager = new LinearLayoutManager(getActivity());
-//        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        rvMallGoods.setLayoutManager(linearLayoutManager);
-        mallGoodAdapter = new MallGoodAdapter(getActivity());
-        rvMallGoods.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        rvMallGoods.setAdapter(mallGoodAdapter);
-        mallGoodAdapter.setOnItemClickListener(new MallGoodAdapter.OnItemClickListener() {
+        ivReturn.setOnClickListener(v -> {
+            finish();
+        });
+        linearLayoutManager = new LinearLayoutManager(CartActivity.this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rvMallCart.setLayoutManager(linearLayoutManager);
+        cartAdapter = new CartAdapter(this);
+        rvMallCart.setAdapter(cartAdapter);
+        cartAdapter.setOnItemClickListener(new CartAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                MallGoodsVO mallGoods = goodsList.get(position);
+                MallUserCartVO cartVO = cartList.get(position);
                 Bundle bundle = new Bundle();
-                bundle.putString("goodsId", mallGoods.getGoodsId());
-//                showShortToast("商品id" + mallGoods.getGoodsId());
-                navigateToWithBundle(GoodDetailActivity.class, bundle);
+                bundle.putString("cartId", cartVO.getCartId());
+                showShortToast("cartId" + cartVO.getCartId());
+//                navigateToWithBundle(GoodDetailActivity.class, bundle);
             }
 
             @Override
@@ -103,32 +108,27 @@ public class MallFragment extends BaseFragment {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 pageNum = 1;
-                getMallGoodsList(true);
+                getCartList(true);
             }
         });
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshlayout) {
                 pageNum++;
-                getMallGoodsList(false);
+                getCartList(false);
             }
         });
-        getMallGoodsList(true);
-        ivMallCart.setOnClickListener(v->{
-            navigateTo(CartActivity.class);
-        });
+        getCartList(true);
     }
 
-    private void getMallGoodsList(final boolean isRefresh) {
+    private void getCartList(final boolean isRefresh) {
         HashMap<String, Object> params = new HashMap<>();
         params.put("pageNum", pageNum);
         params.put("pageSize", ApiConfig.PAGE_SIZE);
-        // 上架商品
-        params.put("status", "0");
-        Api.build(ApiConfig.MALL_GOODS_LIST, params).postRequestWithToken(getActivity(), new HttpCallback() {
+        Api.build(ApiConfig.MALL_CART_LIST, params).postRequestWithToken(this, new HttpCallback() {
             @Override
             public void onSuccess(final String res) {
-                Log.e("getMallGoodsList", res);
+                Log.e("getCartList", res);
                 if (isRefresh) {
                     refreshLayout.finishRefresh(true);
                 } else {
@@ -136,23 +136,23 @@ public class MallFragment extends BaseFragment {
                 }
                 // 后端传递时间格式解析
                 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-                MallGoodsRes mallGoodsRes = gson.fromJson(res, MallGoodsRes.class);
-                if (mallGoodsRes != null && mallGoodsRes.getCode() == 200) {
-                    List<MallGoodsVO> mallGoodsList = mallGoodsRes.getData();
-                    if (mallGoodsList != null && mallGoodsList.size() > 0) {
+                MallUserCartListRes response = gson.fromJson(res, MallUserCartListRes.class);
+                if (response != null && response.getCode() == 200) {
+                    List<MallUserCartVO> cartVOList = response.getData();
+                    if (cartVOList != null && cartVOList.size() > 0) {
                         if (isRefresh) {
-                            goodsList = mallGoodsList;
+                            cartList = cartVOList;
                         } else {
-                            goodsList.addAll(mallGoodsList);
+                            cartList.addAll(cartVOList);
                         }
                         mHandler.sendEmptyMessage(0);
                     } else {
                         if (isRefresh) {
-                            Log.e("getMallGoodsList", "暂时无数据");
-                            showShortToastSync("暂时无数据");
+                            Log.e("getCartList", "暂时无数据");
+                            showSyncShortToast("暂时无数据");
                         } else {
-                            Log.e("getMallGoodsList", "没有更多数据");
-                            showShortToastSync("没有更多数据");
+                            Log.e("getCartList", "没有更多数据");
+                            showSyncShortToast("没有更多数据");
                         }
                     }
                 }

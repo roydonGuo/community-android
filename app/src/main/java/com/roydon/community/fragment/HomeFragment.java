@@ -1,7 +1,10 @@
 package com.roydon.community.fragment;
 
+import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -20,6 +23,7 @@ import com.roydon.community.domain.vo.BannerNoticeListRes;
 import com.roydon.community.view.SobViewPager;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,7 +36,8 @@ public class HomeFragment extends BaseFragment {
     private ViewPager viewPager;
     private RefreshLayout refreshLayout;
     private SobViewPager sobViewPager;
-    private LinearLayout mDotLayout;
+    private ImageView picture;
+    private LinearLayout mDotLayout, funcOne;
     private SlidingTabLayout slidingTabLayout;
 
     private BannerAdapter mBannerAdapter;
@@ -63,10 +68,48 @@ public class HomeFragment extends BaseFragment {
         return R.layout.fragment_home;
     }
 
+    public static final int TAKE_PHOTO = 1;//声明一个请求码，用于识别返回的结果
+    private Uri imageUri;
+    private final String filePath = Environment.getExternalStorageDirectory() + File.separator + "output_image.jpg";
+
     @Override
     protected void initView() {
 //        refreshLayout = mRootView.findViewById(R.id.refreshLayout);
         sobViewPager = mRootView.findViewById(R.id.sob_looper);
+        funcOne = mRootView.findViewById(R.id.func_one);
+        picture = mRootView.findViewById(R.id.picture);
+
+        /**
+         * MimeType.ofAll() -->全部类型
+         * MimeType.ofImage() -->图片
+         * MimeType.ofVideo() -->视频
+         * maxSelectable  选择的最大数量
+         */
+//        Matisse.from(PhotoActivity.this)
+//                .choose(MimeType.ofAll())
+//                .countable(true)
+//                .maxSelectable(9)
+//                .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
+//                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+//                .thumbnailScale(0.85f)
+//                .imageEngine(new GlideEngine())
+//                .showPreview(false)
+//
+//                //这两行要连用 是否在选择图片中展示照相 和适配安卓7.0 FileProvider
+//                .capture(true)
+//                .captureStrategy(new CaptureStrategy(true, "PhotoPicker"))
+//
+//                //蓝色主题
+//                // .theme(R.style.Matisse_Zhihu)
+//                //黑色主题
+//                .theme(R.style.Matisse_Dracula)
+//                //Glide加载方式
+//                .imageEngine(new GlideEngine())
+//                //Picasso加载方式
+//                // .imageEngine(new PicassoEngine())
+//                //请求码
+//                .forResult(REQUEST_CODE_CHOOSE);
+
     }
 
     @Override

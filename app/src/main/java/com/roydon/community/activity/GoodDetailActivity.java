@@ -63,6 +63,9 @@ public class GoodDetailActivity extends BaseActivity {
                 finish();
             }
         });
+        btnGoodAddCart.setOnClickListener((v) -> {
+
+        });
     }
 
     private void getGoodDetail(String goodsId) {
@@ -105,7 +108,7 @@ public class GoodDetailActivity extends BaseActivity {
         }
     };
 
-    @SuppressLint("SetJavaScriptEnabled")
+    @SuppressLint({"SetJavaScriptEnabled", "SetTextI18n"})
     private void goodsDetailShow(MallGoodsVO goodsVO) {
         Picasso.with(this)
                 .load(goodsVO.getGoodsImg())

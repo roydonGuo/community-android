@@ -23,3 +23,5 @@
 -keep class com.baidu.** {*;}
 -keep class mapsdkvi.com.** {*;}
 -dontwarn com.baidu.**
+#-dontwarn com.squareup.picasso.**
+#-dontwarn com.bumptech.glide.**
