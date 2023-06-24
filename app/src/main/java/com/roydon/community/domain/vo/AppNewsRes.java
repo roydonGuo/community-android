@@ -8,8 +8,6 @@ import java.io.Serializable;
  * @author roydon
  * @date 2023/6/13 19:37
  */
-
-
 public class AppNewsRes extends BaseResponse implements Serializable {
 
     private AppNews data;

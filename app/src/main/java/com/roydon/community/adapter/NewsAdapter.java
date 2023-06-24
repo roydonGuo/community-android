@@ -76,7 +76,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .load(newsEntity.getCoverImg())
                     .transform(new CircleTransform())
                     .into(vh.header);
-
             Picasso.with(mContext)
                     .load(newsEntity.getCoverImg())
                     .into(vh.thumb);

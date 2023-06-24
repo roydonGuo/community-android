@@ -23,7 +23,7 @@
             <ImageView
                 android:id="@+id/iv_goodsImg"
                 android:layout_width="match_parent"
-                android:layout_height="110dp"
+                android:layout_height="wrap_content"
                 android:scaleType="fitXY"
                 android:src="@mipmap/avatar_ganyu" />
         </androidx.cardview.widget.CardView>

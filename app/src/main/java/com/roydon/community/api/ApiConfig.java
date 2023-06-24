@@ -28,4 +28,5 @@ public class ApiConfig {
      * mall-goods
      */
     public static final String MALL_GOODS_LIST = "/app/mallGoods/list"; //商品集合
+    public static final String MALL_GOODS_DETAIL = "/app/mallGoods"; //商品集合
 }

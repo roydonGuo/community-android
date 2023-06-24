@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.roydon.community.R;
+import com.roydon.community.activity.GoodDetailActivity;
 import com.roydon.community.adapter.MallGoodAdapter;
 import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
@@ -85,8 +86,8 @@ public class MallFragment extends BaseFragment {
                 MallGoodsVO mallGoods = goodsList.get(position);
                 Bundle bundle = new Bundle();
                 bundle.putString("goodsId", mallGoods.getGoodsId());
-                showShortToast("商品id" + mallGoods.getGoodsId());
-//                navigateToWithBundle(NewsDetailActivity.class, bundle);
+//                showShortToast("商品id" + mallGoods.getGoodsId());
+                navigateToWithBundle(GoodDetailActivity.class, bundle);
             }
 
             @Override

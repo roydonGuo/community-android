@@ -19,7 +19,6 @@ import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.AppNews;
 import com.roydon.community.domain.vo.NewsListRes;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.io.Serializable;
@@ -93,12 +92,9 @@ public class NewsAppFragment extends BaseFragment {
                 getNewsList(true);
             }
         });
-        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore(@NonNull RefreshLayout refreshlayout) {
-                pageNum++;
-                getNewsList(false);
-            }
+        refreshLayout.setOnLoadMoreListener((refreshlayout) -> {
+            pageNum++;
+            getNewsList(false);
         });
         getNewsList(true);
     }
