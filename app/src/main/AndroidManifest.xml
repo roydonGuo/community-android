@@ -35,9 +35,11 @@
         android:theme="@style/Theme.Communityandroid"
         tools:targetApi="31">
         <activity
-            android:name=".activity.CartActivity"
+            android:name=".activity.UserAddressActivity"
             android:exported="false" />
-        <!-- 为调用相机拍照设置内容提供者 -->
+        <activity
+            android:name=".activity.CartActivity"
+            android:exported="false" /> <!-- 为调用相机拍照设置内容提供者 -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.roydon.community.fileprovider"

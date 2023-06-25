@@ -3,8 +3,8 @@ package com.roydon.community.api;
 public class ApiConfig {
 
     public static final int PAGE_SIZE = 10;
-    public static final String BASE_URl = "http://106.14.105.101:8088";
-//    public static final String BASE_URl = "http://192.168.0.101:8088";
+//    public static final String BASE_URl = "http://106.14.105.101:8088";
+    public static final String BASE_URl = "http://192.168.0.101:8088";
 
     /**
      * app前缀接口
@@ -36,4 +36,10 @@ public class ApiConfig {
     public static final String MALL_CART_LIST = "/app/mallUserCart/list"; //购物车集合
     public static final String MALL_ADD_CART = "/app/mallUserCart"; //添加购物车
     public static final String MALL_DEL_CART = "/app/mallUserCart/"; //添加购物车
+
+    /**
+     * mall-address
+     */
+    public static final String MALL_ADDRESS_LIST = "/app/mallUserAddress/list"; //购物车集合
+    public static final String MALL_ADD_ADDRESS = "/app/mallUserAddress"; //添加购物车
 }

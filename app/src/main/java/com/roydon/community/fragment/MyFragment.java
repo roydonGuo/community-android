@@ -3,6 +3,7 @@ package com.roydon.community.fragment;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -10,6 +11,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.roydon.community.R;
 import com.roydon.community.activity.MyDetailActivity;
+import com.roydon.community.activity.UserAddressActivity;
 
 import java.util.ArrayList;
 
@@ -20,6 +22,7 @@ public class MyFragment extends BaseFragment {
     private ViewPager viewPager;
     private SlidingTabLayout slidingTabLayout;
     private LinearLayout mLinearLayout;
+    private RelativeLayout rlUserAddress;
 
     public MyFragment() {
     }
@@ -36,6 +39,7 @@ public class MyFragment extends BaseFragment {
     @Override
     protected void initView() {
         mLinearLayout = mRootView.findViewById(R.id.layout_my_detail);
+        rlUserAddress = mRootView.findViewById(R.id.rl_user_address);
         mLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,6 +47,9 @@ public class MyFragment extends BaseFragment {
 //                bundle.putString("userId", user.getUserId());
                 navigateTo(MyDetailActivity.class);
             }
+        });
+        rlUserAddress.setOnClickListener(v->{
+            navigateTo(UserAddressActivity.class);
         });
 //        viewPager = mRootView.findViewById(R.id.fixedViewPager);
 //        slidingTabLayout = mRootView.findViewById(R.id.slidingTabLayout);

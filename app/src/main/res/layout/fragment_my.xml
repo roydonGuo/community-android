@@ -346,7 +346,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
-                android:id="@+id/rl_collect"
+                android:id="@+id/rl_user_address"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:paddingLeft="30dp"
@@ -367,7 +367,7 @@
                     android:layout_toRightOf="@+id/iv_collect"
                     android:gravity="center|left"
                     android:paddingLeft="10dp"
-                    android:text="我的收藏"
+                    android:text="收货地址管理"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
