@@ -35,6 +35,9 @@
         android:theme="@style/Theme.Communityandroid"
         tools:targetApi="31">
         <activity
+            android:name=".activity.CreateOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.UserAddressActivity"
             android:exported="false" />
         <activity

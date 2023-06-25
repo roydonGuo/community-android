@@ -68,6 +68,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         startActivity(in);
     }
 
+    public void navigateToWithBundle(Class cls, Bundle bundle) {
+        Intent in = new Intent(context, cls);
+        in.putExtras(bundle);
+        startActivity(in);
+    }
+
     protected void insertVal(String key, String val) {
         SharedPreferences sp = getSharedPreferences("sp_roydon", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();

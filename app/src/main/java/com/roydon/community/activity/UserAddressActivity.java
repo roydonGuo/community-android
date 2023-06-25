@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,7 @@ public class UserAddressActivity extends BaseActivity {
     private AddressAdapter addressAdapter;
     private List<MallUserAddress> addressList = new ArrayList<>();
     private ImageView ivReturn;
+    private Button addAddress;
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
@@ -65,6 +67,8 @@ public class UserAddressActivity extends BaseActivity {
         rvMallAddress = findViewById(R.id.rv_mall_address);
         // 返回按钮
         ivReturn = findViewById(R.id.iv_return);
+        // 新增收货地址按钮
+        addAddress = findViewById(R.id.btn_add_address);
     }
 
     @Override
@@ -108,6 +112,9 @@ public class UserAddressActivity extends BaseActivity {
 //                        .setNeutralButton("取消", null)
 //                        .create().show();
             }
+        });
+        addAddress.setOnClickListener(v->{
+
         });
         refreshLayout.setOnRefreshListener(r -> {
             pageNum = 1;

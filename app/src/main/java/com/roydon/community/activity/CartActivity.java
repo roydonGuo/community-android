@@ -27,6 +27,7 @@ import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.MallUserCartVO;
 import com.roydon.community.domain.vo.BaseResponse;
 import com.roydon.community.domain.vo.MallUserCartListRes;
+import com.roydon.community.utils.DoubleUtils;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -34,6 +35,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CartActivity extends BaseActivity {
 
@@ -46,7 +48,7 @@ public class CartActivity extends BaseActivity {
     private List<MallUserCartVO> cartList = new ArrayList<>();
 
     private TextView tvGoodTitle, tvGoodPrice, totalPrice;
-    private Button btnGoodsCount;
+    private Button btnGoodsCount, createOrder;
     private TextView less, add;
     private ImageView ivGoodsImage, ivReturn;
 
@@ -57,8 +59,10 @@ public class CartActivity extends BaseActivity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0:
-                    Double collect = cartList.stream().mapToDouble(MallUserCartVO::getGoodsPrice).sum();
-                    totalPrice.setText("￥" + collect);
+//                    Double collect = cartList.stream().mapToDouble(MallUserCartVO::getGoodsPrice).sum();
+                    List<Double> doubles = cartList.stream().map(MallUserCartVO::getGoodsPrice).collect(Collectors.toList());
+                    double v = DoubleUtils.addDoubleList(doubles);
+                    totalPrice.setText("￥" + v);
                     cartAdapter.setDatas(cartList);
                     cartAdapter.notifyDataSetChanged();
                     break;
@@ -83,6 +87,7 @@ public class CartActivity extends BaseActivity {
         btnGoodsCount = findViewById(R.id.btn_goods_count);
         less = findViewById(R.id.tv_goods_less);
         add = findViewById(R.id.tv_goods_add);
+        createOrder = findViewById(R.id.btn_create_order);
     }
 
     @Override
@@ -142,6 +147,13 @@ public class CartActivity extends BaseActivity {
             }
         });
         getCartList(true);
+        createOrder.setOnClickListener(v -> {
+            List<String> goodsIds = cartList.stream().map(MallUserCartVO::getGoodsId).collect(Collectors.toList());
+            Bundle bundle = new Bundle();
+            bundle.putStringArrayList("goodsIds", (ArrayList<String>) goodsIds);
+//            showShortToast("goodsIds" + goodsIds);
+            navigateToWithBundle(CreateOrderActivity.class, bundle);
+        });
     }
 
     private void getCartList(final boolean isRefresh) {
