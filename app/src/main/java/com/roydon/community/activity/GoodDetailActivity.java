@@ -21,6 +21,7 @@ import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.MallGoodsVO;
+import com.roydon.community.domain.vo.BaseResponse;
 import com.roydon.community.domain.vo.GoodsDetailRes;
 import com.squareup.picasso.Picasso;
 
@@ -64,7 +65,7 @@ public class GoodDetailActivity extends BaseActivity {
             }
         });
         btnGoodAddCart.setOnClickListener((v) -> {
-
+            addCart(goodsId);
         });
     }
 
@@ -83,6 +84,28 @@ public class GoodDetailActivity extends BaseActivity {
                     message.what = 0;
                     message.obj = goodsVO;
                     mHandler.sendMessage(message);
+                } else {
+                    finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
+    }
+
+    private synchronized void addCart(String goodsId){
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("goodsId",goodsId);
+        Api.build(ApiConfig.MALL_ADD_CART , params).postRequestWithToken(this, new HttpCallback() {
+            @Override
+            public void onSuccess(final String res) {
+                // 后端传递时间格式解析
+                BaseResponse response = new Gson().fromJson(res, BaseResponse.class);
+                if (response != null && response.getCode() == 200) {
+                    showSyncShortToast("添加成功");
                 } else {
                     finish();
                 }

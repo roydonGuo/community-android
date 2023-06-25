@@ -3,12 +3,12 @@ package com.roydon.community.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
-public class Utils {
+public class ContextUtils {
 
     @SuppressLint("StaticFieldLeak")
     private static Context context;
 
-    private Utils() {
+    private ContextUtils() {
         throw new UnsupportedOperationException("我是需要实例化的啦！！！");
     }
 
@@ -18,7 +18,7 @@ public class Utils {
      * @param context 上下文
      */
     public static void init(Context context) {
-        Utils.context = context.getApplicationContext();
+        ContextUtils.context = context.getApplicationContext();
     }
 
     /**

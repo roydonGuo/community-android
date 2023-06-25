@@ -109,6 +109,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
+        android:background="@drawable/shape_button_main"
         android:padding="8sp"
         android:text="添加到购物车"
         android:textSize="20sp"

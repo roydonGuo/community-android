@@ -75,11 +75,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
             goodsTitle = view.findViewById(R.id.tv_goods_title);
             goodsPrice = view.findViewById(R.id.tv_goods_price);
             goodsCount = view.findViewById(R.id.btn_goods_count);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mOnItemClickListener.onItemClick(v, getLayoutPosition());
-                }
+            view.setOnClickListener(v -> {
+                mOnItemClickListener.onItemClick(v, getLayoutPosition());
+
+            });
+            //长按事件
+            view.setOnLongClickListener(v -> {
+                mOnItemClickListener.onItemLongClick(view, getLayoutPosition());
+                return true;
             });
         }
     }

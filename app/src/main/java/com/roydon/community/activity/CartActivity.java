@@ -1,6 +1,7 @@
 package com.roydon.community.activity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +25,7 @@ import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.MallUserCartVO;
+import com.roydon.community.domain.vo.BaseResponse;
 import com.roydon.community.domain.vo.MallUserCartListRes;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -42,7 +45,7 @@ public class CartActivity extends BaseActivity {
 
     private List<MallUserCartVO> cartList = new ArrayList<>();
 
-    private TextView tvGoodTitle, tvGoodPrice;
+    private TextView tvGoodTitle, tvGoodPrice, totalPrice;
     private Button btnGoodsCount;
     private TextView less, add;
     private ImageView ivGoodsImage, ivReturn;
@@ -54,6 +57,8 @@ public class CartActivity extends BaseActivity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0:
+                    Double collect = cartList.stream().mapToDouble(MallUserCartVO::getGoodsPrice).sum();
+                    totalPrice.setText("￥" + collect);
                     cartAdapter.setDatas(cartList);
                     cartAdapter.notifyDataSetChanged();
                     break;
@@ -70,6 +75,7 @@ public class CartActivity extends BaseActivity {
     protected void initView() {
         refreshLayout = findViewById(R.id.refreshLayout);
         rvMallCart = findViewById(R.id.rv_mall_cart);
+        totalPrice = findViewById(R.id.tv_total_price);
         ivGoodsImage = findViewById(R.id.iv_goods_img);
         tvGoodTitle = findViewById(R.id.tv_goods_title);
         tvGoodPrice = findViewById(R.id.tv_goods_price);
@@ -101,7 +107,24 @@ public class CartActivity extends BaseActivity {
 
             @Override
             public void onItemLongClick(View view, int position) {
-
+                AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
+                builder.setTitle("⛔删除")
+                        .setMessage("确定删除商品：" + cartList.get(position).getGoodsTitle() + "吗？")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @SuppressLint("NotifyDataSetChanged")
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                String cartId = cartList.get(position).getCartId();
+                                delCart(cartId);
+                                cartList.remove(position);
+                                showShortToast("删除成功");
+                                Double collect = cartList.stream().mapToDouble(MallUserCartVO::getGoodsPrice).sum();
+                                totalPrice.setText("￥" + collect);
+                                cartAdapter.notifyDataSetChanged();
+                            }
+                        })
+                        .setNeutralButton("取消", null)
+                        .create().show();
             }
         });
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
@@ -165,6 +188,22 @@ public class CartActivity extends BaseActivity {
                 } else {
                     refreshLayout.finishLoadMore(true);
                 }
+            }
+        });
+    }
+
+    private void delCart(String cartId) {
+        HashMap<String, Object> params = new HashMap<>();
+        Api.build(ApiConfig.MALL_DEL_CART + cartId, params).delRequestWithToken(this, new HttpCallback() {
+            @Override
+            public void onSuccess(final String res) {
+                BaseResponse response = new Gson().fromJson(res, BaseResponse.class);
+                if (response != null && response.getCode() == 200) {
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
             }
         });
     }

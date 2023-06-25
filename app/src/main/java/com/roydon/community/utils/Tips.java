@@ -29,7 +29,7 @@ public class Tips {
      * @param duration 显示时间长度
      */
     public static void show(String message, int duration) {
-        Toast toast = new Toast(Utils.getContext());
+        Toast toast = new Toast(ContextUtils.getContext());
         toast.setDuration(duration);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.setView(createToastView(message));
@@ -53,13 +53,13 @@ public class Tips {
         drawable.getPaint().setFlags(Paint.ANTI_ALIAS_FLAG);
 
         // 创建View
-        FrameLayout layout = new FrameLayout(Utils.getContext());
+        FrameLayout layout = new FrameLayout(ContextUtils.getContext());
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layout.setLayoutParams(layoutParams);
         layout.setPadding(dp2px(16), dp2px(12), dp2px(16), dp2px(12));
         layout.setBackground(drawable);
 
-        TextView textView = new TextView(Utils.getContext());
+        TextView textView = new TextView(ContextUtils.getContext());
         textView.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT));
         textView.setTextSize(15);
         textView.setText(message);
@@ -78,7 +78,7 @@ public class Tips {
      * @return 转换后的px
      */
     private static int dp2px(float dp) {
-        final float scale = Utils.getContext().getResources().getDisplayMetrics().density;
+        final float scale = ContextUtils.getContext().getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
     }
 }
