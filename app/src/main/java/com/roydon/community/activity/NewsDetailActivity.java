@@ -1,6 +1,9 @@
 package com.roydon.community.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -13,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.roydon.community.BaseActivity;
 import com.roydon.community.R;
@@ -21,8 +25,10 @@ import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.AppNews;
 import com.roydon.community.domain.vo.AppNewsRes;
+import com.roydon.community.utils.LoadImageTask;
 import com.roydon.community.view.CircleTransform;
 import com.squareup.picasso.Picasso;
+import com.zzhoujay.richtext.ImageHolder;
 import com.zzhoujay.richtext.RichText;
 
 import java.util.HashMap;
@@ -83,6 +89,7 @@ public class NewsDetailActivity extends BaseActivity {
                     finish();
                 }
             }
+
             @Override
             public void onFailure(Exception e) {
 
@@ -110,8 +117,31 @@ public class NewsDetailActivity extends BaseActivity {
         String newsContent = appNews.getNewsContent();
 //        tvContent.setText(Html.fromHtml(newsContent, new ImageGetterUtils.MyImageGetter(this, tvContent), null));
         RichText.initCacheDir(context);
-        RichText.from(newsContent).into(tvContent);
+        // 设置为Html，设置图片点击预览大图
+        RichText.fromHtml(newsContent)
+                .autoPlay(true)
+                .borderRadius(10)
+                .scaleType(ImageHolder.ScaleType.fit_center)
+                .imageClick((imageUrls, position) -> bigImageLoader(imageUrls.get(position)))
+                .into(tvContent);
         Picasso.with(this).load(appNews.getCoverImg()).transform(new CircleTransform()).into(ivSourceAvatar);
     }
 
+    private void bigImageLoader(String imgUrl) {
+        Dialog dialog = new Dialog(this);
+        ImageView imageView = new ImageView(context);
+        Glide.with(context).load(imgUrl).centerCrop().into(imageView);
+        // 使用异步任务加载图片并显示在ImageView中
+        new LoadImageTask().execute(imgUrl, imageView);
+        dialog.setContentView(imageView);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+    }
+
+    @Override
+    protected void onDestroy() {
+
+        super.onDestroy();
+        RichText.clear(this);
+    }
 }

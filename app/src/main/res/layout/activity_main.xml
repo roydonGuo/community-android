@@ -23,6 +23,7 @@
             android:layout_alignParentLeft="true"
             android:background="@drawable/shape_login_button"
             android:text="@string/login"
+            android:textColor="@color/white"
             android:textSize="@dimen/dimen_16sp"
             android:textStyle="bold" />
 

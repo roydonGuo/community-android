@@ -22,8 +22,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        buttonLogin = findViewById(R.id.btn_login);
-        buttonRegister = findViewById(R.id.btn_register);
+        buttonLogin = findViewById(R.id.button_login);
+        buttonRegister = findViewById(R.id.button_register);
     }
 
     @Override
