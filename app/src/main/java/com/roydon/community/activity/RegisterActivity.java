@@ -73,7 +73,6 @@ public class RegisterActivity extends BaseActivity {
                     showLongToast(res);
                 });
             }
-
             @Override
             public void onFailure(Exception e) {
                 Log.e("onFailure", e.toString());
