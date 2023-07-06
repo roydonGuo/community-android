@@ -60,7 +60,7 @@
                             android:id="@+id/img_header"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:src="@mipmap/avatar_ganyu" />
+                            android:src="@mipmap/avatar" />
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
 

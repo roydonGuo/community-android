@@ -39,7 +39,7 @@
 
                 android:layout_gravity="center_vertical"
                 android:scaleType="fitXY"
-                android:src="@mipmap/avatar_ganyu" />
+                android:src="@mipmap/avatar" />
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
@@ -54,7 +54,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:scaleType="fitXY"
-                android:src="@mipmap/avatar_ganyu" />
+                android:src="@mipmap/avatar" />
 
             <TextView
                 android:id="@+id/author"

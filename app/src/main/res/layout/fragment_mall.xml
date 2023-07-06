@@ -33,7 +33,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center_vertical"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/avatar_ganyu" />
+                    android:src="@mipmap/avatar" />
             </androidx.cardview.widget.CardView>
 
             <!--搜索框-->
