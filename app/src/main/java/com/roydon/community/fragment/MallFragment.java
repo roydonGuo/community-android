@@ -122,7 +122,7 @@ public class MallFragment extends BaseFragment {
     private void getMallGoodsList(final boolean isRefresh) {
         HashMap<String, Object> params = new HashMap<>();
         params.put("pageNum", pageNum);
-        params.put("pageSize", ApiConfig.PAGE_SIZE);
+        params.put("pageSize", ApiConfig.PAGE_SIZE_20);
         // 上架商品
         params.put("status", "0");
         Api.build(ApiConfig.MALL_GOODS_LIST, params).postRequestWithToken(getActivity(), new HttpCallback() {
