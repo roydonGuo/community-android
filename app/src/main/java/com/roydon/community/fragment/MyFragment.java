@@ -1,5 +1,9 @@
 package com.roydon.community.fragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -10,6 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.roydon.community.R;
+import com.roydon.community.activity.LoginActivity;
 import com.roydon.community.activity.MyDetailActivity;
 import com.roydon.community.activity.UserAddressActivity;
 
@@ -22,7 +27,7 @@ public class MyFragment extends BaseFragment {
     private ViewPager viewPager;
     private SlidingTabLayout slidingTabLayout;
     private LinearLayout mLinearLayout;
-    private RelativeLayout rlUserAddress;
+    private RelativeLayout rlUserAddress, rlReturnLogin;
 
     public MyFragment() {
     }
@@ -40,6 +45,7 @@ public class MyFragment extends BaseFragment {
     protected void initView() {
         mLinearLayout = mRootView.findViewById(R.id.layout_my_detail);
         rlUserAddress = mRootView.findViewById(R.id.rl_user_address);
+        rlReturnLogin = mRootView.findViewById(R.id.rl_return_login);
         mLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +54,7 @@ public class MyFragment extends BaseFragment {
                 navigateTo(MyDetailActivity.class);
             }
         });
-        rlUserAddress.setOnClickListener(v->{
+        rlUserAddress.setOnClickListener(v -> {
             navigateTo(UserAddressActivity.class);
         });
 //        viewPager = mRootView.findViewById(R.id.fixedViewPager);
@@ -57,7 +63,14 @@ public class MyFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-
+        // 退出登录
+        rlReturnLogin.setOnClickListener(v -> {
+            SharedPreferences sp = getContext().getSharedPreferences("sp_roydon", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.clear();
+            editor.apply();
+            navigateToWithFlag(LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        });
     }
 
 }
