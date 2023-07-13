@@ -2,7 +2,6 @@ package com.roydon.community.activity;
 
 import android.content.Intent;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,7 +25,7 @@ public class LoginActivity extends BaseActivity {
     private EditText etUsername;
     private EditText etPassword;
     private Button btnLogin;
-    private TextView tvToRegister;
+    private TextView tvToSmsLogin, tvToRegister;
 
     @Override
     protected int initLayout() {
@@ -38,24 +37,22 @@ public class LoginActivity extends BaseActivity {
         etUsername = findViewById(R.id.et_username);
         etPassword = findViewById(R.id.et_password);
         btnLogin = findViewById(R.id.btn_login);
+        tvToSmsLogin = findViewById(R.id.tv_to_sms_login);
         tvToRegister = findViewById(R.id.tv_to_register);
     }
 
     @Override
     protected void initData() {
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = etUsername.getText().toString().trim();
-                String password = etPassword.getText().toString().trim();
-                login(username, password);
-            }
+        btnLogin.setOnClickListener(v -> {
+            String username = etUsername.getText().toString().trim();
+            String password = etPassword.getText().toString().trim();
+            login(username, password);
         });
-        tvToRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigateToWithFlag(RegisterActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            }
+        tvToSmsLogin.setOnClickListener(v -> {
+            navigateToWithFlag(SmsLoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        });
+        tvToRegister.setOnClickListener(v -> {
+            navigateToWithFlag(RegisterActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         });
     }
 
@@ -91,4 +88,8 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
