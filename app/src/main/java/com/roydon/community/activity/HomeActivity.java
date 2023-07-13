@@ -1,6 +1,8 @@
 package com.roydon.community.activity;
 
+import android.view.KeyEvent;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -83,6 +85,26 @@ public class HomeActivity extends BaseActivity {
             }
         });
         viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), mTitles, mFragments));
+    }
+
+    //第一次点击事件发生的时间
+    private long mExitTime;
+
+    /**
+     * 点击两次返回退出app
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
+                Toast.makeText(this, "再按一次退出APP", Toast.LENGTH_SHORT).show();
+                mExitTime = System.currentTimeMillis();
+            } else {
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 }

@@ -26,6 +26,7 @@
                 android:adjustViewBounds="true"
                 android:layout_height="wrap_content"
                 android:maxHeight="240dp"
+                android:minHeight="180dp"
                 android:scaleType="fitXY"
                 android:src="@mipmap/avatar" />
         </androidx.cardview.widget.CardView>

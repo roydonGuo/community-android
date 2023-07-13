@@ -4,13 +4,17 @@ public class ApiConfig {
 
     public static final int PAGE_SIZE = 10;
     public static final int PAGE_SIZE_20 = 20;
+
     public static final String BASE_URl = "http://106.14.105.101:8088";
 //    public static final String BASE_URl = "http://192.168.0.101:8088";
+//    public static final String BASE_URl = "http://192.168.68.179:8088";
 
     /**
      * app前缀接口
      */
     public static final String LOGIN = "/app/login"; //登录
+    public static final String SMS_SEND_CODE = "/sms/sendCode/"; //发送短信验证码
+    public static final String SMS_LOGIN = "/app/sms-login"; //短信登录
     public static final String REGISTER = "/app/register"; //注册
 
     /**

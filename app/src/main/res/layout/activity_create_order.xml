@@ -84,7 +84,7 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/shape_radius"
                 android:padding="10dp"
-                android:text="admin"
+                android:text=""
                 android:textColor="@color/black" />
             <!--商品-->
             <TextView
