@@ -9,9 +9,12 @@
     <!-- 登录框 -->
     <string name="username_hint">请输入账号</string>
     <string name="password_hint">请输入密码</string>
+    <string name="telephone_hint">请输入手机号码</string>
+    <string name="phoneCode_hint">短信验证码</string>
     <!-- 登录标题 -->
-    <string name="username_password_login">密码登录</string>
-    <string name="sms_login">短信登录</string>
+    <string name="username_password_login">账号密码登录</string>
+    <string name="sms_login">手机短信登录</string>
+    <string name="getPhoneCode">获取验证码</string>
     <string name="title_activity_news_detail">NewsDetailActivity</string>
     <string name="large_text">本文章为原创，谢绝任何媒体转载图片大小V1导弹是比较落后的，采用机械装置决定飞行的方向和时间，从而决定导弹的攻击点。</string>
     <string name="action_settings">Settings</string>
