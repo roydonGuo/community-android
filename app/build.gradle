@@ -54,6 +54,15 @@ android {
         }
     }
 
+    android {
+        defaultConfig {
+            ndk {
+                //设置支持的SO库架构
+                abiFilters "armeabi-v7a", "x86","arm64-v8a","x86_64"
+            }
+        }
+    }
+
 //    sourceSets {main {res.srcDirs = ['src/main/res', 'src/main/res-night']}}
 }
 
@@ -69,7 +78,9 @@ dependencies {
     // 百度地图jar包
 //    implementation(name: 'BaiduLBS_Android', ext: 'jar')
     implementation files('libs/BaiduLBS_Android.jar')
-
+//    implementation 'com.baidu.lbsyun:BaiduMapSDK_Map:7.5.8'
+//    implementation 'com.baidu.lbsyun:BaiduMapSDK_Search:7.5.8'
+//    implementation 'com.baidu.lbsyun:BaiduMapSDK_Util:7.5.8'
     //地图组件
     //implementation 'com.baidu.lbsyun:BaiduMapSDK_Map:7.5.4'
     //检索组件

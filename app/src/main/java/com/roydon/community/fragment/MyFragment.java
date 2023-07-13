@@ -5,7 +5,6 @@ import static android.content.Context.MODE_PRIVATE;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -46,13 +45,11 @@ public class MyFragment extends BaseFragment {
         mLinearLayout = mRootView.findViewById(R.id.layout_my_detail);
         rlUserAddress = mRootView.findViewById(R.id.rl_user_address);
         rlReturnLogin = mRootView.findViewById(R.id.rl_return_login);
-        mLinearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
+        mLinearLayout.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
 //                bundle.putString("userId", user.getUserId());
-                navigateTo(MyDetailActivity.class);
-            }
+            navigateTo(MyDetailActivity.class);
+
         });
         rlUserAddress.setOnClickListener(v -> {
             navigateTo(UserAddressActivity.class);

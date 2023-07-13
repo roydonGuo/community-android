@@ -102,9 +102,10 @@ public class NewsAppFragment extends BaseFragment {
     private void getNewsList(final boolean isRefresh) {
         HashMap<String, Object> params = new HashMap<>();
         params.put("pageNum", pageNum);
+//        showShortToast(pageNum+"");
         params.put("pageSize", ApiConfig.PAGE_SIZE);
         params.put("newsType", dictValue);
-        params.put("showInApp", 1);
+        params.put("showInApp", "1");
         Api.build(ApiConfig.NEWS_LIST, params).getRequestWithToken(getActivity(), new HttpCallback() {
             @Override
             public void onSuccess(final String res) {

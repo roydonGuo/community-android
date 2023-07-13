@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -25,7 +26,7 @@ import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.AppNews;
 import com.roydon.community.domain.vo.AppNewsRes;
-import com.roydon.community.utils.LoadImageTask;
+import com.roydon.community.listener.ScaleListener;
 import com.roydon.community.view.CircleTransform;
 import com.squareup.picasso.Picasso;
 import com.zzhoujay.richtext.ImageHolder;
@@ -127,13 +128,36 @@ public class NewsDetailActivity extends BaseActivity {
         Picasso.with(this).load(appNews.getCoverImg()).transform(new CircleTransform()).into(ivSourceAvatar);
     }
 
+    // 图片点击预览大图
     private void bigImageLoader(String imgUrl) {
         Dialog dialog = new Dialog(this);
-        ImageView imageView = new ImageView(context);
-        Glide.with(context).load(imgUrl).centerCrop().into(imageView);
+//        ImageView imageView = new ImageView(context);
+        /**
+         * scaleType=“matrix” 是保持原图大小、从左上角的点开始，以矩阵形式绘图。
+         * scaleType=“fitXY” 是将原图进行横方向（即XY方向）的拉伸后绘制的。
+         * scaleType=“fitStart” 是将原图沿左上角的点（即matrix方式绘图开始的点），按比例缩放原图绘制而成的。
+         * scaleType=“fitCenter” 是将原图沿上方居中的点（即matrix方式绘图第一行的居中的点），按比例缩放原图绘制而成的。
+         * scaleType=“fitEnd” 是将原图沿下方居中的点（即matrix方式绘图最后一行的居中的点），按比例缩放原图绘制而成的。
+         * scaleType=“Center” 是保持原图大小，以原图的几何中心点和ImagView的几何中心点为基准，只绘制ImagView大小的图像。
+         * scaleType=“centerCrop” 不保持原图大小，以原图的几何中心点和ImagView的几何中心点为基准，只绘制ImagView大小的图像（以填满ImagView为目标，对原图进行裁剪）。
+         * scaleType=“centerInside” 不保持原图大小，以原图的几何中心点和ImagView的几何中心点为基准，只绘制ImagView大小的图像（以显示完整图片为目标，对原图进行缩放）。
+         */
+//        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+//        Glide.with(context).load(imgUrl).centerCrop().into(imageView);
         // 使用异步任务加载图片并显示在ImageView中
-        new LoadImageTask().execute(imgUrl, imageView);
-        dialog.setContentView(imageView);
+//        new LoadImageTask().execute(imgUrl, imageView);
+        // 绑定xml组件
+        dialog.setContentView(R.layout.dialog_image_preview);
+
+        ImageView imageView = dialog.findViewById(R.id.dialog_image);
+        Glide.with(context).load(imgUrl).fitCenter().into(imageView);
+//        new LoadImageTask().execute(imgUrl, imageView);
+        imageView.setScaleType(ImageView.ScaleType.MATRIX);
+        ScaleGestureDetector scaleGestureDetector = new ScaleGestureDetector(context, new ScaleListener(imageView));
+        imageView.setOnTouchListener((v, event) -> {
+            scaleGestureDetector.onTouchEvent(event);
+            return true;
+        });
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
     }

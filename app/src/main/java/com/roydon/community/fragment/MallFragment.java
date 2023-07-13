@@ -114,7 +114,7 @@ public class MallFragment extends BaseFragment {
             }
         });
         getMallGoodsList(true);
-        ivMallCart.setOnClickListener(v->{
+        ivMallCart.setOnClickListener(v -> {
             navigateTo(CartActivity.class);
         });
     }
