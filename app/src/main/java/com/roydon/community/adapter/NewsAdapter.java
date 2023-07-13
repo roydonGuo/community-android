@@ -17,6 +17,9 @@ import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -44,7 +47,20 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        int type = datas.get(position).getViewNum();
+//        int type = datas.get(position).getViewNum();
+        int type = 0;
+        Date postTime = datas.get(position).getPostTime();
+        // 获取今日0时
+        Date mNightDate = new Date();
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            LocalDateTime mNightTime = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0);
+            mNightDate = Date.from(mNightTime.atZone(ZoneId.systemDefault()).toInstant());
+        }
+        if (postTime.after(mNightDate) && datas.get(position).getViewNum() > 20) {
+            type = 2;
+        } else {
+            type = 1;
+        }
         return type;
     }
 
