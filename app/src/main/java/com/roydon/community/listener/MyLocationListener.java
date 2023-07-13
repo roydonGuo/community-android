@@ -1,30 +1,44 @@
 package com.roydon.community.listener;
 
-import android.location.Location;
-import android.location.LocationListener;
-import android.os.Bundle;
+import com.baidu.location.BDAbstractLocationListener;
+import com.baidu.location.BDLocation;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.model.LatLng;
 
-public class MyLocationListener implements LocationListener {
-    @Override
-    public void onLocationChanged(Location location) {
-        // 处理位置更新事件
-        double latitude = location.getLatitude();
-        double longitude = location.getLongitude();
-        // 在这里可以更新UI或执行其他操作
+public class MyLocationListener extends BDAbstractLocationListener {
+    private MapView mMapView;
+    private BaiduMap mBaiduMap;
+    private boolean isFirstLocate = true;
+
+    //构造方法用于传递地图控件
+    public MyLocationListener(MapView mMapView,BaiduMap mBaiduMap) {
+        this.mMapView = mMapView;
+        this.mBaiduMap = mBaiduMap;
     }
 
     @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-        // 当位置提供者状态改变时调用
-    }
+    public void onReceiveLocation(BDLocation location) {
+        LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
+        if (isFirstLocate) {
 
-    @Override
-    public void onProviderEnabled(String provider) {
-        // 当位置提供者启用时调用
-    }
+            isFirstLocate = false;
+            //给地图设置状态
+            mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newLatLng(ll));
+        }
 
-    @Override
-    public void onProviderDisabled(String provider) {
-        // 当位置提供者禁用时调用
+        //mapView 销毁后不在处理新接收的位置
+        if (location == null || mMapView == null){
+            return;
+        }
+        MyLocationData locData = new MyLocationData.Builder()
+                .accuracy(location.getRadius())
+                // 此处设置开发者获取到的方向信息，顺时针0-360
+                .direction(location.getDirection()).latitude(location.getLatitude())
+                .longitude(location.getLongitude()).build();
+
+        mBaiduMap.setMyLocationData(locData);
     }
 }

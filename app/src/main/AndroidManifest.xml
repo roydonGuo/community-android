@@ -62,7 +62,9 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" /> <!-- baidu地图 -->
+            android:exported="false" />
+
+        <!-- baidu地图 -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="3hyBCuhdrkTnOLDX5XLwl5dBRtxnnuRH" />
