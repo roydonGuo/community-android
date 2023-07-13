@@ -151,6 +151,7 @@
                     android:layout_weight="1"
                     android:gravity="left"
                     android:text="@string/sms_login"
+                    android:textColor="@color/grey"
                     android:textSize="@dimen/dimen_12sp" />
                 <!--去注册-->
                 <TextView
@@ -160,6 +161,7 @@
                     android:layout_weight="1"
                     android:gravity="right"
                     android:text="@string/to_register"
+                    android:textColor="@color/grey"
                     android:textSize="@dimen/dimen_12sp" />
             </LinearLayout>
         </LinearLayout>

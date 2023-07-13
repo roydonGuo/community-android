@@ -140,6 +140,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/dimen_20dp"
                 android:text="@string/to_login"
+                android:textColor="@color/grey"
                 android:textSize="@dimen/dimen_16sp" />
         </LinearLayout>
 
