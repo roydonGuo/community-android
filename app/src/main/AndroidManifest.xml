@@ -35,6 +35,9 @@
         android:theme="@style/Theme.Communityandroid"
         tools:targetApi="31">
         <activity
+            android:name=".activity.UserOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.SmsLoginActivity"
             android:exported="false" />
         <activity
@@ -62,9 +65,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
-
-        <!-- baidu地图 -->
+            android:exported="false" /> <!-- baidu地图 -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="3hyBCuhdrkTnOLDX5XLwl5dBRtxnnuRH" />

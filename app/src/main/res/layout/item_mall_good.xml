@@ -66,7 +66,7 @@
                 android:lines="1"
                 android:text="￥9.9"
                 android:textColor="@color/red"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tv_stock"

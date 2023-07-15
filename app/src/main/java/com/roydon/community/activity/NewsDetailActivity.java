@@ -1,15 +1,11 @@
 package com.roydon.community.activity;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
-import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -17,8 +13,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.previewlibrary.GPreviewBuilder;
+import com.previewlibrary.ZoomMediaLoader;
 import com.roydon.community.BaseActivity;
 import com.roydon.community.R;
 import com.roydon.community.api.Api;
@@ -26,13 +23,16 @@ import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.AppNews;
 import com.roydon.community.domain.vo.AppNewsRes;
-import com.roydon.community.listener.ScaleListener;
+import com.roydon.community.utils.ImagePreviewLoader;
+import com.roydon.community.utils.ImageViewInfo;
 import com.roydon.community.view.CircleTransform;
 import com.squareup.picasso.Picasso;
 import com.zzhoujay.richtext.ImageHolder;
 import com.zzhoujay.richtext.RichText;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class NewsDetailActivity extends BaseActivity {
 
@@ -52,7 +52,7 @@ public class NewsDetailActivity extends BaseActivity {
         tvContent = findViewById(R.id.tv_content);
         ivSourceAvatar = findViewById(R.id.iv_source_avatar);
         ivReturn = findViewById(R.id.iv_return);
-
+        ZoomMediaLoader.getInstance().init(new ImagePreviewLoader());
         // 实例化
 //        mWebView = findViewById(R.id.webView);
     }
@@ -119,18 +119,33 @@ public class NewsDetailActivity extends BaseActivity {
 //        tvContent.setText(Html.fromHtml(newsContent, new ImageGetterUtils.MyImageGetter(this, tvContent), null));
         RichText.initCacheDir(context);
         // 设置为Html，设置图片点击预览大图
+
         RichText.fromHtml(newsContent)
                 .autoPlay(true)
                 .borderRadius(10)
                 .scaleType(ImageHolder.ScaleType.fit_center)
-                .imageClick((imageUrls, position) -> bigImageLoader(imageUrls.get(position)))
+                .imageClick((imageUrls, position) -> bigImageLoader(imageUrls, position))
                 .into(tvContent);
+
         Picasso.with(this).load(appNews.getCoverImg()).transform(new CircleTransform()).into(ivSourceAvatar);
     }
 
+    private List<ImageViewInfo> mImgPreviewLists = new ArrayList<>();  //预览的图片列表
+
     // 图片点击预览大图
-    private void bigImageLoader(String imgUrl) {
-        Dialog dialog = new Dialog(this);
+    private void bigImageLoader(List<String> imageUrls, int position) {
+//        Dialog dialog = new Dialog(this);
+        for (int i = 0; i < imageUrls.size(); i++) {
+            String url = imageUrls.get(i);
+            mImgPreviewLists.add(new ImageViewInfo(url));
+        }
+        GPreviewBuilder.from(this)
+                .setData(mImgPreviewLists)//放入数据集合
+                .setCurrentIndex(position)
+                .setSingleFling(true)//是否在黑屏区域点击返回
+                .setDrag(false)//是否禁用图片拖拽返回
+                .setType(GPreviewBuilder.IndicatorType.Number)//指示器类型:dot,number
+                .start();//启动
 //        ImageView imageView = new ImageView(context);
         /**
          * scaleType=“matrix” 是保持原图大小、从左上角的点开始，以矩阵形式绘图。
@@ -146,20 +161,21 @@ public class NewsDetailActivity extends BaseActivity {
 //        Glide.with(context).load(imgUrl).centerCrop().into(imageView);
         // 使用异步任务加载图片并显示在ImageView中
 //        new LoadImageTask().execute(imgUrl, imageView);
-        // 绑定xml组件
-        dialog.setContentView(R.layout.dialog_image_preview);
 
-        ImageView imageView = dialog.findViewById(R.id.dialog_image);
-        Glide.with(context).load(imgUrl).fitCenter().into(imageView);
-//        new LoadImageTask().execute(imgUrl, imageView);
-        imageView.setScaleType(ImageView.ScaleType.MATRIX);
-        ScaleGestureDetector scaleGestureDetector = new ScaleGestureDetector(context, new ScaleListener(imageView));
-        imageView.setOnTouchListener((v, event) -> {
-            scaleGestureDetector.onTouchEvent(event);
-            return true;
-        });
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.show();
+        // 绑定xml组件
+//        dialog.setContentView(R.layout.dialog_image_preview);
+//
+//        ImageView imageView = dialog.findViewById(R.id.dialog_image);
+//        Glide.with(context).load(imgUrl).fitCenter().into(imageView);
+////        new LoadImageTask().execute(imgUrl, imageView);
+//        imageView.setScaleType(ImageView.ScaleType.MATRIX);
+//        ScaleGestureDetector scaleGestureDetector = new ScaleGestureDetector(context, new ScaleListener(imageView));
+//        imageView.setOnTouchListener((v, event) -> {
+//            scaleGestureDetector.onTouchEvent(event);
+//            return true;
+//        });
+//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        dialog.show();
     }
 
     @Override

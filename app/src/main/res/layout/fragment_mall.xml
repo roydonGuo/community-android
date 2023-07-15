@@ -67,7 +67,7 @@
             <!--右侧购物车-->
             <ImageView
                 android:id="@+id/iv_mall_cart"
-                android:layout_width="20dp"
+                android:layout_width="24dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"

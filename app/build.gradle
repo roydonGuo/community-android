@@ -176,7 +176,10 @@ dependencies {
     // 图片库
     implementation 'com.github.bumptech.glide:glide:4.11.0'
 //    implementation 'com.github.bumptech.glide:okhttp3-integration:4.11.0'
-    implementation 'com.github.bumptech.glide:compiler:4.11.0'
+    // 图片预览工具库
+    implementation 'com.ycjiang:ImagePreview:2.3.5'
+
+    annotationProcessor  'com.github.bumptech.glide:compiler:4.11.0'
 
     // banner轮播图https://github.com/youth5201314/banner
     // 轮播图库

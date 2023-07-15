@@ -18,7 +18,7 @@
     <color name="login_form_background">#ADE9EDF1</color>
     <color name="login_edittext_background">#7EC4C7CA</color>
 
-    <color name="divider">#e8e7e7</color>
+    <color name="divider">#80E8E7E7</color>
     <color name="fragment_background">#f2f2ff</color>
     <color name="activity_background">#f2f2ff</color>
 

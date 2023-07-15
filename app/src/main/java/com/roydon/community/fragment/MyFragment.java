@@ -16,6 +16,7 @@ import com.roydon.community.R;
 import com.roydon.community.activity.LoginActivity;
 import com.roydon.community.activity.MyDetailActivity;
 import com.roydon.community.activity.UserAddressActivity;
+import com.roydon.community.activity.UserOrderActivity;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,8 @@ public class MyFragment extends BaseFragment {
     private ViewPager viewPager;
     private SlidingTabLayout slidingTabLayout;
     private LinearLayout mLinearLayout;
+    // 订单栏功能
+    private LinearLayout llUserOrder;
     private RelativeLayout rlUserAddress, rlReturnLogin;
 
     public MyFragment() {
@@ -45,6 +48,9 @@ public class MyFragment extends BaseFragment {
         mLinearLayout = mRootView.findViewById(R.id.layout_my_detail);
         rlUserAddress = mRootView.findViewById(R.id.rl_user_address);
         rlReturnLogin = mRootView.findViewById(R.id.rl_return_login);
+        // 订单栏功能
+        llUserOrder = mRootView.findViewById(R.id.ll_user_order);
+
         mLinearLayout.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
 //                bundle.putString("userId", user.getUserId());
@@ -53,6 +59,9 @@ public class MyFragment extends BaseFragment {
         });
         rlUserAddress.setOnClickListener(v -> {
             navigateTo(UserAddressActivity.class);
+        });
+        llUserOrder.setOnClickListener(v -> {
+            navigateTo(UserOrderActivity.class);
         });
 //        viewPager = mRootView.findViewById(R.id.fixedViewPager);
 //        slidingTabLayout = mRootView.findViewById(R.id.slidingTabLayout);

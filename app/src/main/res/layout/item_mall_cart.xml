@@ -31,10 +31,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:ellipsize="end"
-        android:lines="1"
-        android:text="title"
+        android:maxLines="2"
+        android:text=""
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/cv_goods_img"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,9 +44,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        android:text="￥9.9"
-        android:textColor="#EC4242"
-        android:textSize="18sp"
+        android:text="￥ 9.9"
+        android:textColor="@color/red"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/cv_goods_img"
         app:layout_constraintTop_toBottomOf="@+id/tv_goods_title" />
 
@@ -66,16 +66,16 @@
             android:gravity="center"
             android:text="@string/cart_less_label"
             android:textColor="@color/black"
-            android:textSize="22sp" />
+            android:textSize="24dp" />
 
         <Button
             android:id="@+id/btn_goods_count"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
+            android:background="@drawable/shape_order_btn"
             android:enabled="false"
             android:gravity="center"
-            android:background="@drawable/shape_button_main"
             android:text="@string/cart_goods_count_init"
             android:textColor="@color/black"
             android:textSize="14sp" />
@@ -88,6 +88,6 @@
             android:gravity="center"
             android:text="@string/cart_add_label"
             android:textColor="@color/black"
-            android:textSize="22sp" />
+            android:textSize="24sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
