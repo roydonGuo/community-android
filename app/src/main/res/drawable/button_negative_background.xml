@@ -3,7 +3,7 @@
     android:shape="rectangle">
 
     <corners android:radius="5dp" />
-    <solid android:color="@color/element" />
-<!--    <stroke android:color="@color/element"/>-->
-<!--    <gradient android:endColor="@color/element" />-->
+    <solid android:color="#DDDDDD" />
+    <!--    <stroke android:color="@color/element"/>-->
+    <!--    <gradient android:endColor="@color/element" />-->
 </shape>

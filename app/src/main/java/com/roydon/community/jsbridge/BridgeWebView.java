@@ -54,7 +54,6 @@ public class BridgeWebView extends WebView implements LvUJsBridge {
         init();
     }
 
-
     public void setDefaultHandler(BridgeHandler handler) {
         this.defaultHandler = handler;
     }

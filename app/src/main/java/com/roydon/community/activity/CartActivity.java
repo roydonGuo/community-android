@@ -1,7 +1,6 @@
 package com.roydon.community.activity;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +25,7 @@ import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.MallUserCartVO;
 import com.roydon.community.domain.vo.BaseResponse;
 import com.roydon.community.domain.vo.MallUserCartListRes;
+import com.roydon.community.utils.AlertDialogUtils;
 import com.roydon.community.utils.DoubleUtils;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -112,24 +111,59 @@ public class CartActivity extends BaseActivity {
 
             @Override
             public void onItemLongClick(View view, int position) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
-                builder.setTitle("⛔删除")
-                        .setMessage("确定删除商品：" + cartList.get(position).getGoodsTitle() + "吗？")
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @SuppressLint("NotifyDataSetChanged")
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                String cartId = cartList.get(position).getCartId();
-                                delCart(cartId);
-                                cartList.remove(position);
-                                showShortToast("删除成功");
-                                Double collect = cartList.stream().mapToDouble(MallUserCartVO::getGoodsPrice).sum();
-                                totalPrice.setText("￥" + collect);
-                                cartAdapter.notifyDataSetChanged();
-                            }
-                        })
-                        .setNeutralButton("取消", null)
-                        .create().show();
+                String title = "删除购物车";
+                String msg = "确定删除商品：" + cartList.get(position).getGoodsTitle() + "吗？";
+                AlertDialogUtils.showCustomAlertDialog(CartActivity.this, title, msg, new View.OnClickListener() {
+                    @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
+                    @Override
+                    public void onClick(View view) {
+                        String cartId = cartList.get(position).getCartId();
+                        delCart(cartId);
+                        cartList.remove(position);
+                        showShortToast("删除成功");
+                        // 重新计算总价格
+                        Double collect = cartList.stream().mapToDouble(MallUserCartVO::getGoodsPrice).sum();
+                        totalPrice.setText(collect + "");
+                        cartAdapter.notifyDataSetChanged();
+                    }
+                }, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+//                AlertDialogUtils.showDeleteConfirmationDialog(CartActivity.this, title, msg, new DialogInterface.OnClickListener() {
+//                    @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        String cartId = cartList.get(position).getCartId();
+//                        delCart(cartId);
+//                        cartList.remove(position);
+//                        showShortToast("删除成功");
+//                        // 重新计算总价格
+//                        Double collect = cartList.stream().mapToDouble(MallUserCartVO::getGoodsPrice).sum();
+//                        totalPrice.setText(collect + "");
+//                        cartAdapter.notifyDataSetChanged();
+//                    }
+//                });
+//                AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
+//                builder.setTitle("删除")
+//                        .setMessage("确定删除商品：" + cartList.get(position).getGoodsTitle() + "吗？")
+//                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                            @SuppressLint("NotifyDataSetChanged")
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                String cartId = cartList.get(position).getCartId();
+//                                delCart(cartId);
+//                                cartList.remove(position);
+//                                showShortToast("删除成功");
+//                                Double collect = cartList.stream().mapToDouble(MallUserCartVO::getGoodsPrice).sum();
+//                                totalPrice.setText("￥" + collect);
+//                                cartAdapter.notifyDataSetChanged();
+//                            }
+//                        })
+//                        .setNeutralButton("取消", null)
+//                        .create().show();
             }
         });
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {

@@ -21,4 +21,25 @@
         <item name="cornerSize">10dp</item>
     </style>
 
+    <!-- 自定义弹出样式 -->
+    <style name="MyDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!--是否浮在窗口之上-->
+        <!--<item name="android:windowIsFloating">true</item>-->
+        <!--半透明-->
+        <item name="android:windowIsTranslucent">true</item>
+        <!--弹窗圆角-->
+        <item name="android:windowBackground">@drawable/dialog_background</item>
+        <!--是否显示title-->
+        <item name="android:windowNoTitle">true</item>
+        <!--dialog之外没有焦点的区域是否罩上黑色半透明-->
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18sp</item>
+        <!-- 这里是修改顶部标题背景颜色，具体颜色自己定，可以是图片 -->
+        <item name="android:topDark">@color/element</item>
+        <!-- 这里是修改内容区域背景颜色 -->
+        <item name="android:layout_gravity">center</item>
+        <item name="buttonBarButtonStyle">@color/white</item>
+    </style>
+
 </resources>
