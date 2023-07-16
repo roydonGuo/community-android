@@ -182,14 +182,14 @@ public class CreateOrderActivity extends BaseActivity {
             @Override
             public void onSuccess(final String res) {
                 // 后端传递时间格式解析
-                OrderCreateRes response = new Gson().fromJson(res, OrderCreateRes.class);
+                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+                OrderCreateRes response = gson.fromJson(res, OrderCreateRes.class);
                 if (response != null && response.getCode() == 200) {
                     MallOrder mallOrder = response.getData();
                     if (StringUtil.isNotNull(mallOrder)) {
                         showSyncShortToast("创建订单成功");
                         mHandler.sendEmptyMessage(3);
                     } else {
-                        Log.e("getCartGoodsList", "没有更多数据");
                         showSyncShortToast("没有更多数据");
                     }
                 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromDegrees="0"
+    android:pivotX="50%"
+    android:pivotY="50%"
+    android:toDegrees="360">
+
+    <shape
+        android:innerRadius="8dp"
+        android:shape="ring"
+        android:thickness="3dp"
+        android:useLevel="false">
+        <gradient
+            android:centerY="0.50"
+            android:endColor="#cccccc"
+            android:startColor="@color/white"
+            android:type="sweep"
+            android:useLevel="false" />
+    </shape>
+
+    <!--  android:pivotX     动画执行的起点x坐标 50%代表相对自身宽度的
+    android:innerRadius  内环的半径
+    android:thickness  环的厚度
+    android:useLevel  只有当我们的shape使用在LevelListDrawable中时，这个值为true，否则为false
+    android:centerY 渐变中心Y的相对位置，值为0-1
+    android:type  渐变类型，还有linear,radial两种类型，线性渐变和放射渐变-->
+
+</animated-rotate>

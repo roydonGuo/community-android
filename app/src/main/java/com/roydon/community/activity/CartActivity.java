@@ -25,7 +25,7 @@ import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.MallUserCartVO;
 import com.roydon.community.domain.vo.BaseResponse;
 import com.roydon.community.domain.vo.MallUserCartListRes;
-import com.roydon.community.utils.AlertDialogUtils;
+import com.roydon.community.view.AlertDialogX;
 import com.roydon.community.utils.DoubleUtils;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -113,7 +113,7 @@ public class CartActivity extends BaseActivity {
             public void onItemLongClick(View view, int position) {
                 String title = "删除购物车";
                 String msg = "确定删除商品：" + cartList.get(position).getGoodsTitle() + "吗？";
-                AlertDialogUtils.showCustomAlertDialog(CartActivity.this, title, msg, new View.OnClickListener() {
+                AlertDialogX.showCustomAlertDialog(CartActivity.this, title, msg, new View.OnClickListener() {
                     @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
                     @Override
                     public void onClick(View view) {

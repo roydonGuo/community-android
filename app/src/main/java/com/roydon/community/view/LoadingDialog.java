@@ -1,4 +1,4 @@
-package com.roydon.community.utils;
+package com.roydon.community.view;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -31,7 +31,7 @@ public class LoadingDialog extends Dialog {
     private static LoadingDialog instance;
 
     public static LoadingDialog getInstance(Context context) {
-        if(instance == null) {
+        if (instance == null) {
             instance = new LoadingDialog(context);
         }
         return instance;
@@ -55,8 +55,7 @@ public class LoadingDialog extends Dialog {
 
         //背景透明处理
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
-                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         getWindow().setDimAmount(0f);
 
@@ -86,9 +85,7 @@ public class LoadingDialog extends Dialog {
     //加载动画
     private void loadIng() {
         animationSet = new AnimationSet(true);
-        RotateAnimation animation_rotate = new RotateAnimation(0, +359,
-                RotateAnimation.RELATIVE_TO_SELF, 0.5f,
-                RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+        RotateAnimation animation_rotate = new RotateAnimation(0, +359, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
 
         animation_rotate.setRepeatCount(-1);
         animation_rotate.setStartOffset(0);

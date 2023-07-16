@@ -56,7 +56,12 @@
                 android:src="@mipmap/icon_more" />
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
-
+    <ProgressBar
+        android:id="@+id/loading_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center" />
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"

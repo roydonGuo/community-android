@@ -1,4 +1,4 @@
-package com.roydon.community.utils;
+package com.roydon.community.view;
 
 import android.graphics.Rect;
 import android.os.Parcel;

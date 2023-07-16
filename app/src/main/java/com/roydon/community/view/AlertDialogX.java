@@ -1,4 +1,4 @@
-package com.roydon.community.utils;
+package com.roydon.community.view;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -14,7 +14,10 @@ import android.widget.TextView;
 
 import com.roydon.community.R;
 
-public class AlertDialogUtils {
+/**
+ * 自定义弹出操作框
+ */
+public class AlertDialogX {
 
     /**
      * 默认的弹出窗口

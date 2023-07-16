@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +22,7 @@ import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.vo.MallOrderVO;
 import com.roydon.community.domain.vo.OrderListRes;
+import com.roydon.community.view.LoadDia;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.util.ArrayList;
@@ -45,6 +48,8 @@ public class UserOrderActivity extends BaseActivity {
             if (msg.what == 0) {
                 userOrderAdapter.setDatas(userOrderList);
                 userOrderAdapter.notifyDataSetChanged();
+                ProgressBar loadingSpinner = findViewById(R.id.loading_spinner);
+                loadingSpinner.setVisibility(View.GONE);
             }
         }
     };
@@ -62,7 +67,13 @@ public class UserOrderActivity extends BaseActivity {
         rvMallAddress = findViewById(R.id.rv_user_order);
         // 返回按钮
         ivReturn = findViewById(R.id.iv_return);
+        // 显示加载动画
+        ProgressBar loadingSpinner = findViewById(R.id.loading_spinner);
+        loadingSpinner.setVisibility(View.VISIBLE);
+
     }
+
+    private LoadDia loadDia;
 
     @Override
     protected void initData() {
@@ -130,6 +141,7 @@ public class UserOrderActivity extends BaseActivity {
                 }
             }
         });
+        // 数据加载完成后隐藏加载动画
     }
 
 }

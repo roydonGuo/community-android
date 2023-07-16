@@ -24,7 +24,7 @@ import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.AppNews;
 import com.roydon.community.domain.vo.AppNewsRes;
 import com.roydon.community.utils.ImagePreviewLoader;
-import com.roydon.community.utils.ImageViewInfo;
+import com.roydon.community.view.ImageViewInfo;
 import com.roydon.community.view.CircleTransform;
 import com.squareup.picasso.Picasso;
 import com.zzhoujay.richtext.ImageHolder;

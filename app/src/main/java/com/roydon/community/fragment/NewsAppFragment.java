@@ -1,9 +1,12 @@
 package com.roydon.community.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,7 +39,9 @@ public class NewsAppFragment extends BaseFragment {
     private List<AppNews> newsList = new ArrayList<>();
     private LinearLayoutManager linearLayoutManager;
 
+    @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
+        @SuppressLint("NotifyDataSetChanged")
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
@@ -44,6 +49,8 @@ public class NewsAppFragment extends BaseFragment {
                 case 0:
                     newsAdapter.setDatas(newsList);
                     newsAdapter.notifyDataSetChanged();
+                    ProgressBar loadingSpinner = mRootView.findViewById(R.id.loading_spinner);
+                    loadingSpinner.setVisibility(View.GONE);
                     break;
             }
         }
@@ -67,6 +74,9 @@ public class NewsAppFragment extends BaseFragment {
     protected void initView() {
         recyclerView = mRootView.findViewById(R.id.recyclerView);
         refreshLayout = mRootView.findViewById(R.id.refreshLayout);
+        // 显示加载动画
+        ProgressBar loadingSpinner = mRootView.findViewById(R.id.loading_spinner);
+        loadingSpinner.setVisibility(View.VISIBLE);
     }
 
     @Override
