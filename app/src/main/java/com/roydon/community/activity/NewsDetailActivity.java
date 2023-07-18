@@ -24,6 +24,7 @@ import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.AppNews;
 import com.roydon.community.domain.vo.AppNewsRes;
 import com.roydon.community.utils.ImagePreviewLoader;
+import com.roydon.community.utils.StringUtil;
 import com.roydon.community.view.ImageViewInfo;
 import com.roydon.community.view.CircleTransform;
 import com.squareup.picasso.Picasso;
@@ -119,12 +120,11 @@ public class NewsDetailActivity extends BaseActivity {
 //        tvContent.setText(Html.fromHtml(newsContent, new ImageGetterUtils.MyImageGetter(this, tvContent), null));
         RichText.initCacheDir(context);
         // 设置为Html，设置图片点击预览大图
-
         RichText.fromHtml(newsContent)
                 .autoPlay(true)
                 .borderRadius(10)
                 .scaleType(ImageHolder.ScaleType.fit_center)
-                .imageClick((imageUrls, position) -> bigImageLoader(imageUrls, position))
+                .imageClick(this::bigImageLoader)
                 .into(tvContent);
 
         Picasso.with(this).load(appNews.getCoverImg()).transform(new CircleTransform()).into(ivSourceAvatar);
@@ -135,9 +135,11 @@ public class NewsDetailActivity extends BaseActivity {
     // 图片点击预览大图
     private void bigImageLoader(List<String> imageUrls, int position) {
 //        Dialog dialog = new Dialog(this);
-        for (int i = 0; i < imageUrls.size(); i++) {
-            String url = imageUrls.get(i);
-            mImgPreviewLists.add(new ImageViewInfo(url));
+        if (StringUtil.isEmpty(mImgPreviewLists)) {
+            for (int i = 0; i < imageUrls.size(); i++) {
+                String url = imageUrls.get(i);
+                mImgPreviewLists.add(new ImageViewInfo(url));
+            }
         }
         GPreviewBuilder.from(this)
                 .setData(mImgPreviewLists)//放入数据集合
