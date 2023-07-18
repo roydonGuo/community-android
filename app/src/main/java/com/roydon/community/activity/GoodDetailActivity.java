@@ -21,18 +21,23 @@ import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.MallGoodsVO;
+import com.roydon.community.domain.entity.MallOrder;
 import com.roydon.community.domain.vo.BaseResponse;
 import com.roydon.community.domain.vo.GoodsDetailRes;
+import com.roydon.community.domain.vo.OrderCreateRes;
+import com.roydon.community.utils.StringUtil;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class GoodDetailActivity extends BaseActivity {
 
     private TextView tvGoodTitle, tvGoodPrice, tvGoodDetail;
-    private ImageView ivGoodsImage, ivReturn;
+    private ImageView ivGoodsImage, ivReturn, ivMallCart;
     private String goodsId;
-    private Button btnGoodAddCart;
+    private Button btnGoodAddCart, btnCreateOrder;
 
     @Override
     protected int initLayout() {
@@ -47,6 +52,9 @@ public class GoodDetailActivity extends BaseActivity {
         tvGoodDetail = findViewById(R.id.tv_good_detail);
         ivReturn = findViewById(R.id.iv_return);
         btnGoodAddCart = findViewById(R.id.btn_good_add_card);
+        // 跳转到购物车
+        ivMallCart = findViewById(R.id.iv_mall_cart);
+        btnCreateOrder = findViewById(R.id.btn_create_order);
 
     }
 
@@ -66,6 +74,16 @@ public class GoodDetailActivity extends BaseActivity {
         });
         btnGoodAddCart.setOnClickListener((v) -> {
             addCart(goodsId);
+        });
+        ivMallCart.setOnClickListener(v -> {
+            navigateTo(CartActivity.class);
+        });
+        btnCreateOrder.setOnClickListener(v -> {
+            List<String> goodsIds = new ArrayList<>();
+            goodsIds.add(goodsId);
+            showShortToast(goodsIds.toString());
+            // TODO 立即下单，先到创建订单页面
+//            createOrder(userAddress.getAddressId(), goodsIds);
         });
     }
 
@@ -96,10 +114,10 @@ public class GoodDetailActivity extends BaseActivity {
         });
     }
 
-    private synchronized void addCart(String goodsId){
+    private synchronized void addCart(String goodsId) {
         HashMap<String, Object> params = new HashMap<>();
-        params.put("goodsId",goodsId);
-        Api.build(ApiConfig.MALL_ADD_CART , params).postRequestWithToken(this, new HttpCallback() {
+        params.put("goodsId", goodsId);
+        Api.build(ApiConfig.MALL_ADD_CART, params).postRequestWithToken(this, new HttpCallback() {
             @Override
             public void onSuccess(final String res) {
                 // 后端传递时间格式解析
@@ -139,6 +157,34 @@ public class GoodDetailActivity extends BaseActivity {
         tvGoodTitle.setText(goodsVO.getGoodsTitle());
         tvGoodPrice.setText("￥" + goodsVO.getGoodsPrice());
         tvGoodDetail.setText(goodsVO.getGoodsDetails());
+    }
+
+    // 创建订单
+    private void createOrder(String addressId, List<String> goodsIds) {
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("addressId", addressId);
+        params.put("goodsIds", goodsIds);
+        Api.build(ApiConfig.MALL_ORDER_CREATE, params).postRequestWithToken(this, new HttpCallback() {
+            @Override
+            public void onSuccess(final String res) {
+                // 后端传递时间格式解析
+                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+                OrderCreateRes response = gson.fromJson(res, OrderCreateRes.class);
+                if (response != null && response.getCode() == 200) {
+                    MallOrder mallOrder = response.getData();
+                    if (StringUtil.isNotNull(mallOrder)) {
+                        showSyncShortToast("创建订单成功");
+                        mHandler.sendEmptyMessage(3);
+                    } else {
+                        showSyncShortToast("没有更多数据");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+            }
+        });
     }
 
 }

@@ -22,8 +22,9 @@
     <!-- 字体大小 -->
     <dimen name="dimen_22sp">22sp</dimen>
     <dimen name="dimen_18sp">18sp</dimen>
-    <!-- 著字体大小16sp -->
-    <dimen name="dimen_16sp">16sp</dimen>
+    <!-- 主字体大小16sp -->
+    <dimen name="font_main_size">16sp</dimen>
+    <dimen name="font_second_size">14sp</dimen>
     <dimen name="dimen_12sp">12sp</dimen>
 
     <!-- icon图标-->

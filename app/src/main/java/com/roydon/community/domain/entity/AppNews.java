@@ -28,6 +28,8 @@ public class AppNews implements Serializable {
 
     private String showInApp;
 
+    private String showType;
+
     private String delFlag;
 
     private Integer viewNum;
@@ -35,7 +37,7 @@ public class AppNews implements Serializable {
     public AppNews() {
     }
 
-    public AppNews(String newsId, String newsTitle, String coverImg, String source, String newsType, String thereNewsId, String digest, Date postTime, String newsContent, String contentImages, String showInApp, String delFlag, Integer viewNum) {
+    public AppNews(String newsId, String newsTitle, String coverImg, String source, String newsType, String thereNewsId, String digest, Date postTime, String newsContent, String contentImages, String showInApp, String showType, String delFlag, Integer viewNum) {
         this.newsId = newsId;
         this.newsTitle = newsTitle;
         this.coverImg = coverImg;
@@ -47,6 +49,7 @@ public class AppNews implements Serializable {
         this.newsContent = newsContent;
         this.contentImages = contentImages;
         this.showInApp = showInApp;
+        this.showType = showType;
         this.delFlag = delFlag;
         this.viewNum = viewNum;
     }
@@ -137,6 +140,14 @@ public class AppNews implements Serializable {
 
     public void setShowInApp(String showInApp) {
         this.showInApp = showInApp;
+    }
+
+    public String getShowType() {
+        return showType;
+    }
+
+    public void setShowType(String showType) {
+        this.showType = showType;
     }
 
     public String getDelFlag() {

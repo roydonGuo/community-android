@@ -61,7 +61,7 @@ public class CartActivity extends BaseActivity {
 //                    Double collect = cartList.stream().mapToDouble(MallUserCartVO::getGoodsPrice).sum();
                     List<Double> doubles = cartList.stream().map(MallUserCartVO::getGoodsPrice).collect(Collectors.toList());
                     double v = DoubleUtils.addDoubleList(doubles);
-                    totalPrice.setText("￥" + v);
+                    totalPrice.setText(v + "");
                     cartAdapter.setDatas(cartList);
                     cartAdapter.notifyDataSetChanged();
                     break;

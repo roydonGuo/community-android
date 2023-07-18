@@ -116,6 +116,7 @@ public class CreateOrderActivity extends BaseActivity {
         });
     }
 
+    @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @SuppressLint({"NotifyDataSetChanged", "SetTextI18n", "HandlerLeak"})
         @Override
