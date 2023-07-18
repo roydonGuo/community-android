@@ -11,45 +11,46 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:background="@color/element"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:orientation="horizontal">
 
             <!--左侧头像-->
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                app:cardCornerRadius="20dp">
+            <!--            <androidx.cardview.widget.CardView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_margin="10dp"-->
+            <!--                app:cardCornerRadius="20dp">-->
 
-                <ImageView
-                    android:id="@+id/index_user_avatar"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_vertical"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/avatar" />
-            </androidx.cardview.widget.CardView>
+            <!--                <ImageView-->
+            <!--                    android:id="@+id/index_user_avatar"-->
+            <!--                    android:layout_width="40dp"-->
+            <!--                    android:layout_height="40dp"-->
+            <!--                    android:layout_gravity="center_vertical"-->
+            <!--                    android:scaleType="fitXY"-->
+            <!--                    android:src="@mipmap/avatar" />-->
+            <!--            </androidx.cardview.widget.CardView>-->
 
             <!--搜索框-->
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="34dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/shape_search_box"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="@dimen/dimen_16dp"
-                    android:layout_height="@dimen/dimen_16dp"
-                    android:layout_marginLeft="12dp"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginLeft="10dp"
                     android:src="@mipmap/search" />
 
                 <EditText
@@ -60,19 +61,21 @@
                     android:background="@null"
                     android:hint="商品搜索"
                     android:textColor="@color/black"
-                    android:textColorHint="#737373"
-                    android:textSize="15sp" />
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/font_second_size" />
 
             </LinearLayout>
+
             <!--右侧购物车-->
             <ImageView
                 android:id="@+id/iv_mall_cart"
-                android:layout_width="24dp"
+                android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_margin="10dp"
+                android:padding="4dp"
                 android:src="@mipmap/icon_mall_cart" />
 
         </LinearLayout>
@@ -96,22 +99,22 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-<!--            <RelativeLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content">-->
+            <!--            <RelativeLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content">-->
 
-<!--                <androidx.cardview.widget.CardView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    app:cardCornerRadius="10dp">-->
+            <!--                <androidx.cardview.widget.CardView-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    app:cardCornerRadius="10dp">-->
 
-<!--                    <com.roydon.community.view.SobViewPager-->
-<!--                        android:id="@+id/sob_looper"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="200dp" />-->
-<!--                </androidx.cardview.widget.CardView>-->
+            <!--                    <com.roydon.community.view.SobViewPager-->
+            <!--                        android:id="@+id/sob_looper"-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="200dp" />-->
+            <!--                </androidx.cardview.widget.CardView>-->
 
-<!--            </RelativeLayout>-->
+            <!--            </RelativeLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -120,9 +123,9 @@
                 <!--商品-->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_mall_goods"
-                    android:overScrollMode="never"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never" />
 
             </LinearLayout>
         </LinearLayout>

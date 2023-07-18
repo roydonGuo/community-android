@@ -15,15 +15,16 @@
         <!--功能区域-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:background="@drawable/shape_index_function"
             android:orientation="horizontal">
 
             <!--功能-->
             <ImageView
                 android:id="@+id/iv_mall_cart"
-                android:layout_width="20dp"
+                android:layout_width="30dp"
                 android:layout_height="match_parent"
+                android:padding="4dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
@@ -76,7 +77,7 @@
                         android:layout_weight="1"
                         android:text="admin"
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -84,7 +85,7 @@
                         android:layout_weight="1"
                         android:text="admin"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/font_second_size" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -93,7 +94,7 @@
                         android:layout_weight="1"
                         android:text="欢迎来到此平台"
                         android:textColor="@color/black"
-                        android:textSize="10sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <LinearLayout
