@@ -1,25 +1,35 @@
 package com.roydon.community.fragment;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.google.gson.Gson;
 import com.roydon.community.R;
+import com.roydon.community.activity.NewsDetailActivity;
 import com.roydon.community.adapter.BannerAdapter;
+import com.roydon.community.adapter.NewsHotAdapter;
 import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.AppBannerNotice;
+import com.roydon.community.domain.response.HotNewsListRes;
 import com.roydon.community.domain.vo.BannerNoticeListRes;
+import com.roydon.community.domain.vo.HotNews;
 import com.roydon.community.view.SobViewPager;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
@@ -38,12 +48,18 @@ public class HomeFragment extends BaseFragment {
     private SobViewPager sobViewPager;
     private ImageView picture;
     private LinearLayout mDotLayout, funcOne;
+    private LinearLayoutManager linearLayoutManager;
     private SlidingTabLayout slidingTabLayout;
+    private RecyclerView rvNewsHot;
 
     private BannerAdapter mBannerAdapter;
+    private NewsHotAdapter newsHotAdapter;
     private List<String> mUrls = new ArrayList<>();
+    private List<HotNews> hotNewsList = new ArrayList<>();
 
+    @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
+        @SuppressLint("NotifyDataSetChanged")
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
@@ -51,6 +67,10 @@ public class HomeFragment extends BaseFragment {
                 case 0:
                     mBannerAdapter.setmUrls(mUrls);
                     mBannerAdapter.notifyDataSetChanged();
+                    break;
+                case 1:
+                    newsHotAdapter.setData(hotNewsList);
+                    newsHotAdapter.notifyDataSetChanged();
                     break;
             }
         }
@@ -77,7 +97,9 @@ public class HomeFragment extends BaseFragment {
 //        refreshLayout = mRootView.findViewById(R.id.refreshLayout);
         sobViewPager = mRootView.findViewById(R.id.sob_looper);
         funcOne = mRootView.findViewById(R.id.func_one);
-        picture = mRootView.findViewById(R.id.picture);
+
+        rvNewsHot = mRootView.findViewById(R.id.rv_news_hot);
+//        picture = mRootView.findViewById(R.id.picture);
 
         /**
          * MimeType.ofAll() -->全部类型
@@ -114,23 +136,30 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-
         mBannerAdapter = new BannerAdapter(getContext(), mUrls);
         sobViewPager.setAdapter(mBannerAdapter);
-
-//        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
-//            @Override
-//            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-//                getBannerNoticeList(true);
-//            }
-//        });
-//        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-//            @Override
-//            public void onLoadMore(@NonNull RefreshLayout refreshlayout) {
-//                getBannerNoticeList(false);
-//            }
-//        });
         getBannerNoticeList(true);
+        // 获取热点新闻List
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rvNewsHot.setLayoutManager(linearLayoutManager);
+        newsHotAdapter = new NewsHotAdapter(getActivity());
+        rvNewsHot.setAdapter(newsHotAdapter);
+        newsHotAdapter.setOnItemClickListener(new NewsHotAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                HotNews hotNews = hotNewsList.get(position);
+                Bundle bundle = new Bundle();
+                bundle.putString("newsId", hotNews.getNewsId());
+                navigateToWithBundle(NewsDetailActivity.class, bundle);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
+        });
+        getNewsHotList();
 
     }
 
@@ -145,11 +174,6 @@ public class HomeFragment extends BaseFragment {
         Api.build(ApiConfig.BANNER_NOTICE_LIST, params).getRequestWithToken(getActivity(), new HttpCallback() {
             @Override
             public void onSuccess(final String res) {
-//                if (isRefresh) {
-//                    refreshLayout.finishRefresh(true);
-//                } else {
-//                    refreshLayout.finishLoadMore(true);
-//                }
                 BannerNoticeListRes response = new Gson().fromJson(res, BannerNoticeListRes.class);
                 if (response != null && response.getCode() == 200) {
                     List<AppBannerNotice> list = response.getRows();
@@ -165,6 +189,34 @@ public class HomeFragment extends BaseFragment {
                             showShortToastSync("没有更多数据");
                         }
                     }
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
+    }
+
+    /**
+     * 热点新闻
+     */
+    private void getNewsHotList() {
+        HashMap<String, Object> params = new HashMap<>();
+        Api.build(ApiConfig.NEWS_HOT, params).getRequestWithToken(getActivity(), new HttpCallback() {
+            @Override
+            public void onSuccess(final String res) {
+                // 后端传递时间格式解析
+                HotNewsListRes response = new Gson().fromJson(res, HotNewsListRes.class);
+                if (response != null && response.getCode() == 200) {
+                    List<HotNews> rows = response.getRows();
+                    Log.e("getNewsHotList", rows.toString());
+                    // 使用handler将数据传递给主线程
+                    hotNewsList = rows;
+                    mHandler.sendEmptyMessage(1);
+                } else {
+                    showShortToastSync("没有热点新闻");
                 }
             }
 
