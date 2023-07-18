@@ -24,7 +24,7 @@
             android:background="@drawable/shape_login_button"
             android:text="@string/login"
             android:textColor="@color/white"
-            android:textSize="@dimen/dimen_16sp"
+            android:textSize="@dimen/font_main_size"
             android:textStyle="bold" />
 
         <Button
@@ -35,7 +35,7 @@
             android:background="@drawable/shape_login_button"
             android:text="@string/register"
             android:textColor="@color/white"
-            android:textSize="@dimen/dimen_16sp"
+            android:textSize="@dimen/font_main_size"
             android:textStyle="bold" />
 
     </RelativeLayout>

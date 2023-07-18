@@ -74,7 +74,7 @@
                     android:text="admin"
                     android:textColor="@color/black"
                     android:textColorHint="@color/grey"
-                    android:textSize="@dimen/dimen_16sp" />
+                    android:textSize="@dimen/font_main_size" />
             </LinearLayout>
             <!-- 分割线 -->
             <Space
@@ -113,7 +113,7 @@
                     android:text="admin#123456"
                     android:textColor="@color/black"
                     android:textColorHint="@color/grey"
-                    android:textSize="@dimen/dimen_16sp" />
+                    android:textSize="@dimen/font_main_size" />
             </LinearLayout>
         </LinearLayout>
 

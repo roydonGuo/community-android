@@ -56,23 +56,26 @@
                 android:src="@mipmap/icon_more" />
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
+
     <ProgressBar
         android:id="@+id/loading_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_gravity="center" />
+
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_user_order"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
+
+<!--        <include layout="@layout/layout_not_more" />-->
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 

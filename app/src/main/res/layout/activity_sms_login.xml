@@ -74,7 +74,7 @@
                     android:text="17752552722"
                     android:textColor="@color/black"
                     android:textColorHint="@color/grey"
-                    android:textSize="@dimen/dimen_16sp" />
+                    android:textSize="@dimen/font_main_size" />
             </LinearLayout>
             <!-- 分割线 -->
             <Space
@@ -120,7 +120,7 @@
                         android:text=""
                         android:textColor="@color/black"
                         android:textColorHint="@color/grey"
-                        android:textSize="@dimen/dimen_16sp" />
+                        android:textSize="@dimen/font_main_size" />
 
                 </LinearLayout>
 
@@ -133,7 +133,7 @@
                     android:background="@drawable/shape_login_button_big"
                     android:text="@string/getPhoneCode"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/dimen_16sp"
+                    android:textSize="@dimen/font_main_size"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
