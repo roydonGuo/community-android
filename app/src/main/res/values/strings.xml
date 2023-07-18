@@ -22,4 +22,6 @@
     <string name="cart_less_label">-</string>
     <string name="cart_add_label">+</string>
     <string name="cart_goods_count_init">1</string>
+    <!---->
+    <string name="not_more">~ 没有更多啦 ~</string>
 </resources>
