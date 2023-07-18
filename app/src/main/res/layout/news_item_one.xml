@@ -28,8 +28,8 @@
                 android:layout_weight="1"
                 android:maxHeight="64dp"
                 android:text="《天外世界：果根险境》9月9日上架游戏将支持Xbox Series X专属强化"
-                android:textColor="#222222"
-                android:textSize="14sp" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_main_size" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
@@ -55,39 +55,67 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/header"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:scaleType="fitXY"
-                android:src="@mipmap/avatar" />
-
             <TextView
                 android:id="@+id/author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="游戏早知道"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/font_second_size" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
-                android:text="游戏早知道 ."
-                android:textColor="#777777"
-                android:textSize="13sp" />
+                android:padding="5dp"
+                android:src="@mipmap/icon_view" />
+
+            <TextView
+                android:id="@+id/tv_view_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="1"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/font_second_size" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:padding="5dp"
+                android:src="@mipmap/icon_comment" />
 
             <TextView
                 android:id="@+id/comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="1评论 ."
-                android:textColor="#777777"
-                android:textSize="13sp" />
+                android:layout_gravity="center"
+                android:layout_marginRight="5dp"
+                android:text="1"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/font_second_size" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="·"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/font_second_size" />
 
             <TextView
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
-                android:text="1小时前"
-                android:textColor="#777777"
-                android:textSize="13sp" />
+                android:text=""
+                android:textColor="@color/grey"
+                android:textSize="@dimen/font_second_size" />
         </LinearLayout>
     </LinearLayout>
 
