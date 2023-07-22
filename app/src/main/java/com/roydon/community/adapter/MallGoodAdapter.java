@@ -1,5 +1,6 @@
 package com.roydon.community.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,20 +25,20 @@ import java.util.List;
  */
 public class MallGoodAdapter extends RecyclerView.Adapter<MallGoodAdapter.MallGoodHolder> {
 
-    private Context mContext;
-    private List<MallGoodsVO> datas;
+    private final Context mContext;
+    private List<MallGoodsVO> data;
 
-    public void setDatas(List<MallGoodsVO> datas) {
-        this.datas = datas;
+    public void setData(List<MallGoodsVO> data) {
+        this.data = data;
     }
 
     public MallGoodAdapter(Context context) {
         this.mContext = context;
     }
 
-    public MallGoodAdapter(Context context, List<MallGoodsVO> datas) {
+    public MallGoodAdapter(Context context, List<MallGoodsVO> data) {
         this.mContext = context;
-        this.datas = datas;
+        this.data = data;
     }
 
     @NonNull
@@ -47,31 +48,27 @@ public class MallGoodAdapter extends RecyclerView.Adapter<MallGoodAdapter.MallGo
         return new MallGoodHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MallGoodHolder holder, int position) {
-        MallGoodsVO mallGoods = datas.get(position);
+        MallGoodsVO mallGoods = data.get(position);
         holder.goodsTitle.setText(mallGoods.getGoodsTitle());
-        holder.goodsPrice.setText("￥" + mallGoods.getGoodsPrice());
-        holder.stock.setText("库存" + mallGoods.getStock());
+        holder.goodsPrice.setText(mallGoods.getGoodsPrice() + "");
+        holder.stock.setText(mallGoods.getStock() + "");
         holder.username.setText(mallGoods.getNickName());
-        holder.viewNum.setText("浏览" + mallGoods.getViewNum());
+        holder.viewNum.setText(mallGoods.getViewNum() + "");
         Picasso.with(mContext).load(mallGoods.getGoodsImg()).into(holder.goodsImg);
         Picasso.with(mContext).load(mallGoods.getAvatar()).transform(new CircleTransform()).into(holder.avatar);
     }
 
     @Override
     public int getItemCount() {
-        return (datas == null) ? 0 : datas.size();
+        return (data == null) ? 0 : data.size();
     }
 
     public class MallGoodHolder extends RecyclerView.ViewHolder {
-        private TextView goodsTitle;
-        private TextView goodsPrice;
-        private TextView stock;
-        private TextView username;
-        private TextView viewNum;
-        private ImageView goodsImg;
-        private ImageView avatar;
+        private final TextView goodsTitle, goodsPrice, stock, username, viewNum;
+        private final ImageView goodsImg, avatar;
 
         public MallGoodHolder(@NonNull View view) {
             super(view);
@@ -79,14 +76,11 @@ public class MallGoodAdapter extends RecyclerView.Adapter<MallGoodAdapter.MallGo
             goodsPrice = view.findViewById(R.id.tv_goods_price);
             stock = view.findViewById(R.id.tv_stock);
             username = view.findViewById(R.id.tv_username);
-            viewNum = view.findViewById(R.id.tv_viewNum);
+            viewNum = view.findViewById(R.id.tv_view_num);
             goodsImg = view.findViewById(R.id.iv_goodsImg);
             avatar = view.findViewById(R.id.tv_avatar);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mOnItemClickListener.onItemClick(v, getLayoutPosition());
-                }
+            view.setOnClickListener(v -> {
+                mOnItemClickListener.onItemClick(v, getLayoutPosition());
             });
         }
     }

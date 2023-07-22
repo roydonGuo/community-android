@@ -23,7 +23,7 @@ public class WelcomeActivity extends BaseActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 1500);
+        }, 3000);
     }
 
     @Override

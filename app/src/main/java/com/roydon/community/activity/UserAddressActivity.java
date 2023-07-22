@@ -113,8 +113,8 @@ public class UserAddressActivity extends BaseActivity {
 //                        .create().show();
             }
         });
-        addAddress.setOnClickListener(v->{
-
+        addAddress.setOnClickListener(v -> {
+            navigateTo(UserAddressAddActivity.class);
         });
         refreshLayout.setOnRefreshListener(r -> {
             pageNum = 1;

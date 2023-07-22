@@ -11,13 +11,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:background="@color/element"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
@@ -25,12 +25,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                app:cardCornerRadius="20dp">
+                app:cardCornerRadius="15dp">
 
                 <ImageView
                     android:id="@+id/index_user_avatar"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
                     android:scaleType="fitXY"
                     android:src="@mipmap/avatar" />
@@ -39,7 +39,7 @@
             <!--搜索框-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="34dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="50dp"
@@ -48,9 +48,9 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="@dimen/dimen_16dp"
-                    android:layout_height="@dimen/dimen_16dp"
-                    android:layout_marginLeft="12dp"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginLeft="10dp"
                     android:src="@mipmap/search" />
 
                 <EditText
@@ -61,8 +61,8 @@
                     android:background="@null"
                     android:hint="搜索"
                     android:textColor="@color/black"
-                    android:textColorHint="#737373"
-                    android:textSize="15sp" />
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/font_second_size" />
 
             </LinearLayout>
         </LinearLayout>

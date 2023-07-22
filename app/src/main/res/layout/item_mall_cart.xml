@@ -34,7 +34,7 @@
         android:maxLines="2"
         android:text=""
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/font_main_size"
         app:layout_constraintStart_toEndOf="@+id/cv_goods_img"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,7 +46,7 @@
         android:layout_marginTop="5dp"
         android:text="￥ 9.9"
         android:textColor="@color/red"
-        android:textSize="16sp"
+        android:textSize="@dimen/font_main_size"
         app:layout_constraintStart_toEndOf="@+id/cv_goods_img"
         app:layout_constraintTop_toBottomOf="@+id/tv_goods_title" />
 

@@ -132,38 +132,6 @@ public class CartActivity extends BaseActivity {
 
                     }
                 });
-//                AlertDialogUtils.showDeleteConfirmationDialog(CartActivity.this, title, msg, new DialogInterface.OnClickListener() {
-//                    @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        String cartId = cartList.get(position).getCartId();
-//                        delCart(cartId);
-//                        cartList.remove(position);
-//                        showShortToast("删除成功");
-//                        // 重新计算总价格
-//                        Double collect = cartList.stream().mapToDouble(MallUserCartVO::getGoodsPrice).sum();
-//                        totalPrice.setText(collect + "");
-//                        cartAdapter.notifyDataSetChanged();
-//                    }
-//                });
-//                AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
-//                builder.setTitle("删除")
-//                        .setMessage("确定删除商品：" + cartList.get(position).getGoodsTitle() + "吗？")
-//                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                            @SuppressLint("NotifyDataSetChanged")
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                String cartId = cartList.get(position).getCartId();
-//                                delCart(cartId);
-//                                cartList.remove(position);
-//                                showShortToast("删除成功");
-//                                Double collect = cartList.stream().mapToDouble(MallUserCartVO::getGoodsPrice).sum();
-//                                totalPrice.setText("￥" + collect);
-//                                cartAdapter.notifyDataSetChanged();
-//                            }
-//                        })
-//                        .setNeutralButton("取消", null)
-//                        .create().show();
             }
         });
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {

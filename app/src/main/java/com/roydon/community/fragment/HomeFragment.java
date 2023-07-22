@@ -1,9 +1,7 @@
 package com.roydon.community.fragment;
 
 import android.annotation.SuppressLint;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -19,6 +17,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.roydon.community.R;
 import com.roydon.community.activity.NewsDetailActivity;
 import com.roydon.community.adapter.BannerAdapter;
@@ -28,12 +27,16 @@ import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.AppBannerNotice;
 import com.roydon.community.domain.response.HotNewsListRes;
+import com.roydon.community.domain.response.UserInfoRes;
+import com.roydon.community.domain.vo.AppUser;
 import com.roydon.community.domain.vo.BannerNoticeListRes;
 import com.roydon.community.domain.vo.HotNews;
+import com.roydon.community.utils.StringUtil;
+import com.roydon.community.view.CircleTransform;
 import com.roydon.community.view.SobViewPager;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.squareup.picasso.Picasso;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,7 +49,7 @@ public class HomeFragment extends BaseFragment {
     private ViewPager viewPager;
     private RefreshLayout refreshLayout;
     private SobViewPager sobViewPager;
-    private ImageView picture;
+    private ImageView picture, userAvatar;
     private LinearLayout mDotLayout, funcOne;
     private LinearLayoutManager linearLayoutManager;
     private SlidingTabLayout slidingTabLayout;
@@ -54,6 +57,7 @@ public class HomeFragment extends BaseFragment {
 
     private BannerAdapter mBannerAdapter;
     private NewsHotAdapter newsHotAdapter;
+    private AppUser appUser;
     private List<String> mUrls = new ArrayList<>();
     private List<HotNews> hotNewsList = new ArrayList<>();
 
@@ -72,6 +76,9 @@ public class HomeFragment extends BaseFragment {
                     newsHotAdapter.setData(hotNewsList);
                     newsHotAdapter.notifyDataSetChanged();
                     break;
+                case 2:
+                    showUserInfo(appUser);
+                    break;
             }
         }
     };
@@ -88,54 +95,19 @@ public class HomeFragment extends BaseFragment {
         return R.layout.fragment_home;
     }
 
-    public static final int TAKE_PHOTO = 1;//声明一个请求码，用于识别返回的结果
-    private Uri imageUri;
-    private final String filePath = Environment.getExternalStorageDirectory() + File.separator + "output_image.jpg";
-
     @Override
     protected void initView() {
 //        refreshLayout = mRootView.findViewById(R.id.refreshLayout);
+        userAvatar = mRootView.findViewById(R.id.index_user_avatar);
         sobViewPager = mRootView.findViewById(R.id.sob_looper);
         funcOne = mRootView.findViewById(R.id.func_one);
-
         rvNewsHot = mRootView.findViewById(R.id.rv_news_hot);
-//        picture = mRootView.findViewById(R.id.picture);
-
-        /**
-         * MimeType.ofAll() -->全部类型
-         * MimeType.ofImage() -->图片
-         * MimeType.ofVideo() -->视频
-         * maxSelectable  选择的最大数量
-         */
-//        Matisse.from(PhotoActivity.this)
-//                .choose(MimeType.ofAll())
-//                .countable(true)
-//                .maxSelectable(9)
-//                .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
-//                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-//                .thumbnailScale(0.85f)
-//                .imageEngine(new GlideEngine())
-//                .showPreview(false)
-//
-//                //这两行要连用 是否在选择图片中展示照相 和适配安卓7.0 FileProvider
-//                .capture(true)
-//                .captureStrategy(new CaptureStrategy(true, "PhotoPicker"))
-//
-//                //蓝色主题
-//                // .theme(R.style.Matisse_Zhihu)
-//                //黑色主题
-//                .theme(R.style.Matisse_Dracula)
-//                //Glide加载方式
-//                .imageEngine(new GlideEngine())
-//                //Picasso加载方式
-//                // .imageEngine(new PicassoEngine())
-//                //请求码
-//                .forResult(REQUEST_CODE_CHOOSE);
-
     }
 
     @Override
     protected void initData() {
+        // 获取用户信息
+        getUserInfo();
         mBannerAdapter = new BannerAdapter(getContext(), mUrls);
         sobViewPager.setAdapter(mBannerAdapter);
         getBannerNoticeList(true);
@@ -160,6 +132,44 @@ public class HomeFragment extends BaseFragment {
             }
         });
         getNewsHotList();
+
+    }
+
+    /**
+     * 用户信息
+     */
+    private void getUserInfo() {
+        HashMap<String, Object> params = new HashMap<>();
+        Api.build(ApiConfig.USER_INFO, params).getRequestWithToken(getActivity(), new HttpCallback() {
+            @Override
+            public void onSuccess(final String res) {
+                Log.e("getUserInfo", res);
+                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+                UserInfoRes response = gson.fromJson(res, UserInfoRes.class);
+                if (response != null && response.getCode() == 200) {
+                    AppUser user = response.getData();
+                    if (StringUtil.isNotNull(user)) {
+                        Log.e("getUserInfo", user.toString());
+                        appUser = user;
+                        mHandler.sendEmptyMessage(2);
+                    } else {
+                        showShortToastSync("请重新登陆");
+//                        getActivity().finish();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
+    }
+
+    private void showUserInfo(AppUser appUser) {
+        if (appUser.getAvatar() != null && !appUser.getAvatar().equals("")) {
+            Picasso.with(getContext()).load(appUser.getAvatar()).transform(new CircleTransform()).into(userAvatar);
+        }
 
     }
 

@@ -24,7 +24,7 @@
                 android:layout_gravity="center_horizontal"
                 app:cardCornerRadius="5dp">
 
-                <!-- 16:9 -->
+                <!-- 16:10 -->
                 <ImageView
                     android:id="@+id/tv_cover_img"
                     android:layout_width="96dp"
@@ -49,7 +49,7 @@
                     android:maxLines="2"
                     android:text="《天外世界：果根险境》9月9日上架游戏将支持Xbox Series X专属强化"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/font_main_size" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -69,7 +69,7 @@
                         android:singleLine="true"
                         android:text="环球网资讯资讯"
                         android:textColor="@color/grey"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/font_second_size" />
 
                     <ImageView
                         android:layout_width="20dp"
@@ -86,16 +86,25 @@
                         android:layout_marginRight="5dp"
                         android:text="2"
                         android:textColor="@color/grey"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/font_second_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="·"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/font_second_size" />
 
                     <TextView
                         android:id="@+id/tv_post_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
                         android:text=""
                         android:textColor="@color/grey"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/font_second_size" />
                 </LinearLayout>
 
             </LinearLayout>

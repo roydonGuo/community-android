@@ -13,7 +13,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="@dimen/top_bar_height"
         android:background="@color/element"
         app:contentInsetStart="0dp"
         app:popupTheme="@style/AppTheme.PopupOverlay">
@@ -26,8 +26,8 @@
 
             <ImageView
                 android:id="@+id/iv_return"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center_vertical|left"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
@@ -38,21 +38,22 @@
             <TextView
                 android:id="@+id/tv_cart"
                 android:layout_width="280dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="收货地址"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="@dimen/font_main_size" />
 
             <ImageView
                 android:id="@+id/iv_edit"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center_vertical|right"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
+                android:padding="4dp"
                 android:src="@mipmap/icon_edit" />
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>

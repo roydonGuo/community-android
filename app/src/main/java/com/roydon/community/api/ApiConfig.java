@@ -18,6 +18,11 @@ public class ApiConfig {
     public static final String REGISTER = "/app/register"; //注册
 
     /**
+     * user接口
+     */
+    public static final String USER_INFO = "/app/user/info"; //注册
+
+    /**
      * 新闻模块接口
      */
     public static final String NEWS_CATEGORY_LIST = "/app/news/category"; //新闻分类

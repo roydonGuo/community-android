@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -38,7 +37,6 @@ public class MallFragment extends BaseFragment {
     private RecyclerView rvMallGoods;
     private int pageNum = 1;
     private MallGoodAdapter mallGoodAdapter;
-    private LinearLayoutManager linearLayoutManager;
     private List<MallGoodsVO> goodsList = new ArrayList<>();
     private ImageView ivMallCart;
 
@@ -51,12 +49,13 @@ public class MallFragment extends BaseFragment {
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
+        @SuppressLint("NotifyDataSetChanged")
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0:
-                    mallGoodAdapter.setDatas(goodsList);
+                    mallGoodAdapter.setData(goodsList);
                     mallGoodAdapter.notifyDataSetChanged();
                     break;
             }
@@ -78,9 +77,6 @@ public class MallFragment extends BaseFragment {
     @Override
     protected void initData() {
         // 首页瀑布流列表
-//        linearLayoutManager = new LinearLayoutManager(getActivity());
-//        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        rvMallGoods.setLayoutManager(linearLayoutManager);
         mallGoodAdapter = new MallGoodAdapter(getActivity());
         rvMallGoods.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         rvMallGoods.setAdapter(mallGoodAdapter);
@@ -90,7 +86,6 @@ public class MallFragment extends BaseFragment {
                 MallGoodsVO mallGoods = goodsList.get(position);
                 Bundle bundle = new Bundle();
                 bundle.putString("goodsId", mallGoods.getGoodsId());
-//                showShortToast("商品id" + mallGoods.getGoodsId());
                 navigateToWithBundle(GoodDetailActivity.class, bundle);
             }
 
