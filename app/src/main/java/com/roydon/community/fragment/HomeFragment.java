@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.roydon.community.R;
 import com.roydon.community.activity.NewsDetailActivity;
+import com.roydon.community.activity.NewsSearchActivity;
 import com.roydon.community.adapter.BannerAdapter;
 import com.roydon.community.adapter.NewsHotAdapter;
 import com.roydon.community.api.Api;
@@ -50,6 +52,7 @@ public class HomeFragment extends BaseFragment {
     private RefreshLayout refreshLayout;
     private SobViewPager sobViewPager;
     private ImageView picture, userAvatar;
+    private TextView etSearch;
     private LinearLayout mDotLayout, funcOne;
     private LinearLayoutManager linearLayoutManager;
     private SlidingTabLayout slidingTabLayout;
@@ -98,6 +101,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected void initView() {
 //        refreshLayout = mRootView.findViewById(R.id.refreshLayout);
+        etSearch = mRootView.findViewById(R.id.et_search);
         userAvatar = mRootView.findViewById(R.id.index_user_avatar);
         sobViewPager = mRootView.findViewById(R.id.sob_looper);
         funcOne = mRootView.findViewById(R.id.func_one);
@@ -132,7 +136,9 @@ public class HomeFragment extends BaseFragment {
             }
         });
         getNewsHotList();
-
+        etSearch.setOnClickListener(v->{
+            navigateTo(NewsSearchActivity.class);
+        });
     }
 
     /**

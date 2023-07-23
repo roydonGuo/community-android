@@ -42,7 +42,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
@@ -65,7 +65,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
@@ -90,15 +90,33 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/iv_relocated"
+            android:layout_width="@dimen/dimen_icon_32dp"
+            android:layout_height="@dimen/dimen_icon_32dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/shape_background_icon_white"
+            android:padding="8dp"
+            app:srcCompat="@mipmap/icon_baidu_located" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
         android:gravity="center_horizontal|bottom"
         android:orientation="horizontal"
         android:padding="10dp">
 
         <Button
+            android:id="@+id/btn_confirm_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/layer_shadow"
-            android:id="@+id/btn_confirm_address"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
             android:text="确认地址"
