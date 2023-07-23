@@ -152,7 +152,7 @@
                     android:gravity="left"
                     android:text="@string/sms_login"
                     android:textColor="@color/grey"
-                    android:textSize="@dimen/dimen_12sp" />
+                    android:textSize="@dimen/font_third_size" />
                 <!--去注册-->
                 <TextView
                     android:id="@+id/tv_to_register"
@@ -162,7 +162,7 @@
                     android:gravity="right"
                     android:text="@string/to_register"
                     android:textColor="@color/grey"
-                    android:textSize="@dimen/dimen_12sp" />
+                    android:textSize="@dimen/font_third_size" />
             </LinearLayout>
         </LinearLayout>
 
@@ -185,7 +185,7 @@
                 android:layout_alignParentBottom="true"
                 android:text="登录即代表阅读并同意服务条款"
                 android:textColor="@color/black"
-                android:textSize="@dimen/dimen_12sp" />
+                android:textSize="@dimen/font_third_size" />
         </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

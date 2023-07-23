@@ -169,7 +169,7 @@
                         android:gravity="center"
                         android:text="功能一"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/dimen_12sp" />
+                        android:textSize="@dimen/font_third_size" />
 
                 </LinearLayout>
 
@@ -193,7 +193,7 @@
                         android:gravity="center"
                         android:text="功能一"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/dimen_12sp" />
+                        android:textSize="@dimen/font_third_size" />
 
                 </LinearLayout>
 
@@ -217,7 +217,7 @@
                         android:gravity="center"
                         android:text="功能一"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/dimen_12sp" />
+                        android:textSize="@dimen/font_third_size" />
 
                 </LinearLayout>
 
@@ -241,7 +241,7 @@
                         android:gravity="center"
                         android:text="功能一"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/dimen_12sp" />
+                        android:textSize="@dimen/font_third_size" />
 
                 </LinearLayout>
 
@@ -265,7 +265,7 @@
                         android:gravity="center"
                         android:text="功能一"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/dimen_12sp" />
+                        android:textSize="@dimen/font_third_size" />
 
                 </LinearLayout>
 

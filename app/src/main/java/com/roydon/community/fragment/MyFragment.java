@@ -32,8 +32,10 @@ import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.response.UserInfoRes;
 import com.roydon.community.domain.vo.AppUser;
+import com.roydon.community.listener.OnShareDialogClickListener;
 import com.roydon.community.utils.StringUtil;
 import com.roydon.community.view.CircleTransform;
+import com.roydon.community.view.DialogX;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -46,7 +48,7 @@ public class MyFragment extends BaseFragment {
     private ViewPager viewPager;
     private SlidingTabLayout slidingTabLayout;
     private LinearLayout mLinearLayout;
-    private ImageView userAvatar;
+    private ImageView ivShare, userAvatar;
     private TextView userNickName, userDept;
     // 订单栏功能
     private LinearLayout llUserOrder;
@@ -82,6 +84,8 @@ public class MyFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        // 顶部功能icon
+        ivShare = mRootView.findViewById(R.id.iv_share);
         mLinearLayout = mRootView.findViewById(R.id.layout_my_detail);
         rlUserAddress = mRootView.findViewById(R.id.rl_user_address);
         rlBDAddress = mRootView.findViewById(R.id.rl_bd_address);
@@ -92,6 +96,35 @@ public class MyFragment extends BaseFragment {
         userDept = mRootView.findViewById(R.id.user_dept);
         // 订单栏功能
         llUserOrder = mRootView.findViewById(R.id.ll_user_order);
+
+        ivShare.setOnClickListener(v -> {
+            DialogX.showShareDialog(getContext(), new OnShareDialogClickListener() {
+                @Override
+                public void onShareToWechat() {
+                    showShortToast("onShareToWechat");
+                }
+
+                @Override
+                public void onShareToPengyouquan() {
+                    showShortToast("onShareToPengyouquan");
+                }
+
+                @Override
+                public void onShareToQQ() {
+                    showShortToast("onShareToQQ");
+                }
+
+                @Override
+                public void onShareToWeibo() {
+                    showShortToast("onShareToWeibo");
+                }
+
+                @Override
+                public void onCancelShare() {
+
+                }
+            });
+        });
 
         mLinearLayout.setOnClickListener(v -> {
             Bundle bundle = new Bundle();

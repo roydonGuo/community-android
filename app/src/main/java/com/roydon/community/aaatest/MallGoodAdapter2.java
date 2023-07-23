@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * @author roydon
  * @date 2023/6/21 22:39
- * @description community-android
+ * @description 具有尾部的adapter
  */
 public class MallGoodAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int VIEW_TYPE_ITEM = 0;

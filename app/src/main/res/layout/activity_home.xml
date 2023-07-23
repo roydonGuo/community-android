@@ -31,7 +31,7 @@
         app:tl_indicator_height="0dp"
         app:tl_textSelectColor="@color/element"
         app:tl_textUnselectColor="@color/black"
-        app:tl_textsize="@dimen/dimen_12sp"
+        app:tl_textsize="@dimen/font_third_size"
         app:tl_underline_color="@color/divider"
         app:tl_underline_height="1dp" />
 

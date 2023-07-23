@@ -42,6 +42,12 @@
         <item name="buttonBarButtonStyle">@color/white</item>
     </style>
 
+    <!-- dialog -->
+    <style name="DialogShare" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
     <!--自定义switch的按钮和轨迹颜色theme-->
     <style name="mySwitch" parent="Theme.AppCompat.Light">
         <!-- switch 打开时的按钮的颜色 轨迹颜色默认为30%（看效果就明白30%是怎么回事了）这个颜色 -->
@@ -50,7 +56,6 @@
         <item name="colorSwitchThumbNormal">@color/grey</item>
         <!-- switch关闭时的轨迹的颜色 30%这个颜色 -->
         <item name="android:colorForeground">@color/element</item>
-
     </style>
 
 </resources>

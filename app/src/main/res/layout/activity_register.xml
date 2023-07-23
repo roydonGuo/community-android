@@ -163,7 +163,7 @@
                 android:layout_alignParentBottom="true"
                 android:text="登录即代表阅读并同意服务条款"
                 android:textColor="@color/black"
-                android:textSize="@dimen/dimen_12sp" />
+                android:textSize="@dimen/font_third_size" />
         </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

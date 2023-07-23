@@ -24,4 +24,5 @@
     <string name="cart_goods_count_init">1</string>
     <!---->
     <string name="not_more">~ 没有更多啦 ~</string>
+    <string name="share_to_people">点击分享</string>
 </resources>
