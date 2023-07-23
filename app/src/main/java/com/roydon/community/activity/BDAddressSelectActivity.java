@@ -113,6 +113,7 @@ public class BDAddressSelectActivity extends AppCompatActivity {
         option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
         // 设置需要地址信息
         option.setIsNeedAddress(true);
+        option.setCoorType("bd09ll");//设置坐标系，默认“gcj02”
         // 保存定位参数
         mLocationClient.setLocOption(option);
 
@@ -157,6 +158,7 @@ public class BDAddressSelectActivity extends AppCompatActivity {
                 navigateTo(bdLocation);
             } else if (bdLocation.getLocType() == BDLocation.TypeOffLineLocation) {
                 Log.e("Tag", "离线定位成功，离线定位结果也是有效的");
+                navigateTo(bdLocation);
             } else if (bdLocation.getLocType() == BDLocation.TypeServerError) {
                 Log.e("Tag", "服务端网络定位失败,错误代码：" + bdLocation.getLocType());
             } else if (bdLocation.getLocType() == BDLocation.TypeNetWorkException) {
