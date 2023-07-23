@@ -1,13 +1,16 @@
 package com.roydon.community.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.roydon.community.BaseActivity;
@@ -24,6 +27,7 @@ import java.util.List;
 public class UserAddressAddActivity extends BaseActivity {
 
     private ImageView ivReturn;
+    private TextView tvCity;
     private Button addAddress;
 
     @SuppressLint("HandlerLeak")
@@ -47,8 +51,26 @@ public class UserAddressAddActivity extends BaseActivity {
     protected void initView() {
         // 返回按钮
         ivReturn = findViewById(R.id.iv_return);
+        tvCity = findViewById(R.id.tv_city);
+        tvCity.setOnClickListener(v -> {
+//            navigateTo(BDAddressSelectActivity.class);
+            Intent intent = new Intent(this, BDAddressSelectActivity.class);
+            //要求目标页面传真实地址数据回来
+            startActivityForResult(intent, 100);
+        });
         // 新增收货地址按钮
         addAddress = findViewById(R.id.btn_save_address);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == 200) {
+            if (data != null) {
+                String realAddress = data.getExtras().getString("realAddress");
+                tvCity.setText(realAddress);
+            }
+        }
     }
 
     @Override

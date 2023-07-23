@@ -1,8 +1,11 @@
 package com.roydon.community.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +35,8 @@ public class BDAddressSelectActivity extends AppCompatActivity {
 
     TextView tv_Lat;  // 纬度
     TextView tv_Lon;  // 经度
-    TextView tv_Add;  // 地址
+    TextView tvRealAddress;  // 地址
+    Button btnConfirmAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +82,8 @@ public class BDAddressSelectActivity extends AppCompatActivity {
         baiduMap = mapView.getMap();
         tv_Lat = findViewById(R.id.tv_lat);
         tv_Lon = findViewById(R.id.tv_lon);
-        tv_Add = findViewById(R.id.tv_real_address);
+        tvRealAddress = findViewById(R.id.tv_real_address);
+        btnConfirmAddress = findViewById(R.id.btn_confirm_address);
 
         LocationClientOption option = new LocationClientOption();
         // 设置扫描时间间隔
@@ -91,15 +96,24 @@ public class BDAddressSelectActivity extends AppCompatActivity {
         option.setIsNeedAddress(true);
         // 保存定位参数
         mLocationClient.setLocOption(option);
+
+        // 确认地址返回给上个activity
+        btnConfirmAddress.setOnClickListener(v -> {
+            Intent intent = new Intent(this, UserAddressAddActivity.class);
+            intent.putExtra("realAddress", tvRealAddress.getText().toString());
+            setResult(200, intent);
+            finish();
+        });
     }
 
     // 内部类，百度位置监听器
     private class MyLocationListener implements BDLocationListener {
+        @SuppressLint("SetTextI18n")
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
             tv_Lat.setText(bdLocation.getLatitude() + "");
             tv_Lon.setText(bdLocation.getLongitude() + "");
-            tv_Add.setText(bdLocation.getAddrStr());
+            tvRealAddress.setText(bdLocation.getAddrStr());
             if (bdLocation.getLocType() == BDLocation.TypeGpsLocation || bdLocation.getLocType() == BDLocation.TypeNetWorkLocation) {
                 navigateTo(bdLocation);
             }

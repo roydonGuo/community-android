@@ -1,8 +1,11 @@
 package com.roydon.community.fragment;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -101,7 +104,12 @@ public class MyFragment extends BaseFragment {
             DialogX.showShareDialog(getContext(), new OnShareDialogClickListener() {
                 @Override
                 public void onShareToWechat() {
-                    showShortToast("onShareToWechat");
+                    String base_uRl = ApiConfig.BASE_URl;
+                    // Gets a handle to the clipboard service.
+                    ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(CLIPBOARD_SERVICE);
+                    // 将数据复制到新的 ClipData 对象,Set the clipboard's primary clip.
+                    clipboard.setPrimaryClip(ClipData.newPlainText(null, base_uRl));
+                    showShortToast("Copied");
                 }
 
                 @Override
