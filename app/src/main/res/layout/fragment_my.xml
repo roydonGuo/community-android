@@ -24,11 +24,11 @@
                 android:id="@+id/iv_mall_cart"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
-                android:padding="4dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_margin="10dp"
+                android:padding="4dp"
                 android:src="@mipmap/icon_more" />
 
         </LinearLayout>
@@ -72,20 +72,20 @@
                     android:paddingLeft="10dp">
 
                     <TextView
+                        android:id="@+id/user_nick_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text=""
-                        android:id="@+id/user_nick_name"
                         android:textColor="@color/black"
                         android:textSize="@dimen/font_size_h1" />
 
                     <TextView
+                        android:id="@+id/user_dept"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text=""
-                        android:id="@+id/user_dept"
                         android:textColor="@color/black"
                         android:textSize="@dimen/font_main_size" />
 
@@ -413,6 +413,47 @@
                     android:gravity="center|left"
                     android:paddingLeft="10dp"
                     android:text="个人信息"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/icon_right" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/fragment_background" />
+
+            <RelativeLayout
+                android:id="@+id/rl_bd_address"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp">
+
+                <ImageView
+                    android:id="@+id/iv_address"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/tab_news_select" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_toEndOf="@+id/iv_address"
+                    android:layout_toRightOf="@+id/iv_address"
+                    android:gravity="center|left"
+                    android:paddingLeft="10dp"
+                    android:text="百度定位测试"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 

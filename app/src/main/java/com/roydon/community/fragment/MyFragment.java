@@ -22,6 +22,7 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.roydon.community.R;
+import com.roydon.community.activity.BDAddressSelectActivity;
 import com.roydon.community.activity.LoginActivity;
 import com.roydon.community.activity.MyDetailActivity;
 import com.roydon.community.activity.UserAddressActivity;
@@ -49,7 +50,7 @@ public class MyFragment extends BaseFragment {
     private TextView userNickName, userDept;
     // 订单栏功能
     private LinearLayout llUserOrder;
-    private RelativeLayout rlUserAddress, rlReturnLogin;
+    private RelativeLayout rlUserAddress, rlReturnLogin, rlBDAddress;
 
     private AppUser appUser;
 
@@ -83,6 +84,7 @@ public class MyFragment extends BaseFragment {
     protected void initView() {
         mLinearLayout = mRootView.findViewById(R.id.layout_my_detail);
         rlUserAddress = mRootView.findViewById(R.id.rl_user_address);
+        rlBDAddress = mRootView.findViewById(R.id.rl_bd_address);
         rlReturnLogin = mRootView.findViewById(R.id.rl_return_login);
         // 用户info栏
         userAvatar = mRootView.findViewById(R.id.img_header);
@@ -99,6 +101,9 @@ public class MyFragment extends BaseFragment {
         });
         rlUserAddress.setOnClickListener(v -> {
             navigateTo(UserAddressActivity.class);
+        });
+        rlBDAddress.setOnClickListener(v -> {
+            navigateTo(BDAddressSelectActivity.class);
         });
         llUserOrder.setOnClickListener(v -> {
             navigateTo(UserOrderActivity.class);
