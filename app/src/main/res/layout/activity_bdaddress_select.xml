@@ -73,6 +73,28 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="编码："
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_main_size" />
+
+            <TextView
+                android:id="@+id/tv_regin_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_main_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="地址："
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_main_size" />

@@ -42,6 +42,7 @@ public class BDAddressSelectActivity extends AppCompatActivity {
 
     TextView tv_Lat;  // 纬度
     TextView tv_Lon;  // 经度
+    TextView tvReginCode;  // 编码
     TextView tvRealAddress;  // 地址
 
     private ImageView ivRelocated;
@@ -101,6 +102,7 @@ public class BDAddressSelectActivity extends AppCompatActivity {
         baiduMap.setMyLocationEnabled(true);
         tv_Lat = findViewById(R.id.tv_lat);
         tv_Lon = findViewById(R.id.tv_lon);
+        tvReginCode = findViewById(R.id.tv_regin_code);
         tvRealAddress = findViewById(R.id.tv_real_address);
         ivRelocated = findViewById(R.id.iv_relocated);
         btnConfirmAddress = findViewById(R.id.btn_confirm_address);
@@ -150,7 +152,8 @@ public class BDAddressSelectActivity extends AppCompatActivity {
 //            location.getPoiList();            //获取当前位置周边POI信息
             tv_Lat.setText(bdLocation.getLatitude() + "");
             tv_Lon.setText(bdLocation.getLongitude() + "");
-            tvRealAddress.setText(bdLocation.getAdCode() + " — " + bdLocation.getAddrStr());
+            tvReginCode.setText(bdLocation.getAdCode() + "");
+            tvRealAddress.setText(bdLocation.getAddrStr());
 
             getlocation = bdLocation;
 
@@ -179,7 +182,7 @@ public class BDAddressSelectActivity extends AppCompatActivity {
     public void clickReLocation() {
         LatLng latLng = new LatLng(getlocation.getLatitude(), getlocation.getLongitude());
         MapStatus.Builder builder = new MapStatus.Builder();
-        builder.target(latLng).zoom(18.0f);
+        builder.target(latLng).zoom(20.0f); // 设置地图缩放
         baiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
         myLocationData = new MyLocationData.Builder()
                 .accuracy(getlocation.getRadius())// 设置定位数据的精度信息，单位：米
