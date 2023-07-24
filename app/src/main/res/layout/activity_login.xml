@@ -71,7 +71,7 @@
                     android:background="@null"
                     android:hint="@string/username_hint"
                     android:inputType="textCapWords"
-                    android:text="admin"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textColorHint="@color/grey"
                     android:textSize="@dimen/font_main_size" />
@@ -110,7 +110,7 @@
                     android:background="@null"
                     android:hint="@string/password_hint"
                     android:inputType="textPassword"
-                    android:text="admin#123456"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textColorHint="@color/grey"
                     android:textSize="@dimen/font_main_size" />
