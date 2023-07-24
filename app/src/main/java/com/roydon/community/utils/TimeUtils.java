@@ -25,11 +25,10 @@ import java.util.Date;
 /**
  * 通用时间类
  */
-public class TimeUtil {
+public class TimeUtils {
     private static final String TAG = "TimeUtil";
 
-    private TimeUtil() {/* 不能实例化**/}
-
+    private TimeUtils() {/* 不能实例化**/}
 
     /**
      * 系统计时开始时间
@@ -123,7 +122,6 @@ public class TimeUtil {
 
     }
 
-
     public static final int YEAR = 0;
     public static final int MONTH = 1;
     public static final int DAY_OF_MONTH = 2;
@@ -131,15 +129,12 @@ public class TimeUtil {
     public static final int MINUTE = 4;
     public static final int SECOND = 5;
 
-
     public static final int[] MIN_TIME_DETAILS = {0, 0, 0};
     public static final int[] MAX_TIME_DETAILS = {23, 59, 59};
-
 
     public static boolean isLeapYear(int year) {
         return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
     }
-
 
     /**
      * 获取时间,hh:mm:ss
@@ -179,7 +174,7 @@ public class TimeUtil {
      * @return
      */
     public static String getWholeTime(long date) {
-        int[] details = TimeUtil.getWholeDetail(date);
+        int[] details = TimeUtils.getWholeDetail(date);
 
         return details[0] + "年" + details[1] + "月" + details[2] + "日  " + details[3] + "时" + details[4] + "分";
     }
@@ -349,7 +344,7 @@ public class TimeUtil {
     @SuppressLint("SimpleDateFormat")
     public static long getBetween(SimpleDateFormat sdf, long dateLong0, long dateLong1) {
         if (sdf == null) {
-            sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+            sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         }
         Date date0;
         Date date1;
@@ -378,7 +373,7 @@ public class TimeUtil {
             return 0;
         }
         if (birthday.getYear() > getDateDetail(System.currentTimeMillis())[0]) {
-            birthday.setYear(birthday.getYear() - TimeUtil.SYSTEM_START_DATE[0]);
+            birthday.setYear(birthday.getYear() - TimeUtils.SYSTEM_START_DATE[0]);
         }
 
         return getAge(new int[]{birthday.getYear(), birthday.getMonth(), birthday.getDay()});
@@ -483,7 +478,7 @@ public class TimeUtil {
      * @return
      */
     public static String getBirthday(long date, boolean needYear) {
-        int[] details = TimeUtil.getWholeDetail(date);
+        int[] details = TimeUtils.getWholeDetail(date);
 
         if (needYear) {
             return details[0] + "年" + details[1] + "月" + details[2] + "日";
@@ -501,8 +496,8 @@ public class TimeUtil {
         if (birthdayDetails == null || birthdayDetails.length < 3) {
             return "";
         }
-        if (birthdayDetails[0] > TimeUtil.SYSTEM_START_DATE[0]) {
-            birthdayDetails[0] = birthdayDetails[0] - TimeUtil.SYSTEM_START_DATE[0];
+        if (birthdayDetails[0] > TimeUtils.SYSTEM_START_DATE[0]) {
+            birthdayDetails[0] = birthdayDetails[0] - TimeUtils.SYSTEM_START_DATE[0];
         }
         return getSmartBirthday(new Date(birthdayDetails[0], birthdayDetails[1], birthdayDetails[2]));
     }
@@ -516,10 +511,10 @@ public class TimeUtil {
             return "";
         }
         if (birthday.getYear() > getDateDetail(System.currentTimeMillis())[0]) {
-            birthday.setYear(birthday.getYear() - TimeUtil.SYSTEM_START_DATE[0]);
+            birthday.setYear(birthday.getYear() - TimeUtils.SYSTEM_START_DATE[0]);
         }
 
-        return getSmartBirthday(birthday.getTime(), false) + " " + (TimeUtil.getDateDetail(System.currentTimeMillis())[0] - birthday.getYear()) + "岁";
+        return getSmartBirthday(birthday.getTime(), false) + " " + (TimeUtils.getDateDetail(System.currentTimeMillis())[0] - birthday.getYear()) + "岁";
     }
 
     /**
