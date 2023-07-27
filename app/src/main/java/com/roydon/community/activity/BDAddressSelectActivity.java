@@ -49,6 +49,8 @@ public class BDAddressSelectActivity extends AppCompatActivity {
 
     Button btnConfirmAddress;
 
+    private String regionCode;
+
     BDLocation getlocation;
 
     // 当前定位模式
@@ -127,6 +129,7 @@ public class BDAddressSelectActivity extends AppCompatActivity {
         // 确认地址返回给上个activity
         btnConfirmAddress.setOnClickListener(v -> {
             Intent intent = new Intent(this, UserAddressAddActivity.class);
+            intent.putExtra("regionCode", regionCode);
             intent.putExtra("realAddress", tvRealAddress.getText().toString());
             setResult(200, intent);
             finish();
@@ -154,6 +157,7 @@ public class BDAddressSelectActivity extends AppCompatActivity {
             tv_Lon.setText(bdLocation.getLongitude() + "");
             tvReginCode.setText(bdLocation.getAdCode() + "");
             tvRealAddress.setText(bdLocation.getAddrStr());
+            regionCode = bdLocation.getAdCode();
 
             getlocation = bdLocation;
 
@@ -177,7 +181,7 @@ public class BDAddressSelectActivity extends AppCompatActivity {
     private MyLocationData myLocationData;
 
     /**
-     * 右下角“定位”点击事件(点击后重新定位)
+     * 左下角“定位”点击事件(点击后重新定位)
      */
     public void clickReLocation() {
         LatLng latLng = new LatLng(getlocation.getLatitude(), getlocation.getLongitude());

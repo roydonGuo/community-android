@@ -52,8 +52,8 @@ public class ApiConfig {
     /**
      * mall-address
      */
-    public static final String MALL_ADDRESS_LIST = "/app/mallUserAddress/list"; //购物车集合
-    public static final String MALL_ADD_ADDRESS = "/app/mallUserAddress"; //添加购物车
+    public static final String MALL_ADDRESS_LIST = "/app/mallUserAddress/list"; //地址集合
+    public static final String MALL_ADD_ADDRESS = "/app/mallUserAddress"; //添加地址
     public static final String MALL_DEFAULT_ADDRESS = "/app/mallUserAddress/default"; //默认收货地址
 
     /**

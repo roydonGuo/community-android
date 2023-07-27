@@ -6,7 +6,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,17 +20,35 @@ import com.roydon.community.R;
 import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
-import com.roydon.community.domain.entity.MallUserAddress;
-import com.roydon.community.domain.vo.UserAddressListRes;
+import com.roydon.community.domain.response.AddressAddRes;
+import com.roydon.community.utils.StringUtil;
+import com.roydon.community.utils.TelephoneUtils;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class UserAddressAddActivity extends BaseActivity {
 
     private ImageView ivReturn;
     private TextView tvCity;
     private Button addAddress;
+    private EditText etNickname, etTelephone, etCompleteAddress;
+    private Switch addressIsDefault;
+    private String isDefault = "0";
+
+    /**
+     * 新增地址需要的数据
+     * <p>
+     * {
+     * "nickName": "guoyicheng",
+     * "telephone": "18203707837",
+     * "regionCode": "411481",
+     * "completeAddress": "测试默认地址~ o(*￣▽￣*)o",
+     * "isDefault": "1"
+     * }
+     */
+
+    String realAddress;
+    String regionCode;
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
@@ -51,7 +71,21 @@ public class UserAddressAddActivity extends BaseActivity {
     protected void initView() {
         // 返回按钮
         ivReturn = findViewById(R.id.iv_return);
+        // 输入区域
+        etNickname = findViewById(R.id.et_nickname);
+        etTelephone = findViewById(R.id.et_telephone);
         tvCity = findViewById(R.id.tv_city);
+        etCompleteAddress = findViewById(R.id.et_complete_address);
+        addressIsDefault = findViewById(R.id.address_is_default);
+
+        // 设为默认地址
+        addressIsDefault.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                isDefault = "1";
+            } else {
+                isDefault = "0";
+            }
+        });
         tvCity.setOnClickListener(v -> {
 //            navigateTo(BDAddressSelectActivity.class);
             Intent intent = new Intent(this, BDAddressSelectActivity.class);
@@ -67,7 +101,8 @@ public class UserAddressAddActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100 && resultCode == 200) {
             if (data != null) {
-                String realAddress = data.getExtras().getString("realAddress");
+                realAddress = data.getExtras().getString("realAddress");
+                regionCode = data.getExtras().getString("regionCode");
                 tvCity.setText(realAddress);
             }
         }
@@ -79,28 +114,41 @@ public class UserAddressAddActivity extends BaseActivity {
             finish();
         });
         addAddress.setOnClickListener(v -> {
+            if (etNickname.getText().toString().length() >= 12 || StringUtil.isEmpty(etNickname.getText().toString())) {
+                showShortToast("请输入合法昵称");
+                return;
+            }
+            if (!TelephoneUtils.isValidPhoneNumber(etTelephone.getText().toString()) || StringUtil.isEmpty(etTelephone.getText().toString())) {
+                showShortToast("请输入正确的手机号码");
+                return;
+            }
+            if (StringUtil.isEmpty(tvCity.getText().toString())) {
+                showShortToast("请选择地址");
+                return;
+            }
+            saveAddress(etNickname.getText().toString(), etTelephone.getText().toString(), regionCode, realAddress + etCompleteAddress.getText().toString(), isDefault);
 
         });
 
     }
 
-    private void saveAddress(MallUserAddress mallUserAddress) {
+    private void saveAddress(String nickname, String telephone, String regionCode, String completeAddress, String isDefault) {
         HashMap<String, Object> params = new HashMap<>();
-        Api.build(ApiConfig.MALL_ADDRESS_LIST, params).postRequestWithToken(this, new HttpCallback() {
+        params.put("nickname", nickname);
+        params.put("telephone", telephone);
+        params.put("regionCode", regionCode);
+        params.put("completeAddress", completeAddress);
+        params.put("isDefault", isDefault);
+        Api.build(ApiConfig.MALL_ADD_ADDRESS, params).postRequestWithToken(this, new HttpCallback() {
             @Override
             public void onSuccess(final String res) {
                 Log.e("saveAddress", res);
                 // 后端传递时间格式解析
 //                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-                UserAddressListRes response = new Gson().fromJson(res, UserAddressListRes.class);
-                if (response != null && response.getCode() == 200) {
-                    List<MallUserAddress> userAddressList = response.getData();
-                    if (userAddressList != null && userAddressList.size() > 0) {
-                        mHandler.sendEmptyMessage(0);
-                    } else {
-                        showSyncShortToast("新增失败");
-
-                    }
+                AddressAddRes response = new Gson().fromJson(res, AddressAddRes.class);
+                if (response != null && response.getCode() == 200 && response.getData() != null) {
+                    showShortToast("新增成功");
+                    finish();
                 }
             }
 

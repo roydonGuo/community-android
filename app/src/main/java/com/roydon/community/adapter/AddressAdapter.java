@@ -5,7 +5,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -51,8 +50,8 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressH
     public void onBindViewHolder(@NonNull AddressAdapter.AddressHolder holder, int position) {
         MallUserAddress address = datas.get(position);
         holder.addressUser.setText(address.getNickname() + " " + address.getTelephone());
-        holder.addressComplete.setText(address.getProvinceCode() + " " + address.getCityCode() + " " + address.getRegionCode() + " " + address.getCompleteAddress());
-        holder.isDefault.setChecked(address.getIsDefault().equals("1"));
+        holder.addressComplete.setText(address.getCompleteAddress());
+        holder.isDefault.setText(address.getIsDefault().equals("1") ? "默认" : "");
     }
 
     @Override
@@ -61,14 +60,13 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressH
     }
 
     public class AddressHolder extends RecyclerView.ViewHolder {
-        private TextView addressUser, addressComplete;
-        private RadioButton isDefault;
+        private TextView addressUser, addressComplete, isDefault;
 
         public AddressHolder(@NonNull View view) {
             super(view);
             addressUser = view.findViewById(R.id.tv_address_user);
             addressComplete = view.findViewById(R.id.tv_address_complete);
-            isDefault = view.findViewById(R.id.rb_address_default);
+            isDefault = view.findViewById(R.id.address_is_default);
             view.setOnClickListener(v -> {
                 mOnItemClickListener.onItemClick(v, getLayoutPosition());
 
