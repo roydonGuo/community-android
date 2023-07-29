@@ -11,13 +11,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/top_bar_height"
         android:background="@color/element"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
@@ -25,12 +25,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                app:cardCornerRadius="15dp">
+                app:cardCornerRadius="20dp">
 
                 <ImageView
                     android:id="@+id/index_user_avatar"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center_vertical"
                     android:scaleType="fitXY"
                     android:src="@mipmap/avatar" />
@@ -42,7 +42,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/shape_search_box"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
