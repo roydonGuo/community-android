@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -25,6 +26,7 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.roydon.community.R;
+import com.roydon.community.activity.AccessRecordActivity;
 import com.roydon.community.activity.BDAddressSelectActivity;
 import com.roydon.community.activity.LoginActivity;
 import com.roydon.community.activity.MyDetailActivity;
@@ -37,6 +39,7 @@ import com.roydon.community.domain.response.UserInfoRes;
 import com.roydon.community.domain.vo.AppUser;
 import com.roydon.community.listener.OnShareDialogClickListener;
 import com.roydon.community.utils.StringUtil;
+import com.roydon.community.view.AlertDialogX;
 import com.roydon.community.view.CircleTransform;
 import com.roydon.community.view.DialogX;
 import com.squareup.picasso.Picasso;
@@ -55,7 +58,7 @@ public class MyFragment extends BaseFragment {
     private TextView userNickName, userDept;
     // 订单栏功能
     private LinearLayout llUserOrder;
-    private RelativeLayout rlUserAddress, rlReturnLogin, rlBDAddress;
+    private RelativeLayout rlUserAddress, rlAccessRecord, rlReturnLogin, rlBDAddress;
 
     private AppUser appUser;
 
@@ -92,6 +95,7 @@ public class MyFragment extends BaseFragment {
         mLinearLayout = mRootView.findViewById(R.id.layout_my_detail);
         rlUserAddress = mRootView.findViewById(R.id.rl_user_address);
         rlBDAddress = mRootView.findViewById(R.id.rl_bd_address);
+        rlAccessRecord = mRootView.findViewById(R.id.rl_access_record);
         rlReturnLogin = mRootView.findViewById(R.id.rl_return_login);
         // 用户info栏
         userAvatar = mRootView.findViewById(R.id.img_header);
@@ -155,13 +159,31 @@ public class MyFragment extends BaseFragment {
 
     @Override
     protected void initData() {
+
+        //出入社区报备
+        rlAccessRecord.setOnClickListener(v -> {
+            navigateTo(AccessRecordActivity.class);
+        });
         // 退出登录
         rlReturnLogin.setOnClickListener(v -> {
-            SharedPreferences sp = getContext().getSharedPreferences("sp_roydon", MODE_PRIVATE);
-            SharedPreferences.Editor editor = sp.edit();
-            editor.clear();
-            editor.apply();
-            navigateToWithFlag(LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            String title = "退出登录";
+            String msg = "确定清除数据并退出登录吗？";
+            AlertDialogX.showCustomAlertDialog(getContext(), title, msg, new View.OnClickListener() {
+                @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
+                @Override
+                public void onClick(View view) {
+                    SharedPreferences sp = getContext().getSharedPreferences("sp_roydon", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.clear();
+                    editor.apply();
+                    navigateToWithFlag(LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                }
+            }, new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
         });
         //getUserInfo
         getUserInfo();
