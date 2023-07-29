@@ -15,7 +15,7 @@
         android:padding="10dp"
         android:text="删除"
         android:textColor="@color/black"
-        android:textSize="18sp" />
+        android:textSize="@dimen/font_size_h3" />
 
     <!-- 内容 -->
     <TextView
@@ -24,9 +24,9 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="10dp"
-        android:text="确定删除商品：xxx吗？"
+        android:text="确定要：xxx吗？"
         android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:textSize="@dimen/font_main_size" />
 
     <!-- 按钮 -->
     <LinearLayout
