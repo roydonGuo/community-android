@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lines="1"
-            android:text="title"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="18sp" />
     </LinearLayout>
