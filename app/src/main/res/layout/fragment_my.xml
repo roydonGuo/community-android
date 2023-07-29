@@ -250,9 +250,8 @@
 
                         <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:padding="10dp"
-                            android:src="@mipmap/tab_mall_select" />
+                            android:layout_height="@dimen/icon_main_size"
+                            android:src="@mipmap/icon_mall_order" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -260,7 +259,7 @@
                             android:gravity="center_horizontal"
                             android:text="订单"
                             android:textColor="@color/black"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/font_second_size" />
 
                     </LinearLayout>
 
@@ -273,9 +272,8 @@
 
                         <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:padding="10dp"
-                            android:src="@mipmap/tab_mall_select" />
+                            android:layout_height="@dimen/icon_main_size"
+                            android:src="@mipmap/icon_mall_pay" />
 
                         <TextView
                             android:id="@+id/textView4"
@@ -284,7 +282,7 @@
                             android:gravity="center_horizontal"
                             android:text="待付款"
                             android:textColor="@color/black"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/font_second_size" />
 
                     </LinearLayout>
 
@@ -297,9 +295,8 @@
 
                         <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:padding="8dp"
-                            android:src="@mipmap/icon_add" />
+                            android:layout_height="@dimen/icon_main_size"
+                            android:src="@mipmap/icon_mall_putaway" />
 
                         <TextView
                             android:id="@+id/tv_add_good"
@@ -308,7 +305,7 @@
                             android:gravity="center_horizontal"
                             android:text="@string/add_good"
                             android:textColor="@color/black"
-                            android:textSize="13sp"
+                            android:textSize="@dimen/font_second_size"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -322,9 +319,8 @@
 
                         <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:padding="10dp"
-                            android:src="@mipmap/tab_mall_select" />
+                            android:layout_height="@dimen/icon_main_size"
+                            android:src="@mipmap/icon_mall_comment" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -332,7 +328,7 @@
                             android:gravity="center_horizontal"
                             android:text="待评价"
                             android:textColor="@color/black"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/font_second_size" />
 
                     </LinearLayout>
 
@@ -345,9 +341,8 @@
 
                         <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:padding="10dp"
-                            android:src="@mipmap/tab_mall_select" />
+                            android:layout_height="@dimen/icon_main_size"
+                            android:src="@mipmap/icon_mall_refund" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -355,7 +350,7 @@
                             android:gravity="center_horizontal"
                             android:text="退款"
                             android:textColor="@color/black"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/font_second_size" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -377,10 +372,10 @@
 
                         <ImageView
                             android:id="@+id/iv_collect"
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                            android:layout_width="@dimen/icon_main_size"
+                            android:layout_height="@dimen/icon_main_size"
                             android:layout_centerVertical="true"
-                            android:src="@mipmap/tab_news_select" />
+                            android:src="@mipmap/icon_order_address" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -461,10 +456,10 @@
 
                         <ImageView
                             android:id="@+id/iv_detail"
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                            android:layout_width="@dimen/icon_main_size"
+                            android:layout_height="@dimen/icon_main_size"
                             android:layout_centerVertical="true"
-                            android:src="@mipmap/tab_news_select" />
+                            android:src="@mipmap/icon_user_profile" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -506,10 +501,10 @@
 
                         <ImageView
                             android:id="@+id/iv_address"
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                            android:layout_width="@dimen/icon_main_size"
+                            android:layout_height="@dimen/icon_main_size"
                             android:layout_centerVertical="true"
-                            android:src="@mipmap/tab_news_select" />
+                            android:src="@mipmap/icon_order_address" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -547,10 +542,10 @@
 
                         <ImageView
                             android:id="@+id/iv_setting"
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                            android:layout_width="@dimen/icon_main_size"
+                            android:layout_height="@dimen/icon_main_size"
                             android:layout_centerVertical="true"
-                            android:src="@mipmap/tab_news_select" />
+                            android:src="@mipmap/icon_setting" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -588,10 +583,10 @@
 
                         <ImageView
                             android:id="@+id/iv_return_login"
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                            android:layout_width="@dimen/icon_main_size"
+                            android:layout_height="@dimen/icon_main_size"
                             android:layout_centerVertical="true"
-                            android:src="@mipmap/tab_news_select" />
+                            android:src="@mipmap/icon_logout" />
 
                         <TextView
                             android:layout_width="match_parent"
