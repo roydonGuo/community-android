@@ -1,7 +1,6 @@
 package com.roydon.community.domain.response;
 
 import com.roydon.community.domain.vo.AppUser;
-import com.roydon.community.domain.vo.BaseResponse;
 
 public class UserInfoRes extends BaseResponse {
 
