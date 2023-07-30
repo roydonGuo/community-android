@@ -1,6 +1,7 @@
 package com.roydon.community.domain.vo;
 
 import com.roydon.community.domain.entity.MallUserAddress;
+import com.roydon.community.domain.response.BaseResponse;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * @date 2023/6/25 12:51
  * @description community-android
  */
-public class UserAddressListRes extends BaseResponse{
+public class UserAddressListRes extends BaseResponse {
     private int total;
     private List<MallUserAddress> data;
 
