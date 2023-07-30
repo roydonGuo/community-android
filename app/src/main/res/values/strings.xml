@@ -25,4 +25,9 @@
     <!---->
     <string name="not_more">~ 没有更多啦 ~</string>
     <string name="share_to_people">点击分享</string>
+
+    <!-- 0出1进 -->
+    <string name="access_out">出</string>
+    <string name="access_in">进</string>
+
 </resources>
