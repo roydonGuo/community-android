@@ -1,6 +1,7 @@
 package com.roydon.community.domain.vo;
 
 import com.roydon.community.domain.entity.MallUserCartVO;
+import com.roydon.community.domain.response.BaseResponse;
 
 import java.io.Serializable;
 import java.util.List;
