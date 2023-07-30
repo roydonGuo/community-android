@@ -21,7 +21,7 @@ import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.MallUserAddress;
-import com.roydon.community.domain.vo.BaseResponse;
+import com.roydon.community.domain.response.BaseResponse;
 import com.roydon.community.domain.vo.UserAddressListRes;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 

@@ -46,7 +46,6 @@ public class UserAddressAddActivity extends BaseActivity {
      * "isDefault": "1"
      * }
      */
-
     String realAddress;
     String regionCode;
 

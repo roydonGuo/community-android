@@ -1,6 +1,7 @@
 package com.roydon.community.domain.vo;
 
 import com.roydon.community.domain.entity.MallUserAddress;
+import com.roydon.community.domain.response.BaseResponse;
 
 /**
  * @author roydon
