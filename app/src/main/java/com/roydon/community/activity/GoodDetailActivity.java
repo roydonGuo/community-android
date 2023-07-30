@@ -22,7 +22,7 @@ import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.MallGoodsVO;
 import com.roydon.community.domain.entity.MallOrder;
-import com.roydon.community.domain.vo.BaseResponse;
+import com.roydon.community.domain.response.BaseResponse;
 import com.roydon.community.domain.vo.GoodsDetailRes;
 import com.roydon.community.domain.vo.OrderCreateRes;
 import com.roydon.community.utils.StringUtil;
