@@ -1,4 +1,4 @@
-package com.roydon.community.domain.vo;
+package com.roydon.community.domain.response;
 
 public class BaseResponse {
 
