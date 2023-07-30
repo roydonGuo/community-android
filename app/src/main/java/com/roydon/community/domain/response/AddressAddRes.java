@@ -1,7 +1,6 @@
 package com.roydon.community.domain.response;
 
 import com.roydon.community.domain.entity.MallUserAddress;
-import com.roydon.community.domain.vo.BaseResponse;
 
 public class AddressAddRes extends BaseResponse {
 
