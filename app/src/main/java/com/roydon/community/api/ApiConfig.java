@@ -61,4 +61,10 @@ public class ApiConfig {
      */
     public static final String MALL_ORDER_CREATE = "/app/mallOrder/create";
     public static final String MALL_USER_ORDER_LIST = "/app/mallOrder/userOrderList";
+
+    /**
+     * 疫情防控-出入社区吧报备
+     */
+    public static final String EPIDEMIC_ACCESS_ADD = "/epidemic/access"; // 新增
+
 }
