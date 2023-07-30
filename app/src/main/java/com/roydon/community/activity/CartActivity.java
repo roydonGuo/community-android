@@ -23,7 +23,7 @@ import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.MallUserCartVO;
-import com.roydon.community.domain.vo.BaseResponse;
+import com.roydon.community.domain.response.BaseResponse;
 import com.roydon.community.domain.vo.MallUserCartListRes;
 import com.roydon.community.view.AlertDialogX;
 import com.roydon.community.utils.DoubleUtils;
