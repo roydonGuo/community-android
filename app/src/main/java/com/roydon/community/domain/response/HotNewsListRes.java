@@ -1,6 +1,5 @@
 package com.roydon.community.domain.response;
 
-import com.roydon.community.domain.vo.BaseResponse;
 import com.roydon.community.domain.vo.HotNews;
 
 import java.util.List;
