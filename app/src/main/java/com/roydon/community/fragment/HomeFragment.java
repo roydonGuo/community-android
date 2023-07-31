@@ -33,7 +33,7 @@ import com.roydon.community.domain.response.UserInfoRes;
 import com.roydon.community.domain.vo.AppUser;
 import com.roydon.community.domain.vo.BannerNoticeListRes;
 import com.roydon.community.domain.vo.HotNews;
-import com.roydon.community.utils.StringUtil;
+import com.roydon.community.utils.string.StringUtil;
 import com.roydon.community.view.CircleTransform;
 import com.roydon.community.view.SobViewPager;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;

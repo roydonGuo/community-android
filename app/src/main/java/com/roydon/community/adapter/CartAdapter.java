@@ -75,11 +75,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
             goodsCount = view.findViewById(R.id.btn_goods_count);
             view.setOnClickListener(v -> {
                 mOnItemClickListener.onItemClick(v, getLayoutPosition());
-
             });
             //长按事件
             view.setOnLongClickListener(v -> {
-                mOnItemClickListener.onItemLongClick(view, getLayoutPosition());
+                mOnItemClickListener.onItemLongClick(v, getLayoutPosition());
                 return true;
             });
         }

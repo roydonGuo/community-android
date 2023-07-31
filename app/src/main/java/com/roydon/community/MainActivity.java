@@ -6,7 +6,7 @@ import android.widget.Button;
 import com.roydon.community.activity.HomeActivity;
 import com.roydon.community.activity.LoginActivity;
 import com.roydon.community.activity.RegisterActivity;
-import com.roydon.community.utils.StringUtil;
+import com.roydon.community.utils.string.StringUtil;
 
 /**
  * @author roydon

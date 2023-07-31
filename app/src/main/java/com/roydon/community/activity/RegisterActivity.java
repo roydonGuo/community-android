@@ -12,7 +12,7 @@ import com.roydon.community.R;
 import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
-import com.roydon.community.utils.StringUtil;
+import com.roydon.community.utils.string.StringUtil;
 
 import java.util.HashMap;
 

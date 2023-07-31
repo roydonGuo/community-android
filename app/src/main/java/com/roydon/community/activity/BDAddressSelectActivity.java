@@ -22,8 +22,6 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BitmapDescriptor;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
@@ -44,6 +42,7 @@ public class BDAddressSelectActivity extends AppCompatActivity {
     TextView tv_Lon;  // 经度
     TextView tvReginCode;  // 编码
     TextView tvRealAddress;  // 地址
+//    EditText etSearchAddress;
 
     private ImageView ivRelocated;
 
@@ -198,13 +197,13 @@ public class BDAddressSelectActivity extends AppCompatActivity {
         // ------------------  以下是可选部分 ------------------
         // 自定义地图样式，可选
         // 更换定位图标，这里的图片是放在 drawble 文件下的
-        BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory.fromResource(R.mipmap.icon_baidu_geo);
-        // 定位模式 地图SDK支持三种定位模式：NORMAL（普通态）, FOLLOWING（跟随态）, COMPASS（罗盘态）
-        locationMode = MyLocationConfiguration.LocationMode.NORMAL;
-        // 定位模式、是否开启方向、设置自定义定位图标、精度圈填充颜色以及精度圈边框颜色5个属性（此处只设置了前三个）。
-        MyLocationConfiguration mLocationConfiguration = new MyLocationConfiguration(locationMode, true, mCurrentMarker);
-        // 使自定义的配置生效
-        baiduMap.setMyLocationConfiguration(mLocationConfiguration);
+//        BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory.fromResource(R.mipmap.icon_baidu_geo);
+//        // 定位模式 地图SDK支持三种定位模式：NORMAL（普通态）, FOLLOWING（跟随态）, COMPASS（罗盘态）
+//        locationMode = MyLocationConfiguration.LocationMode.NORMAL;
+//        // 定位模式、是否开启方向、设置自定义定位图标、精度圈填充颜色以及精度圈边框颜色5个属性（此处只设置了前三个）。
+//        MyLocationConfiguration mLocationConfiguration = new MyLocationConfiguration(locationMode, true, mCurrentMarker);
+//        // 使自定义的配置生效
+//        baiduMap.setMyLocationConfiguration(mLocationConfiguration);
         // ------------------  可选部分结束 ------------------
     }
 
@@ -223,13 +222,13 @@ public class BDAddressSelectActivity extends AppCompatActivity {
             // ------------------  以下是可选部分 ------------------
             // 自定义地图样式，可选
             // 更换定位图标，这里的图片是放在 drawble 文件下的
-            BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory.fromResource(R.mipmap.icon_baidu_geo);
-            // 定位模式 地图SDK支持三种定位模式：NORMAL（普通态）, FOLLOWING（跟随态）, COMPASS（罗盘态）
-            locationMode = MyLocationConfiguration.LocationMode.NORMAL;
-            // 定位模式、是否开启方向、设置自定义定位图标、精度圈填充颜色以及精度圈边框颜色5个属性（此处只设置了前三个）。
-            MyLocationConfiguration mLocationConfiguration = new MyLocationConfiguration(locationMode, true, mCurrentMarker);
-            // 使自定义的配置生效
-            baiduMap.setMyLocationConfiguration(mLocationConfiguration);
+//            BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory.fromResource(R.mipmap.icon_baidu_geo);
+//            // 定位模式 地图SDK支持三种定位模式：NORMAL（普通态）, FOLLOWING（跟随态）, COMPASS（罗盘态）
+//            locationMode = MyLocationConfiguration.LocationMode.NORMAL;
+//            // 定位模式、是否开启方向、设置自定义定位图标、精度圈填充颜色以及精度圈边框颜色5个属性（此处只设置了前三个）。
+//            MyLocationConfiguration mLocationConfiguration = new MyLocationConfiguration(locationMode, true, mCurrentMarker);
+//            // 使自定义的配置生效
+//            baiduMap.setMyLocationConfiguration(mLocationConfiguration);
             // ------------------  可选部分结束 ------------------
             isFirstLocate = false;
         }

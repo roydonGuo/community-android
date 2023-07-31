@@ -95,7 +95,7 @@ public class UserOrderAdapter extends RecyclerView.Adapter<UserOrderAdapter.User
             });
             //长按事件
             view.setOnLongClickListener(v -> {
-                mOnItemClickListener.onItemLongClick(view, getLayoutPosition());
+                mOnItemClickListener.onItemLongClick(v, getLayoutPosition());
                 return true;
             });
         }

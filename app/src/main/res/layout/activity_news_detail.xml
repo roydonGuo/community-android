@@ -38,7 +38,7 @@
                     app:srcCompat="@mipmap/icon_left" />
 
                 <TextView
-                    android:id="@+id/tv_city"
+                    android:id="@+id/tv_news_title_top"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -183,6 +183,8 @@
                         android:textSize="@dimen/font_main_size" />
 
                 </LinearLayout>
+
+                <include layout="@layout/layout_not_more" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

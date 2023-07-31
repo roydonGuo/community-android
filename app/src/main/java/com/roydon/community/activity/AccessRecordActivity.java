@@ -24,8 +24,8 @@ import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.response.BaseResponse;
 import com.roydon.community.enums.AccessTypeEnum;
 import com.roydon.community.enums.ReportTypeEnum;
-import com.roydon.community.utils.StringUtil;
-import com.roydon.community.utils.TelephoneUtils;
+import com.roydon.community.utils.string.StringUtil;
+import com.roydon.community.utils.string.TelephoneUtils;
 
 import java.util.HashMap;
 

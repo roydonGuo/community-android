@@ -27,7 +27,7 @@ import com.roydon.community.domain.vo.MallUserCartListRes;
 import com.roydon.community.domain.vo.OrderCreateRes;
 import com.roydon.community.domain.vo.UserAddressRes;
 import com.roydon.community.utils.DoubleUtils;
-import com.roydon.community.utils.StringUtil;
+import com.roydon.community.utils.string.StringUtil;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.util.ArrayList;
@@ -145,7 +145,7 @@ public class CreateOrderActivity extends BaseActivity {
 
     @SuppressLint("SetTextI18n")
     private void showAddressView(MallUserAddress address) {
-        tvAddress.setText(address.getNickname() + " " + address.getTelephone() + " " + address.getProvinceCode() + " " + address.getCityCode() + " " + address.getRegionCode() + " " + address.getCompleteAddress());
+        tvAddress.setText(address.getNickname() + " " + address.getTelephone() + "\n" + address.getCompleteAddress());
     }
 
     private void getCartGoodsList() {

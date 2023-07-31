@@ -82,6 +82,10 @@ public class MallGoodAdapter extends RecyclerView.Adapter<MallGoodAdapter.MallGo
             view.setOnClickListener(v -> {
                 mOnItemClickListener.onItemClick(v, getLayoutPosition());
             });
+            view.setOnLongClickListener(v -> {
+                mOnItemClickListener.onItemLongClick(v, getLayoutPosition());
+                return true;
+            });
         }
     }
 

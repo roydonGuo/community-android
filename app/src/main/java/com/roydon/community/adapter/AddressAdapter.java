@@ -73,7 +73,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressH
             });
             //长按事件
             view.setOnLongClickListener(v -> {
-                mOnItemClickListener.onItemLongClick(view, getLayoutPosition());
+                mOnItemClickListener.onItemLongClick(v, getLayoutPosition());
                 return true;
             });
         }

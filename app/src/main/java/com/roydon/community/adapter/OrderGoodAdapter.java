@@ -77,7 +77,7 @@ public class OrderGoodAdapter extends RecyclerView.Adapter<OrderGoodAdapter.Orde
             });
             //长按事件
             view.setOnLongClickListener(v -> {
-                mOnItemClickListener.onItemLongClick(view, getLayoutPosition());
+                mOnItemClickListener.onItemLongClick(v, getLayoutPosition());
                 return true;
             });
         }

@@ -8,6 +8,7 @@
     android:fitsSystemWindows="true"
     tools:context=".activity.GoodDetailActivity">
 
+
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -38,14 +39,13 @@
 
                 <ImageView
                     android:id="@+id/iv_return"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="@dimen/icon_main_size"
+                    android:layout_height="@dimen/icon_main_size"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/shape_background_icon_black"
                     android:padding="10dp"
                     app:srcCompat="@mipmap/icon_left" />
-
             </RelativeLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -99,6 +99,8 @@
                     android:textColor="@color/grey"
                     android:textSize="@dimen/font_main_size" />
             </LinearLayout>
+
+            <include layout="@layout/layout_not_more" />
 
         </LinearLayout>
 

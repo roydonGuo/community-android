@@ -10,7 +10,7 @@ import android.util.Log;
 import com.roydon.community.activity.LoginActivity;
 import com.roydon.community.constants.Constants;
 import com.roydon.community.constants.HttpStatus;
-import com.roydon.community.utils.StringUtil;
+import com.roydon.community.utils.string.StringUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;

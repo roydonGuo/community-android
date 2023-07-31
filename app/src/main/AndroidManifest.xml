@@ -2,14 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.roydon.community">
-    <!-- 访问网络 -->
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
 
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- 百度地图需要的权限 -->
-    <!-- 这个权限用于进行网络定位 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 这个权限用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 访问网络 -->
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 访问GPS定位 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 访问网络，进行地图相关业务数据请求，包括地图数据，路线规划，POI检索等 -->
@@ -22,6 +22,8 @@
         android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -60,7 +62,8 @@
             android:exported="false" />
         <activity
             android:name=".activity.CartActivity"
-            android:exported="false" /> <!-- 为调用相机拍照设置内容提供者 -->
+            android:exported="false" />
+        <!-- 为调用相机拍照设置内容提供者 -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.roydon.community.fileprovider"
@@ -77,7 +80,9 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" /> <!-- baidu地图 -->
+            android:exported="false" />
+
+        <!-- baidu地图 -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="3hyBCuhdrkTnOLDX5XLwl5dBRtxnnuRH" />

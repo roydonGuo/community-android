@@ -17,7 +17,7 @@ import com.roydon.community.api.HttpCallback;
 import com.roydon.community.constants.Constants;
 import com.roydon.community.domain.vo.PhoneCodeRes;
 import com.roydon.community.domain.vo.SmsLoginRes;
-import com.roydon.community.utils.TelephoneUtils;
+import com.roydon.community.utils.string.TelephoneUtils;
 
 import java.util.HashMap;
 

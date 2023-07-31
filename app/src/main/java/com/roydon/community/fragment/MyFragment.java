@@ -38,7 +38,7 @@ import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.response.UserInfoRes;
 import com.roydon.community.domain.vo.AppUser;
 import com.roydon.community.listener.OnShareDialogClickListener;
-import com.roydon.community.utils.StringUtil;
+import com.roydon.community.utils.string.StringUtil;
 import com.roydon.community.view.AlertDialogX;
 import com.roydon.community.view.CircleTransform;
 import com.roydon.community.view.DialogX;

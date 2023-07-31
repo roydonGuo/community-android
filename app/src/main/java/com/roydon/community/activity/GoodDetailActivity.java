@@ -25,7 +25,7 @@ import com.roydon.community.domain.entity.MallOrder;
 import com.roydon.community.domain.response.BaseResponse;
 import com.roydon.community.domain.vo.GoodsDetailRes;
 import com.roydon.community.domain.vo.OrderCreateRes;
-import com.roydon.community.utils.StringUtil;
+import com.roydon.community.utils.string.StringUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

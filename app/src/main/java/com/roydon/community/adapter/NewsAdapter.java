@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.roydon.community.R;
 import com.roydon.community.domain.entity.AppNews;
+import com.roydon.community.utils.string.TimeUtils;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -71,8 +71,9 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             vh.author.setText(newsEntity.getSource());
             vh.viewNum.setText(newsEntity.getViewNum() + "");
             vh.comment.setText(newsEntity.getViewNum() + "");
-            SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss");
-            vh.time.setText(sdf.format(newsEntity.getPostTime()));
+//            SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss");
+//            vh.time.setText(sdf.format(newsEntity.getPostTime()));
+            vh.time.setText(TimeUtils.getSmartDate(newsEntity.getPostTime().getTime()));
             vh.appNews = newsEntity;
 //            Picasso.with(mContext).load(newsEntity.getCoverImg()).transform(new CircleTransform()).into(vh.header);
             Picasso.with(mContext).load(newsEntity.getCoverImg()).into(vh.thumb);
@@ -82,8 +83,9 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             vh.author.setText(newsEntity.getSource());
             vh.viewNum.setText(newsEntity.getViewNum() + "");
             vh.comment.setText(newsEntity.getViewNum() + "");
-            SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss");
-            vh.time.setText(sdf.format(newsEntity.getPostTime()));
+//            SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss");
+//            vh.time.setText(sdf.format(newsEntity.getPostTime()));
+            vh.time.setText(TimeUtils.getSmartDate(newsEntity.getPostTime().getTime()));
             vh.appNews = newsEntity;
 //            Picasso.with(mContext).load(newsEntity.getCoverImg()).transform(new CircleTransform()).into(vh.header);
             Picasso.with(mContext).load(newsEntity.getCoverImg()).into(vh.thumb);
@@ -137,11 +139,8 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             time = view.findViewById(R.id.time);
             header = view.findViewById(R.id.header);
             thumb = view.findViewById(R.id.thumb);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mOnItemClickListener.onItemClick(appNews);
-                }
+            view.setOnClickListener(v -> {
+                mOnItemClickListener.onItemClick(appNews);
             });
         }
     }

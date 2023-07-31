@@ -21,8 +21,8 @@ import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.response.AddressAddRes;
-import com.roydon.community.utils.StringUtil;
-import com.roydon.community.utils.TelephoneUtils;
+import com.roydon.community.utils.string.StringUtil;
+import com.roydon.community.utils.string.TelephoneUtils;
 
 import java.util.HashMap;
 

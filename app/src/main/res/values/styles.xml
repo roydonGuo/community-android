@@ -58,4 +58,9 @@
         <item name="android:colorForeground">@color/element</item>
     </style>
 
+    <!-- CustomRadioTheme -->
+<!--    <style name="CustomRadioTheme" parent="@android:style/Widget.CompoundButton.CheckBox">-->
+<!--        <item name="android:button">@drawable/selector_radio_group</item>-->
+<!--    </style>-->
+
 </resources>

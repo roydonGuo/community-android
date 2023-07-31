@@ -32,7 +32,7 @@ import java.util.List;
 public class UserOrderActivity extends BaseActivity {
 
     private RefreshLayout refreshLayout;
-    private RecyclerView rvMallAddress;
+    private RecyclerView rvUserOrder;
     private LinearLayoutManager linearLayoutManager;
     private int pageNum = 1;
     private UserOrderAdapter userOrderAdapter;
@@ -64,7 +64,7 @@ public class UserOrderActivity extends BaseActivity {
         // 刷新组件
         refreshLayout = findViewById(R.id.refreshLayout);
         // RecyclerView
-        rvMallAddress = findViewById(R.id.rv_user_order);
+        rvUserOrder = findViewById(R.id.rv_user_order);
         // 返回按钮
         ivReturn = findViewById(R.id.iv_return);
         // 显示加载动画
@@ -82,9 +82,22 @@ public class UserOrderActivity extends BaseActivity {
         });
         linearLayoutManager = new LinearLayoutManager(UserOrderActivity.this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        rvMallAddress.setLayoutManager(linearLayoutManager);
+        rvUserOrder.setLayoutManager(linearLayoutManager);
         userOrderAdapter = new UserOrderAdapter(this);
-        rvMallAddress.setAdapter(userOrderAdapter);
+        rvUserOrder.setAdapter(userOrderAdapter);
+
+        userOrderAdapter.setOnItemClickListener(new UserOrderAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                showShortToast(position + "");
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                showShortToast(position + "");
+
+            }
+        });
 
         refreshLayout.setOnRefreshListener(r -> {
             pageNum = 1;

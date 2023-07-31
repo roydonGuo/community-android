@@ -23,6 +23,7 @@ import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.MallUserAddress;
 import com.roydon.community.domain.response.BaseResponse;
 import com.roydon.community.domain.vo.UserAddressListRes;
+import com.roydon.community.view.AlertDialogX;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.util.ArrayList;
@@ -93,24 +94,21 @@ public class UserAddressActivity extends BaseActivity {
 
             @Override
             public void onItemLongClick(View view, int position) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
-//                builder.setTitle("⛔删除")
-//                        .setMessage("确定删除商品：" + cartList.get(position).getGoodsTitle() + "吗？")
-//                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                            @SuppressLint("NotifyDataSetChanged")
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                String cartId = cartList.get(position).getCartId();
-//                                delCart(cartId);
-//                                cartList.remove(position);
-//                                showShortToast("删除成功");
-//                                Double collect = cartList.stream().mapToDouble(MallUserCartVO::getGoodsPrice).sum();
-//                                totalPrice.setText("￥" + collect);
-//                                cartAdapter.notifyDataSetChanged();
-//                            }
-//                        })
-//                        .setNeutralButton("取消", null)
-//                        .create().show();
+                String title = "删除收货地址";
+                String msg = "确定删除此收货地址吗？";
+                AlertDialogX.showCustomAlertDialog(UserAddressActivity.this, title, msg, new View.OnClickListener() {
+                    @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
+                    @Override
+                    public void onClick(View view) {
+                        // TODO 删除收货地址
+                        showShortToast("删除成功");
+                    }
+                }, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
             }
         });
         addAddress.setOnClickListener(v -> {
