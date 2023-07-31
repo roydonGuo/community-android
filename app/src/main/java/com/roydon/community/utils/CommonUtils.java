@@ -23,6 +23,9 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.roydon.community.utils.string.StringUtil;
+import com.roydon.community.utils.string.UrlUtils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

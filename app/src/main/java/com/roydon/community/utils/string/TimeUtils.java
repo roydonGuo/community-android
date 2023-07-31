@@ -12,7 +12,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.*/
 
-package com.roydon.community.utils;
+package com.roydon.community.utils.string;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
@@ -233,18 +233,18 @@ public class TimeUtils {
 
         String smartDate = "";
 
-        if (nowDetails[0] == smartDetail[0]) {//this year
-            if (nowDetails[1] == smartDetail[1]) {//this month
-                String time = " " + new SimpleDateFormat("HH:mm").format(date);
+        if (nowDetails[0] == smartDetail[0]) { // this year
+            if (nowDetails[1] == smartDetail[1]) { // this month
+                String time = "" + new SimpleDateFormat("HH:mm").format(date);
 
-                long day = nowDetails[2] - smartDetail[2];//between/(24*3600);
-                if (day >= 3) {//fomer day
+                long day = nowDetails[2] - smartDetail[2]; // between/(24*3600);
+                if (day >= 3) { // fomer day
                     smartDate = String.valueOf(smartDetail[2]) + "日" + time;
-                } else if (day >= 2) {//fomer day
+                } else if (day >= 2) { // fomer day
                     smartDate = "前天" + time;
-                } else if (day >= 1) {//fomer day
+                } else if (day >= 1) { // fomer day
                     smartDate = "昨天" + time;
-                } else if (day >= 0) {//today
+                } else if (day >= 0) { // today
                     if (0 == (nowDetails[HOUR_OF_DAY] - smartDetail[HOUR_OF_DAY])) {
                         long minute = nowDetails[MINUTE] - smartDetail[MINUTE];
                         if (minute < 1) {

@@ -25,7 +25,6 @@ public class FileUtils {
 
     public final static String APK_NAME = "community.apk";
 
-
     /**
      * 应用关联的图片存储空间
      *

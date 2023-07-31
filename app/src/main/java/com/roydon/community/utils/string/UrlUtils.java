@@ -1,4 +1,4 @@
-package com.roydon.community.utils;
+package com.roydon.community.utils.string;
 
 import android.util.Log;
 import android.widget.TextView;
