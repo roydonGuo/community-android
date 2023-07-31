@@ -1,11 +1,8 @@
 package com.roydon.community.fragment;
 
-import static android.content.Context.CLIPBOARD_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.annotation.SuppressLint;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -29,8 +26,8 @@ import com.roydon.community.R;
 import com.roydon.community.activity.AccessRecordActivity;
 import com.roydon.community.activity.BDAddressSelectActivity;
 import com.roydon.community.activity.LoginActivity;
-import com.roydon.community.activity.UserInfoActivity;
 import com.roydon.community.activity.UserAddressActivity;
+import com.roydon.community.activity.UserInfoActivity;
 import com.roydon.community.activity.UserOrderActivity;
 import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
@@ -38,6 +35,7 @@ import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.response.UserInfoRes;
 import com.roydon.community.domain.vo.AppUser;
 import com.roydon.community.listener.OnShareDialogClickListener;
+import com.roydon.community.utils.android.SystemUtils;
 import com.roydon.community.utils.string.StringUtil;
 import com.roydon.community.view.AlertDialogX;
 import com.roydon.community.view.CircleTransform;
@@ -108,11 +106,7 @@ public class MyFragment extends BaseFragment {
             DialogX.showShareDialog(getContext(), new OnShareDialogClickListener() {
                 @Override
                 public void onShareToWechat() {
-                    String base_uRl = ApiConfig.BASE_URl;
-                    // Gets a handle to the clipboard service.
-                    ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(CLIPBOARD_SERVICE);
-                    // 将数据复制到新的 ClipData 对象,Set the clipboard's primary clip.
-                    clipboard.setPrimaryClip(ClipData.newPlainText(null, base_uRl));
+                    SystemUtils.copyToClipboard(getContext(), ApiConfig.BASE_URl);
                     showShortToast("Copied");
                 }
 

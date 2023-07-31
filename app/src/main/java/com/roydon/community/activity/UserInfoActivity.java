@@ -15,20 +15,33 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.roydon.community.BaseActivity;
 import com.roydon.community.R;
+import com.roydon.community.api.Api;
+import com.roydon.community.api.ApiConfig;
+import com.roydon.community.api.HttpCallback;
+import com.roydon.community.domain.response.UserInfoRes;
+import com.roydon.community.domain.vo.AppUser;
+import com.roydon.community.enums.TenantTypeEnum;
 import com.roydon.community.listener.OnPhotoSelectDialogClickListener;
 import com.roydon.community.utils.img.PhotoUtils;
+import com.roydon.community.utils.string.StringUtil;
+import com.roydon.community.view.CircleTransform;
 import com.roydon.community.view.DialogX;
 import com.roydon.community.widget.RoundImageView;
+import com.squareup.picasso.Picasso;
 
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 
 public class UserInfoActivity extends BaseActivity {
 
@@ -50,6 +63,10 @@ public class UserInfoActivity extends BaseActivity {
 
     private PhotoUtils photoUtils;
 
+    private AppUser appUser;
+
+    private TextView tvUserId, tvUserName, tvNickName, tvRealName, tvPhonenumber, tvEmail, tvIdCard, tvSex, tvAge, tvIsTenant;
+
     @Override
     protected int initLayout() {
         return R.layout.activity_user_info;
@@ -63,6 +80,11 @@ public class UserInfoActivity extends BaseActivity {
             switch (msg.what) {
                 case 0:
                     break;
+                case 2:
+                    showUserInfo(appUser);
+                    break;
+                default:
+                    break;
             }
         }
     };
@@ -74,10 +96,21 @@ public class UserInfoActivity extends BaseActivity {
         llEditAvatar = findViewById(R.id.ll_edit_avatar);
         // 用户头像
         riUserAvatar = findViewById(R.id.ri_user_avatar);
+        tvUserId = findViewById(R.id.tv_user_id);
+        tvUserName = findViewById(R.id.tv_user_name);
+        tvNickName = findViewById(R.id.tv_nick_name);
+        tvRealName = findViewById(R.id.tv_real_name);
+        tvPhonenumber = findViewById(R.id.tv_phonenumber);
+        tvEmail = findViewById(R.id.tv_email);
+        tvIdCard = findViewById(R.id.tv_id_card);
+        tvSex = findViewById(R.id.tv_sex);
+        tvAge = findViewById(R.id.tv_age);
+        tvIsTenant = findViewById(R.id.tv_is_tenant);
     }
 
     @Override
     protected void initData() {
+        getUserInfo();
         ivReturn.setOnClickListener(v -> {
             finish();
         });
@@ -90,12 +123,43 @@ public class UserInfoActivity extends BaseActivity {
         });
     }
 
+    // ui渲染=============================================================================================================
+    @SuppressLint("SetTextI18n")
+    private void showUserInfo(AppUser appUser) {
+        if (appUser.getAvatar() != null && !appUser.getAvatar().equals("")) {
+            Picasso.with(this).load(appUser.getAvatar()).transform(new CircleTransform()).into(riUserAvatar);
+        }
+        tvUserId.setText(appUser.getUserId() + "");
+        tvUserName.setText(appUser.getUserName());
+        tvNickName.setText(appUser.getNickName());
+        tvRealName.setText(appUser.getRealName());
+        tvPhonenumber.setText(appUser.getPhonenumber());
+        tvEmail.setText(appUser.getEmail());
+        tvIdCard.setText(appUser.getIdCard());
+        tvSex.setText(appUser.getSex().equals("0") ? "男" : "女");
+        tvAge.setText(appUser.getAge() + "");
+        String isTenant = appUser.getIsTenant();
+        if (isTenant.equals(TenantTypeEnum.NO.getCode())) {
+            // 房东
+            tvIsTenant.setText(TenantTypeEnum.NO.getInfo());
+        } else if (isTenant.equals(TenantTypeEnum.YES.getCode())) {
+            // 租户
+            tvIsTenant.setText(TenantTypeEnum.YES.getInfo());
+        } else {
+            tvIsTenant.setText("未知");
+        }
+    }
 
-    // 页面跳转回来的回调===============================================================
+    // ============================================================================================================
+
+
+    // 页面跳转回来的回调=====================================================================================================================
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+//        if(StringUtil.isNull(data)){
+//            return;
+//        }
         switch (requestCode) {
             //拍照得到图片
             case TAKE_PHOTO:
@@ -227,6 +291,40 @@ public class UserInfoActivity extends BaseActivity {
         Intent intent = new Intent("android.intent.action.GET_CONTENT");
         intent.setType("image/*");
         startActivityForResult(intent, FROM_ALBUMS);
+    }
+
+
+    // api============================================================================
+
+    /**
+     * 用户信息
+     */
+    private void getUserInfo() {
+        HashMap<String, Object> params = new HashMap<>();
+        Api.build(ApiConfig.USER_INFO, params).getRequestWithToken(this, new HttpCallback() {
+            @Override
+            public void onSuccess(final String res) {
+                Log.e("getUserInfo", res);
+                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+                UserInfoRes response = gson.fromJson(res, UserInfoRes.class);
+                if (response != null && response.getCode() == 200) {
+                    AppUser user = response.getData();
+                    if (StringUtil.isNotNull(user)) {
+                        Log.e("getUserInfo", user.toString());
+                        appUser = user;
+                        mHandler.sendEmptyMessage(2);
+                    } else {
+                        showShortToast("请重新登陆");
+//                        getActivity().finish();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
     }
 
 }
