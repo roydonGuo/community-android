@@ -129,20 +129,15 @@ public class Api {
      * @param context
      * @param callback
      */
-    public void postImgRequestWithToken(Context context, File file, final HttpCallback callback) {
+    public void postImgRequestWithToken(Context context, String fileName, File file, final HttpCallback callback) {
         SharedPreferences sp = context.getSharedPreferences("sp_roydon", MODE_PRIVATE);
         String token = Constants.TOKEN_PREFIX + sp.getString(Constants.TOKEN, "");
-//        JSONObject jsonObject = new JSONObject(mParams);
-//        String jsonStr = jsonObject.toString();
-//        RequestBody requestBodyJson = RequestBody.create(MediaType.parse("image/*;charset=utf-8"), jsonStr);
-        //所有图片类型
-        MediaType mediaType = MediaType.parse("multipart/form-data");
         //第一步，说明数据为文件，以及文件类型
-        RequestBody fileBody = RequestBody.create(mediaType, file);
+        RequestBody fileBody = RequestBody.create(MediaType.parse("image/jpeg"), file);
         //第二步，指明服务表单的键名，文件名，文件体
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("avatarfile", file.getName(), fileBody)
+                .addFormDataPart(fileName, file.getName(), fileBody)
                 .build();
         //第三步创建Request
         Request request = new Request.Builder()

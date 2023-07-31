@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
@@ -34,7 +35,6 @@ import com.roydon.community.domain.response.UserInfoRes;
 import com.roydon.community.domain.vo.AppUser;
 import com.roydon.community.enums.TenantTypeEnum;
 import com.roydon.community.listener.OnPhotoSelectDialogClickListener;
-import com.roydon.community.utils.UriToPath;
 import com.roydon.community.utils.img.PhotoUtils;
 import com.roydon.community.utils.string.StringUtil;
 import com.roydon.community.view.CircleTransform;
@@ -45,7 +45,11 @@ import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class UserInfoActivity extends BaseActivity {
 
@@ -190,7 +194,13 @@ public class UserInfoActivity extends BaseActivity {
                         }
                         riUserAvatar.setImageBitmap(bitmap);
                         // 发送到服务器
-                        uploadAvatar(avatarUri);
+                        try {
+                            File photoFile = createPhotoFile();
+                            uploadAvatar(photoFile);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+
                     }
                 }
                 break;
@@ -211,7 +221,7 @@ public class UserInfoActivity extends BaseActivity {
                         Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
                         riUserAvatar.setImageBitmap(bitmap);
                         // 发送到服务器
-
+                        uploadAvatar(new File(imagePath));
                     } else {
                         Log.d("onSelectAlbums", "没有找到图片");
                     }
@@ -308,6 +318,20 @@ public class UserInfoActivity extends BaseActivity {
         startActivityForResult(intent, FROM_ALBUMS);
     }
 
+    private File createPhotoFile() throws IOException {
+        // 创建一个唯一的文件名
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        String imageFileName = timeStamp + "_";
+
+        // 获取保存照片的目录
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+        // 创建文件
+        File imageFile = File.createTempFile(imageFileName, ".jpg", storageDir);
+        Log.e("imageFile", imageFile.getPath());
+        // 返回文件路径
+        return imageFile;
+    }
     // api============================================================================
 
     /**
@@ -344,13 +368,8 @@ public class UserInfoActivity extends BaseActivity {
     /**
      * 上传头像
      */
-    private void uploadAvatar(Uri uri) {
-        String path = UriToPath.getImageAbsolutePath(this, uri);
-        Log.e("UriToPath", path);
-        File file = new File(path);
-//        HashMap<String, Object> params = new HashMap<>();
-//        params.put("avatarfile", file);
-        Api.buildNoParams(ApiConfig.USER_PROFILE_AVATAR).postImgRequestWithToken(this, file, new HttpCallback() {
+    private void uploadAvatar(File file) {
+        Api.buildNoParams(ApiConfig.USER_PROFILE_AVATAR).postImgRequestWithToken(this, "avatarfile", file, new HttpCallback() {
             @Override
             public void onSuccess(final String res) {
                 Log.e("uploadAvatar", res);
@@ -361,7 +380,6 @@ public class UserInfoActivity extends BaseActivity {
                         mHandler.sendEmptyMessage(HANDLER_WHAT_USERINFO);
                     } else {
                         showShortToast("请重新登陆");
-//                        getActivity().finish();
                     }
                 }
             }
