@@ -29,7 +29,7 @@ import com.roydon.community.R;
 import com.roydon.community.activity.AccessRecordActivity;
 import com.roydon.community.activity.BDAddressSelectActivity;
 import com.roydon.community.activity.LoginActivity;
-import com.roydon.community.activity.MyDetailActivity;
+import com.roydon.community.activity.UserInfoActivity;
 import com.roydon.community.activity.UserAddressActivity;
 import com.roydon.community.activity.UserOrderActivity;
 import com.roydon.community.api.Api;
@@ -141,7 +141,7 @@ public class MyFragment extends BaseFragment {
         mLinearLayout.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
 //                bundle.putString("userId", user.getUserId());
-            navigateTo(MyDetailActivity.class);
+            navigateTo(UserInfoActivity.class);
 
         });
         rlUserAddress.setOnClickListener(v -> {

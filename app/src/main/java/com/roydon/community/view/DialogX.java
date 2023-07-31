@@ -10,12 +10,20 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.roydon.community.R;
+import com.roydon.community.listener.OnPhotoSelectDialogClickListener;
 import com.roydon.community.listener.OnShareDialogClickListener;
 
 public class DialogX {
 
+    /**
+     * 弹出分享框
+     *
+     * @param context
+     * @param listener
+     */
     public static void showShareDialog(Context context, final OnShareDialogClickListener listener) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.layout_dialog_share, null);
@@ -71,6 +79,57 @@ public class DialogX {
         mViewQQ.setOnClickListener(clickListener);
         mViewWeibo.setOnClickListener(clickListener);
         mBtnCancel.setOnClickListener(clickListener);
+
+        // 设置相关位置，一定要在 show()之后
+        Window window = dialog.getWindow();
+        window.getDecorView().setPadding(0, 0, 0, 0);
+        WindowManager.LayoutParams params = window.getAttributes();
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+        params.gravity = Gravity.BOTTOM;
+        window.setAttributes(params);
+
+    }
+
+    public static void showPhotoSelectDialog(Context context, final OnPhotoSelectDialogClickListener listener) {
+        View dialogPhotoSelect = LayoutInflater.from(context).inflate(R.layout.layout_dialog_photo_select, null);
+        final Dialog dialog = new Dialog(context, R.style.DialogShare);
+        dialog.setContentView(dialogPhotoSelect);
+        dialog.show();
+        // 点击监听
+        View.OnClickListener clickListener = new View.OnClickListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.take_photo:
+                        if (listener != null) {
+                            listener.onSelectPhoto();
+                        }
+                        break;
+                    case R.id.from_albums:
+                        if (listener != null) {
+                            listener.onSelectAlbums();
+                        }
+                        break;
+                    case R.id.cancel:
+                        if (listener != null) {
+                            listener.onSelectCancel();
+                        }
+                        break;
+                    default:
+                        dialog.dismiss();
+                        break;
+                }
+                dialog.dismiss();
+            }
+        };
+        TextView takePhoto = dialogPhotoSelect.findViewById(R.id.take_photo);
+        TextView fromAlbums = dialogPhotoSelect.findViewById(R.id.from_albums);
+        TextView cancel = dialogPhotoSelect.findViewById(R.id.cancel);
+
+        takePhoto.setOnClickListener(clickListener);
+        fromAlbums.setOnClickListener(clickListener);
+        cancel.setOnClickListener(clickListener);
 
         // 设置相关位置，一定要在 show()之后
         Window window = dialog.getWindow();
