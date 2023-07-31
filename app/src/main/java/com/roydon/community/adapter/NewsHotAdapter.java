@@ -2,6 +2,7 @@ package com.roydon.community.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.roydon.community.R;
 import com.roydon.community.domain.vo.HotNews;
-import com.squareup.picasso.Picasso;
+import com.roydon.community.utils.img.MyBitmapUtils;
+import com.roydon.community.utils.string.TimeUtils;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class NewsHotAdapter extends RecyclerView.Adapter<NewsHotAdapter.NewsHotHolder> {
 
     private final Context mContext;
     private List<HotNews> data;
+    private MyBitmapUtils myBitmapUtils;
 
     public void setData(List<HotNews> data) {
         this.data = data;
@@ -47,12 +49,15 @@ public class NewsHotAdapter extends RecyclerView.Adapter<NewsHotAdapter.NewsHotH
     @Override
     public void onBindViewHolder(@NonNull NewsHotAdapter.NewsHotHolder holder, int position) {
         HotNews hotNews = data.get(position);
-        Picasso.with(mContext).load(hotNews.getCoverImg()).into(holder.coverImg);
+        // 新闻封面
+//        Picasso.with(mContext).load(hotNews.getCoverImg()).into(holder.coverImg);
+        myBitmapUtils = new MyBitmapUtils(mContext);
+        Bitmap imageFile = myBitmapUtils.disPlay(holder.coverImg, hotNews.getCoverImg());
+        holder.coverImg.setImageBitmap(imageFile);
         holder.newsTitle.setText(hotNews.getNewsTitle());
         holder.source.setText(hotNews.getSource());
         holder.viewNum.setText(hotNews.getViewNum() + "");
-        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm");
-        holder.postTime.setText(sdf.format(hotNews.getPostTime()));
+        holder.postTime.setText(TimeUtils.getSmartDate(hotNews.getPostTime().getTime()));
     }
 
     @Override
@@ -77,7 +82,7 @@ public class NewsHotAdapter extends RecyclerView.Adapter<NewsHotAdapter.NewsHotH
             });
             //长按事件
             view.setOnLongClickListener(v -> {
-                mOnItemClickListener.onItemLongClick(view, getLayoutPosition());
+                mOnItemClickListener.onItemLongClick(v, getLayoutPosition());
                 return true;
             });
         }
