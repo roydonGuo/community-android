@@ -26,6 +26,7 @@ import com.roydon.community.R;
 import com.roydon.community.activity.AccessRecordActivity;
 import com.roydon.community.activity.BDAddressSelectActivity;
 import com.roydon.community.activity.LoginActivity;
+import com.roydon.community.activity.SettingActivity;
 import com.roydon.community.activity.UserAddressActivity;
 import com.roydon.community.activity.UserInfoActivity;
 import com.roydon.community.activity.UserOrderActivity;
@@ -56,7 +57,7 @@ public class MyFragment extends BaseFragment {
     private TextView userNickName, userDept;
     // 订单栏功能
     private LinearLayout llUserOrder;
-    private RelativeLayout rlUserAddress, rlAccessRecord, rlReturnLogin, rlBDAddress;
+    private RelativeLayout rlUserAddress, rlAccessRecord, rlReturnLogin, rlBDAddress, rlSetting;
 
     private AppUser appUser;
 
@@ -102,6 +103,9 @@ public class MyFragment extends BaseFragment {
         // 订单栏功能
         llUserOrder = mRootView.findViewById(R.id.ll_user_order);
 
+        // 设置
+        rlSetting = mRootView.findViewById(R.id.rl_setting);
+
         ivShare.setOnClickListener(v -> {
             DialogX.showShareDialog(getContext(), new OnShareDialogClickListener() {
                 @Override
@@ -146,6 +150,9 @@ public class MyFragment extends BaseFragment {
         });
         llUserOrder.setOnClickListener(v -> {
             navigateTo(UserOrderActivity.class);
+        });
+        rlSetting.setOnClickListener(v -> {
+            navigateTo(SettingActivity.class);
         });
 //        viewPager = mRootView.findViewById(R.id.fixedViewPager);
 //        slidingTabLayout = mRootView.findViewById(R.id.slidingTabLayout);

@@ -15,6 +15,7 @@ import com.roydon.community.utils.string.StringUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -23,6 +24,7 @@ import java.util.Map;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -100,6 +102,53 @@ public class Api {
                 .addHeader("contentType", "application/json;charset=UTF-8")
                 .addHeader(Constants.AUTHORIZATION, token)
                 .post(requestBodyJson).build();
+        //第四步创建call回调对象
+        final Call call = client.newCall(request);
+        //第五步发起请求
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("onFailure", e.getMessage());
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (StringUtil.isNotNull(response.body())) {
+                    final String result = response.body().string();
+                    Log.e("onSuccess", result);
+                    callback.onSuccess(result);
+                }
+            }
+        });
+    }
+
+    /**
+     * 上传图片post请求with token
+     *
+     * @param context
+     * @param callback
+     */
+    public void postImgRequestWithToken(Context context, File file, final HttpCallback callback) {
+        SharedPreferences sp = context.getSharedPreferences("sp_roydon", MODE_PRIVATE);
+        String token = Constants.TOKEN_PREFIX + sp.getString(Constants.TOKEN, "");
+//        JSONObject jsonObject = new JSONObject(mParams);
+//        String jsonStr = jsonObject.toString();
+//        RequestBody requestBodyJson = RequestBody.create(MediaType.parse("image/*;charset=utf-8"), jsonStr);
+        //所有图片类型
+        MediaType mediaType = MediaType.parse("multipart/form-data");
+        //第一步，说明数据为文件，以及文件类型
+        RequestBody fileBody = RequestBody.create(mediaType, file);
+        //第二步，指明服务表单的键名，文件名，文件体
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("avatarfile", file.getName(), fileBody)
+                .build();
+        //第三步创建Request
+        Request request = new Request.Builder()
+                .url(requestUrl)
+                .addHeader(Constants.AUTHORIZATION, token)
+                .post(requestBody).build();
         //第四步创建call回调对象
         final Call call = client.newCall(request);
         //第五步发起请求

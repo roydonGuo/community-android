@@ -29,25 +29,32 @@ import com.roydon.community.R;
 import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
+import com.roydon.community.domain.response.UploadAvatarRes;
 import com.roydon.community.domain.response.UserInfoRes;
 import com.roydon.community.domain.vo.AppUser;
 import com.roydon.community.enums.TenantTypeEnum;
 import com.roydon.community.listener.OnPhotoSelectDialogClickListener;
+import com.roydon.community.utils.UriToPath;
 import com.roydon.community.utils.img.PhotoUtils;
 import com.roydon.community.utils.string.StringUtil;
 import com.roydon.community.view.CircleTransform;
 import com.roydon.community.view.DialogX;
 import com.roydon.community.widget.RoundImageView;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 public class UserInfoActivity extends BaseActivity {
 
     // 页面传值常量
-    private static final int TAKE_PHOTO = 1;
-    private static final int FROM_ALBUMS = 2;
+    private static final int TAKE_PHOTO = 100;
+    private static final int FROM_ALBUMS = 200;
+
+    // handler
+    private static final int HANDLER_WHAT_USERINFO = 0;
 
     /**
      * 顶部top-bar功能栏
@@ -57,15 +64,17 @@ public class UserInfoActivity extends BaseActivity {
     // 头像
     private LinearLayout llEditAvatar;
     private Uri avatarUri;
-    private String imagePath;  //从相册中选的地址
+    //从相册中选的地址
 
     private RoundImageView riUserAvatar;
 
-    private PhotoUtils photoUtils;
+    private PhotoUtils photoUtils = new PhotoUtils();
 
     private AppUser appUser;
 
     private TextView tvUserId, tvUserName, tvNickName, tvRealName, tvPhonenumber, tvEmail, tvIdCard, tvSex, tvAge, tvIsTenant;
+
+    private String mCurrentPhotoPath;
 
     @Override
     protected int initLayout() {
@@ -78,9 +87,7 @@ public class UserInfoActivity extends BaseActivity {
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
-                case 0:
-                    break;
-                case 2:
+                case HANDLER_WHAT_USERINFO:
                     showUserInfo(appUser);
                     break;
                 default:
@@ -127,7 +134,7 @@ public class UserInfoActivity extends BaseActivity {
     @SuppressLint("SetTextI18n")
     private void showUserInfo(AppUser appUser) {
         if (appUser.getAvatar() != null && !appUser.getAvatar().equals("")) {
-            Picasso.with(this).load(appUser.getAvatar()).transform(new CircleTransform()).into(riUserAvatar);
+            Picasso.with(this).load(appUser.getAvatar()).transform(new CircleTransform()).memoryPolicy(MemoryPolicy.NO_CACHE).into(riUserAvatar);
         }
         tvUserId.setText(appUser.getUserId() + "");
         tvUserName.setText(appUser.getUserName());
@@ -157,9 +164,6 @@ public class UserInfoActivity extends BaseActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        if(StringUtil.isNull(data)){
-//            return;
-//        }
         switch (requestCode) {
             //拍照得到图片
             case TAKE_PHOTO:
@@ -177,6 +181,7 @@ public class UserInfoActivity extends BaseActivity {
                         // 通过目标uri，找到图片
                         // 对图片的缩放处理
                         // 操作
+                        Log.d("avatarUri", avatarUri.getPath());
                         Bitmap bitmap = null;
                         try {
                             bitmap = BitmapFactory.decodeStream((getContentResolver().openInputStream(avatarUri)));
@@ -184,27 +189,34 @@ public class UserInfoActivity extends BaseActivity {
                             e.printStackTrace();
                         }
                         riUserAvatar.setImageBitmap(bitmap);
+                        // 发送到服务器
+                        uploadAvatar(avatarUri);
                     }
                 }
                 break;
             //从相册中选择图片
             case FROM_ALBUMS:
                 if (resultCode == RESULT_OK) {
-                    //判断手机版本号
+                    if (data == null) return;
+                    // 判断手机版本号
+                    String imagePath;
                     if (Build.VERSION.SDK_INT >= 19) {
                         imagePath = photoUtils.handleImageOnKitKat(this, data);
                     } else {
                         imagePath = photoUtils.handleImageBeforeKitKat(this, data);
                     }
+                    Log.d("imagePath", imagePath);
+                    if (imagePath != null) {
+                        // 将拍摄的图片展示
+                        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+                        riUserAvatar.setImageBitmap(bitmap);
+                        // 发送到服务器
+
+                    } else {
+                        Log.d("onSelectAlbums", "没有找到图片");
+                    }
                 }
-                if (imagePath != null) {
-                    //将拍摄的图片展示并更新数据库
-                    Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-                    riUserAvatar.setImageBitmap(bitmap);
-//                    loginUser.setPortrait(photoUtils.bitmap2byte(bitmap));
-                } else {
-                    Log.d("onSelectAlbums", "没有找到图片");
-                }
+
                 break;
             default:
                 break;
@@ -220,7 +232,7 @@ public class UserInfoActivity extends BaseActivity {
             case 1:
                 // 申请到了相机权限
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    openCamera();
+                    openSysCamera();
                 } else {
                     Toast.makeText(this, "You denied the permission", Toast.LENGTH_SHORT).show();
                     finish();
@@ -229,7 +241,7 @@ public class UserInfoActivity extends BaseActivity {
             case 2:
                 // 申请到了相册权限
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    openAlbums();
+                    openSysAlbums();
                 } else {
                     Toast.makeText(this, "You denied the permission", Toast.LENGTH_SHORT).show();
                     finish();
@@ -251,7 +263,7 @@ public class UserInfoActivity extends BaseActivity {
                 if (ContextCompat.checkSelfPermission(UserInfoActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(UserInfoActivity.this, new String[]{Manifest.permission.CAMERA}, 1);
                 } else {
-                    openCamera();
+                    openSysCamera();
                 }
             }
 
@@ -262,7 +274,7 @@ public class UserInfoActivity extends BaseActivity {
                 if (ContextCompat.checkSelfPermission(UserInfoActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(UserInfoActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
                 } else {
-                    openAlbums();
+                    openSysAlbums();
                 }
 
             }
@@ -277,22 +289,24 @@ public class UserInfoActivity extends BaseActivity {
     //=============================================
 
     // 打开相机拍照
-    private void openCamera() {
-        photoUtils = new PhotoUtils();
-        avatarUri = photoUtils.take_photo_util(UserInfoActivity.this, "com.roydon.community.fileprovider", "output_image.jpg");
+    private void openSysCamera() {
+        avatarUri = photoUtils.takePhoto(UserInfoActivity.this, "com.roydon.community.fileprovider", "output_image.jpg");
         //调用相机，拍摄结果会存到imageUri也就是outputImage中
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, avatarUri);
         startActivityForResult(intent, TAKE_PHOTO);
     }
 
-    private void openAlbums() {
+    private void openSysAlbums() {
         //打开相册
         Intent intent = new Intent("android.intent.action.GET_CONTENT");
         intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        //intent.setAction(Intent.ACTION_GET_CONTENT)  //实现相册多选 该方法获得的uri在转化为真实文件路径时Android 4.4以上版本会有问题
+//        intent.setAction(Intent.ACTION_PICK);
+
         startActivityForResult(intent, FROM_ALBUMS);
     }
-
 
     // api============================================================================
 
@@ -312,7 +326,39 @@ public class UserInfoActivity extends BaseActivity {
                     if (StringUtil.isNotNull(user)) {
                         Log.e("getUserInfo", user.toString());
                         appUser = user;
-                        mHandler.sendEmptyMessage(2);
+                        mHandler.sendEmptyMessage(HANDLER_WHAT_USERINFO);
+                    } else {
+                        showShortToast("请重新登陆");
+//                        getActivity().finish();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
+    }
+
+    /**
+     * 上传头像
+     */
+    private void uploadAvatar(Uri uri) {
+        String path = UriToPath.getImageAbsolutePath(this, uri);
+        Log.e("UriToPath", path);
+        File file = new File(path);
+//        HashMap<String, Object> params = new HashMap<>();
+//        params.put("avatarfile", file);
+        Api.buildNoParams(ApiConfig.USER_PROFILE_AVATAR).postImgRequestWithToken(this, file, new HttpCallback() {
+            @Override
+            public void onSuccess(final String res) {
+                Log.e("uploadAvatar", res);
+                UploadAvatarRes response = new Gson().fromJson(res, UploadAvatarRes.class);
+                if (response != null && response.getCode() == 200) {
+                    appUser.setAvatar(response.getImgUrl());
+                    if (StringUtil.isNotNull(appUser)) {
+                        mHandler.sendEmptyMessage(HANDLER_WHAT_USERINFO);
                     } else {
                         showShortToast("请重新登陆");
 //                        getActivity().finish();
