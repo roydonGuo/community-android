@@ -41,6 +41,7 @@ import com.roydon.community.view.CircleTransform;
 import com.roydon.community.view.DialogX;
 import com.roydon.community.widget.RoundImageView;
 import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -138,7 +139,8 @@ public class UserInfoActivity extends BaseActivity {
     @SuppressLint("SetTextI18n")
     private void showUserInfo(AppUser appUser) {
         if (appUser.getAvatar() != null && !appUser.getAvatar().equals("")) {
-            Picasso.with(this).load(appUser.getAvatar()).transform(new CircleTransform()).memoryPolicy(MemoryPolicy.NO_CACHE).into(riUserAvatar);
+            // 禁止Picasso缓存用户头像
+            Picasso.with(this).load(appUser.getAvatar()).transform(new CircleTransform()).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(riUserAvatar);
         }
         tvUserId.setText(appUser.getUserId() + "");
         tvUserName.setText(appUser.getUserName());
@@ -196,7 +198,8 @@ public class UserInfoActivity extends BaseActivity {
                         // 发送到服务器
                         try {
                             File photoFile = createPhotoFile();
-                            uploadAvatar(photoFile);
+                            File file = new File(avatarUri.getPath());
+                            uploadAvatar(file);
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }

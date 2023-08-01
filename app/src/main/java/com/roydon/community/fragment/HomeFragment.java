@@ -60,8 +60,12 @@ public class HomeFragment extends BaseFragment {
 
     private BannerAdapter mBannerAdapter;
     private NewsHotAdapter newsHotAdapter;
+
+    // 登录用户
     private AppUser appUser;
+    // 首页顶部轮播数据url
     private List<String> mUrls = new ArrayList<>();
+    // 热点新闻数据
     private List<HotNews> hotNewsList = new ArrayList<>();
 
     @SuppressLint("HandlerLeak")
@@ -136,7 +140,7 @@ public class HomeFragment extends BaseFragment {
             }
         });
         getNewsHotList();
-        etSearch.setOnClickListener(v->{
+        etSearch.setOnClickListener(v -> {
             navigateTo(NewsSearchActivity.class);
         });
     }
@@ -186,7 +190,7 @@ public class HomeFragment extends BaseFragment {
         HashMap<String, Object> params = new HashMap<>();
         params.put("pageNum", 1);
         params.put("pageSize", 5);
-        params.put("showInApp", 1);
+        params.put("showInApp", "1");
         Api.build(ApiConfig.BANNER_NOTICE_LIST, params).getRequestWithToken(getActivity(), new HttpCallback() {
             @Override
             public void onSuccess(final String res) {

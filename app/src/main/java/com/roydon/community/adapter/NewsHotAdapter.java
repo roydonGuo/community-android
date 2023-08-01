@@ -49,8 +49,7 @@ public class NewsHotAdapter extends RecyclerView.Adapter<NewsHotAdapter.NewsHotH
     @Override
     public void onBindViewHolder(@NonNull NewsHotAdapter.NewsHotHolder holder, int position) {
         HotNews hotNews = data.get(position);
-        // 新闻封面
-//        Picasso.with(mContext).load(hotNews.getCoverImg()).into(holder.coverImg);
+        // 新闻封面-myBitmapUtils缓存封面（缺点：无法适配gif，要想适配gif可以用Glide.with()）
         myBitmapUtils = new MyBitmapUtils(mContext);
         Bitmap imageFile = myBitmapUtils.disPlay(holder.coverImg, hotNews.getCoverImg());
         holder.coverImg.setImageBitmap(imageFile);

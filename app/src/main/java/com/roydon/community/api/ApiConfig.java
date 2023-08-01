@@ -39,7 +39,7 @@ public class ApiConfig {
     /**
      * 轮播公告
      */
-    public static final String BANNER_NOTICE_LIST = "/app/notice/list"; //新闻分类
+    public static final String BANNER_NOTICE_LIST = "/app/notice/banner"; //新闻分类
 
     /**
      * mall-goods

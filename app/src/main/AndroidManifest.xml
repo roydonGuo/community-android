@@ -13,9 +13,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 访问网络，进行地图相关业务数据请求，包括地图数据，路线规划，POI检索等 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 读取外置存储。如果开发者使用了so动态加载功能并且把so文件放在了外置存储区域，则需要申请该权限，否则不需要 -->
-    <uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" /> <!-- 写外置存储。如果开发者使用了离线地图，并且数据写在外置存储区域，则需要申请该权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 写外置存储。如果开发者使用了离线地图，并且数据写在外置存储区域，则需要申请该权限 -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" /> <!-- 如果应用的 targetSdkVersion 大于等于 33，则需要同时声明 READ_EXTERNAL_STORAGE 和 READ_MEDIA_IMAGES 两个权限。此外，在这种情况下，READ_EXTERNAL_STORAGE 权限已无法用于 Android 13 开始之后的系统版本了，所以可以将此权限的 maxSdkVersion 设为 32，从而不会出现在 Android 13 开始之后的系统版本中 -->
     <uses-permission
         android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
