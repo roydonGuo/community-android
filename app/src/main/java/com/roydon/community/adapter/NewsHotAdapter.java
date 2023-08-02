@@ -3,6 +3,7 @@ package com.roydon.community.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.roydon.community.R;
 import com.roydon.community.domain.vo.HotNews;
 import com.roydon.community.utils.img.MyBitmapUtils;
-import com.roydon.community.utils.string.TimeUtils;
+import com.roydon.community.utils.string.DateUtils;
+import com.roydon.community.utils.string.TimeAgoUtils;
 
 import java.util.List;
 
@@ -45,6 +48,7 @@ public class NewsHotAdapter extends RecyclerView.Adapter<NewsHotAdapter.NewsHotH
         return new NewsHotAdapter.NewsHotHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint({"SimpleDateFormat", "SetTextI18n"})
     @Override
     public void onBindViewHolder(@NonNull NewsHotAdapter.NewsHotHolder holder, int position) {
@@ -56,7 +60,7 @@ public class NewsHotAdapter extends RecyclerView.Adapter<NewsHotAdapter.NewsHotH
         holder.newsTitle.setText(hotNews.getNewsTitle());
         holder.source.setText(hotNews.getSource());
         holder.viewNum.setText(hotNews.getViewNum() + "");
-        holder.postTime.setText(TimeUtils.getSmartDate(hotNews.getPostTime().getTime()));
+        holder.postTime.setText(TimeAgoUtils.smartTime(DateUtils.date2LocalDateTime(hotNews.getPostTime())));
     }
 
     @Override
