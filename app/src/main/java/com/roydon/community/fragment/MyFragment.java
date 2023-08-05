@@ -33,6 +33,7 @@ import com.roydon.community.activity.SettingActivity;
 import com.roydon.community.activity.UserAddressActivity;
 import com.roydon.community.activity.UserInfoActivity;
 import com.roydon.community.activity.UserOrderActivity;
+import com.roydon.community.activity.WebviewActivity;
 import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
@@ -68,7 +69,7 @@ public class MyFragment extends BaseFragment {
     private ImageView ivShare, ivTheme;
     // 订单栏功能
     private LinearLayout llUserOrder;
-    private RelativeLayout rlUserAddress, rlAccessRecord, rlReturnLogin, rlSetting;
+    private RelativeLayout rlUserAddress, rlAccessRecord, rlReturnLogin, rlWebview, rlSetting;
 
     // 测试功能区
     private RelativeLayout rlBDAddress, rlMessage;
@@ -122,6 +123,7 @@ public class MyFragment extends BaseFragment {
         // 功能测试区
         rlBDAddress = mRootView.findViewById(R.id.rl_bd_address);
         rlMessage = mRootView.findViewById(R.id.rl_message);
+        rlWebview = mRootView.findViewById(R.id.rl_webview);
 
         // 设置
         rlSetting = mRootView.findViewById(R.id.rl_setting);
@@ -187,6 +189,9 @@ public class MyFragment extends BaseFragment {
         });
         rlMessage.setOnClickListener(v -> {
             navigateTo(MessageActivity.class);
+        });
+        rlWebview.setOnClickListener(v -> {
+            navigateTo(WebviewActivity.class);
         });
 //        viewPager = mRootView.findViewById(R.id.fixedViewPager);
 //        slidingTabLayout = mRootView.findViewById(R.id.slidingTabLayout);

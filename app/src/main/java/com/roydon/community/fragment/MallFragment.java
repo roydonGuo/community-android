@@ -31,7 +31,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MallFragment extends BaseLazyLoadFragment{
+import scut.carson_ho.kawaii_loadingview.Kawaii_LoadingView;
+
+public class MallFragment extends BaseLazyLoadFragment {
 
     private RefreshLayout refreshLayout;
     private RecyclerView rvMallGoods;
@@ -39,6 +41,15 @@ public class MallFragment extends BaseLazyLoadFragment{
     private MallGoodAdapter mallGoodAdapter;
     private List<MallGoodsVO> goodsList = new ArrayList<>();
     private ImageView ivMallCart;
+
+    // 1. 定义控件变量
+    private Kawaii_LoadingView loadingView;
+
+    // 3. 使用动画（API说明）
+    // 3.1 启动动画
+//       Kawaii_LoadingView.startMoving();
+    // 3.2 停止动画
+//       Kawaii_LoadingView.stopMoving();
 
     @Override
     protected void lazyLoad() {
@@ -117,6 +128,7 @@ public class MallFragment extends BaseLazyLoadFragment{
                 case 0:
                     mallGoodAdapter.setData(goodsList);
                     mallGoodAdapter.notifyDataSetChanged();
+//                    loadingView.stopMoving();
                     break;
             }
         }
@@ -129,9 +141,13 @@ public class MallFragment extends BaseLazyLoadFragment{
 
     @Override
     protected void initView() {
+        // 2. 绑定控件
+//        loadingView = mRootView.findViewById(R.id.loadingView);
+//        loadingView.startMoving();
         rvMallGoods = mRootView.findViewById(R.id.rv_mall_goods);
         refreshLayout = mRootView.findViewById(R.id.rl_goods);
         ivMallCart = mRootView.findViewById(R.id.iv_mall_cart);
+
     }
 
     @Override

@@ -51,10 +51,7 @@
                 android:background="@drawable/shape_login_edittext"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/dimen_20dp"
-                android:paddingTop="@dimen/dimen_20dp"
-                android:paddingRight="@dimen/dimen_20dp"
-                android:paddingBottom="@dimen/dimen_20dp">
+                android:padding="@dimen/dimen_20dp">
 
                 <ImageView
                     android:layout_width="@dimen/dimen_icon_16dp"
@@ -66,7 +63,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen_20dp"
-                    android:layout_marginLeft="@dimen/dimen_20dp"
                     android:autofillHints="admin"
                     android:background="@null"
                     android:hint="@string/username_hint"
@@ -90,10 +86,7 @@
                 android:background="@drawable/shape_login_edittext"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/dimen_20dp"
-                android:paddingTop="@dimen/dimen_20dp"
-                android:paddingRight="@dimen/dimen_20dp"
-                android:paddingBottom="@dimen/dimen_20dp">
+                android:padding="@dimen/dimen_20dp">
 
                 <ImageView
                     android:layout_width="@dimen/dimen_icon_16dp"
@@ -105,15 +98,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen_20dp"
-                    android:layout_marginLeft="@dimen/dimen_20dp"
                     android:autofillHints="admin#123456"
                     android:background="@null"
                     android:hint="@string/password_hint"
                     android:inputType="textPassword"
+                    android:password="true"
                     android:text=""
                     android:textColor="@color/black"
                     android:textColorHint="@color/grey"
-                    android:textSize="@dimen/font_main_size" />
+                    android:textSize="@dimen/font_main_size"
+                    tools:ignore="Deprecated" />
             </LinearLayout>
         </LinearLayout>
 

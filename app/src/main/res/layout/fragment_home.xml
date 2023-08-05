@@ -41,7 +41,7 @@
             <!--搜索框-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="@dimen/search_box_height"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -69,117 +69,10 @@
 
             </LinearLayout>
 
-            <!--        <com.flyco.tablayout.SlidingTabLayout-->
-            <!--            android:id="@+id/slidingTabLayout"-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:layout_height="50dp"-->
-            <!--            tl:tl_indicator_color="#fdf299"-->
-            <!--            tl:tl_indicator_corner_radius="2dp"-->
-            <!--            tl:tl_indicator_height="3dp"-->
-            <!--            tl:tl_indicator_width="18dp"-->
-            <!--            tl:tl_textSelectColor="#fdf299"-->
-            <!--            tl:tl_textUnselectColor="#ffffff"-->
-            <!--            tl:tl_textsize="16sp" />-->
-
         </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="@dimen/top_bar_height"-->
-    <!--        android:background="@color/element"-->
-    <!--        android:orientation="vertical">-->
-
-    <!--        <LinearLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:orientation="horizontal">-->
-
-    <!--            <androidx.cardview.widget.CardView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_marginLeft="10dp"-->
-    <!--                android:layout_marginTop="10dp"-->
-    <!--                app:cardCornerRadius="20dp">-->
-
-    <!--                <ImageView-->
-    <!--                    android:id="@+id/index_user_avatar"-->
-    <!--                    android:layout_width="40dp"-->
-    <!--                    android:layout_height="40dp"-->
-    <!--                    android:layout_gravity="center_vertical"-->
-    <!--                    android:scaleType="fitXY"-->
-    <!--                    android:src="@mipmap/avatar" />-->
-    <!--            </androidx.cardview.widget.CardView>-->
-
-    <!--            &lt;!&ndash;搜索框&ndash;&gt;-->
-    <!--            <LinearLayout-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="30dp"-->
-    <!--                android:layout_gravity="center_vertical"-->
-    <!--                android:layout_marginLeft="10dp"-->
-    <!--                android:layout_marginRight="10dp"-->
-    <!--                android:background="@drawable/shape_search_box"-->
-    <!--                android:gravity="center_vertical"-->
-    <!--                android:orientation="horizontal">-->
-
-    <!--                <ImageView-->
-    <!--                    android:layout_width="12dp"-->
-    <!--                    android:layout_height="12dp"-->
-    <!--                    android:layout_marginLeft="10dp"-->
-    <!--                    android:src="@mipmap/search" />-->
-
-    <!--                <TextView-->
-    <!--                    android:id="@+id/et_search"-->
-    <!--                    android:layout_width="match_parent"-->
-    <!--                    android:layout_height="match_parent"-->
-    <!--                    android:layout_gravity="center"-->
-    <!--                    android:layout_marginLeft="10dp"-->
-    <!--                    android:background="@null"-->
-    <!--                    android:gravity="center_vertical|left"-->
-    <!--                    android:text="搜索"-->
-    <!--                    android:textColor="@color/grey"-->
-    <!--                    android:textSize="@dimen/font_second_size" />-->
-
-    <!--            </LinearLayout>-->
-    <!--        </LinearLayout>-->
-
-    <!--        &lt;!&ndash;        <com.flyco.tablayout.SlidingTabLayout&ndash;&gt;-->
-    <!--        &lt;!&ndash;            android:id="@+id/slidingTabLayout"&ndash;&gt;-->
-    <!--        &lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
-    <!--        &lt;!&ndash;            android:layout_height="50dp"&ndash;&gt;-->
-    <!--        &lt;!&ndash;            tl:tl_indicator_color="#fdf299"&ndash;&gt;-->
-    <!--        &lt;!&ndash;            tl:tl_indicator_corner_radius="2dp"&ndash;&gt;-->
-    <!--        &lt;!&ndash;            tl:tl_indicator_height="3dp"&ndash;&gt;-->
-    <!--        &lt;!&ndash;            tl:tl_indicator_width="18dp"&ndash;&gt;-->
-    <!--        &lt;!&ndash;            tl:tl_textSelectColor="#fdf299"&ndash;&gt;-->
-    <!--        &lt;!&ndash;            tl:tl_textUnselectColor="#ffffff"&ndash;&gt;-->
-    <!--        &lt;!&ndash;            tl:tl_textsize="16sp" />&ndash;&gt;-->
-
-    <!--    </LinearLayout>-->
-
-    <!--    <com.scwang.smartrefresh.layout.SmartRefreshLayout-->
-    <!--        android:id="@+id/refreshLayout"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:background="@color/black">-->
-
-    <!--        <com.roydon.community.view.FixedViewPager-->
-    <!--            android:id="@+id/fixedViewPager"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="0dp"-->
-    <!--            android:layout_weight="1" />-->
-    <!--    </com.scwang.smartrefresh.layout.SmartRefreshLayout>-->
-
-    <!--    <com.scwang.smartrefresh.layout.SmartRefreshLayout-->
-    <!--        android:id="@+id/refreshLayout"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:background="@color/white"-->
-    <!--        app:srlEnablePreviewInEditMode="true">-->
-    <!--NestedScrollView 里面只能包裹一个大的布局，
-            当这个布局长度超出手机展示的部分就可以滚动，
-            其中overScrollMode="never"隐藏掉滚动条到顶部和底部时的水波纹-->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"

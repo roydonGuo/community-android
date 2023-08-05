@@ -198,4 +198,7 @@ dependencies {
     // java-websocket
     implementation 'org.java-websocket:Java-WebSocket:1.5.4'
 
+    // 加载动画 https://github.com/Carson-Ho/Kawaii_LoadingView
+    implementation 'com.carson_ho:Kawaii_LoadingView:1.0.0'
+
 }

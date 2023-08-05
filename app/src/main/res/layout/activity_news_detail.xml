@@ -46,7 +46,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:ellipsize="marquee"
                     android:gravity="center"
+                    android:maxLines="1"
                     android:text="新闻"
                     android:textColor="@color/black"
                     android:textSize="@dimen/font_main_size" />
