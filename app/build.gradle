@@ -195,4 +195,7 @@ dependencies {
     //Zoomage实现可缩放的ImageView
     implementation 'com.jsibbold:zoomage:1.3.1'
 
+    // java-websocket
+    implementation 'org.java-websocket:Java-WebSocket:1.5.4'
+
 }

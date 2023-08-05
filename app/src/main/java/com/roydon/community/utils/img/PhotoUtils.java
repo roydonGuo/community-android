@@ -31,8 +31,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import androidx.core.content.FileProvider;
 
@@ -40,13 +42,36 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 
 public class PhotoUtils {
 
+    /**
+     * 获取存储文件路径
+     *
+     * @param dir 选择目录
+     * @return 路径
+     */
+    public String getFilePath(Context context, String dir) {
+        String path;
+        // 判断是否有外部存储，是否可用
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+            path = Objects.requireNonNull(context.getExternalFilesDir(dir)).getAbsolutePath();
+        } else {
+            // 使用内部储存
+            path = context.getFilesDir() + File.separator + dir;
+        }
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        return path;
+    }
+
     //方法1，take photo
-    public Uri takePhoto(Context context, String auth, String filename) {
+    public Uri takePhoto(Context context, String auth) {
         Uri imageUri;
-        File outputImage = new File(context.getExternalCacheDir(), filename);
+        File outputImage = new File(new File(getFilePath(context, null)), System.currentTimeMillis() + ".jpg");
         //处理重复拍照问题
         try {
             if (outputImage.exists()) {
@@ -54,7 +79,7 @@ public class PhotoUtils {
             }
             outputImage.createNewFile();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e("createNewFile", "创建图片失败", e);
         }
         //处理版本问题
         if (Build.VERSION.SDK_INT >= 24) {

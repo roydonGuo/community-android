@@ -106,9 +106,9 @@ public class MallGoodAdapter extends RecyclerView.Adapter<MallGoodAdapter.MallGo
          * @param view     点击item的视图
          * @param position 点击得到的数据
          */
-        public void onItemClick(View view, int position);
+        void onItemClick(View view, int position);
 
-        public void onItemLongClick(View view, int position);
+        void onItemLongClick(View view, int position);
 
     }
 }

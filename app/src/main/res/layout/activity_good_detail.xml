@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
     android:background="@color/fragment_background"
-    android:fitsSystemWindows="true"
     tools:context=".activity.GoodDetailActivity">
-
 
     <ScrollView
         android:layout_width="0dp"
@@ -17,93 +16,109 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/iv_goods_img"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:maxHeight="500dp"
-                    android:src="@color/white"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/iv_return"
-                    android:layout_width="@dimen/icon_main_size"
-                    android:layout_height="@dimen/icon_main_size"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/shape_background_icon_black"
-                    android:padding="10dp"
-                    app:srcCompat="@mipmap/icon_left" />
-            </RelativeLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:padding="10dp">
-
-                <TextView
-                    android:id="@+id/tv_good_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/font_size_h1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_good_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="#F84040"
-                    android:textSize="@dimen/font_size_h1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_good_title" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <ProgressBar
+                android:id="@+id/loading_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:paddingBottom="100dp"
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10sp"
-                    android:gravity="center_vertical"
-                    android:text="描述："
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/font_size_h2" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tv_good_detail"
+                    <ImageView
+                        android:id="@+id/iv_goods_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:maxHeight="500dp"
+                        android:src="#00000000"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/iv_return"
+                        android:layout_width="@dimen/icon_main_size"
+                        android:layout_height="@dimen/icon_main_size"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="40dp"
+                        android:background="@drawable/shape_background_icon_black"
+                        android:padding="10dp"
+                        app:srcCompat="@mipmap/icon_left" />
+                </RelativeLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/tv_good_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/font_size_h1"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_good_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/mg_6"
+                        android:text=""
+                        android:textColor="#F84040"
+                        android:textSize="@dimen/font_size_h1"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_good_title" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/font_main_size" />
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text=""
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/font_size_h2" />
+
+                    <TextView
+                        android:id="@+id/tv_good_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/mg_6"
+                        android:text=""
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/font_main_size" />
+                </LinearLayout>
+
+<!--                <include layout="@layout/layout_not_more" />-->
+
             </LinearLayout>
-
-            <include layout="@layout/layout_not_more" />
-
-        </LinearLayout>
-
+        </RelativeLayout>
     </ScrollView>
 
     <!--    <Button-->

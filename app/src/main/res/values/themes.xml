@@ -14,6 +14,8 @@
         <!-- Customize your theme here. -->
         <!-- 引入自定义弹窗 -->
         <item name="android:alertDialogTheme">@style/MyDialogStyle</item>
+        <!-- 夜间模式切换闪屏bug -->
+<!--        <item name="android:windowAnimationStyle">@android:style/Animation.Toast</item>-->
     </style>
 
     <style name="Theme.Communityandroid.NoActionBar">

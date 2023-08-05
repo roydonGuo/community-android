@@ -96,9 +96,9 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressH
          * @param view     点击item的视图
          * @param position 点击得到的数据
          */
-        public void onItemClick(View view, int position);
+        void onItemClick(View view, int position);
 
-        public void onItemLongClick(View view, int position);
+        void onItemLongClick(View view, int position);
 
     }
 }

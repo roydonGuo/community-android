@@ -69,7 +69,6 @@ public class LoginActivity extends BaseActivity {
                 if (loginResponse.getCode() == 200) {
                     String token = loginResponse.getToken();
                     insertVal(Constants.TOKEN, token);
-//                    insertVal("userId", token);
                     navigateToWithFlag(HomeActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     runOnUiThread(() -> {
                         showLongToast("登录成功");

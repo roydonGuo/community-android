@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,6 +40,21 @@ public class GoodDetailActivity extends BaseActivity {
     private String goodsId;
     private Button btnGoodAddCart, btnCreateOrder;
 
+    private Handler mHandler = new Handler(Looper.myLooper()) {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 0) {
+                MallGoodsVO goodsVO = (MallGoodsVO) msg.obj;
+                Log.e("onSuccess", goodsVO.getGoodsId());
+                goodsDetailShow(goodsVO);
+                ProgressBar loadingSpinner = findViewById(R.id.loading_spinner);
+                loadingSpinner.setVisibility(View.GONE);
+//                LoadingDialog.getInstance(getApplicationContext()).dismiss();
+            }
+        }
+    };
+
     @Override
     protected int initLayout() {
         return R.layout.activity_good_detail;
@@ -55,6 +71,9 @@ public class GoodDetailActivity extends BaseActivity {
         // 跳转到购物车
         ivMallCart = findViewById(R.id.iv_mall_cart);
         btnCreateOrder = findViewById(R.id.btn_create_order);
+        // 显示加载动画
+        ProgressBar loadingSpinner = findViewById(R.id.loading_spinner);
+        loadingSpinner.setVisibility(View.VISIBLE);
 
     }
 
@@ -136,24 +155,9 @@ public class GoodDetailActivity extends BaseActivity {
         });
     }
 
-    private Handler mHandler = new Handler(Looper.myLooper()) {
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == 0) {
-                MallGoodsVO goodsVO = (MallGoodsVO) msg.obj;
-                Log.e("onSuccess", goodsVO.getGoodsId());
-                goodsDetailShow(goodsVO);
-//                LoadingDialog.getInstance(getApplicationContext()).dismiss();
-            }
-        }
-    };
-
     @SuppressLint({"SetJavaScriptEnabled", "SetTextI18n"})
     private void goodsDetailShow(MallGoodsVO goodsVO) {
-        Picasso.with(this)
-                .load(goodsVO.getGoodsImg())
-                .into(ivGoodsImage);
+        Picasso.with(this).load(goodsVO.getGoodsImg()).into(ivGoodsImage);
         tvGoodTitle.setText(goodsVO.getGoodsTitle());
         tvGoodPrice.setText("￥" + goodsVO.getGoodsPrice());
         tvGoodDetail.setText(goodsVO.getGoodsDetails());

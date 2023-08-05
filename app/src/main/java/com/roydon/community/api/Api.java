@@ -91,7 +91,7 @@ public class Api {
      * @param callback
      */
     public void postRequestWithToken(Context context, final HttpCallback callback) {
-        SharedPreferences sp = context.getSharedPreferences("sp_roydon", MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences(Constants.AUTHORIZATION, MODE_PRIVATE);
         String token = Constants.TOKEN_PREFIX + sp.getString(Constants.TOKEN, "");
         JSONObject jsonObject = new JSONObject(mParams);
         String jsonStr = jsonObject.toString();
@@ -130,7 +130,7 @@ public class Api {
      * @param callback
      */
     public void postImgRequestWithToken(Context context, String fileName, File file, final HttpCallback callback) {
-        SharedPreferences sp = context.getSharedPreferences("sp_roydon", MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences(Constants.AUTHORIZATION, MODE_PRIVATE);
         String token = Constants.TOKEN_PREFIX + sp.getString(Constants.TOKEN, "");
         //第一步，说明数据为文件，以及文件类型
         RequestBody fileBody = RequestBody.create(MediaType.parse("image/jpeg"), file);
@@ -210,7 +210,7 @@ public class Api {
      * @param callback
      */
     public void getRequestWithToken(Context context, final HttpCallback callback) {
-        SharedPreferences sp = context.getSharedPreferences("sp_roydon", MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences(Constants.AUTHORIZATION, MODE_PRIVATE);
         String token = Constants.TOKEN_PREFIX + sp.getString(Constants.TOKEN, "");
         String url = getAppendUrl(requestUrl, mParams);
         Request request = new Request.Builder()
@@ -253,7 +253,7 @@ public class Api {
      * @param callback
      */
     public void delRequestWithToken(Context context, final HttpCallback callback) {
-        SharedPreferences sp = context.getSharedPreferences("sp_roydon", MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences(Constants.AUTHORIZATION, MODE_PRIVATE);
         String token = Constants.TOKEN_PREFIX + sp.getString(Constants.TOKEN, "");
         JSONObject jsonObject = new JSONObject(mParams);
         String jsonStr = jsonObject.toString();

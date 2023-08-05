@@ -27,12 +27,15 @@ import com.roydon.community.adapter.NewsHotAdapter;
 import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
+import com.roydon.community.constants.CacheConstants;
 import com.roydon.community.domain.entity.AppBannerNotice;
 import com.roydon.community.domain.response.HotNewsListRes;
 import com.roydon.community.domain.response.UserInfoRes;
 import com.roydon.community.domain.vo.AppUser;
 import com.roydon.community.domain.vo.BannerNoticeListRes;
 import com.roydon.community.domain.vo.HotNews;
+import com.roydon.community.utils.android.StatusBarUtil;
+import com.roydon.community.utils.cache.SPUtils;
 import com.roydon.community.utils.string.StringUtil;
 import com.roydon.community.view.CircleTransform;
 import com.roydon.community.view.SobViewPager;
@@ -84,6 +87,9 @@ public class HomeFragment extends BaseFragment {
                     newsHotAdapter.notifyDataSetChanged();
                     break;
                 case 2:
+                    // 设置用户缓存
+                    SPUtils.putLong(CacheConstants.USERID, appUser.getUserId(), getContext());
+                    SPUtils.putString(CacheConstants.USERNAME, appUser.getUserName(), getContext());
                     showUserInfo(appUser);
                     break;
             }
@@ -104,6 +110,7 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        StatusBarUtil.setColorStatus(getActivity(), 0xffffff);
 //        refreshLayout = mRootView.findViewById(R.id.refreshLayout);
         etSearch = mRootView.findViewById(R.id.et_search);
         userAvatar = mRootView.findViewById(R.id.index_user_avatar);
@@ -204,7 +211,7 @@ public class HomeFragment extends BaseFragment {
                         }
                     } else {
                         if (isRefresh) {
-                            showShortToastSync("暂时无轮播数据");
+//                            showShortToastSync("暂时无轮播数据");
                         } else {
                             showShortToastSync("没有更多数据");
                         }
@@ -236,7 +243,7 @@ public class HomeFragment extends BaseFragment {
                     hotNewsList = rows;
                     mHandler.sendEmptyMessage(1);
                 } else {
-                    showShortToastSync("没有热点新闻");
+//                    showShortToastSync("没有热点新闻");
                 }
             }
 

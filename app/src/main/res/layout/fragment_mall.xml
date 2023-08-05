@@ -9,78 +9,70 @@
     android:orientation="vertical"
     tools:context=".fragment.MallFragment">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/top_bar_height"
+        android:layout_height="wrap_content"
         android:background="@color/element"
-        android:orientation="vertical">
+        android:fitsSystemWindows="true"
+        app:contentInsetStart="0dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:background="@color/element"
+            android:orientation="vertical"
+            android:padding="@dimen/pd_6">
 
-            <!--左侧头像-->
-            <!--            <androidx.cardview.widget.CardView-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_margin="10dp"-->
-            <!--                app:cardCornerRadius="20dp">-->
-
-            <!--                <ImageView-->
-            <!--                    android:id="@+id/index_user_avatar"-->
-            <!--                    android:layout_width="40dp"-->
-            <!--                    android:layout_height="40dp"-->
-            <!--                    android:layout_gravity="center_vertical"-->
-            <!--                    android:scaleType="fitXY"-->
-            <!--                    android:src="@mipmap/avatar" />-->
-            <!--            </androidx.cardview.widget.CardView>-->
-
-            <!--搜索框-->
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/shape_search_box"
-                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
+                <!--搜索框-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
-                    android:src="@mipmap/search" />
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_search_box"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/et_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:background="@null"
-                    android:hint="商品搜索"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/font_second_size" />
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginLeft="10dp"
+                        android:src="@mipmap/search" />
+
+                    <EditText
+                        android:id="@+id/et_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:background="@null"
+                        android:hint="商品搜索"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/font_second_size" />
+
+                </LinearLayout>
+
+                <!--右侧购物车-->
+                <ImageView
+                    android:id="@+id/iv_mall_cart"
+                    android:layout_width="@dimen/icon_main_size"
+                    android:layout_height="@dimen/icon_main_size"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="10dp"
+                    android:src="@mipmap/icon_mall_cart" />
 
             </LinearLayout>
 
-            <!--右侧购物车-->
-            <ImageView
-                android:id="@+id/iv_mall_cart"
-                android:layout_width="@dimen/icon_main_size"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_margin="10dp"
-                android:src="@mipmap/icon_mall_cart" />
-
         </LinearLayout>
-
-    </LinearLayout>
-
+    </androidx.appcompat.widget.Toolbar>
     <!--    <com.roydon.community.view.FixedViewPager-->
     <!--        android:id="@+id/fixedViewPager"-->
     <!--        android:layout_width="match_parent"-->

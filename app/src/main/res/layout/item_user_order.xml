@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/dp_10"
-    android:layout_marginTop="@dimen/dp_10"
-    android:layout_marginRight="@dimen/dp_10"
+    android:layout_marginLeft="@dimen/mg_3"
+    android:layout_marginTop="@dimen/mg_6"
+    android:layout_marginRight="@dimen/mg_3"
     android:background="@drawable/shape_radius"
     android:orientation="vertical"
     android:padding="@dimen/dimen_10dp">
@@ -13,7 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="6dp"
         android:orientation="horizontal">
 
         <TextView
@@ -23,7 +23,7 @@
             android:layout_gravity="center_vertical|right"
             android:text="未支付"
             android:textColor="@color/red"
-            android:textSize="@dimen/sp_14" />
+            android:textSize="@dimen/font_main_size" />
     </LinearLayout>
 
     <!-- 订单商品 -->
@@ -41,8 +41,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="@dimen/mg_6"
+        android:layout_marginBottom="@dimen/mg_6"
         android:gravity="right"
         android:orientation="horizontal">
 
@@ -52,15 +52,15 @@
             android:layout_gravity="center_vertical|right"
             android:text="总价: "
             android:textColor="@color/black"
-            android:textSize="@dimen/sp_14" />
+            android:textSize="@dimen/font_second_size" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|right"
             android:text="￥"
-            android:textColor="@color/black"
-            android:textSize="10sp" />
+            android:textColor="@color/red"
+            android:textSize="@dimen/font_second_size" />
 
         <TextView
             android:id="@+id/tv_total_price"
@@ -69,7 +69,7 @@
             android:layout_gravity="center_vertical|right"
             android:text="1869.91"
             android:textColor="@color/red"
-            android:textSize="@dimen/sp_14" />
+            android:textSize="@dimen/font_main_size" />
     </LinearLayout>
 
     <View
@@ -81,7 +81,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="@dimen/mg_6"
         android:gravity="right"
         android:orientation="horizontal">
 
@@ -90,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimen_30dp"
             android:layout_gravity="center_vertical|right"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="@dimen/mg_6"
             android:background="@drawable/shape_order_btn"
             android:gravity="center"
             android:text="删除订单"

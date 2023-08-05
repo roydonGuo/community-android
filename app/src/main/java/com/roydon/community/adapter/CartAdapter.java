@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.roydon.community.R;
 import com.roydon.community.domain.entity.MallUserCartVO;
 import com.squareup.picasso.Picasso;
@@ -101,9 +103,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
          * @param view     点击item的视图
          * @param position 点击得到的数据
          */
-        public void onItemClick(View view, int position);
+        void onItemClick(View view, int position);
 
-        public void onItemLongClick(View view, int position);
+        void onItemLongClick(View view, int position);
 
     }
 }

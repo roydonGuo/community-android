@@ -1,11 +1,14 @@
 package com.roydon.community.fragment;
 
+import android.widget.TextView;
+
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.google.gson.Gson;
 import com.roydon.community.R;
+import com.roydon.community.activity.NewsSearchActivity;
 import com.roydon.community.adapter.HomeAdapter;
 import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
@@ -17,6 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class NewsFragment extends BaseLazyLoadFragment {
+
+    private TextView etSearch ;
 
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private String[] mTitles;
@@ -37,13 +42,18 @@ public class NewsFragment extends BaseLazyLoadFragment {
 
     @Override
     protected void initView() {
+        etSearch = mRootView.findViewById(R.id.et_search);
         viewPager = mRootView.findViewById(R.id.fixedViewPager);
         slidingTabLayout = mRootView.findViewById(R.id.slidingTabLayout);
+
     }
 
     @Override
     protected void lazyLoad() {
         getNewsCategoryList();
+        etSearch.setOnClickListener(v->{
+            navigateTo(NewsSearchActivity.class);
+        });
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.os.Handler;
 import com.roydon.community.BaseActivity;
 import com.roydon.community.MainActivity;
 import com.roydon.community.R;
+import com.roydon.community.utils.android.StatusBarUtil;
 
 public class WelcomeActivity extends BaseActivity {
 
@@ -16,6 +17,7 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        StatusBarUtil.setColorStatus(this, 0xffffff);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

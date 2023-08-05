@@ -22,7 +22,6 @@ import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.AppNews;
 import com.roydon.community.domain.vo.NewsListRes;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -95,12 +94,9 @@ public class NewsAppFragment extends BaseFragment {
                 navigateToWithBundle(NewsDetailActivity.class, bundle);
             }
         });
-        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                pageNum = 1;
-                getNewsList(true);
-            }
+        refreshLayout.setOnRefreshListener(refreshLayout -> {
+            pageNum = 1;
+            getNewsList(true);
         });
         refreshLayout.setOnLoadMoreListener((refreshlayout) -> {
             pageNum++;
@@ -137,7 +133,7 @@ public class NewsAppFragment extends BaseFragment {
                     } else {
                         if (isRefresh) {
                             Log.e("getNewsList", "暂时无数据");
-                            showShortToastSync("暂时无数据");
+//                            showShortToastSync("暂时无数据");
                         } else {
                             Log.e("getNewsList", "没有更多数据");
                             showShortToastSync("没有更多数据");

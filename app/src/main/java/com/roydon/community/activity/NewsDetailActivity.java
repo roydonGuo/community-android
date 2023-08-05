@@ -9,9 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.Gson;
 import com.previewlibrary.GPreviewBuilder;
@@ -25,8 +27,8 @@ import com.roydon.community.domain.entity.AppNews;
 import com.roydon.community.domain.vo.AppNewsRes;
 import com.roydon.community.utils.img.ImagePreviewLoader;
 import com.roydon.community.utils.string.StringUtil;
-import com.roydon.community.view.ImageViewInfo;
 import com.roydon.community.view.CircleTransform;
+import com.roydon.community.view.ImageViewInfo;
 import com.squareup.picasso.Picasso;
 import com.zzhoujay.richtext.ImageHolder;
 import com.zzhoujay.richtext.RichText;
@@ -37,10 +39,28 @@ import java.util.List;
 
 public class NewsDetailActivity extends BaseActivity {
 
-    private TextView tvTitle, tvContent;
+    private TextView tvNewsTitleTop, tvTitle, tvSource, tvContent;
     private ImageView ivSourceAvatar, ivReturn;
     private String newsId;
     private WebView mWebView;
+
+    private Toolbar toolbar;
+
+    private Handler mHandler = new Handler(Looper.myLooper()) {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 0) {
+                AppNews appNews = (AppNews) msg.obj;
+                Log.e("onSuccess", appNews.getNewsId());
+                newsDetailShow(appNews);
+//                LoadingDialog.getInstance(getApplicationContext()).dismiss();
+                // 显示加载动画
+                ProgressBar loadingSpinner = findViewById(R.id.loading_spinner);
+                loadingSpinner.setVisibility(View.GONE);
+            }
+        }
+    };
 
     @Override
     protected int initLayout() {
@@ -49,13 +69,19 @@ public class NewsDetailActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        toolbar = findViewById(R.id.toolbar);
+        tvNewsTitleTop = findViewById(R.id.tv_news_title_top);
         tvTitle = findViewById(R.id.tv_title);
+        tvSource = findViewById(R.id.tv_source);
         tvContent = findViewById(R.id.tv_content);
         ivSourceAvatar = findViewById(R.id.iv_source_avatar);
         ivReturn = findViewById(R.id.iv_return);
         ZoomMediaLoader.getInstance().init(new ImagePreviewLoader());
         // 实例化
 //        mWebView = findViewById(R.id.webView);
+        // 显示加载动画
+        ProgressBar loadingSpinner = findViewById(R.id.loading_spinner);
+        loadingSpinner.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -99,33 +125,17 @@ public class NewsDetailActivity extends BaseActivity {
         });
     }
 
-    private Handler mHandler = new Handler(Looper.myLooper()) {
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == 0) {
-                AppNews appNews = (AppNews) msg.obj;
-                Log.e("onSuccess", appNews.getNewsId());
-                newsDetailShow(appNews);
-//                LoadingDialog.getInstance(getApplicationContext()).dismiss();
-            }
-        }
-    };
-
     @SuppressLint("SetJavaScriptEnabled")
     private void newsDetailShow(AppNews appNews) {
+        tvNewsTitleTop.setText(appNews.getNewsTitle());
         tvTitle.setText(appNews.getNewsTitle());
+        tvSource.setText(appNews.getSource());
         tvContent.setText(appNews.getNewsContent());
         String newsContent = appNews.getNewsContent();
 //        tvContent.setText(Html.fromHtml(newsContent, new ImageGetterUtils.MyImageGetter(this, tvContent), null));
         RichText.initCacheDir(context);
         // 设置为Html，设置图片点击预览大图
-        RichText.fromHtml(newsContent)
-                .autoPlay(true)
-                .borderRadius(10)
-                .scaleType(ImageHolder.ScaleType.fit_center)
-                .imageClick(this::bigImageLoader)
-                .into(tvContent);
+        RichText.fromHtml(newsContent).autoPlay(true).borderRadius(10).scaleType(ImageHolder.ScaleType.fit_center).imageClick(this::bigImageLoader).into(tvContent);
 
         Picasso.with(this).load(appNews.getCoverImg()).transform(new CircleTransform()).into(ivSourceAvatar);
     }
@@ -141,10 +151,8 @@ public class NewsDetailActivity extends BaseActivity {
                 mImgPreviewLists.add(new ImageViewInfo(url));
             }
         }
-        GPreviewBuilder.from(this)
-                .setData(mImgPreviewLists)//放入数据集合
-                .setCurrentIndex(position)
-                .setSingleFling(true)//是否在黑屏区域点击返回
+        GPreviewBuilder.from(this).setData(mImgPreviewLists)//放入数据集合
+                .setCurrentIndex(position).setSingleFling(true)//是否在黑屏区域点击返回
                 .setDrag(false)//是否禁用图片拖拽返回
                 .setType(GPreviewBuilder.IndicatorType.Number)//指示器类型:dot,number
                 .start();//启动

@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MallFragment extends BaseFragment {
+public class MallFragment extends BaseLazyLoadFragment{
 
     private RefreshLayout refreshLayout;
     private RecyclerView rvMallGoods;
@@ -40,42 +40,8 @@ public class MallFragment extends BaseFragment {
     private List<MallGoodsVO> goodsList = new ArrayList<>();
     private ImageView ivMallCart;
 
-    public MallFragment() {
-    }
-
-    public static MallFragment newInstance() {
-        return new MallFragment();
-    }
-
-    @SuppressLint("HandlerLeak")
-    private Handler mHandler = new Handler() {
-        @SuppressLint("NotifyDataSetChanged")
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 0:
-                    mallGoodAdapter.setData(goodsList);
-                    mallGoodAdapter.notifyDataSetChanged();
-                    break;
-            }
-        }
-    };
-
     @Override
-    protected int initLayout() {
-        return R.layout.fragment_mall;
-    }
-
-    @Override
-    protected void initView() {
-        rvMallGoods = mRootView.findViewById(R.id.rv_mall_goods);
-        refreshLayout = mRootView.findViewById(R.id.rl_goods);
-        ivMallCart = mRootView.findViewById(R.id.iv_mall_cart);
-    }
-
-    @Override
-    protected void initData() {
+    protected void lazyLoad() {
         // 首页瀑布流列表
         mallGoodAdapter = new MallGoodAdapter(getActivity());
         rvMallGoods.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
@@ -114,6 +80,65 @@ public class MallFragment extends BaseFragment {
         });
     }
 
+    @Override
+    protected void visibleReLoad() {
+
+    }
+
+    @Override
+    protected void inVisibleRelease() {
+
+    }
+
+    @Override
+    protected void resume() {
+
+    }
+
+    @Override
+    protected void pause() {
+
+    }
+
+    public MallFragment() {
+    }
+
+    public static MallFragment newInstance() {
+        return new MallFragment();
+    }
+
+    @SuppressLint("HandlerLeak")
+    private Handler mHandler = new Handler() {
+        @SuppressLint("NotifyDataSetChanged")
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+                    mallGoodAdapter.setData(goodsList);
+                    mallGoodAdapter.notifyDataSetChanged();
+                    break;
+            }
+        }
+    };
+
+    @Override
+    protected int initLayout() {
+        return R.layout.fragment_mall;
+    }
+
+    @Override
+    protected void initView() {
+        rvMallGoods = mRootView.findViewById(R.id.rv_mall_goods);
+        refreshLayout = mRootView.findViewById(R.id.rl_goods);
+        ivMallCart = mRootView.findViewById(R.id.iv_mall_cart);
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
     private void getMallGoodsList(final boolean isRefresh) {
         HashMap<String, Object> params = new HashMap<>();
         params.put("pageNum", pageNum);
@@ -144,7 +169,7 @@ public class MallFragment extends BaseFragment {
                     } else {
                         if (isRefresh) {
                             Log.e("getMallGoodsList", "暂时无数据");
-                            showShortToastSync("暂时无数据");
+//                            showShortToastSync("暂时无数据");
                         } else {
                             Log.e("getMallGoodsList", "没有更多数据");
                             showShortToastSync("没有更多数据");

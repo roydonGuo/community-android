@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/dp_10"
+    android:layout_marginBottom="@dimen/pd_6"
     android:background="@drawable/shape_radius"
-    android:padding="@dimen/dp_10">
+    android:padding="@dimen/pd_10">
 
     <LinearLayout
         android:layout_width="match_parent"

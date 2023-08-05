@@ -22,6 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -45,7 +46,6 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -183,27 +183,13 @@ public class UserInfoActivity extends BaseActivity {
                             riUserAvatar.setImageBitmap(bitmap);
                         }
                     } else {
-                        //由于指定了目标uri，存储在目标uri，intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-                        // 通过目标uri，找到图片
-                        // 对图片的缩放处理
-                        // 操作
-                        Log.d("avatarUri", avatarUri.getPath());
-                        Bitmap bitmap = null;
-                        try {
-                            bitmap = BitmapFactory.decodeStream((getContentResolver().openInputStream(avatarUri)));
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                        riUserAvatar.setImageBitmap(bitmap);
+                        riUserAvatar.setImageBitmap(BitmapFactory.decodeFile(mCurrentPhotoPath));
                         // 发送到服务器
                         try {
-                            File photoFile = createPhotoFile();
-                            File file = new File(avatarUri.getPath());
-                            uploadAvatar(file);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
+                            uploadAvatar(new File(mCurrentPhotoPath));
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-
                     }
                 }
                 break;
@@ -229,7 +215,6 @@ public class UserInfoActivity extends BaseActivity {
                         Log.d("onSelectAlbums", "没有找到图片");
                     }
                 }
-
                 break;
             default:
                 break;
@@ -303,11 +288,28 @@ public class UserInfoActivity extends BaseActivity {
 
     // 打开相机拍照
     private void openSysCamera() {
-        avatarUri = photoUtils.takePhoto(UserInfoActivity.this, "com.roydon.community.fileprovider", "output_image.jpg");
-        //调用相机，拍摄结果会存到imageUri也就是outputImage中
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, avatarUri);
-        startActivityForResult(intent, TAKE_PHOTO);
+//        avatarUri = photoUtils.takePhoto(UserInfoActivity.this, "com.roydon.community.fileprovider");
+//        //调用相机，拍摄结果会存到imageUri也就是outputImage中
+//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        intent.putExtra(MediaStore.EXTRA_OUTPUT, avatarUri);
+//        startActivityForResult(intent, TAKE_PHOTO);
+        // 创建照片存储目录
+        File imgDir = new File(getFilePath(null));
+        // 创建照片
+        File picture = new File(imgDir, System.currentTimeMillis() + ".jpg");
+        if (!picture.exists()) {
+            try {
+                picture.createNewFile();
+            } catch (IOException e) {
+                Log.e("createNewFile", "创建图片失败", e);
+            }
+        }
+        mCurrentPhotoPath = picture.getAbsolutePath();
+        Log.e("mCurrentPhotoPath", mCurrentPhotoPath);
+        // 调用相机拍照
+        Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        camera.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(this, "com.roydon.community.fileprovider", picture));
+        startActivityForResult(camera, TAKE_PHOTO);
     }
 
     private void openSysAlbums() {
@@ -317,7 +319,6 @@ public class UserInfoActivity extends BaseActivity {
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         //intent.setAction(Intent.ACTION_GET_CONTENT)  //实现相册多选 该方法获得的uri在转化为真实文件路径时Android 4.4以上版本会有问题
 //        intent.setAction(Intent.ACTION_PICK);
-
         startActivityForResult(intent, FROM_ALBUMS);
     }
 
@@ -326,14 +327,35 @@ public class UserInfoActivity extends BaseActivity {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         String imageFileName = timeStamp + "_";
 
-        // 获取保存照片的目录
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        //
 
-        // 创建文件
-        File imageFile = File.createTempFile(imageFileName, ".jpg", storageDir);
+        // 获取保存照片的目录创建文件
+        File imageFile = File.createTempFile(imageFileName, ".jpg", getExternalFilesDir(Environment.DIRECTORY_PICTURES));
         Log.e("imageFile", imageFile.getPath());
         // 返回文件路径
         return imageFile;
+    }
+
+    /**
+     * 获取存储文件路径
+     *
+     * @param dir 选择目录
+     * @return 路径
+     */
+    public String getFilePath(String dir) {
+        String path;
+        // 判断是否有外部存储，是否可用
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+            path = getExternalFilesDir(dir).getAbsolutePath();
+        } else {
+            // 使用内部储存
+            path = getFilesDir() + File.separator + dir;
+        }
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        return path;
     }
     // api============================================================================
 
@@ -389,7 +411,8 @@ public class UserInfoActivity extends BaseActivity {
 
             @Override
             public void onFailure(Exception e) {
-
+                Log.e("uploadAvatar", "上传出现了问题");
+                e.printStackTrace();
             }
         });
     }
