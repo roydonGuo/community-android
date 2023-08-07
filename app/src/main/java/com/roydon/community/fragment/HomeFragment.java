@@ -22,6 +22,7 @@ import com.google.gson.GsonBuilder;
 import com.roydon.community.R;
 import com.roydon.community.activity.NewsDetailActivity;
 import com.roydon.community.activity.NewsSearchActivity;
+import com.roydon.community.activity.QrCodeScanActivity;
 import com.roydon.community.adapter.BannerAdapter;
 import com.roydon.community.adapter.NewsHotAdapter;
 import com.roydon.community.api.Api;
@@ -34,7 +35,6 @@ import com.roydon.community.domain.response.UserInfoRes;
 import com.roydon.community.domain.vo.AppUser;
 import com.roydon.community.domain.vo.BannerNoticeListRes;
 import com.roydon.community.domain.vo.HotNews;
-import com.roydon.community.utils.android.StatusBarUtil;
 import com.roydon.community.utils.cache.SPUtils;
 import com.roydon.community.utils.string.StringUtil;
 import com.roydon.community.view.CircleTransform;
@@ -54,7 +54,7 @@ public class HomeFragment extends BaseFragment {
     private ViewPager viewPager;
     private RefreshLayout refreshLayout;
     private SobViewPager sobViewPager;
-    private ImageView picture, userAvatar;
+    private ImageView picture, userAvatar, ivScanCode;
     private TextView etSearch;
     private LinearLayout mDotLayout, funcOne;
     private LinearLayoutManager linearLayoutManager;
@@ -110,12 +110,18 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        StatusBarUtil.setColorStatus(getActivity(), 0xffffff);
+//        StatusBarUtil.setColorStatus(getActivity(), 0xffffff);
 //        refreshLayout = mRootView.findViewById(R.id.refreshLayout);
-        etSearch = mRootView.findViewById(R.id.et_search);
+        // 用户头像
         userAvatar = mRootView.findViewById(R.id.index_user_avatar);
+        // 搜索框
+        etSearch = mRootView.findViewById(R.id.et_search);
+        // 二维码扫描
+        ivScanCode = mRootView.findViewById(R.id.iv_scan_code);
+        // 轮播图
         sobViewPager = mRootView.findViewById(R.id.sob_looper);
         funcOne = mRootView.findViewById(R.id.func_one);
+        // 热门新闻
         rvNewsHot = mRootView.findViewById(R.id.rv_news_hot);
     }
 
@@ -149,6 +155,9 @@ public class HomeFragment extends BaseFragment {
         getNewsHotList();
         etSearch.setOnClickListener(v -> {
             navigateTo(NewsSearchActivity.class);
+        });
+        ivScanCode.setOnClickListener(v -> {
+            navigateTo(QrCodeScanActivity.class);
         });
     }
 

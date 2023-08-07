@@ -25,7 +25,6 @@ public class ApiConfig {
     /**
      * user-profile详情接口
      */
-
     public static final String USER_PROFILE_AVATAR = "/system/user/profile/avatar"; // 修改头像
 
     /**
@@ -72,5 +71,10 @@ public class ApiConfig {
      * 疫情防控-出入社区吧报备
      */
     public static final String EPIDEMIC_ACCESS_ADD = "/epidemic/access"; // 新增
+
+    /**
+     * 紧急热线
+     */
+    public static final String APP_HOTLINE_ALL = "/app/hotline/all"; // list
 
 }

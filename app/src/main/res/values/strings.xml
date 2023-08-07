@@ -30,4 +30,8 @@
     <string name="access_out">出</string>
     <string name="access_in">进</string>
 
+    <!-- 布局提示文字 -->
+    <string name="cancel">取消</string>
+    <string name="confirm">提交</string>
+
 </resources>

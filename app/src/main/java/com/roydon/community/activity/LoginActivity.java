@@ -1,7 +1,6 @@
 package com.roydon.community.activity;
 
 import android.content.Intent;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -63,7 +62,6 @@ public class LoginActivity extends BaseActivity {
         Api.build(ApiConfig.LOGIN, params).postRequest(this, new HttpCallback() {
             @Override
             public void onSuccess(final String res) {
-                Log.e("onSuccess", res);
                 Gson gson = new Gson();
                 LoginResponse loginResponse = gson.fromJson(res, LoginResponse.class);
                 if (loginResponse.getCode() == 200) {

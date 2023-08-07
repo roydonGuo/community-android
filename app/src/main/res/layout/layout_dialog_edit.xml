@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/mg_10"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/pd_10">
+
+    <!-- 内容区域 -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="vertical">
+        <!-- 标题 -->
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="title"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_h2" />
+        <!-- 编辑内容 -->
+        <EditText
+            android:id="@+id/et_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mg_10"
+            android:background="@drawable/et_send_message_box"
+            android:includeFontPadding="false"
+            android:padding="10dp"
+            android:text="result"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_main_size" />
+
+    </LinearLayout>
+
+    <!-- 按钮 -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button_cancel"
+            android:text="@string/cancel"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_main_size" />
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button_confirm"
+            android:text="@string/confirm"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_main_size" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
+    android:background="@drawable/shape_radius"
+    android:orientation="vertical"
+    android:padding="@dimen/pd_10">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_hotline_leader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="郭意诚"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_h2" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_hotline_telephone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/mg_6"
+            android:text="18203565656"
+            android:textColor="@color/red"
+            android:textSize="@dimen/font_main_size" />
+    </LinearLayout>
+
+</LinearLayout>

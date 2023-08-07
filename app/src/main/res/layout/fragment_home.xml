@@ -40,11 +40,12 @@
 
             <!--搜索框-->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/search_box_height"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_weight="1"
                 android:background="@drawable/shape_search_box"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -68,6 +69,15 @@
                     android:textSize="@dimen/font_second_size" />
 
             </LinearLayout>
+
+            <!--右侧二维码扫描-->
+            <ImageView
+                android:id="@+id/iv_scan_code"
+                android:layout_width="@dimen/icon_main_size"
+                android:layout_height="@dimen/icon_main_size"
+                android:padding="2dp"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/icon_scan_code" />
 
         </LinearLayout>
 

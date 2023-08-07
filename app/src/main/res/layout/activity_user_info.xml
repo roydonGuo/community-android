@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".activity.UserInfoActivity">
 
-    <!--标题 沉浸式-->
+    <!-- 标题 沉浸式 -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -54,7 +54,7 @@
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <!--个人信息界面-->
+    <!-- 个人信息界面 -->
     <!-- 头像-->
     <LinearLayout
         android:id="@+id/ll_edit_avatar"

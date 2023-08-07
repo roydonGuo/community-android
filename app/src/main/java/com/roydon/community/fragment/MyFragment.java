@@ -27,6 +27,7 @@ import com.google.gson.GsonBuilder;
 import com.roydon.community.R;
 import com.roydon.community.activity.AccessRecordActivity;
 import com.roydon.community.activity.BDAddressSelectActivity;
+import com.roydon.community.activity.HotlineActivity;
 import com.roydon.community.activity.LoginActivity;
 import com.roydon.community.activity.MessageActivity;
 import com.roydon.community.activity.SettingActivity;
@@ -69,7 +70,7 @@ public class MyFragment extends BaseFragment {
     private ImageView ivShare, ivTheme;
     // 订单栏功能
     private LinearLayout llUserOrder;
-    private RelativeLayout rlUserAddress, rlAccessRecord, rlReturnLogin, rlWebview, rlSetting;
+    private RelativeLayout rlUserAddress, rlAccessRecord, rlHotline, rlReturnLogin, rlWebview, rlSetting;
 
     // 测试功能区
     private RelativeLayout rlBDAddress, rlMessage;
@@ -111,6 +112,7 @@ public class MyFragment extends BaseFragment {
         mLinearLayout = mRootView.findViewById(R.id.layout_my_detail);
         rlUserAddress = mRootView.findViewById(R.id.rl_user_address);
         rlAccessRecord = mRootView.findViewById(R.id.rl_access_record);
+        rlHotline = mRootView.findViewById(R.id.rl_hotline);
         rlReturnLogin = mRootView.findViewById(R.id.rl_return_login);
         // 用户info栏
 //        userBg = mRootView.findViewById(R.id.iv_user_bg);
@@ -177,6 +179,9 @@ public class MyFragment extends BaseFragment {
         });
         rlUserAddress.setOnClickListener(v -> {
             navigateTo(UserAddressActivity.class);
+        });
+        rlHotline.setOnClickListener(v->{
+            navigateTo(HotlineActivity.class);
         });
         rlBDAddress.setOnClickListener(v -> {
             navigateTo(BDAddressSelectActivity.class);

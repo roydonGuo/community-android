@@ -1,9 +1,11 @@
 package com.roydon.community.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -41,11 +43,14 @@ public class NewsSearchActivity extends BaseActivity {
     private AutoCompleteTextView queryStr; // 自动完成文本框
     private SmartRefreshLayout refreshLayout;
     private RecyclerView recyclerView; // 新闻搜索结果展示
+    private ImageView ivSpeech; // 语音输入
     // 数据
     private int pageNum = 1;
     private List<AppNews> newsList = new ArrayList<>();
     // 适配器
     private NewsAdapter newsAdapter;
+
+    private static final int SPEECH_REQUEST_CODE = 100;
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
@@ -60,6 +65,8 @@ public class NewsSearchActivity extends BaseActivity {
                     ProgressBar loadingSpinner = findViewById(R.id.loading_spinner);
                     loadingSpinner.setVisibility(View.GONE);
                     break;
+                default:
+                    break;
             }
         }
     };
@@ -73,6 +80,7 @@ public class NewsSearchActivity extends BaseActivity {
     protected void initView() {
         ivReturn = findViewById(R.id.iv_return);
         queryStr = findViewById(R.id.edit_news_query);
+        ivSpeech = findViewById(R.id.iv_speech);
         ivNewsSearch = findViewById(R.id.iv_news_search);
 
         refreshLayout = findViewById(R.id.refreshLayout);
@@ -110,6 +118,10 @@ public class NewsSearchActivity extends BaseActivity {
             pageNum++;
             selNewsList(false, queryStr.getText().toString());
         });
+        // 语音输入
+        ivSpeech.setOnClickListener(v -> {
+//            displaySpeechRecognizer();
+        });
 
         // 点击搜索
         ivNewsSearch.setOnClickListener(v -> {
@@ -131,8 +143,7 @@ public class NewsSearchActivity extends BaseActivity {
                 //当actionId == XX_SEND 或者 XX_DONE时都触发
                 //或者event.getKeyCode == ENTER 且 event.getAction == ACTION_DOWN时也触发
                 //注意，这是一定要判断event != null。因为在某些输入法上会返回null。
-                if (i == EditorInfo.IME_ACTION_SEND || i == EditorInfo.IME_ACTION_DONE || (keyEvent != null
-                        && KeyEvent.KEYCODE_ENTER == keyEvent.getKeyCode() && KeyEvent.ACTION_DOWN == keyEvent.getAction())) {
+                if (i == EditorInfo.IME_ACTION_SEND || i == EditorInfo.IME_ACTION_DONE || (keyEvent != null && KeyEvent.KEYCODE_ENTER == keyEvent.getKeyCode() && KeyEvent.ACTION_DOWN == keyEvent.getAction())) {
                     //处理事件
                     // 显示加载动画
                     ProgressBar loadingSpinner = findViewById(R.id.loading_spinner);
@@ -142,6 +153,24 @@ public class NewsSearchActivity extends BaseActivity {
                 return false;
             }
         });
+    }
+
+    // Create an intent that can start the Speech Recognizer activity
+    private void displaySpeechRecognizer() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        startActivityForResult(intent, SPEECH_REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SPEECH_REQUEST_CODE && resultCode == RESULT_OK) {
+            List<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            String spokenText = results.get(0);
+            Log.e("spokenText", spokenText);
+//            queryStr.setText(spokenText);
+        }
     }
 
     private void selNewsList(final boolean isRefresh, String title) {

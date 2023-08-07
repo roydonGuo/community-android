@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.roydon.community.R;
+import com.roydon.community.listener.OnConfirmDialogClickListener;
 import com.roydon.community.listener.OnPhotoSelectDialogClickListener;
 import com.roydon.community.listener.OnShareDialogClickListener;
 
@@ -90,6 +91,12 @@ public class DialogX {
 
     }
 
+    /**
+     * 图片选择框
+     *
+     * @param context
+     * @param listener
+     */
     public static void showPhotoSelectDialog(Context context, final OnPhotoSelectDialogClickListener listener) {
         View dialogPhotoSelect = LayoutInflater.from(context).inflate(R.layout.layout_dialog_photo_select, null);
         final Dialog dialog = new Dialog(context, R.style.DialogShare);
@@ -137,6 +144,56 @@ public class DialogX {
         WindowManager.LayoutParams params = window.getAttributes();
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
         params.gravity = Gravity.BOTTOM;
+        window.setAttributes(params);
+
+    }
+
+    /**
+     * 弹出单条内容编辑框
+     *
+     * @param context
+     * @param listener
+     */
+    public static void showEditTextDialog(Context context, final OnConfirmDialogClickListener listener) {
+        View dialogLayout = LayoutInflater.from(context).inflate(R.layout.layout_dialog_edit, null);
+        final Dialog dialog = new Dialog(context, R.style.DialogShare);
+        dialog.setContentView(dialogLayout);
+        dialog.show();
+        // 点击监听
+        View.OnClickListener clickListener = new View.OnClickListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.btn_confirm:
+                        if (listener != null) {
+                            listener.onConfirm();
+                        }
+                        break;
+                    case R.id.btn_cancel:
+                        if (listener != null) {
+                            listener.onCancel();
+                        }
+                        break;
+                    default:
+                        dialog.dismiss();
+                        break;
+                }
+                dialog.dismiss();
+            }
+        };
+        Button confirm = dialogLayout.findViewById(R.id.btn_confirm);
+        Button cancel = dialogLayout.findViewById(R.id.btn_cancel);
+
+        confirm.setOnClickListener(clickListener);
+        cancel.setOnClickListener(clickListener);
+
+        // 设置相关位置，一定要在 show()之后
+        Window window = dialog.getWindow();
+        window.getDecorView().setPadding(0, 0, 0, 0);
+        WindowManager.LayoutParams params = window.getAttributes();
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+//        params.gravity = Gravity.BOTTOM;
         window.setAttributes(params);
 
     }

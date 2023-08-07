@@ -50,7 +50,6 @@ public class BridgeUtil {
         return null;
     }
 
-
     /**
      * js 文件将注入为第一个script引用
      *
