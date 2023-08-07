@@ -21,6 +21,7 @@ public class ApiConfig {
      * user接口
      */
     public static final String USER_INFO = "/app/user/info"; //注册
+    public static final String USER_EDIT_INFO = "/app/user/edit"; //注册
 
     /**
      * user-profile详情接口

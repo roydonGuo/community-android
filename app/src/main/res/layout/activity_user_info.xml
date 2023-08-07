@@ -50,6 +50,7 @@
                 android:layout_height="@dimen/icon_main_size"
                 android:layout_gravity="center_vertical|right"
                 android:layout_marginEnd="10dp"
+                android:padding="1dp"
                 android:src="@mipmap/icon_more" />
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
@@ -177,6 +178,7 @@
                 android:background="@color/divider" />
 
             <LinearLayout
+                android:id="@+id/ll_edit_nick_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -218,8 +220,8 @@
                 android:layout_height="1dp"
                 android:background="@color/divider" />
 
-
             <LinearLayout
+                android:id="@+id/ll_edit_real_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -262,6 +264,7 @@
                 android:background="@color/divider" />
 
             <LinearLayout
+                android:id="@+id/ll_edit_phonenumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -304,6 +307,7 @@
                 android:background="@color/divider" />
 
             <LinearLayout
+                android:id="@+id/ll_edit_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"

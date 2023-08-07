@@ -124,6 +124,45 @@ public class Api {
     }
 
     /**
+     * post请求with token
+     *
+     * @param context
+     * @param callback
+     */
+    public void putRequestWithToken(Context context, final HttpCallback callback) {
+        SharedPreferences sp = context.getSharedPreferences(Constants.AUTHORIZATION, MODE_PRIVATE);
+        String token = Constants.TOKEN_PREFIX + sp.getString(Constants.TOKEN, "");
+        JSONObject jsonObject = new JSONObject(mParams);
+        String jsonStr = jsonObject.toString();
+        RequestBody requestBodyJson = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonStr);
+        //第三步创建Request
+        Request request = new Request.Builder()
+                .url(requestUrl)
+                .addHeader("contentType", "application/json;charset=UTF-8")
+                .addHeader(Constants.AUTHORIZATION, token)
+                .put(requestBodyJson).build();
+        //第四步创建call回调对象
+        final Call call = client.newCall(request);
+        //第五步发起请求
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("onFailure", e.getMessage());
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (StringUtil.isNotNull(response.body())) {
+                    final String result = response.body().string();
+                    Log.e("onSuccess", result);
+                    callback.onSuccess(result);
+                }
+            }
+        });
+    }
+
+    /**
      * 上传图片post请求with token
      *
      * @param context

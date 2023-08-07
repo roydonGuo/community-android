@@ -13,7 +13,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,13 +30,17 @@ import com.roydon.community.R;
 import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
+import com.roydon.community.domain.response.BaseResponse;
 import com.roydon.community.domain.response.UploadAvatarRes;
 import com.roydon.community.domain.response.UserInfoRes;
 import com.roydon.community.domain.vo.AppUser;
 import com.roydon.community.enums.TenantTypeEnum;
+import com.roydon.community.listener.OnConfirmDialogClickListener;
 import com.roydon.community.listener.OnPhotoSelectDialogClickListener;
 import com.roydon.community.utils.img.PhotoUtils;
+import com.roydon.community.utils.string.EmailUtils;
 import com.roydon.community.utils.string.StringUtil;
+import com.roydon.community.utils.string.TelephoneUtils;
 import com.roydon.community.view.CircleTransform;
 import com.roydon.community.view.DialogX;
 import com.roydon.community.widget.RoundImageView;
@@ -60,6 +63,7 @@ public class UserInfoActivity extends BaseActivity {
 
     // handler
     private static final int HANDLER_WHAT_USERINFO = 0;
+    private static final int HANDLER_REFRESH_USERINFO = 1;
 
     /**
      * 顶部top-bar功能栏
@@ -81,6 +85,9 @@ public class UserInfoActivity extends BaseActivity {
 
     private String mCurrentPhotoPath;
 
+    // 编辑组件
+    private LinearLayout llEditNickName, llEditRealName, llEditPhonenumber, llEditEmail;
+
     @Override
     protected int initLayout() {
         return R.layout.activity_user_info;
@@ -94,6 +101,9 @@ public class UserInfoActivity extends BaseActivity {
             switch (msg.what) {
                 case HANDLER_WHAT_USERINFO:
                     showUserInfo(appUser);
+                    break;
+                case HANDLER_REFRESH_USERINFO:
+                    getUserInfo();
                     break;
                 default:
                     break;
@@ -118,6 +128,12 @@ public class UserInfoActivity extends BaseActivity {
         tvSex = findViewById(R.id.tv_sex);
         tvAge = findViewById(R.id.tv_age);
         tvIsTenant = findViewById(R.id.tv_is_tenant);
+
+        // 编辑组件
+        llEditNickName = findViewById(R.id.ll_edit_nick_name);
+        llEditRealName = findViewById(R.id.ll_edit_real_name);
+        llEditPhonenumber = findViewById(R.id.ll_edit_phonenumber);
+        llEditEmail = findViewById(R.id.ll_edit_email);
     }
 
     @Override
@@ -127,11 +143,86 @@ public class UserInfoActivity extends BaseActivity {
             finish();
         });
         // 头像点击事件
-        llEditAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showSelectDialog();
-            }
+        llEditAvatar.setOnClickListener(v -> {
+            showSelectDialog();
+        });
+        // 昵称点击编辑
+        llEditNickName.setOnClickListener(v -> {
+            String dialogTitle = "编辑昵称";
+            DialogX.showEditTextDialog(this, dialogTitle, appUser.getNickName(), new OnConfirmDialogClickListener() {
+                @Override
+                public void onConfirm(String result) {
+                    if (result == null) {
+                        showShortToast("不能为空");
+                    }
+                    editUserInfo("nickName", result.trim());
+                }
+
+                @Override
+                public void onCancel() {
+
+                }
+            });
+        });
+        // 编辑姓名
+        llEditRealName.setOnClickListener(v -> {
+            String dialogTitle = "编辑姓名";
+            DialogX.showEditTextDialog(this, dialogTitle, appUser.getRealName(), new OnConfirmDialogClickListener() {
+                @Override
+                public void onConfirm(String result) {
+                    if (result == null) {
+                        showShortToast("不能为空");
+                    }
+                    editUserInfo("realName", result.trim());
+                }
+
+                @Override
+                public void onCancel() {
+
+                }
+            });
+        });
+        // 编辑手机
+        llEditPhonenumber.setOnClickListener(v -> {
+            String dialogTitle = "编辑手机号码";
+            DialogX.showEditTextDialog(this, dialogTitle, appUser.getPhonenumber(), new OnConfirmDialogClickListener() {
+                @Override
+                public void onConfirm(String result) {
+                    if (result == null) {
+                        showShortToast("手机号不能为空");
+                    } else if (!TelephoneUtils.isValidPhoneNumber(result)) {
+                        showShortToast("请输入正确的手机号");
+                    } else {
+                        editUserInfo("phonenumber", result.trim());
+                    }
+
+                }
+
+                @Override
+                public void onCancel() {
+
+                }
+            });
+        });
+        llEditEmail.setOnClickListener(v -> {
+            String dialogTitle = "编辑邮箱";
+            DialogX.showEditTextDialog(this, dialogTitle, appUser.getEmail(), new OnConfirmDialogClickListener() {
+                @Override
+                public void onConfirm(String result) {
+                    if (result == null) {
+                        showShortToast("邮箱不能为空");
+                    } else if (!EmailUtils.isValidEmail(result)) {
+                        showShortToast("请输入正确邮箱");
+                    } else {
+                        editUserInfo("email", result.trim());
+                    }
+                }
+
+                @Override
+                public void onCancel() {
+
+                }
+            });
         });
     }
 
@@ -283,7 +374,6 @@ public class UserInfoActivity extends BaseActivity {
         });
     }
 
-
     //=============================================
 
     // 打开相机拍照
@@ -413,6 +503,28 @@ public class UserInfoActivity extends BaseActivity {
             public void onFailure(Exception e) {
                 Log.e("uploadAvatar", "上传出现了问题");
                 e.printStackTrace();
+            }
+        });
+    }
+
+    private void editUserInfo(String field, String value) {
+        HashMap<String, Object> params = new HashMap<>();
+        params.put(field, value);
+        Api.build(ApiConfig.USER_EDIT_INFO, params).putRequestWithToken(this, new HttpCallback() {
+            @Override
+            public void onSuccess(final String res) {
+                BaseResponse response = new Gson().fromJson(res, BaseResponse.class);
+                if (response != null && response.getCode() == 200) {
+                    Log.e("editUserInfo", response.getMsg());
+                    mHandler.sendEmptyMessage(HANDLER_REFRESH_USERINFO);
+                    showSyncShortToast("更新成功");
+                } else {
+                    showSyncShortToast(response.getMsg());
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
             }
         });
     }

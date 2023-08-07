@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.roydon.community.R;
@@ -154,11 +155,17 @@ public class DialogX {
      * @param context
      * @param listener
      */
-    public static void showEditTextDialog(Context context, final OnConfirmDialogClickListener listener) {
+    public static void showEditTextDialog(Context context, String title, String editResult, final OnConfirmDialogClickListener listener) {
         View dialogLayout = LayoutInflater.from(context).inflate(R.layout.layout_dialog_edit, null);
         final Dialog dialog = new Dialog(context, R.style.DialogShare);
         dialog.setContentView(dialogLayout);
         dialog.show();
+        // 标题
+        TextView tvTitle = dialogLayout.findViewById(R.id.tv_title);
+        tvTitle.setText(title);
+        // 编辑的单条内容
+        EditText etResult = dialogLayout.findViewById(R.id.et_result);
+        etResult.setText(editResult);
         // 点击监听
         View.OnClickListener clickListener = new View.OnClickListener() {
             @SuppressLint("NonConstantResourceId")
@@ -167,7 +174,7 @@ public class DialogX {
                 switch (v.getId()) {
                     case R.id.btn_confirm:
                         if (listener != null) {
-                            listener.onConfirm();
+                            listener.onConfirm(etResult.getText().toString());
                         }
                         break;
                     case R.id.btn_cancel:
@@ -184,16 +191,14 @@ public class DialogX {
         };
         Button confirm = dialogLayout.findViewById(R.id.btn_confirm);
         Button cancel = dialogLayout.findViewById(R.id.btn_cancel);
-
         confirm.setOnClickListener(clickListener);
         cancel.setOnClickListener(clickListener);
-
         // 设置相关位置，一定要在 show()之后
         Window window = dialog.getWindow();
         window.getDecorView().setPadding(0, 0, 0, 0);
         WindowManager.LayoutParams params = window.getAttributes();
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
-//        params.gravity = Gravity.BOTTOM;
+        params.gravity = Gravity.CENTER;
         window.setAttributes(params);
 
     }

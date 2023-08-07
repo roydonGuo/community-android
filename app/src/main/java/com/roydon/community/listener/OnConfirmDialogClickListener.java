@@ -2,7 +2,7 @@ package com.roydon.community.listener;
 
 public interface OnConfirmDialogClickListener {
 
-    void onConfirm();
+    void onConfirm(String result);
 
     void onCancel();
 }
