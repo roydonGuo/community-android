@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+
+    <color name="black">#FFFFFF</color>
+    <color name="black_80">#CCC1B9B9</color>
+    <color name="black_50">#80B3ACAC</color>
+    <color name="black_30">#4D000000</color>
+    <color name="black_10">#1A000000</color>
+
+    <color name="white">#161616</color>
+    <color name="white_80">#CC272626</color>
+    <color name="white_50">#803E3C3C</color>
+    <color name="white_30">#4DFFFFFF</color>
+    <color name="white_10">#1AFFFFFF</color>
+
+    <color name="red">#FF1616</color>
+    <color name="grey">#808080</color>
+
+    <color name="green_deep">#088C1E</color>
+    <color name="blue_deep">#044cf4</color>
+    <color name="element">#409EFF</color>
+    <color name="text_select_color">#ffd700</color>
+
+    <!-- login-form -->
+    <color name="login_form_background">#ADE9EDF1</color>
+    <color name="login_edittext_background">#7EC4C7CA</color>
+
+    <color name="divider">#80E8E7E7</color>
+    <color name="fragment_background">#282828</color>
+    <color name="activity_background">#282828</color>
+
+</resources>

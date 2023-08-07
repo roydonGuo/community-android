@@ -1,5 +1,6 @@
 package com.roydon.community.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,17 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.roydon.community.R;
-import com.roydon.community.entity.AppNews;
-import com.roydon.community.view.CircleTransform;
+import com.roydon.community.domain.entity.AppNews;
+import com.roydon.community.utils.string.TimeUtils;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Context mContext;
+    private final Context mContext;
     private List<AppNews> datas;
     private OnItemClickListener mOnItemClickListener;
 
@@ -44,14 +44,14 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        int type = datas.get(position).getViewNum();
-        return type;
+        String showType = datas.get(position).getShowType();
+        return Integer.parseInt(showType);
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType == 1) {
+        if (viewType == 0) {
             View view = LayoutInflater.from(mContext).inflate(R.layout.news_item_one, parent, false);
             return new ViewHolderOne(view);
         } else {
@@ -60,41 +60,35 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    @SuppressLint({"SimpleDateFormat", "SetTextI18n"})
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         int type = getItemViewType(position);
         AppNews newsEntity = datas.get(position);
-        if (type == 1) {
+        if (type == 0) {
             ViewHolderOne vh = (ViewHolderOne) holder;
             vh.title.setText(newsEntity.getNewsTitle());
             vh.author.setText(newsEntity.getSource());
-            vh.comment.setText(newsEntity.getViewNum() + "浏览 .");
-            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            vh.time.setText(sdf.format(newsEntity.getPostTime()));
+            vh.viewNum.setText(newsEntity.getViewNum() + "");
+            vh.comment.setText(newsEntity.getViewNum() + "");
+//            SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss");
+//            vh.time.setText(sdf.format(newsEntity.getPostTime()));
+            vh.time.setText(TimeUtils.getSmartDate(newsEntity.getPostTime().getTime()));
             vh.appNews = newsEntity;
-            Picasso.with(mContext)
-                    .load(newsEntity.getCoverImg())
-                    .transform(new CircleTransform())
-                    .into(vh.header);
-
-            Picasso.with(mContext)
-                    .load(newsEntity.getCoverImg())
-                    .into(vh.thumb);
+//            Picasso.with(mContext).load(newsEntity.getCoverImg()).transform(new CircleTransform()).into(vh.header);
+            Picasso.with(mContext).load(newsEntity.getCoverImg()).into(vh.thumb);
         } else {
             ViewHolderTwo vh = (ViewHolderTwo) holder;
             vh.title.setText(newsEntity.getNewsTitle());
             vh.author.setText(newsEntity.getSource());
-            vh.comment.setText(newsEntity.getViewNum() + "浏览 .");
-            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            vh.time.setText(sdf.format(newsEntity.getPostTime()));
+            vh.viewNum.setText(newsEntity.getViewNum() + "");
+            vh.comment.setText(newsEntity.getViewNum() + "");
+//            SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss");
+//            vh.time.setText(sdf.format(newsEntity.getPostTime()));
+            vh.time.setText(TimeUtils.getSmartDate(newsEntity.getPostTime().getTime()));
             vh.appNews = newsEntity;
-            Picasso.with(mContext)
-                    .load(newsEntity.getCoverImg())
-                    .transform(new CircleTransform())
-                    .into(vh.header);
-            Picasso.with(mContext)
-                    .load(newsEntity.getCoverImg())
-                    .into(vh.thumb);
+//            Picasso.with(mContext).load(newsEntity.getCoverImg()).transform(new CircleTransform()).into(vh.header);
+            Picasso.with(mContext).load(newsEntity.getCoverImg()).into(vh.thumb);
         }
 
     }
@@ -109,18 +103,15 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public class ViewHolderOne extends RecyclerView.ViewHolder {
-        private TextView title;
-        private TextView author;
-        private TextView comment;
-        private TextView time;
-        private ImageView header;
-        private ImageView thumb;
+        private final TextView title, author, viewNum, comment, time;
+        private final ImageView header, thumb;
         private AppNews appNews;
 
         public ViewHolderOne(@NonNull View view) {
             super(view);
             title = view.findViewById(R.id.title);
             author = view.findViewById(R.id.author);
+            viewNum = view.findViewById(R.id.tv_view_num);
             comment = view.findViewById(R.id.comment);
             time = view.findViewById(R.id.time);
             header = view.findViewById(R.id.header);
@@ -135,28 +126,21 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public class ViewHolderTwo extends RecyclerView.ViewHolder {
-
-        private TextView title;
-        private TextView author;
-        private TextView comment;
-        private TextView time;
-        private ImageView header;
-        private ImageView thumb;
+        private final TextView title, author, viewNum, comment, time;
+        private final ImageView header, thumb;
         private AppNews appNews;
 
         public ViewHolderTwo(@NonNull View view) {
             super(view);
             title = view.findViewById(R.id.title);
             author = view.findViewById(R.id.author);
+            viewNum = view.findViewById(R.id.tv_view_num);
             comment = view.findViewById(R.id.comment);
             time = view.findViewById(R.id.time);
             header = view.findViewById(R.id.header);
             thumb = view.findViewById(R.id.thumb);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mOnItemClickListener.onItemClick(appNews);
-                }
+            view.setOnClickListener(v -> {
+                mOnItemClickListener.onItemClick(appNews);
             });
         }
     }

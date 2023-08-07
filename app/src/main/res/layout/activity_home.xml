@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/shape_login_register_background"
+    android:background="@color/fragment_background"
+    android:fitsSystemWindows="false"
     android:orientation="vertical"
     tools:context=".activity.HomeActivity">
 
-    <com.roydon.community.view.FixedViewPager
+    <com.roydon.community.view.NoScrollFixedViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -22,16 +23,16 @@
     <com.flyco.tablayout.CommonTabLayout
         android:id="@+id/commonTabLayout"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="50dp"
         android:background="@color/white"
         app:tl_iconHeight="24dp"
         app:tl_iconWidth="24dp"
         app:tl_indicator_color="#2C97DE"
         app:tl_indicator_height="0dp"
-        app:tl_textSelectColor="#0025ff"
-        app:tl_textUnselectColor="#000000"
-        app:tl_textsize="@dimen/dimen_12sp"
-        app:tl_underline_color="#DDDDDD"
-        app:tl_underline_height="1dp" />
+        app:tl_textSelectColor="@color/element"
+        app:tl_textUnselectColor="@color/black"
+        app:tl_textsize="@dimen/font_third_size"
+        app:tl_underline_color="@color/divider"
+        app:tl_underline_height="0dp" />
 
 </LinearLayout>

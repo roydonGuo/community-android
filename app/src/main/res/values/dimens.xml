@@ -19,17 +19,41 @@
     <dimen name="dimen_10dp">10dp</dimen>
     <dimen name="dimen_3dp">3dp</dimen>
 
+    <!---->
+    <dimen name="pd_6">6dp</dimen>
+    <dimen name="pd_10">10dp</dimen>
+    <dimen name="mg_3">3dp</dimen>
+    <dimen name="mg_6">6dp</dimen>
+    <dimen name="mg_10">10dp</dimen>
+
+    <!-- 顶部top-bar高度-->
+    <dimen name="top_bar_height">60dp</dimen>
+    <dimen name="search_box_height">36dp</dimen>
+
+    <!-- icon 图标大小 -->
+    <dimen name="icon_main_size">32dp</dimen>
+
     <!-- 字体大小 -->
     <dimen name="dimen_22sp">22sp</dimen>
     <dimen name="dimen_18sp">18sp</dimen>
-    <!-- 著字体大小16sp -->
-    <dimen name="dimen_16sp">16sp</dimen>
-    <dimen name="dimen_12sp">12sp</dimen>
+    <!-- 主字体大小16sp -->
+    <dimen name="font_size_h1">22sp</dimen>
+    <dimen name="font_size_h2">21sp</dimen>
+    <dimen name="font_size_h3">20sp</dimen>
+    <dimen name="font_size_h4">19sp</dimen>
+    <dimen name="font_size_h5">18sp</dimen>
+    <dimen name="font_size_h6">17sp</dimen>
+    <dimen name="font_main_size">16sp</dimen>
+    <dimen name="font_second_size">14sp</dimen>
+    <dimen name="font_third_size">12sp</dimen>
 
     <!-- icon图标-->
     <dimen name="dimen_icon_64dp">64dp</dimen>
     <dimen name="dimen_icon_32dp">32dp</dimen>
     <dimen name="dimen_icon_24dp">24dp</dimen>
     <dimen name="dimen_icon_16dp">16dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 
 </resources>

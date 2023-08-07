@@ -31,7 +31,7 @@
                 android:layout_height="78dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:src="@mipmap/avatar_ganyu" />
+                android:src="@mipmap/avatar" />
 
             <ImageView
                 android:id="@+id/pic2"
@@ -40,7 +40,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:src="@mipmap/avatar_ganyu" />
+                android:src="@mipmap/avatar" />
 
             <ImageView
                 android:id="@+id/pic3"
@@ -48,7 +48,7 @@
                 android:layout_height="78dp"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
-                android:src="@mipmap/avatar_ganyu" />
+                android:src="@mipmap/avatar" />
         </LinearLayout>
 
         <LinearLayout
@@ -63,7 +63,7 @@
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:scaleType="fitXY"
-                android:src="@mipmap/avatar_ganyu" />
+                android:src="@mipmap/avatar" />
 
             <TextView
                 android:id="@+id/author"

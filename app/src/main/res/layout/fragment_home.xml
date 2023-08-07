@@ -5,26 +5,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/fragment_background"
     android:orientation="vertical"
     tools:context=".fragment.HomeFragment">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:background="@color/element"
-        android:orientation="vertical">
+        android:fitsSystemWindows="true"
+        app:contentInsetStart="0dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="@dimen/pd_6">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
                 app:cardCornerRadius="20dp">
 
                 <ImageView
@@ -33,104 +35,102 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center_vertical"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/avatar_ganyu" />
+                    android:src="@mipmap/avatar" />
             </androidx.cardview.widget.CardView>
 
             <!--搜索框-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/search_box_height"
+                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
                 android:background="@drawable/shape_search_box"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="@dimen/dimen_16dp"
-                    android:layout_height="@dimen/dimen_16dp"
-                    android:layout_marginLeft="12dp"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginLeft="10dp"
                     android:src="@mipmap/search" />
 
-                <EditText
+                <TextView
                     android:id="@+id/et_search"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:background="@null"
-                    android:hint="搜索"
-                    android:textColor="@color/black"
-                    android:textColorHint="#737373"
-                    android:textSize="15sp" />
+                    android:gravity="center_vertical|left"
+                    android:text="搜索"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/font_second_size" />
 
             </LinearLayout>
+
+            <!--右侧二维码扫描-->
+            <ImageView
+                android:id="@+id/iv_scan_code"
+                android:layout_width="@dimen/icon_main_size"
+                android:layout_height="@dimen/icon_main_size"
+                android:padding="2dp"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/icon_scan_code" />
+
         </LinearLayout>
 
-        <!--        <com.flyco.tablayout.SlidingTabLayout-->
-        <!--            android:id="@+id/slidingTabLayout"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="50dp"-->
-        <!--            tl:tl_indicator_color="#fdf299"-->
-        <!--            tl:tl_indicator_corner_radius="2dp"-->
-        <!--            tl:tl_indicator_height="3dp"-->
-        <!--            tl:tl_indicator_width="18dp"-->
-        <!--            tl:tl_textSelectColor="#fdf299"-->
-        <!--            tl:tl_textUnselectColor="#ffffff"-->
-        <!--            tl:tl_textsize="16sp" />-->
+    </androidx.appcompat.widget.Toolbar>
 
-    </LinearLayout>
-
-    <!--    <com.scwang.smartrefresh.layout.SmartRefreshLayout-->
-    <!--        android:id="@+id/refreshLayout"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:background="@color/black">-->
-
-    <!--        <com.roydon.community.view.FixedViewPager-->
-    <!--            android:id="@+id/fixedViewPager"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="0dp"-->
-    <!--            android:layout_weight="1" />-->
-    <!--    </com.scwang.smartrefresh.layout.SmartRefreshLayout>-->
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refreshLayout"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        app:srlAccentColor="@android:color/white"
-        app:srlEnablePreviewInEditMode="true"
-        app:srlPrimaryColor="#59B8FF">
+        android:background="@color/fragment_background"
+        android:overScrollMode="never">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="6dp">
+            android:padding="@dimen/pd_6">
 
-            <androidx.cardview.widget.CardView
+            <!--轮播图区域-->
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="5dp">
+                android:layout_height="wrap_content">
 
-                <ImageView
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="#FFFFFF"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/lunbotu2" />
-            </androidx.cardview.widget.CardView>
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="10dp">
 
+                    <com.roydon.community.view.SobViewPager
+                        android:id="@+id/sob_looper"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp" />
+                    <!--                    <com.youth.banner.Banner-->
+                    <!--                        android:id="@+id/banner"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="200dp"-->
+                    <!--                        app:banner_loop_time="5000" />-->
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+            <!--功能区域-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="@dimen/mg_6"
                 android:background="@drawable/shape_index_function"
                 android:orientation="horizontal"
                 android:weightSum="5">
                 <!-- 功能按钮 -->
                 <LinearLayout
+                    android:id="@+id/func_one"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_weight="1"
@@ -149,7 +149,8 @@
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:text="功能一"
-                        android:textSize="@dimen/dimen_12sp" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/font_third_size" />
 
                 </LinearLayout>
 
@@ -172,7 +173,8 @@
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:text="功能一"
-                        android:textSize="@dimen/dimen_12sp" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/font_third_size" />
 
                 </LinearLayout>
 
@@ -195,7 +197,8 @@
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:text="功能一"
-                        android:textSize="@dimen/dimen_12sp" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/font_third_size" />
 
                 </LinearLayout>
 
@@ -218,7 +221,8 @@
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:text="功能一"
-                        android:textSize="@dimen/dimen_12sp" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/font_third_size" />
 
                 </LinearLayout>
 
@@ -241,14 +245,77 @@
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:text="功能一"
-                        android:textSize="@dimen/dimen_12sp" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/font_third_size" />
 
                 </LinearLayout>
 
             </LinearLayout>
+
+            <!--新闻热榜-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mg_6"
+                android:orientation="vertical">
+
+                <!-- 顶部区域 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/mg_6"
+                    android:orientation="horizontal"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp">
+
+                    <TextView
+                        android:id="@+id/tv_order_pay_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|left"
+                        android:text="热点新闻"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/font_main_size"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/icon_hot" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_news_hot"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
+            <include layout="@layout/layout_not_more" />
+
         </LinearLayout>
 
+    </androidx.core.widget.NestedScrollView>
 
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:background="@drawable/shape_index_function"-->
+    <!--        android:orientation="horizontal">-->
+
+    <!--        <ImageView-->
+    <!--            android:id="@+id/picture"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content" />-->
+    <!--    </LinearLayout>-->
+    <!--    </com.scwang.smartrefresh.layout.SmartRefreshLayout>-->
 
 </LinearLayout>

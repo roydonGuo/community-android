@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.Communityandroid" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <!-- Base application theme..NoActionBar.Bridge修复buton不能设置背景色的bug -->
+    <style name="Theme.Communityandroid" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -12,5 +12,6 @@
         <!-- Status bar color. -->
 <!--        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>-->
         <!-- Customize your theme here. -->
+<!--        <item name="android:windowAnimationStyle">@android:style/Animation.Toast</item>-->
     </style>
 </resources>

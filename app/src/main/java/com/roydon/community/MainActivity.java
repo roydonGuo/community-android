@@ -1,45 +1,48 @@
 package com.roydon.community;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.roydon.community.activity.HomeActivity;
 import com.roydon.community.activity.LoginActivity;
 import com.roydon.community.activity.RegisterActivity;
+import com.roydon.community.utils.string.StringUtil;
 
 /**
  * @author roydon
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private Button buttonLogin, buttonRegister;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected int initLayout() {
+        return R.layout.activity_main;
+    }
 
+    @Override
+    protected void initView() {
         buttonLogin = findViewById(R.id.button_login);
         buttonRegister = findViewById(R.id.button_register);
+    }
 
-        // 跳转登陆页面
+    @Override
+    protected void initData() {
+        if (!StringUtil.isEmpty(findByKey("token"))) {
+            navigateTo(HomeActivity.class);
+            finish();
+        }
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
+            public void onClick(View v) {
+                navigateTo(LoginActivity.class);
             }
         });
 
-        // 跳转注册页面
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-                startActivity(intent);
+            public void onClick(View v) {
+                navigateTo(RegisterActivity.class);
             }
         });
     }

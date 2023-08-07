@@ -1,5 +1,9 @@
 package com.roydon.community.activity;
 
+import android.view.KeyEvent;
+import android.view.WindowManager;
+import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -9,7 +13,7 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.roydon.community.BaseActivity;
 import com.roydon.community.R;
 import com.roydon.community.adapter.MyPagerAdapter;
-import com.roydon.community.entity.TabEntity;
+import com.roydon.community.domain.entity.TabEntity;
 import com.roydon.community.fragment.HomeFragment;
 import com.roydon.community.fragment.MallFragment;
 import com.roydon.community.fragment.MyFragment;
@@ -37,6 +41,8 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        // 解决弹出输入法会把底部导航栏顶上来的bug
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         viewPager = findViewById(R.id.viewpager);
         commonTabLayout = findViewById(R.id.commonTabLayout);
     }
@@ -79,6 +85,26 @@ public class HomeActivity extends BaseActivity {
             }
         });
         viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), mTitles, mFragments));
+    }
+
+    //第一次点击事件发生的时间
+    private long mExitTime;
+
+    /**
+     * 点击两次返回退出app
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
+                Toast.makeText(this, "再按一次退出APP", Toast.LENGTH_SHORT).show();
+                mExitTime = System.currentTimeMillis();
+            } else {
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 }

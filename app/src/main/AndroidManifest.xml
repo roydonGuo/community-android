@@ -3,7 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.roydon.community">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 访问网络 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 访问网络，进行地图相关业务数据请求，包括地图数据，路线规划，POI检索等 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 读取外置存储。如果开发者使用了so动态加载功能并且把so文件放在了外置存储区域，则需要申请该权限，否则不需要 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 写外置存储。如果开发者使用了离线地图，并且数据写在外置存储区域，则需要申请该权限 -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" /> <!-- 如果应用的 targetSdkVersion 大于等于 33，则需要同时声明 READ_EXTERNAL_STORAGE 和 READ_MEDIA_IMAGES 两个权限。此外，在这种情况下，READ_EXTERNAL_STORAGE 权限已无法用于 Android 13 开始之后的系统版本了，所以可以将此权限的 maxSdkVersion 设为 32，从而不会出现在 Android 13 开始之后的系统版本中 -->
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" /> <!-- 相机权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 扫描二维码所需权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" /> <!-- 对讲 -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -11,15 +33,92 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/icon_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.Communityandroid"
-        android:networkSecurityConfig="@xml/network_security_config"
         tools:targetApi="31">
+        <activity
+            android:name=".activity.HotlineActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.QrCodeScanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.WebviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MessageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AccessRecordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.NewsSearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.BDAddressSelectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.UserAddressAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.UserOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SmsLoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.CreateOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.UserAddressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.CartActivity"
+            android:exported="false" /> <!-- 为调用相机拍照设置内容提供者 -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.roydon.community.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:ignore="WrongManifestParent">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity
+            android:name=".activity.GoodDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="3hyBCuhdrkTnOLDX5XLwl5dBRtxnnuRH" /> <!-- baidu地图 -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+
+        <activity
+            android:name=".activity.UserInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.NewsDetailActivity"
+            android:exported="false"
+            android:label="@string/title_activity_news_detail"
+            android:theme="@style/Theme.Communityandroid.NoActionBar" />
         <activity
             android:name=".activity.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
 public class FixedViewPager extends ViewPager {
+
     public FixedViewPager(@NonNull Context context) {
         super(context);
     }
@@ -17,7 +18,8 @@ public class FixedViewPager extends ViewPager {
     }
 
     @Override
-    public void setCurrentItem(int item)  {
+    public void setCurrentItem(int item) {
         super.setCurrentItem(item, false);
     }
+
 }

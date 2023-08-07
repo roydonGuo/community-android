@@ -3,24 +3,54 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('D:\\Android\\tools\\keystore\\community-key.jks')
+            keyAlias 'community'
+            storePassword 'qwer1234'
+            keyPassword 'qwer1234'
+        }
+        release {
+            storeFile file('D:\\Android\\tools\\keystore\\community-release.jks')
+            storePassword 'roydon#Android'
+            keyPassword 'roydon#Android'
+            keyAlias 'community'
+        }
+    }
+
+//    signingConfigs {
+//        release {
+//            storeFile file('community-key.jks')
+//            keyAlias 'community'
+//            storePassword 'qwer1234'
+//            keyPassword 'qwer1234'
+//        }
+//    }
+
 //    namespace 'com.roydon.community'
 
     compileSdkVersion 32
 
     defaultConfig {
         applicationId "com.roydon.community"
-        minSdkVersion 16
+        minSdkVersion 24
         targetSdkVersion 32
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            //设置支持的SO库架构
+            abiFilters "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.release
         }
     }
 
@@ -29,14 +59,66 @@ android {
         targetCompatibility 1.8
     }
 
+    buildFeatures {
+        viewBinding true
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+    }
+
 //    sourceSets {main {res.srcDirs = ['src/main/res', 'src/main/res-night']}}
 }
 
 dependencies {
+    implementation fileTree(includes: ['*.jar'], dir: 'libs')
 
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    // 百度地图jar包
+//    implementation(name: 'BaiduLBS_Android', ext: 'jar')
+    implementation files('libs/BaiduLBS_Android.jar')
+//    implementation 'com.baidu.lbsyun:BaiduMapSDK_Map:7.5.8'
+//    implementation 'com.baidu.lbsyun:BaiduMapSDK_Search:7.5.8'
+//    implementation 'com.baidu.lbsyun:BaiduMapSDK_Util:7.5.8'
+    //地图组件
+    //implementation 'com.baidu.lbsyun:BaiduMapSDK_Map:7.5.4'
+    //检索组件
+    //implementation 'com.baidu.lbsyun:BaiduMapSDK_Search:7.5.4'
+    //工具组件
+    //implementation 'com.baidu.lbsyun:BaiduMapSDK_Util:7.5.4'
+    //步骑行组件
+    //implementation 'com.baidu.lbsyun:BaiduMapSDK_Map-BWNavi:7.5.4'
+    //基础定位组件
+    //implementation 'com.baidu.lbsyun:BaiduMapSDK_Location:9.3.7'
+    //全量定位组件
+    //implementation 'com.baidu.lbsyun:BaiduMapSDK_Location_All:9.3.7'
+    //驾车导航组件
+    //implementation 'com.baidu.lbsyun:BaiduMapSDK_Map-Navi:7.5.4'
+    //驾车导航+步骑行导航
+    //implementation 'com.baidu.lbsyun:BaiduMapSDK_Map-AllNavi:7.5.4'
+    //TTS组件
+    //implementation 'com.baidu.lbsyun:NaviTts:3.2.8'
+    //全景组件
+    //implementation 'com.baidu.lbsyun:BaiduMapSDK_Panorama:2.9.0'
+
+//    implementation 'com.baidu.lbsyun:BaiduMapSDK_Search:7.4.0'//检索组件
+//    implementation 'com.baidu.lbsyun:BaiduMapSDK_Util:7.4.0'//工具组件
+//    implementation 'com.baidu.lbsyun:BaiduMapSDK_Location:9.1.8'//基础定位组件
+//    implementation 'com.baidu.lbsyun:BaiduMapSDK_Map-AllNavi:7.4.0'//导航
+//    implementation 'com.baidu.lbsyun:NaviTts:2.5.5'//TTS语言
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
@@ -45,17 +127,39 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     // gson
     implementation 'com.google.code.gson:gson:2.10.1'
+    // fastjson
+//    api 'com.alibaba:fastjson:1.2.54'
     // 底部导航栏flycoTabLayout
     implementation 'io.github.h07000223:flycoTabLayout:3.0.0'
-
+//    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+    // BaseRecyclerViewAdapterHelper库
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'com.zhy:base-rvadapter:3.0.3'
 
+    // https://github.com/youlookwhat/ByRecyclerView/wiki
+    // implementation 'com.github.youlookwhat:ByRecyclerView:1.3.7'
+// zhihu图片选择库
+//    implementation "com.github.leavesCZY:Matisse:1.0.0-beta03"
+//    implementation 'com.zhihu.android:matisse:0.5.3-beta3'
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.3'
 
     // 圆角图片
     implementation 'com.makeramen:roundedimageview:2.3.0'
+    // 引入CircleImageView照片库
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    // glide图片库
+//    implementation 'com.github.bumptech.glide:glide:4.11.0'
+//    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    // 富文本库
+    implementation 'com.zzhoujay.richtext:richtext:3.0.7'
+
+    // 城市选择插件
+    implementation 'com.contrarywind:Android-PickerView:4.1.9'
 
 //    implementation  'io.github.scwang90:refresh-layout-kernel:2.0.6'      //核心必须依赖
 //    implementation  'io.github.scwang90:refresh-header-classics:2.0.6'    //经典刷新头
@@ -76,6 +180,46 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.2.3'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 
+    // 图片库
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+//    implementation 'com.github.bumptech.glide:okhttp3-integration:4.11.0'
+    // 图片预览工具库
+    implementation 'com.ycjiang:ImagePreview:2.3.5'
+
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    // banner轮播图https://github.com/youth5201314/banner
+    // 轮播图库
+    implementation 'io.github.youth5201314:banner:2.2.2'
+
 //    implementation 'skin.support:skin-support:4.0.5'                   // skin-support
 //    implementation 'skin.support:skin-support-appcompat:4.0.5'         // skin-support 基础控件支持
+
+    //Zoomage实现可缩放的ImageView
+    implementation 'com.jsibbold:zoomage:1.3.1'
+
+    // java-websocket
+    implementation 'org.java-websocket:Java-WebSocket:1.5.4'
+
+    // 加载动画 https://github.com/Carson-Ho/Kawaii_LoadingView
+    implementation 'com.carson_ho:Kawaii_LoadingView:1.0.0'
+
+    // Google Play 服务 https://developer.android.google.cn/training/wearables/apps/creating-app-china?hl=zh-cn#voice-actions-support
+    // com.google.android.gms:play-services-wearable:10.2.0
+//    implementation 'com.google.android.gms:play-services-location:10.2.0'
+
+    // 相机相关依赖
+    implementation 'androidx.camera:camera-camera2:1.1.0'
+    implementation 'androidx.camera:camera-lifecycle:1.1.0'
+    implementation 'androidx.camera:camera-view:1.1.0-beta02'
+
+    // MLKit Barcode Scanning依赖
+    implementation 'com.google.mlkit:barcode-scanning:17.0.0'
+
+    // 工具类库
+    implementation 'com.blankj:utilcodex:1.31.1'
+
+    //动态权限获取(权限简单获取)
+    implementation 'pub.devrel:easypermissions:3.0.0'
+
 }

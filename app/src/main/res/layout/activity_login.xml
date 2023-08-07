@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/shape_login_register_background"
+    android:background="@color/activity_background"
     tools:context=".activity.LoginActivity">
 
     <RelativeLayout
@@ -22,7 +22,7 @@
             android:id="@+id/tv_login_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_189dp"
+            android:layout_marginTop="@dimen/dimen_200dp"
             android:gravity="center"
             android:text="@string/username_password_login"
             android:textColor="@color/black"
@@ -51,10 +51,7 @@
                 android:background="@drawable/shape_login_edittext"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/dimen_20dp"
-                android:paddingTop="@dimen/dimen_20dp"
-                android:paddingRight="@dimen/dimen_20dp"
-                android:paddingBottom="@dimen/dimen_20dp">
+                android:padding="@dimen/dimen_20dp">
 
                 <ImageView
                     android:layout_width="@dimen/dimen_icon_16dp"
@@ -66,18 +63,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen_20dp"
-                    android:layout_marginLeft="@dimen/dimen_20dp"
                     android:autofillHints="admin"
                     android:background="@null"
                     android:hint="@string/username_hint"
                     android:inputType="textCapWords"
-                    android:text="admin"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textColorHint="@color/grey"
-                    android:textSize="@dimen/dimen_16sp" />
+                    android:textSize="@dimen/font_main_size" />
             </LinearLayout>
             <!-- 分割线 -->
-            <View
+            <Space
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_3dp"
                 android:layout_marginTop="@dimen/dimen_10dp"
@@ -90,10 +86,7 @@
                 android:background="@drawable/shape_login_edittext"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/dimen_20dp"
-                android:paddingTop="@dimen/dimen_20dp"
-                android:paddingRight="@dimen/dimen_20dp"
-                android:paddingBottom="@dimen/dimen_20dp">
+                android:padding="@dimen/dimen_20dp">
 
                 <ImageView
                     android:layout_width="@dimen/dimen_icon_16dp"
@@ -105,15 +98,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen_20dp"
-                    android:layout_marginLeft="@dimen/dimen_20dp"
-                    android:autofillHints="123456"
+                    android:autofillHints="admin#123456"
                     android:background="@null"
                     android:hint="@string/password_hint"
                     android:inputType="textPassword"
-                    android:text="123456"
+                    android:password="true"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textColorHint="@color/grey"
-                    android:textSize="@dimen/dimen_16sp" />
+                    android:textSize="@dimen/font_main_size"
+                    tools:ignore="Deprecated" />
             </LinearLayout>
         </LinearLayout>
 
@@ -145,12 +139,14 @@
                 android:paddingRight="20dp">
                 <!--验证码登录-->
                 <TextView
+                    android:id="@+id/tv_to_sms_login"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimen_20dp"
                     android:layout_weight="1"
                     android:gravity="left"
                     android:text="@string/sms_login"
-                    android:textSize="@dimen/dimen_12sp" />
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/font_third_size" />
                 <!--去注册-->
                 <TextView
                     android:id="@+id/tv_to_register"
@@ -159,7 +155,8 @@
                     android:layout_weight="1"
                     android:gravity="right"
                     android:text="@string/to_register"
-                    android:textSize="@dimen/dimen_12sp" />
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/font_third_size" />
             </LinearLayout>
         </LinearLayout>
 
@@ -182,7 +179,7 @@
                 android:layout_alignParentBottom="true"
                 android:text="登录即代表阅读并同意服务条款"
                 android:textColor="@color/black"
-                android:textSize="@dimen/dimen_12sp" />
+                android:textSize="@dimen/font_third_size" />
         </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>
