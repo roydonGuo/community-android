@@ -56,6 +56,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 public class UserInfoActivity extends BaseActivity {
+    private String TOOL_TITLE = "我的资料";
 
     // 页面传值常量
     private static final int TAKE_PHOTO = 100;
@@ -65,10 +66,9 @@ public class UserInfoActivity extends BaseActivity {
     private static final int HANDLER_WHAT_USERINFO = 0;
     private static final int HANDLER_REFRESH_USERINFO = 1;
 
-    /**
-     * 顶部top-bar功能栏
-     */
+    // toolbar
     private ImageView ivReturn;
+    private TextView tvToolTitle;
 
     // 头像
     private LinearLayout llEditAvatar;
@@ -114,6 +114,8 @@ public class UserInfoActivity extends BaseActivity {
     @Override
     protected void initView() {
         ivReturn = findViewById(R.id.iv_return);
+        tvToolTitle = findViewById(R.id.tv_tool_title);
+        tvToolTitle.setText(TOOL_TITLE);
 
         llEditAvatar = findViewById(R.id.ll_edit_avatar);
         // 用户头像

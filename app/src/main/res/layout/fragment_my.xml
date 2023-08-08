@@ -488,6 +488,49 @@
                         android:layout_marginRight="15dp"
                         android:background="@color/fragment_background" />
 
+                    <RelativeLayout
+                        android:id="@+id/rl_health_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp">
+
+                        <ImageView
+                            android:id="@+id/iv_health_code"
+                            android:layout_width="@dimen/icon_main_size"
+                            android:layout_height="@dimen/icon_main_size"
+                            android:layout_centerVertical="true"
+                            android:padding="2dp"
+                            android:src="@mipmap/icon_access_report" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:layout_toEndOf="@+id/iv_health_code"
+                            android:layout_toRightOf="@+id/iv_health_code"
+                            android:gravity="center|left"
+                            android:paddingLeft="10dp"
+                            android:text="防疫健康码"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/icon_right" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@color/fragment_background" />
+
                     <!--                    <RelativeLayout-->
                     <!--                        android:id="@+id/rl_detail"-->
                     <!--                        android:layout_width="match_parent"-->
@@ -572,13 +615,6 @@
                     android:layout_marginTop="@dimen/mg_10"
                     android:background="@drawable/shape_radius"
                     android:orientation="vertical">
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:background="@color/fragment_background" />
 
                     <RelativeLayout
                         android:id="@+id/rl_feedback"

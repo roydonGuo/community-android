@@ -1,14 +1,21 @@
 package com.roydon.community.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +42,8 @@ import java.util.List;
  * @description 紧急热线
  */
 public class HotlineActivity extends BaseActivity {
+
+    public static final int REQUEST_CALL_PERMISSION = 10111; //拨号请求码
 
     /**
      * 顶部top-bar功能栏
@@ -105,7 +114,7 @@ public class HotlineActivity extends BaseActivity {
         hotlineAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                call(hotlineList.get(position).getTelephone());
             }
 
             @Override
@@ -123,6 +132,73 @@ public class HotlineActivity extends BaseActivity {
             getHotlineList(false);
         });
 
+    }
+
+    /**
+     * 判断是否有某项权限
+     *
+     * @param string_permission 权限
+     * @param request_code      请求码
+     * @return
+     */
+    public boolean checkReadPermission(String string_permission, int request_code) {
+        boolean flag = false;
+        if (ContextCompat.checkSelfPermission(this, string_permission) == PackageManager.PERMISSION_GRANTED) {//已有权限
+            flag = true;
+        } else {//申请权限
+            ActivityCompat.requestPermissions(this, new String[]{string_permission}, request_code);
+        }
+        return flag;
+    }
+
+    /**
+     * 检查权限后的回调
+     *
+     * @param requestCode  请求码
+     * @param permissions  权限
+     * @param grantResults 结果
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_CALL_PERMISSION: //拨打电话
+                if (permissions.length != 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {//失败
+                    Toast.makeText(this, "请允许拨号权限后再试", Toast.LENGTH_SHORT).show();
+                } else {
+                    //成功
+                    call("13592342233");
+                }
+                break;
+        }
+    }
+    /**
+     * 1.直接拨打电话。
+     *
+     *  Intent Intent =  new Intent(Intent.ACTION_CALL,Uri.parse("tel:" + phoneNumber));
+     *  startActivity(Intent);
+     *
+     * 2.Android跳转到拨号界面。
+     *
+     *  Intent Intent =  new Intent(Intent.ACTION_CALL_BUTTON);//跳转到拨号界面
+     *  startActivity(Intent);
+     *
+     * 3.Android跳转到拨号界面，同时传递电话号码。
+     *
+     *  Intent Intent =  new Intent(Intent.ACTION_DIAL,Uri.parse("tel:" + phoneNumber));
+     *  startActivity(Intent);
+     */
+
+    /**
+     * 拨打电话（跳转到拨号界面）
+     *
+     * @param telPhone 电话
+     */
+    public void call(String telPhone) {
+        if (checkReadPermission(Manifest.permission.CALL_PHONE, REQUEST_CALL_PERMISSION)) {
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + telPhone));
+            startActivity(intent);
+        }
     }
 
     private void getHotlineList(final boolean isRefresh) {

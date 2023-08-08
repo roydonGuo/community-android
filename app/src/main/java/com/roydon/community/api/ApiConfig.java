@@ -29,6 +29,11 @@ public class ApiConfig {
     public static final String USER_PROFILE_AVATAR = "/system/user/profile/avatar"; // 修改头像
 
     /**
+     * 健康码接口
+     */
+    public static final String HEALTH_CODE_GET = "/epidemic/health/code"; // 查询健康码
+
+    /**
      * 新闻模块接口
      */
     public static final String NEWS_CATEGORY_LIST = "/app/news/category"; //新闻分类
