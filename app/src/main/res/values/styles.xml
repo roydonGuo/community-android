@@ -21,6 +21,14 @@
         <item name="cornerSize">10dp</item>
     </style>
 
+    <!-- 动画 -->
+<!--    <style name="AppSlide" parent="@android:style/Animation.Activity">-->
+<!--        <item name="android:activityOpenEnterAnimation">@anim/slide_top_in</item>-->
+<!--        <item name="android:activityOpenExitAnimation">@anim/out_activity</item>-->
+<!--        <item name="android:activityCloseEnterAnimation">@anim/in_activity_close</item>-->
+<!--        <item name="android:activityCloseExitAnimation">@anim/slide_top_bottom</item>-->
+<!--    </style>-->
+
     <!-- 自定义弹出样式 -->
     <style name="MyDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
         <!--是否浮在窗口之上-->

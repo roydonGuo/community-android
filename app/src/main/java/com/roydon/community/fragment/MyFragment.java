@@ -29,6 +29,7 @@ import com.roydon.community.activity.AccessRecordActivity;
 import com.roydon.community.activity.BDAddressSelectActivity;
 import com.roydon.community.activity.HealthCodeActivity;
 import com.roydon.community.activity.HotlineActivity;
+import com.roydon.community.activity.InoculationHistoryActivity;
 import com.roydon.community.activity.LoginActivity;
 import com.roydon.community.activity.MessageActivity;
 import com.roydon.community.activity.SettingActivity;
@@ -71,7 +72,7 @@ public class MyFragment extends BaseFragment {
     private ImageView ivShare, ivTheme;
     // 订单栏功能
     private LinearLayout llUserOrder;
-    private RelativeLayout rlUserAddress, rlAccessRecord, rlHotline, rlHealthCode, rlReturnLogin, rlWebview, rlSetting;
+    private RelativeLayout rlUserAddress, rlAccessRecord, rlHotline, rlHealthCode, rlInoculationHistoryReport, rlReturnLogin, rlWebview, rlSetting;
 
     // 测试功能区
     private RelativeLayout rlBDAddress, rlMessage;
@@ -116,6 +117,8 @@ public class MyFragment extends BaseFragment {
         rlHotline = mRootView.findViewById(R.id.rl_hotline);
         rlHealthCode = mRootView.findViewById(R.id.rl_health_code);
         rlReturnLogin = mRootView.findViewById(R.id.rl_return_login);
+        rlInoculationHistoryReport = mRootView.findViewById(R.id.rl_inoculation_history_report);
+
         // 用户info栏
 //        userBg = mRootView.findViewById(R.id.iv_user_bg);
         userAvatar = mRootView.findViewById(R.id.img_header);
@@ -185,8 +188,11 @@ public class MyFragment extends BaseFragment {
         rlHotline.setOnClickListener(v -> {
             navigateTo(HotlineActivity.class);
         });
-        rlHealthCode.setOnClickListener(v->{
+        rlHealthCode.setOnClickListener(v -> {
             navigateTo(HealthCodeActivity.class);
+        });
+        rlInoculationHistoryReport.setOnClickListener(v -> {
+            navigateTo(InoculationHistoryActivity.class);
         });
         rlBDAddress.setOnClickListener(v -> {
             navigateTo(BDAddressSelectActivity.class);

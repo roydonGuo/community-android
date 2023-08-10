@@ -26,4 +26,5 @@
     <style name="Theme.Communityandroid.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Communityandroid.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

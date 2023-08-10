@@ -29,8 +29,7 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-
-    <uses-permission android:name="android.permission.CALL_PHONE" /> <!--电话权限-->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -43,6 +42,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Communityandroid"
         tools:targetApi="31">
+        <activity
+            android:name=".activity.InoculationHistoryReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.InoculationHistoryActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.HealthCodeActivity"
             android:exported="false" />
