@@ -8,6 +8,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+
 import androidx.appcompat.widget.AppCompatImageView;
 
 public class RoundImageView extends AppCompatImageView {
@@ -44,8 +45,7 @@ public class RoundImageView extends AppCompatImageView {
     }
 
     @Override
-    protected void onLayout(boolean changed, int left, int top, int right,
-                            int bottom) {
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
         int w = getWidth();
         int h = getHeight();

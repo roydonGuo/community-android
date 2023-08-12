@@ -5,9 +5,9 @@ public class ApiConfig {
     public static final int PAGE_SIZE = 10;
     public static final int PAGE_SIZE_20 = 20;
 
-//    public static final String BASE_URl = "http://106.14.105.101:8088";
+    public static final String BASE_URl = "http://106.14.105.101:8088";
 //    public static final String BASE_URl = "http://192.168.0.101:8088";
-    public static final String BASE_URl = "http://192.168.68.179:8088";
+//    public static final String BASE_URl = "http://192.168.68.179:8088";
 
     /**
      * app前缀接口

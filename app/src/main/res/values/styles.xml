@@ -29,7 +29,7 @@
 <!--        <item name="android:activityCloseExitAnimation">@anim/slide_top_bottom</item>-->
 <!--    </style>-->
 
-    <!-- 自定义弹出样式 -->
+    <!-- 自定义弹窗样式 -->
     <style name="MyDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
         <!--是否浮在窗口之上-->
         <!--<item name="android:windowIsFloating">true</item>-->
