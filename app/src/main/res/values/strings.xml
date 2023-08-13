@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">智慧社区</string>
-    <string name="main_text_size">16sp</string>
     <!-- 登录注册按钮-->
     <string name="login">登录</string>
     <string name="to_login">去登录</string>
@@ -26,12 +25,97 @@
     <string name="not_more">~ 没有更多啦 ~</string>
     <string name="share_to_people">点击分享</string>
 
+    <!-- 通用的 -->
+    <string name="common_loading">加载中&#8230;</string>
+
+    <string name="common_unknown_error">未知错误</string>
+
+    <string name="common_confirm">确定</string>
+    <string name="common_cancel">取消</string>
+
+    <string name="common_year">年</string>
+    <string name="common_month">月</string>
+    <string name="common_day">日</string>
+
+    <string name="common_hour">时</string>
+    <string name="common_minute">分</string>
+    <string name="common_second">秒</string>
+
+    <string name="common_crash_hint">应用出了点小意外，正在重新启动</string>
+
+    <string name="common_network_error">当前网络不可用，请检查网络设置</string>
+
+    <string name="common_video_error_not_support">该视频不适合在此设备上播放</string>
+    <string name="common_video_error_unknown">无法播放此视频</string>
+    <string name="common_video_error_supplement">错误类型：%d，错误代码：%d</string>
+
+    <string name="common_phone_input_hint">请输入手机号码</string>
+    <string name="common_phone_input_error">手机号输入不正确</string>
+
+    <string name="common_password_input_error">请输入密码</string>
+    <string name="common_password_input_unlike">两次密码输入不一致，请重新输入</string>
+
+    <string name="common_code_input_hint">请输入验证码</string>
+    <string name="common_code_send">发送验证码</string>
+    <string name="common_code_send_hint">验证码已发送，请注意查收</string>
+    <string name="common_code_error_hint">验证码错误，请检查输入</string>
+
+    <string name="common_step_next">下一步</string>
+    <string name="common_step_complete">完成</string>
+    <string name="common_step_commit">提交</string>
+
+    <string name="common_permission_alert">授权提醒</string>
+    <string name="common_permission_fail_1">授权失败，请正确授予权限</string>
+    <string name="common_permission_fail_2">获取权限失败，请手动授予权限</string>
+    <string name="common_permission_fail_3">获取权限失败，请手动授予%s</string>
+    <string name="common_permission_fail_4">没有授予后台定位权限，请您选择"始终允许"</string>
+    <string name="common_permission_goto">前往授权</string>
+
+    <string name="common_permission_calendar">日历权限</string>
+    <string name="common_permission_camera">相机权限</string>
+    <string name="common_permission_contacts">通讯录权限</string>
+    <string name="common_permission_location">定位权限</string>
+    <string name="common_permission_location_background">后台定位权限</string>
+    <string name="common_permission_microphone">麦克风权限</string>
+    <string name="common_permission_phone">电话权限</string>
+    <string name="common_permission_call_log">通话记录权限</string>
+    <string name="common_permission_sensors">身体传感器权限</string>
+    <string name="common_permission_activity_recognition">健身运动权限</string>
+    <string name="common_permission_sms">短信权限</string>
+    <string name="common_permission_storage">存储权限</string>
+
+    <string name="common_permission_install">安装应用权限</string>
+    <string name="common_permission_notification">通知栏权限</string>
+    <string name="common_permission_window">悬浮窗权限</string>
+    <string name="common_permission_setting">系统设置权限</string>
+
+    <string name="common_network_hint">当前没有网络连接，请检查网络设置</string>
+    <string name="common_no_more_data">没有更多数据了</string>
+
+    <string name="common_web_ssl_error_title">当前网站安全证书已过期或不可信\n是否继续浏览</string>
+    <string name="common_web_ssl_error_allow">继续浏览</string>
+    <string name="common_web_ssl_error_reject">返回上一页</string>
+
+    <string name="common_web_location_permission_title">当前网站需要获取您的地理位置</string>
+    <string name="common_web_location_permission_allow">授予</string>
+    <string name="common_web_location_permission_reject">拒绝</string>
+
+    <string name="common_web_call_phone_title">当前号码 %s</string>
+    <string name="common_web_call_phone_allow">拨打</string>
+    <string name="common_web_call_phone_reject">取消</string>
+
     <!-- 0出1进 -->
     <string name="access_out">出</string>
     <string name="access_in">进</string>
 
     <!-- 布局提示文字 -->
     <string name="cancel">取消</string>
-    <string name="confirm">提交</string>
+    <string name="confirm">确定</string>
+    <string name="submit">提交</string>
+
+    <!-- 地区对话框 -->
+    <string name="address_selecter_title">请选择地区</string>
+    <string name="address_selecter_hint">请选择</string>
+
 
 </resources>

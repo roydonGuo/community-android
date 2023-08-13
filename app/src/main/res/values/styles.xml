@@ -8,11 +8,11 @@
     </style>
 
     <declare-styleable name="SunAnimationView">
-        <attr name="sun_circle_color" format="color"/>
-        <attr name="sun_font_color" format="color"/>
-        <attr name="sun_font_size" format="dimension"/>
-        <attr name="sun_circle_radius" format="integer"/>
-        <attr name="type" format="boolean"/>
+        <attr name="sun_circle_color" format="color" />
+        <attr name="sun_font_color" format="color" />
+        <attr name="sun_font_size" format="dimension" />
+        <attr name="sun_circle_radius" format="integer" />
+        <attr name="type" format="boolean" />
     </declare-styleable>
 
     <!-- 圆角图片 -->
@@ -22,12 +22,12 @@
     </style>
 
     <!-- 动画 -->
-<!--    <style name="AppSlide" parent="@android:style/Animation.Activity">-->
-<!--        <item name="android:activityOpenEnterAnimation">@anim/slide_top_in</item>-->
-<!--        <item name="android:activityOpenExitAnimation">@anim/out_activity</item>-->
-<!--        <item name="android:activityCloseEnterAnimation">@anim/in_activity_close</item>-->
-<!--        <item name="android:activityCloseExitAnimation">@anim/slide_top_bottom</item>-->
-<!--    </style>-->
+    <!--    <style name="AppSlide" parent="@android:style/Animation.Activity">-->
+    <!--        <item name="android:activityOpenEnterAnimation">@anim/slide_top_in</item>-->
+    <!--        <item name="android:activityOpenExitAnimation">@anim/out_activity</item>-->
+    <!--        <item name="android:activityCloseEnterAnimation">@anim/in_activity_close</item>-->
+    <!--        <item name="android:activityCloseExitAnimation">@anim/slide_top_bottom</item>-->
+    <!--    </style>-->
 
     <!-- 自定义弹窗样式 -->
     <style name="MyDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
@@ -67,8 +67,17 @@
     </style>
 
     <!-- CustomRadioTheme -->
-<!--    <style name="CustomRadioTheme" parent="@android:style/Widget.CompoundButton.CheckBox">-->
-<!--        <item name="android:button">@drawable/selector_radio_group</item>-->
-<!--    </style>-->
+    <!--    <style name="CustomRadioTheme" parent="@android:style/Widget.CompoundButton.CheckBox">-->
+    <!--        <item name="android:button">@drawable/selector_radio_group</item>-->
+    <!--    </style>-->
+
+    <!-- 上拉刷新下拉加载样式 -->
+    <style name="RefreshLayoutStyle" parent="Base.CardView">
+        <item name="srlPrimaryColor">@color/blue_deep</item>
+        <item name="srlAccentColor">@color/white</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="srlEnablePreviewInEditMode">false</item>
+    </style>
 
 </resources>

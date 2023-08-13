@@ -25,41 +25,35 @@ public class ImagePreviewLoader implements IZoomMediaLoader {
 
     @Override
     public void displayImage(@NonNull Fragment context, @NonNull String path, ImageView imageView, @NonNull MySimpleTarget mySimpleTarget) {
-        Glide.with(context)
-                .asBitmap()
-                .load(path)
-                .apply(new RequestOptions().fitCenter())
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        mySimpleTarget.onResourceReady();
-                        imageView.setImageBitmap(resource);
+        Glide.with(context).asBitmap().load(path).apply(new RequestOptions().fitCenter()).into(new SimpleTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                mySimpleTarget.onResourceReady();
+                imageView.setImageBitmap(resource);
 
-                    }
-                });
+            }
+        });
     }
 
     @Override
     public void displayGifImage(@NonNull Fragment context, @NonNull String path, ImageView imageView, @NonNull MySimpleTarget mySimpleTarget) {
-        Glide.with(context)
-                .asGif()
-                .load(path)
+        Glide.with(context).asGif().load(path)
                 //可以解决gif比较几种时 ，加载过慢  //DiskCacheStrategy.NONE
                 .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE).dontAnimate())
-               //去掉显示动画
+                //去掉显示动画
                 .listener(new RequestListener<GifDrawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<GifDrawable> target, boolean isFirstResource) {
                         mySimpleTarget.onResourceReady();
                         return false;
                     }
+
                     @Override
                     public boolean onResourceReady(GifDrawable resource, Object model, Target<GifDrawable> target, DataSource dataSource, boolean isFirstResource) {
-                       mySimpleTarget.onLoadFailed(null);
+                        mySimpleTarget.onLoadFailed(null);
                         return false;
                     }
-                })
-                .into(imageView);
+                }).into(imageView);
     }
 
     @Override

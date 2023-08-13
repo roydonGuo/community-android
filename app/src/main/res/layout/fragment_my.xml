@@ -12,14 +12,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!--        <androidx.appcompat.widget.Toolbar-->
-        <!--            android:id="@+id/toolbar"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:background="@mipmap/avatar_ganyu"-->
-        <!--            app:contentInsetStart="0dp"-->
-        <!--            app:popupTheme="@style/AppTheme.PopupOverlay">-->
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -899,6 +891,48 @@
                             android:gravity="center|left"
                             android:paddingLeft="10dp"
                             android:text="webview测试"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/font_main_size" />
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/icon_right" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@color/fragment_background" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_address_selecter"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp">
+
+                        <ImageView
+                            android:id="@+id/iv_address_selecter"
+                            android:layout_width="@dimen/icon_main_size"
+                            android:layout_height="@dimen/icon_main_size"
+                            android:layout_centerVertical="true"
+                            android:padding="2dp"
+                            android:src="@mipmap/icon_add" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:layout_toEndOf="@+id/iv_address_selecter"
+                            android:layout_toRightOf="@+id/iv_address_selecter"
+                            android:gravity="center|left"
+                            android:paddingLeft="10dp"
+                            android:text="地址选择弹窗"
                             android:textColor="@color/black"
                             android:textSize="@dimen/font_main_size" />
 

@@ -43,6 +43,9 @@
         android:theme="@style/Theme.Communityandroid"
         tools:targetApi="31">
         <activity
+            android:name=".activity.ImageSelectActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.InoculationHistoryReportActivity"
             android:exported="false" />
         <activity

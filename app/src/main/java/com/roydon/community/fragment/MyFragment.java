@@ -46,12 +46,14 @@ import com.roydon.community.domain.response.UserInfoRes;
 import com.roydon.community.domain.vo.AppUser;
 import com.roydon.community.enums.ThemeEnum;
 import com.roydon.community.listener.OnShareDialogClickListener;
+import com.roydon.community.ui.dialog.AddressDialog;
 import com.roydon.community.utils.android.SystemUtils;
 import com.roydon.community.utils.cache.SPUtils;
 import com.roydon.community.utils.string.StringUtil;
 import com.roydon.community.view.AlertDialogX;
 import com.roydon.community.view.CircleTransform;
 import com.roydon.community.view.DialogX;
+import com.roydon.library.BaseDialog;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -72,7 +74,7 @@ public class MyFragment extends BaseFragment {
     private ImageView ivShare, ivTheme;
     // 订单栏功能
     private LinearLayout llUserOrder;
-    private RelativeLayout rlUserAddress, rlAccessRecord, rlHotline, rlHealthCode, rlInoculationHistoryReport, rlReturnLogin, rlWebview, rlSetting;
+    private RelativeLayout rlUserAddress, rlAccessRecord, rlHotline, rlHealthCode, rlInoculationHistoryReport, rlAddressSelecter, rlReturnLogin, rlWebview, rlSetting;
 
     // 测试功能区
     private RelativeLayout rlBDAddress, rlMessage;
@@ -118,6 +120,7 @@ public class MyFragment extends BaseFragment {
         rlHealthCode = mRootView.findViewById(R.id.rl_health_code);
         rlReturnLogin = mRootView.findViewById(R.id.rl_return_login);
         rlInoculationHistoryReport = mRootView.findViewById(R.id.rl_inoculation_history_report);
+        rlAddressSelecter = mRootView.findViewById(R.id.rl_address_selecter);
 
         // 用户info栏
 //        userBg = mRootView.findViewById(R.id.iv_user_bg);
@@ -193,6 +196,29 @@ public class MyFragment extends BaseFragment {
         });
         rlInoculationHistoryReport.setOnClickListener(v -> {
             navigateTo(InoculationHistoryActivity.class);
+        });
+        rlAddressSelecter.setOnClickListener(v -> {
+// 选择地区对话框
+            new AddressDialog.Builder(getContext()).setTitle(getString(R.string.address_selecter_title))
+                    // 设置默认省份
+                    .setProvince("河南省")
+                    // 设置默认城市（必须要先设置默认省份）
+                    .setCity("郑州市")
+                    // 不选择县级区域
+                    //.setIgnoreArea()
+                    .setListener(new AddressDialog.OnListener() {
+
+                        @Override
+                        public void onSelected(BaseDialog dialog, String province, String city, String area) {
+                            showShortToast(province + city + area);
+                        }
+
+                        @Override
+                        public void onCancel(BaseDialog dialog) {
+                            showShortToast("取消了");
+                        }
+                    }).show();
+
         });
         rlBDAddress.setOnClickListener(v -> {
             navigateTo(BDAddressSelectActivity.class);

@@ -11,6 +11,11 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.0"
 
+        // AOP 开发插件：https://mvnrepository.com/artifact/org.aspectj/aspectjtools
+        classpath 'org.aspectj:aspectjtools:1.9.5'
+        // AOP 配置插件：https://github.com/xuexiangjys/XAOP
+        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:1.1.0'
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

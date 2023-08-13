@@ -17,10 +17,6 @@ import butterknife.Unbinder;
 
 public abstract class BaseFragment extends Fragment {
 
-    private boolean isFragmentVisible;
-    private boolean isReuseView;
-    private boolean isFirstVisible;
-
     protected View mRootView;
     private Unbinder unbinder;
 

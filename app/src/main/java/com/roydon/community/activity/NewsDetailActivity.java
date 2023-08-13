@@ -39,6 +39,8 @@ import java.util.List;
 
 public class NewsDetailActivity extends BaseActivity {
 
+    private ProgressBar loadingSpinner;
+
     private TextView tvNewsTitleTop, tvTitle, tvSource, tvContent;
     private ImageView ivSourceAvatar, ivReturn;
     private String newsId;
@@ -54,9 +56,7 @@ public class NewsDetailActivity extends BaseActivity {
                 AppNews appNews = (AppNews) msg.obj;
                 Log.e("onSuccess", appNews.getNewsId());
                 newsDetailShow(appNews);
-//                LoadingDialog.getInstance(getApplicationContext()).dismiss();
                 // 显示加载动画
-                ProgressBar loadingSpinner = findViewById(R.id.loading_spinner);
                 loadingSpinner.setVisibility(View.GONE);
             }
         }
@@ -77,10 +77,9 @@ public class NewsDetailActivity extends BaseActivity {
         ivSourceAvatar = findViewById(R.id.iv_source_avatar);
         ivReturn = findViewById(R.id.iv_return);
         ZoomMediaLoader.getInstance().init(new ImagePreviewLoader());
-        // 实例化
 //        mWebView = findViewById(R.id.webView);
         // 显示加载动画
-        ProgressBar loadingSpinner = findViewById(R.id.loading_spinner);
+        loadingSpinner = findViewById(R.id.loading_spinner);
         loadingSpinner.setVisibility(View.VISIBLE);
     }
 
@@ -92,11 +91,8 @@ public class NewsDetailActivity extends BaseActivity {
             newsId = bundle.getString("newsId");
             this.getNewsDetail(newsId);
         }
-        ivReturn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
+        ivReturn.setOnClickListener(v -> {
+            finish();
         });
     }
 
@@ -144,53 +140,23 @@ public class NewsDetailActivity extends BaseActivity {
 
     // 图片点击预览大图
     private void bigImageLoader(List<String> imageUrls, int position) {
-//        Dialog dialog = new Dialog(this);
         if (StringUtil.isEmpty(mImgPreviewLists)) {
             for (int i = 0; i < imageUrls.size(); i++) {
                 String url = imageUrls.get(i);
                 mImgPreviewLists.add(new ImageViewInfo(url));
             }
         }
-        GPreviewBuilder.from(this).setData(mImgPreviewLists)//放入数据集合
-                .setCurrentIndex(position).setSingleFling(true)//是否在黑屏区域点击返回
+        GPreviewBuilder.from(this)
+                .setData(mImgPreviewLists)//放入数据集合
+                .setCurrentIndex(position)
+                .setSingleFling(true)//是否在黑屏区域点击返回
                 .setDrag(false)//是否禁用图片拖拽返回
                 .setType(GPreviewBuilder.IndicatorType.Number)//指示器类型:dot,number
-                .start();//启动
-//        ImageView imageView = new ImageView(context);
-        /**
-         * scaleType=“matrix” 是保持原图大小、从左上角的点开始，以矩阵形式绘图。
-         * scaleType=“fitXY” 是将原图进行横方向（即XY方向）的拉伸后绘制的。
-         * scaleType=“fitStart” 是将原图沿左上角的点（即matrix方式绘图开始的点），按比例缩放原图绘制而成的。
-         * scaleType=“fitCenter” 是将原图沿上方居中的点（即matrix方式绘图第一行的居中的点），按比例缩放原图绘制而成的。
-         * scaleType=“fitEnd” 是将原图沿下方居中的点（即matrix方式绘图最后一行的居中的点），按比例缩放原图绘制而成的。
-         * scaleType=“Center” 是保持原图大小，以原图的几何中心点和ImagView的几何中心点为基准，只绘制ImagView大小的图像。
-         * scaleType=“centerCrop” 不保持原图大小，以原图的几何中心点和ImagView的几何中心点为基准，只绘制ImagView大小的图像（以填满ImagView为目标，对原图进行裁剪）。
-         * scaleType=“centerInside” 不保持原图大小，以原图的几何中心点和ImagView的几何中心点为基准，只绘制ImagView大小的图像（以显示完整图片为目标，对原图进行缩放）。
-         */
-//        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-//        Glide.with(context).load(imgUrl).centerCrop().into(imageView);
-        // 使用异步任务加载图片并显示在ImageView中
-//        new LoadImageTask().execute(imgUrl, imageView);
-
-        // 绑定xml组件
-//        dialog.setContentView(R.layout.dialog_image_preview);
-//
-//        ImageView imageView = dialog.findViewById(R.id.dialog_image);
-//        Glide.with(context).load(imgUrl).fitCenter().into(imageView);
-////        new LoadImageTask().execute(imgUrl, imageView);
-//        imageView.setScaleType(ImageView.ScaleType.MATRIX);
-//        ScaleGestureDetector scaleGestureDetector = new ScaleGestureDetector(context, new ScaleListener(imageView));
-//        imageView.setOnTouchListener((v, event) -> {
-//            scaleGestureDetector.onTouchEvent(event);
-//            return true;
-//        });
-//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//        dialog.show();
+                .start();
     }
 
     @Override
     protected void onDestroy() {
-
         super.onDestroy();
         RichText.clear(this);
     }
