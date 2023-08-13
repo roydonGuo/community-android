@@ -24,19 +24,20 @@ import java.util.List;
 import java.util.Random;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/10/18
- *    desc   : Activity 技术基类
+ * desc   : Activity 技术基类
  */
 public abstract class BaseActivity extends AppCompatActivity
         implements ActivityAction, ClickAction,
         HandlerAction, BundleAction, KeyboardAction {
 
-    /** 错误结果码 */
+    /**
+     * 错误结果码
+     */
     public static final int RESULT_ERROR = -2;
 
-    /** Activity 回调集合 */
+    /**
+     * Activity 回调集合
+     */
     private SparseArray<OnActivityCallback> mActivityCallbacks;
 
     @Override
@@ -192,8 +193,8 @@ public abstract class BaseActivity extends AppCompatActivity
         /**
          * 结果回调
          *
-         * @param resultCode        结果码
-         * @param data              数据
+         * @param resultCode 结果码
+         * @param data       数据
          */
         void onActivityResult(int resultCode, @Nullable Intent data);
     }

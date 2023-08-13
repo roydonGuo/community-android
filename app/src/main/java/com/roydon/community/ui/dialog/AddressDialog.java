@@ -23,7 +23,6 @@ import com.roydon.community.aop.SingleClick;
 import com.roydon.community.ui.adapter.AppAdapter;
 import com.roydon.community.ui.adapter.TabAdapter;
 import com.roydon.library.BaseDialog;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,11 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * author : Android 轮子哥
- * github : https://github.com/getActivity/AndroidProject
- * time   : 2019/02/12
  * desc   : 省市区选择对话框
- * doc    : https://baijiahao.baidu.com/s?id=1615894776741007967
  */
 public final class AddressDialog {
 
@@ -484,7 +479,8 @@ public final class AddressDialog {
                 return list;
 
             } catch (JSONException e) {
-                CrashReport.postCatchedException(e);
+//                CrashReport.postCatchedException(e);
+                e.printStackTrace();
             }
             return null;
         }
@@ -507,7 +503,8 @@ public final class AddressDialog {
 
                 return list;
             } catch (JSONException e) {
-                CrashReport.postCatchedException(e);
+//                CrashReport.postCatchedException(e);
+                e.printStackTrace();
                 return null;
             }
         }
@@ -530,7 +527,8 @@ public final class AddressDialog {
                 }
                 return list;
             } catch (JSONException e) {
-                CrashReport.postCatchedException(e);
+//                CrashReport.postCatchedException(e);
+                e.printStackTrace();
                 return null;
             }
         }
@@ -551,7 +549,8 @@ public final class AddressDialog {
                 inputStream.close();
                 return new JSONArray(outStream.toString());
             } catch (IOException | JSONException e) {
-                CrashReport.postCatchedException(e);
+//                CrashReport.postCatchedException(e);
+                e.printStackTrace();
             }
             return null;
         }

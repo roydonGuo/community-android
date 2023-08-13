@@ -12,16 +12,14 @@ import androidx.annotation.Nullable;
 
 import com.roydon.library.R;
 
-
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/08/23
- *    desc   : 按照比例显示的 FrameLayout
+ * desc   : 按照比例显示的 FrameLayout
  */
 public final class RatioFrameLayout extends FrameLayout {
 
-    /** 宽高比例 */
+    /**
+     * 宽高比例
+     */
     private float mWidthRatio;
     private float mHeightRatio;
 

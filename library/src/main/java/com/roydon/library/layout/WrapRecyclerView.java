@@ -17,18 +17,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/09/21
- *    desc   : 支持添加头部和底部的 RecyclerView
+ * desc   : 支持添加头部和底部的 RecyclerView
  */
 @SuppressWarnings("rawtypes")
 public final class WrapRecyclerView extends RecyclerView {
 
-    /** 原有的适配器 */
+    /**
+     * 原有的适配器
+     */
     private Adapter mRealAdapter;
 
-    /** 支持添加头部和底部的适配器 */
+    /**
+     * 支持添加头部和底部的适配器
+     */
     private final WrapRecyclerAdapter mWrapAdapter = new WrapRecyclerAdapter();
 
     public WrapRecyclerView(Context context) {
@@ -160,24 +161,40 @@ public final class WrapRecyclerView extends RecyclerView {
      */
     private static final class WrapRecyclerAdapter extends Adapter<ViewHolder> {
 
-        /** 头部条目类型 */
+        /**
+         * 头部条目类型
+         */
         private static final int HEADER_VIEW_TYPE = Integer.MIN_VALUE >> 1;
-        /** 底部条目类型 */
+        /**
+         * 底部条目类型
+         */
         private static final int FOOTER_VIEW_TYPE = Integer.MAX_VALUE >> 1;
 
-        /** 原有的适配器 */
+        /**
+         * 原有的适配器
+         */
         private Adapter mRealAdapter;
-        /** 头部View集合 */
+        /**
+         * 头部View集合
+         */
         private final List<View> mHeaderViews = new ArrayList<>();
-        /** 底部View集合 */
+        /**
+         * 底部View集合
+         */
         private final List<View> mFooterViews = new ArrayList<>();
-        /** 当前调用的位置 */
+        /**
+         * 当前调用的位置
+         */
         private int mCurrentPosition;
 
-        /** RecyclerView对象 */
+        /**
+         * RecyclerView对象
+         */
         private RecyclerView mRecyclerView;
 
-        /** 数据观察者对象 */
+        /**
+         * 数据观察者对象
+         */
         private WrapAdapterDataObserver mObserver;
 
         private void setRealAdapter(Adapter adapter) {

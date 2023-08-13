@@ -14,29 +14,42 @@ import com.roydon.library.R;
 import java.util.regex.Pattern;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/06/29
- *    desc   : 正则输入限制编辑框
+ * desc   : 正则输入限制编辑框
  */
 public class RegexEditText extends AppCompatEditText implements InputFilter {
 
-    /** 手机号（只能以 1 开头） */
+    /**
+     * 手机号（只能以 1 开头）
+     */
     public static final String REGEX_MOBILE = "[1]\\d{0,10}";
-    /** 中文（普通的中文字符） */
+    /**
+     * 中文（普通的中文字符）
+     */
     public static final String REGEX_CHINESE = "[\\u4e00-\\u9fa5]*";
-    /** 英文（大写和小写的英文） */
+    /**
+     * 英文（大写和小写的英文）
+     */
     public static final String REGEX_ENGLISH = "[a-zA-Z]*";
-    /** 数字（只允许输入纯数字）*/
+    /**
+     * 数字（只允许输入纯数字）
+     */
     public static final String REGEX_NUMBER = "\\d*";
-    /** 计数（非 0 开头的数字） */
+    /**
+     * 计数（非 0 开头的数字）
+     */
     public static final String REGEX_COUNT = "[1-9]\\d*";
-    /** 用户名（中文、英文、数字） */
+    /**
+     * 用户名（中文、英文、数字）
+     */
     public static final String REGEX_NAME = "[[\\u4e00-\\u9fa5]|[a-zA-Z]|\\d]*";
-    /** 非空格的字符（不能输入空格） */
+    /**
+     * 非空格的字符（不能输入空格）
+     */
     public static final String REGEX_NONNULL = "\\S+";
 
-    /** 正则表达式规则 */
+    /**
+     * 正则表达式规则
+     */
     private Pattern mPattern;
 
     public RegexEditText(Context context) {
@@ -161,13 +174,13 @@ public class RegexEditText extends AppCompatEditText implements InputFilter {
     /**
      * {@link InputFilter}
      *
-     * @param source        新输入的字符串
-     * @param start         新输入的字符串起始下标
-     * @param end           新输入的字符串终点下标
-     * @param dest          输入之前文本框内容
-     * @param destStart     在原内容上的起始坐标
-     * @param destEnd       在原内容上的终点坐标
-     * @return              返回字符串将会加入到内容中
+     * @param source    新输入的字符串
+     * @param start     新输入的字符串起始下标
+     * @param end       新输入的字符串终点下标
+     * @param dest      输入之前文本框内容
+     * @param destStart 在原内容上的起始坐标
+     * @param destEnd   在原内容上的终点坐标
+     * @return 返回字符串将会加入到内容中
      */
     @Override
     public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int destStart, int destEnd) {

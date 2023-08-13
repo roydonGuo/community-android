@@ -23,6 +23,7 @@ import com.roydon.community.R;
 import com.roydon.community.activity.NewsDetailActivity;
 import com.roydon.community.activity.NewsSearchActivity;
 import com.roydon.community.activity.QrCodeScanActivity;
+import com.roydon.community.activity.UserInfoActivity;
 import com.roydon.community.adapter.BannerAdapter;
 import com.roydon.community.adapter.NewsHotAdapter;
 import com.roydon.community.api.Api;
@@ -138,6 +139,9 @@ public class HomeFragment extends BaseFragment {
         rvNewsHot.setLayoutManager(linearLayoutManager);
         newsHotAdapter = new NewsHotAdapter(getActivity());
         rvNewsHot.setAdapter(newsHotAdapter);
+        userAvatar.setOnClickListener(v -> {
+            navigateTo(UserInfoActivity.class);
+        });
         newsHotAdapter.setOnItemClickListener(new NewsHotAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {

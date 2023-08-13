@@ -14,37 +14,47 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.roydon.library.action.ResourcesAction;
 
-
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/10/18
- *    desc   : RecyclerView 适配器技术基类
+ * desc   : RecyclerView 适配器技术基类
  */
 public abstract class BaseAdapter<VH extends BaseAdapter<?>.ViewHolder>
         extends RecyclerView.Adapter<VH> implements ResourcesAction {
 
-    /** 上下文对象 */
+    /**
+     * 上下文对象
+     */
     private final Context mContext;
 
-    /** RecyclerView 对象 */
+    /**
+     * RecyclerView 对象
+     */
     private RecyclerView mRecyclerView;
 
-    /** 条目点击监听器 */
+    /**
+     * 条目点击监听器
+     */
     @Nullable
     private OnItemClickListener mItemClickListener;
-    /** 条目长按监听器 */
+    /**
+     * 条目长按监听器
+     */
     @Nullable
     private OnItemLongClickListener mItemLongClickListener;
 
-    /** 条目子 View 点击监听器 */
+    /**
+     * 条目子 View 点击监听器
+     */
     @Nullable
     private SparseArray<OnChildClickListener> mChildClickListeners;
-    /** 条目子 View 长按监听器 */
+    /**
+     * 条目子 View 长按监听器
+     */
     @Nullable
     private SparseArray<OnChildLongClickListener> mChildLongClickListeners;
 
-    /** ViewHolder 位置偏移值 */
+    /**
+     * ViewHolder 位置偏移值
+     */
     private int mPositionOffset = 0;
 
     public BaseAdapter(Context context) {
@@ -145,7 +155,7 @@ public abstract class BaseAdapter<VH extends BaseAdapter<?>.ViewHolder>
             }
 
             if (view == getItemView()) {
-                if(mItemClickListener != null) {
+                if (mItemClickListener != null) {
                     mItemClickListener.onItemClick(mRecyclerView, view, position);
                 }
                 return;
@@ -270,14 +280,14 @@ public abstract class BaseAdapter<VH extends BaseAdapter<?>.ViewHolder>
     /**
      * RecyclerView 条目点击监听类
      */
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
 
         /**
          * 当 RecyclerView 某个条目被点击时回调
          *
-         * @param recyclerView      RecyclerView 对象
-         * @param itemView          被点击的条目对象
-         * @param position          被点击的条目位置
+         * @param recyclerView RecyclerView 对象
+         * @param itemView     被点击的条目对象
+         * @param position     被点击的条目位置
          */
         void onItemClick(RecyclerView recyclerView, View itemView, int position);
     }
@@ -290,10 +300,10 @@ public abstract class BaseAdapter<VH extends BaseAdapter<?>.ViewHolder>
         /**
          * 当 RecyclerView 某个条目被长按时回调
          *
-         * @param recyclerView      RecyclerView 对象
-         * @param itemView          被点击的条目对象
-         * @param position          被点击的条目位置
-         * @return                  是否拦截事件
+         * @param recyclerView RecyclerView 对象
+         * @param itemView     被点击的条目对象
+         * @param position     被点击的条目位置
+         * @return 是否拦截事件
          */
         boolean onItemLongClick(RecyclerView recyclerView, View itemView, int position);
     }
@@ -306,9 +316,9 @@ public abstract class BaseAdapter<VH extends BaseAdapter<?>.ViewHolder>
         /**
          * 当 RecyclerView 某个条目 子 View 被点击时回调
          *
-         * @param recyclerView      RecyclerView 对象
-         * @param childView         被点击的条目子 View
-         * @param position          被点击的条目位置
+         * @param recyclerView RecyclerView 对象
+         * @param childView    被点击的条目子 View
+         * @param position     被点击的条目位置
          */
         void onChildClick(RecyclerView recyclerView, View childView, int position);
     }
@@ -321,9 +331,9 @@ public abstract class BaseAdapter<VH extends BaseAdapter<?>.ViewHolder>
         /**
          * 当 RecyclerView 某个条目子 View 被长按时回调
          *
-         * @param recyclerView      RecyclerView 对象
-         * @param childView         被点击的条目子 View
-         * @param position          被点击的条目位置
+         * @param recyclerView RecyclerView 对象
+         * @param childView    被点击的条目子 View
+         * @param position     被点击的条目位置
          */
         boolean onChildLongClick(RecyclerView recyclerView, View childView, int position);
     }

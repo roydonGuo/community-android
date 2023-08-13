@@ -10,14 +10,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2021/09/17
- *    desc   : 带悬浮动画的按钮
+ * desc   : 带悬浮动画的按钮
  */
 public final class FloatActionButton extends AppCompatImageView {
 
-    /** 动画显示时长 */
+    /**
+     * 动画显示时长
+     */
     private static final int ANIM_TIME = 300;
 
     public FloatActionButton(@NonNull Context context) {

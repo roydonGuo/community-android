@@ -17,12 +17,8 @@ import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.roydon.library.R;
 
-
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/08/25
- *    desc   : 密码隐藏显示 EditText
+ * desc   : 密码隐藏显示 EditText
  */
 public final class PasswordEditText extends RegexEditText
         implements View.OnTouchListener,
@@ -176,8 +172,10 @@ public final class PasswordEditText extends RegexEditText
     }
 
     @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    }
 
     @Override
-    public void afterTextChanged(Editable s) {}
+    public void afterTextChanged(Editable s) {
+    }
 }

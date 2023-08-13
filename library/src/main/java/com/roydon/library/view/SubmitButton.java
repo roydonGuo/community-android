@@ -20,52 +20,76 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import com.roydon.library.R;
 
-
 /**
- *    author : Unstoppable & Android 轮子哥
- *    github : https://github.com/Someonewow/SubmitButton
- *    time   : 2016/12/31
- *    desc   : 带提交动画按钮
+ * desc   : 带提交动画按钮
  */
 public final class SubmitButton extends AppCompatButton {
 
-    /** 无进度 */
+    /**
+     * 无进度
+     */
     private static final int STYLE_LOADING = 0x00;
-    /** 带进度 */
+    /**
+     * 带进度
+     */
     private static final int STYLE_PROGRESS = 0x01;
 
-    /** 默认状态 */
+    /**
+     * 默认状态
+     */
     private static final int STATE_NONE = 0;
-    /** 提交状态 */
+    /**
+     * 提交状态
+     */
     private static final int STATE_SUBMIT = 1;
-    /** 加载状态 */
+    /**
+     * 加载状态
+     */
     private static final int STATE_LOADING = 2;
-    /** 结果状态 */
+    /**
+     * 结果状态
+     */
     private static final int STATE_RESULT = 3;
 
-    /** 当前按钮状态 */
+    /**
+     * 当前按钮状态
+     */
     private int mButtonState = STATE_NONE;
 
-    /** 当前进度条样式 */
+    /**
+     * 当前进度条样式
+     */
     private final int mProgressStyle;
     private float mCurrentProgress;
 
-    /** View 宽高 */
+    /**
+     * View 宽高
+     */
     private int mViewWidth;
     private int mViewHeight;
 
-    /** View 最大宽高 */
+    /**
+     * View 最大宽高
+     */
     private int mMaxWidth;
     private int mMaxHeight;
 
-    /** 画布坐标原点 */
+    /**
+     * 画布坐标原点
+     */
     private int mX, mY;
 
-    /** 进度按钮的颜色 */
+    /**
+     * 进度按钮的颜色
+     */
     private final int mProgressColor;
-    /** 成功按钮的颜色 */
+    /**
+     * 成功按钮的颜色
+     */
     private final int mSucceedColor;
-    /** 失败按钮的颜色 */
+    /**
+     * 失败按钮的颜色
+     */
     private final int mErrorColor;
 
     private Paint mBackgroundPaint, mLoadingPaint, mResultPaint;
@@ -82,9 +106,13 @@ public final class SubmitButton extends AppCompatButton {
 
     private ValueAnimator mSubmitAnim, mLoadingAnim, mResultAnim;
 
-    /** 是否有结果 */
+    /**
+     * 是否有结果
+     */
     private boolean mDoResult;
-    /** 是否成功了 */
+    /**
+     * 是否成功了
+     */
     private boolean mSucceed;
 
     public SubmitButton(Context context) {
@@ -200,12 +228,12 @@ public final class SubmitButton extends AppCompatButton {
      */
     private void drawButton(Canvas canvas) {
         mButtonPath.reset();
-        mCircleLeft.set(- mViewWidth / 2f, - mViewHeight / 2f, - mViewWidth / 2f + mViewHeight, mViewHeight / 2f);
+        mCircleLeft.set(-mViewWidth / 2f, -mViewHeight / 2f, -mViewWidth / 2f + mViewHeight, mViewHeight / 2f);
         mButtonPath.arcTo(mCircleLeft, 90, 180);
-        mButtonPath.lineTo(mViewWidth / 2f - mViewHeight / 2f, - mViewHeight / 2f);
-        mCircleRight.set(mViewWidth / 2f - mViewHeight, - mViewHeight / 2f, mViewWidth / 2f, mViewHeight / 2f);
+        mButtonPath.lineTo(mViewWidth / 2f - mViewHeight / 2f, -mViewHeight / 2f);
+        mCircleRight.set(mViewWidth / 2f - mViewHeight, -mViewHeight / 2f, mViewWidth / 2f, mViewHeight / 2f);
         mButtonPath.arcTo(mCircleRight, 270, 180);
-        mButtonPath.lineTo(- mViewWidth / 2f + mViewHeight / 2f, mViewHeight / 2f);
+        mButtonPath.lineTo(-mViewWidth / 2f + mViewHeight / 2f, mViewHeight / 2f);
         canvas.drawPath(mButtonPath, mBackgroundPaint);
     }
 
@@ -214,7 +242,7 @@ public final class SubmitButton extends AppCompatButton {
      */
     private void drawLoading(Canvas canvas) {
         mDstPath.reset();
-        mCircleMid.set(- mMaxHeight / 2f, - mMaxHeight / 2f, mMaxHeight / 2f, mMaxHeight / 2f);
+        mCircleMid.set(-mMaxHeight / 2f, -mMaxHeight / 2f, mMaxHeight / 2f, mMaxHeight / 2f);
         mLoadPath.addArc(mCircleMid, 270, 359.999f);
         mPathMeasure.setPath(mLoadPath, true);
         float startD = 0f, stopD;
@@ -233,13 +261,13 @@ public final class SubmitButton extends AppCompatButton {
      */
     private void drawResult(Canvas canvas, boolean isSucceed) {
         if (isSucceed) {
-            mResultPath.moveTo(- mViewHeight / 6f, 0);
-            mResultPath.lineTo(0, (float) (- mViewHeight / 6 + (1 + Math.sqrt(5)) * mViewHeight / 12));
-            mResultPath.lineTo(mViewHeight / 6f, - mViewHeight / 6f);
+            mResultPath.moveTo(-mViewHeight / 6f, 0);
+            mResultPath.lineTo(0, (float) (-mViewHeight / 6 + (1 + Math.sqrt(5)) * mViewHeight / 12));
+            mResultPath.lineTo(mViewHeight / 6f, -mViewHeight / 6f);
         } else {
-            mResultPath.moveTo(- mViewHeight / 6f, mViewHeight / 6f);
-            mResultPath.lineTo(mViewHeight / 6f, - mViewHeight / 6f);
-            mResultPath.moveTo(- mViewHeight / 6f, - mViewHeight / 6f);
+            mResultPath.moveTo(-mViewHeight / 6f, mViewHeight / 6f);
+            mResultPath.lineTo(mViewHeight / 6f, -mViewHeight / 6f);
+            mResultPath.moveTo(-mViewHeight / 6f, -mViewHeight / 6f);
             mResultPath.lineTo(mViewHeight / 6f, mViewHeight / 6f);
         }
         canvas.drawPath(mResultPath, mResultPaint);
@@ -265,7 +293,8 @@ public final class SubmitButton extends AppCompatButton {
         mSubmitAnim.addListener(new Animator.AnimatorListener() {
 
             @Override
-            public void onAnimationStart(Animator animation) {}
+            public void onAnimationStart(Animator animation) {
+            }
 
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -277,10 +306,12 @@ public final class SubmitButton extends AppCompatButton {
             }
 
             @Override
-            public void onAnimationCancel(Animator animation) {}
+            public void onAnimationCancel(Animator animation) {
+            }
 
             @Override
-            public void onAnimationRepeat(Animator animation) {}
+            public void onAnimationRepeat(Animator animation) {
+            }
         });
     }
 
@@ -327,7 +358,8 @@ public final class SubmitButton extends AppCompatButton {
         mResultAnim.addListener(new Animator.AnimatorListener() {
 
             @Override
-            public void onAnimationStart(Animator animation) {}
+            public void onAnimationStart(Animator animation) {
+            }
 
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -336,10 +368,12 @@ public final class SubmitButton extends AppCompatButton {
             }
 
             @Override
-            public void onAnimationCancel(Animator animation) {}
+            public void onAnimationCancel(Animator animation) {
+            }
 
             @Override
-            public void onAnimationRepeat(Animator animation) {}
+            public void onAnimationRepeat(Animator animation) {
+            }
         });
         mResultAnim.setDuration(300);
         mResultAnim.setInterpolator(new AccelerateInterpolator());

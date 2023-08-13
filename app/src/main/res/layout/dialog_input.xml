@@ -12,5 +12,5 @@
     android:paddingVertical="@dimen/dp_5"
     android:singleLine="true"
     android:textColor="#333333"
-    android:textSize="@dimen/sp_14"
+    android:textSize="@dimen/font_main_size"
     tools:context=".ui.dialog.InputDialog" />

@@ -49,10 +49,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/11/24
- *    desc   : Dialog 技术基类
+ * desc   : Dialog 技术基类
  */
 public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
         ActivityAction, ResourcesAction, HandlerAction, ClickAction, AnimAction, KeyboardAction,
@@ -230,8 +227,8 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
     /**
      * 设置一个显示监听器
      *
-     * @param listener       显示监听器对象
-     * @deprecated           请使用 {@link #addOnShowListener(OnShowListener)}}
+     * @param listener 显示监听器对象
+     * @deprecated 请使用 {@link #addOnShowListener(OnShowListener)}}
      */
     @Deprecated
     @Override
@@ -245,8 +242,8 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
     /**
      * 设置一个取消监听器
      *
-     * @param listener       取消监听器对象
-     * @deprecated           请使用 {@link #addOnCancelListener(OnCancelListener)}
+     * @param listener 取消监听器对象
+     * @deprecated 请使用 {@link #addOnCancelListener(OnCancelListener)}
      */
     @Deprecated
     @Override
@@ -260,8 +257,8 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
     /**
      * 设置一个销毁监听器
      *
-     * @param listener       销毁监听器对象
-     * @deprecated           请使用 {@link #addOnDismissListener(OnDismissListener)}
+     * @param listener 销毁监听器对象
+     * @deprecated 请使用 {@link #addOnDismissListener(OnDismissListener)}
      */
     @Deprecated
     @Override
@@ -275,8 +272,8 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
     /**
      * 设置一个按键监听器
      *
-     * @param listener       按键监听器对象
-     * @deprecated           请使用 {@link #setOnKeyListener(OnKeyListener)}
+     * @param listener 按键监听器对象
+     * @deprecated 请使用 {@link #setOnKeyListener(OnKeyListener)}
      */
     @Deprecated
     @Override
@@ -291,7 +288,7 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
     /**
      * 添加一个显示监听器
      *
-     * @param listener      监听器对象
+     * @param listener 监听器对象
      */
     public void addOnShowListener(@Nullable OnShowListener listener) {
         if (mShowListeners == null) {
@@ -304,7 +301,7 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
     /**
      * 添加一个取消监听器
      *
-     * @param listener      监听器对象
+     * @param listener 监听器对象
      */
     public void addOnCancelListener(@Nullable OnCancelListener listener) {
         if (mCancelListeners == null) {
@@ -317,7 +314,7 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
     /**
      * 添加一个销毁监听器
      *
-     * @param listener      监听器对象
+     * @param listener 监听器对象
      */
     public void addOnDismissListener(@Nullable OnDismissListener listener) {
         if (mDismissListeners == null) {
@@ -330,7 +327,7 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
     /**
      * 移除一个显示监听器
      *
-     * @param listener      监听器对象
+     * @param listener 监听器对象
      */
     public void removeOnShowListener(@Nullable OnShowListener listener) {
         if (mShowListeners == null) {
@@ -342,7 +339,7 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
     /**
      * 移除一个取消监听器
      *
-     * @param listener      监听器对象
+     * @param listener 监听器对象
      */
     public void removeOnCancelListener(@Nullable OnCancelListener listener) {
         if (mCancelListeners == null) {
@@ -354,7 +351,7 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
     /**
      * 移除一个销毁监听器
      *
-     * @param listener      监听器对象
+     * @param listener 监听器对象
      */
     public void removeOnDismissListener(@Nullable OnDismissListener listener) {
         if (mDismissListeners == null) {
@@ -455,53 +452,93 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
     public static class Builder<B extends Builder<?>> implements
             ActivityAction, ResourcesAction, ClickAction, KeyboardAction {
 
-        /** Activity 对象 */
+        /**
+         * Activity 对象
+         */
         private final Activity mActivity;
-        /** Context 对象 */
+        /**
+         * Context 对象
+         */
         private final Context mContext;
-        /** Dialog 对象 */
+        /**
+         * Dialog 对象
+         */
         private BaseDialog mDialog;
-        /** Dialog 布局 */
+        /**
+         * Dialog 布局
+         */
         private View mContentView;
 
-        /** 主题样式 */
+        /**
+         * 主题样式
+         */
         private int mThemeId = R.style.BaseDialogTheme;
-        /** 动画样式 */
+        /**
+         * 动画样式
+         */
         private int mAnimStyle = BaseDialog.ANIM_DEFAULT;
 
-        /** 宽度和高度 */
+        /**
+         * 宽度和高度
+         */
         private int mWidth = WindowManager.LayoutParams.WRAP_CONTENT;
         private int mHeight = WindowManager.LayoutParams.WRAP_CONTENT;
 
-        /** 重心位置 */
+        /**
+         * 重心位置
+         */
         private int mGravity = Gravity.NO_GRAVITY;
-        /** 水平偏移 */
+        /**
+         * 水平偏移
+         */
         private int mXOffset;
-        /** 垂直偏移 */
+        /**
+         * 垂直偏移
+         */
         private int mYOffset;
 
-        /** 是否能够被取消 */
+        /**
+         * 是否能够被取消
+         */
         private boolean mCancelable = true;
-        /** 点击空白是否能够取消  前提是这个对话框可以被取消 */
+        /**
+         * 点击空白是否能够取消  前提是这个对话框可以被取消
+         */
         private boolean mCanceledOnTouchOutside = true;
 
-        /** 背景遮盖层开关 */
+        /**
+         * 背景遮盖层开关
+         */
         private boolean mBackgroundDimEnabled = true;
-        /** 背景遮盖层透明度 */
+        /**
+         * 背景遮盖层透明度
+         */
         private float mBackgroundDimAmount = 0.5f;
 
-        /** Dialog 创建监听 */
+        /**
+         * Dialog 创建监听
+         */
         private OnCreateListener mCreateListener;
-        /** Dialog 显示监听 */
+        /**
+         * Dialog 显示监听
+         */
         private final List<OnShowListener> mShowListeners = new ArrayList<>();
-        /** Dialog 取消监听 */
+        /**
+         * Dialog 取消监听
+         */
         private final List<OnCancelListener> mCancelListeners = new ArrayList<>();
-        /** Dialog 销毁监听 */
+        /**
+         * Dialog 销毁监听
+         */
         private final List<OnDismissListener> mDismissListeners = new ArrayList<>();
-        /** Dialog 按键监听 */
+        /**
+         * Dialog 按键监听
+         */
         private OnKeyListener mKeyListener;
 
-        /** 点击事件集合 */
+        /**
+         * 点击事件集合
+         */
         private SparseArray<OnClickListener<?>> mClickArray;
 
         public Builder(Activity activity) {
@@ -520,6 +557,7 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
             // 这里解释一下，为什么要传 new FrameLayout，因为如果不传的话，XML 的根布局获取到的 LayoutParams 对象会为空，也就会导致宽高参数解析不出来
             return setContentView(LayoutInflater.from(mContext).inflate(id, new FrameLayout(mContext), false));
         }
+
         public B setContentView(View view) {
             // 请不要传入空的布局
             if (view == null) {
@@ -757,6 +795,7 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
         public B setText(@IdRes int viewId, @StringRes int stringId) {
             return setText(viewId, getString(stringId));
         }
+
         public B setText(@IdRes int id, CharSequence text) {
             ((TextView) findViewById(id)).setText(text);
             return (B) this;
@@ -776,6 +815,7 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
         public B setHint(@IdRes int viewId, @StringRes int stringId) {
             return setHint(viewId, getString(stringId));
         }
+
         public B setHint(@IdRes int id, CharSequence text) {
             ((TextView) findViewById(id)).setHint(text);
             return (B) this;
@@ -795,6 +835,7 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
         public B setBackground(@IdRes int viewId, @DrawableRes int drawableId) {
             return setBackground(viewId, ContextCompat.getDrawable(mContext, drawableId));
         }
+
         public B setBackground(@IdRes int id, Drawable drawable) {
             findViewById(id).setBackground(drawable);
             return (B) this;
@@ -806,6 +847,7 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
         public B setImageDrawable(@IdRes int viewId, @DrawableRes int drawableId) {
             return setBackground(viewId, ContextCompat.getDrawable(mContext, drawableId));
         }
+
         public B setImageDrawable(@IdRes int id, Drawable drawable) {
             ((ImageView) findViewById(id)).setImageDrawable(drawable);
             return (B) this;
@@ -1024,7 +1066,7 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
          * 根据 id 查找 View
          */
         @Override
-        public  <V extends View> V findViewById(@IdRes int id) {
+        public <V extends View> V findViewById(@IdRes int id) {
             if (mContentView == null) {
                 // 没有 setContentView 就想 findViewById ?
                 throw new IllegalStateException("are you ok?");
@@ -1055,7 +1097,9 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
         private BaseDialog mDialog;
         private Activity mActivity;
 
-        /** Dialog 动画样式（避免 Dialog 从后台返回到前台后再次触发动画效果） */
+        /**
+         * Dialog 动画样式（避免 Dialog 从后台返回到前台后再次触发动画效果）
+         */
         private int mDialogAnim;
 
         private DialogLifecycle(Activity activity, BaseDialog dialog) {
@@ -1065,10 +1109,12 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
         }
 
         @Override
-        public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {}
+        public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
+        }
 
         @Override
-        public void onActivityStarted(@NonNull Activity activity) {}
+        public void onActivityStarted(@NonNull Activity activity) {
+        }
 
         @Override
         public void onActivityResumed(@NonNull Activity activity) {
@@ -1106,10 +1152,12 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
         }
 
         @Override
-        public void onActivityStopped(@NonNull Activity activity) {}
+        public void onActivityStopped(@NonNull Activity activity) {
+        }
 
         @Override
-        public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {}
+        public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {
+        }
 
         @Override
         public void onActivityDestroyed(@NonNull Activity activity) {
@@ -1178,7 +1226,7 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
      * Dialog 监听包装类（修复原生 Dialog 监听器对象导致的内存泄漏）
      */
     private static final class ListenersWrapper<T extends DialogInterface.OnShowListener & DialogInterface.OnCancelListener & DialogInterface.OnDismissListener>
-                        extends SoftReference<T> implements DialogInterface.OnShowListener, DialogInterface.OnCancelListener, DialogInterface.OnDismissListener {
+            extends SoftReference<T> implements DialogInterface.OnShowListener, DialogInterface.OnCancelListener, DialogInterface.OnDismissListener {
 
         private ListenersWrapper(T referent) {
             super(referent);

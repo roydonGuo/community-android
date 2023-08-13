@@ -24,19 +24,13 @@
             android:orientation="horizontal"
             android:padding="@dimen/pd_6">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="20dp">
-
-                <ImageView
+                <com.roydon.community.widget.RoundImageView
                     android:id="@+id/index_user_avatar"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_vertical"
                     android:scaleType="fitXY"
                     android:src="@mipmap/avatar" />
-            </androidx.cardview.widget.CardView>
 
             <!--搜索框-->
             <LinearLayout

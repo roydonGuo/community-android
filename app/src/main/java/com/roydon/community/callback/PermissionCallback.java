@@ -16,9 +16,6 @@
 //import java.util.List;
 //
 ///**
-// *    author : Android 轮子哥
-// *    github : https://github.com/getActivity/AndroidProject
-// *    time   : 2020/10/24
 // *    desc   : 权限申请回调封装
 // */
 //public abstract class PermissionCallback implements OnPermissionCallback {

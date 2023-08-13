@@ -15,11 +15,7 @@ import com.roydon.community.R;
 import com.roydon.community.manager.ActivityStackManager;
 import com.roydon.community.widget.HintLayout;
 
-
 /**
- * author : Android 轮子哥
- * github : https://github.com/getActivity/AndroidProject
- * time   : 2019/12/08
  * desc   : 界面状态提示
  */
 public interface StatusAction {

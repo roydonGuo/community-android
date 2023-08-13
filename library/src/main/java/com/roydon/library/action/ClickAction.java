@@ -6,10 +6,7 @@ import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/09/15
- *    desc   : 点击事件意图
+ * desc   : 点击事件意图
  */
 public interface ClickAction extends View.OnClickListener {
 
@@ -26,7 +23,7 @@ public interface ClickAction extends View.OnClickListener {
     }
 
     default void setOnClickListener(View... views) {
-       setOnClickListener(this, views);
+        setOnClickListener(this, views);
     }
 
     default void setOnClickListener(@Nullable View.OnClickListener listener, View... views) {

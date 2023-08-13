@@ -13,9 +13,6 @@ import com.roydon.library.BaseDialog;
 
 
 /**
- * author : Android 轮子哥
- * github : https://github.com/getActivity/AndroidProject
- * time   : 2018/12/2
  * desc   : 提示对话框
  */
 public final class TipsDialog {

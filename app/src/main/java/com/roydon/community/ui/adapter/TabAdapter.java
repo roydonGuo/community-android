@@ -16,29 +16,33 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.roydon.community.R;
 import com.roydon.library.BaseAdapter;
 
-
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2021/02/28
- *    desc   : Tab 适配器
+ * desc   : Tab 适配器
  */
 public final class TabAdapter extends AppAdapter<String> implements BaseAdapter.OnItemClickListener {
 
     public static final int TAB_MODE_DESIGN = 1;
     public static final int TAB_MODE_SLIDING = 2;
 
-    /** 当前选中条目位置 */
+    /**
+     * 当前选中条目位置
+     */
     private int mSelectedPosition = 0;
 
-    /** 导航栏监听对象 */
+    /**
+     * 导航栏监听对象
+     */
     @Nullable
     private OnTabListener mListener;
 
-    /** Tab 样式 */
+    /**
+     * Tab 样式
+     */
     private final int mTabMode;
 
-    /** Tab 宽度是否固定 */
+    /**
+     * Tab 宽度是否固定
+     */
     private final boolean mFixed;
 
     public TabAdapter(Context context) {
@@ -230,10 +234,12 @@ public final class TabAdapter extends AppAdapter<String> implements BaseAdapter.
         }
 
         @Override
-        public void onItemRangeChanged(int positionStart, int itemCount, Object payload) {}
+        public void onItemRangeChanged(int positionStart, int itemCount, Object payload) {
+        }
 
         @Override
-        public void onItemRangeChanged(int positionStart, int itemCount) {}
+        public void onItemRangeChanged(int positionStart, int itemCount) {
+        }
 
         @Override
         public void onItemRangeInserted(int positionStart, int itemCount) {
@@ -249,7 +255,8 @@ public final class TabAdapter extends AppAdapter<String> implements BaseAdapter.
         }
 
         @Override
-        public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {}
+        public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
+        }
 
         private void refreshLayoutManager() {
             if (!mFixed) {

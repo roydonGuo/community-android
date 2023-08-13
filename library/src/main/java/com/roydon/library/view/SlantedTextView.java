@@ -24,37 +24,51 @@ import androidx.annotation.StringRes;
 
 import com.roydon.library.R;
 
-
 /**
- *    author : HaoZhang & Android 轮子哥
- *    github : https://github.com/HeZaiJin/SlantedTextView
- *    time   : 2016/06/30
- *    desc   : 一个倾斜的 TextView，适用于标签效果
+ * desc   : 一个倾斜的 TextView，适用于标签效果
  */
 @SuppressLint("RtlHardcoded")
 public final class SlantedTextView extends View {
 
-    /** 旋转角度 */
+    /**
+     * 旋转角度
+     */
     public static final int ROTATE_ANGLE = 45;
 
-    /** 背景画笔 */
+    /**
+     * 背景画笔
+     */
     private final Paint mBackgroundPaint;
-    /** 文字画笔 */
+    /**
+     * 文字画笔
+     */
     private final TextPaint mTextPaint;
 
-    /** 显示的文本 */
+    /**
+     * 显示的文本
+     */
     @NonNull
     private String mText = "";
-    /** 倾斜重心 */
+    /**
+     * 倾斜重心
+     */
     private int mGravity;
-    /** 是否绘制成三角形的 */
+    /**
+     * 是否绘制成三角形的
+     */
     private boolean mTriangle;
-    /** 背景颜色 */
+    /**
+     * 背景颜色
+     */
     private int mColorBackground;
 
-    /** 文字测量范围装载 */
+    /**
+     * 文字测量范围装载
+     */
     private final Rect mTextBounds = new Rect();
-    /** 测量出来的文本高度 */
+    /**
+     * 测量出来的文本高度
+     */
     private int mTextHeight;
 
     public SlantedTextView(Context context) {
@@ -226,7 +240,7 @@ public final class SlantedTextView extends View {
                 toY = rectF.top - mTextPaint.ascent();
                 centerX = width / 2f;
                 centerY = height / 2f;
-                angle = - ROTATE_ANGLE;
+                angle = -ROTATE_ANGLE;
                 break;
             // 右上角
             case Gravity.NO_GRAVITY:
@@ -271,13 +285,13 @@ public final class SlantedTextView extends View {
                 toY = rectF.top - mTextPaint.ascent();
                 centerX = width / 2f + offset;
                 centerY = height / 2f + offset;
-                angle = - ROTATE_ANGLE;
+                angle = -ROTATE_ANGLE;
                 break;
             default:
                 throw new IllegalArgumentException("are you ok?");
         }
 
-        canvas.rotate(angle, centerX , centerY);
+        canvas.rotate(angle, centerX, centerY);
         canvas.drawText(mText, toX, toY, mTextPaint);
     }
 

@@ -15,39 +15,57 @@ import androidx.core.content.ContextCompat;
 
 import com.roydon.library.R;
 
-
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2021/07/11
- *    desc   : 自定义评分控件（系统的 RatingBar 不好用）
+ * desc   : 自定义评分控件（系统的 RatingBar 不好用）
  */
 public final class SimpleRatingBar extends View {
 
-    /** 默认的星星图标 */
+    /**
+     * 默认的星星图标
+     */
     private Drawable mNormalDrawable;
-    /** 选中的星星图标 */
+    /**
+     * 选中的星星图标
+     */
     private Drawable mFillDrawable;
-    /** 选中的星星图标 */
+    /**
+     * 选中的星星图标
+     */
     private Drawable mHalfDrawable;
 
-    /** 当前星等级 */
+    /**
+     * 当前星等级
+     */
     private float mCurrentGrade;
-    /** 星星总数量 */
+    /**
+     * 星星总数量
+     */
     private int mGradeCount;
-    /** 星星的宽度 */
+    /**
+     * 星星的宽度
+     */
     private int mGradeWidth;
-    /** 星星的高度 */
+    /**
+     * 星星的高度
+     */
     private int mGradeHeight;
-    /** 星星之间的间隔 */
+    /**
+     * 星星之间的间隔
+     */
     private int mGradeSpace;
-    /** 星星选择跨度 */
+    /**
+     * 星星选择跨度
+     */
     private GradleStep mGradeStep;
 
-    /** 星星变化监听事件 */
+    /**
+     * 星星变化监听事件
+     */
     private OnRatingChangeListener mListener;
 
-    /** 星星位置记录 */
+    /**
+     * 星星位置记录
+     */
     private final Rect mGradeBounds = new Rect();
 
     public SimpleRatingBar(Context context) {
@@ -248,9 +266,13 @@ public final class SimpleRatingBar extends View {
 
     public enum GradleStep {
 
-        /** 半颗星 */
+        /**
+         * 半颗星
+         */
         HALF,
-        /** 一颗星 */
+        /**
+         * 一颗星
+         */
         ONE
     }
 
@@ -259,8 +281,8 @@ public final class SimpleRatingBar extends View {
         /**
          * 评分发生变化监听时回调
          *
-         * @param grade             当前星星数
-         * @param touch             是否通过触摸改变
+         * @param grade 当前星星数
+         * @param touch 是否通过触摸改变
          */
         void onRatingChanged(SimpleRatingBar ratingBar, float grade, boolean touch);
     }

@@ -13,12 +13,8 @@ import androidx.annotation.Nullable;
 
 import com.roydon.library.R;
 
-
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/07/06
- *    desc   : 自定义 ViewStub（原生 ViewStub 的缺点：继承至 View，不支持 findViewById、动态添加和移除 View、监听显示隐藏）
+ * desc   : 自定义 ViewStub（原生 ViewStub 的缺点：继承至 View，不支持 findViewById、动态添加和移除 View、监听显示隐藏）
  */
 public final class CustomViewStub extends FrameLayout {
 
@@ -103,16 +99,16 @@ public final class CustomViewStub extends FrameLayout {
         /**
          * 布局填充回调（可在此中做 View 初始化）
          *
-         * @param stub              当前 ViewStub 对象
-         * @param inflatedView      填充布局对象
+         * @param stub         当前 ViewStub 对象
+         * @param inflatedView 填充布局对象
          */
         void onInflate(CustomViewStub stub, View inflatedView);
 
         /**
          * 可见状态改变（可在此中做 View 更新）
          *
-         * @param stub              当前 ViewStub 对象
-         * @param visibility        可见状态参数改变
+         * @param stub       当前 ViewStub 对象
+         * @param visibility 可见状态参数改变
          */
         void onVisibility(CustomViewStub stub, int visibility);
     }

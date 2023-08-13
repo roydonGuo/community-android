@@ -11,12 +11,8 @@ import androidx.appcompat.widget.AppCompatTextView;
 
 import com.roydon.library.R;
 
-
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2021/04/18
- *    desc   : 支持限定 Drawable 大小的 TextView
+ * desc   : 支持限定 Drawable 大小的 TextView
  */
 public final class DrawableTextView extends AppCompatTextView {
 

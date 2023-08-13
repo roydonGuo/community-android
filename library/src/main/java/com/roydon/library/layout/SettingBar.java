@@ -25,16 +25,14 @@ import androidx.core.content.ContextCompat;
 
 import com.roydon.library.R;
 
-
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/01/23
- *    desc   : 设置条自定义控件
+ * desc   : 设置条自定义控件
  */
 public final class SettingBar extends FrameLayout {
 
-    /** 无色值 */
+    /**
+     * 无色值
+     */
     public static final int NO_COLOR = Color.TRANSPARENT;
 
     private final LinearLayout mMainLayout;
@@ -42,10 +40,14 @@ public final class SettingBar extends FrameLayout {
     private final TextView mRightView;
     private final View mLineView;
 
-    /** 图标着色器 */
+    /**
+     * 图标着色器
+     */
     private int mLeftDrawableTint, mRightDrawableTint;
 
-    /** 图标显示大小 */
+    /**
+     * 图标显示大小
+     */
     private int mLeftDrawableSize, mRightDrawableSize;
 
     public SettingBar(Context context) {
@@ -66,7 +68,7 @@ public final class SettingBar extends FrameLayout {
         mMainLayout = new LinearLayout(getContext());
         mLeftView = new TextView(getContext());
         mRightView = new TextView(getContext());
-        mLineView  = new View(getContext());
+        mLineView = new View(getContext());
 
         mMainLayout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, Gravity.CENTER_VERTICAL));
 
@@ -325,7 +327,7 @@ public final class SettingBar extends FrameLayout {
         Drawable drawable = getLeftDrawable();
         if (drawable != null) {
             if (size > 0) {
-                drawable.setBounds(0 ,0, size, size);
+                drawable.setBounds(0, 0, size, size);
             } else {
                 drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
             }
@@ -342,7 +344,7 @@ public final class SettingBar extends FrameLayout {
         Drawable drawable = getRightDrawable();
         if (drawable != null) {
             if (size > 0) {
-                drawable.setBounds(0 ,0, size, size);
+                drawable.setBounds(0, 0, size, size);
             } else {
                 drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
             }
@@ -423,6 +425,7 @@ public final class SettingBar extends FrameLayout {
     public SettingBar setLineColor(@ColorInt int color) {
         return setLineDrawable(new ColorDrawable(color));
     }
+
     public SettingBar setLineDrawable(Drawable drawable) {
         mLineView.setBackground(drawable);
         return this;

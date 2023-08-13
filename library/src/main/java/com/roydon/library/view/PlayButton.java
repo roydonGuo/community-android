@@ -18,24 +18,28 @@ import androidx.annotation.Nullable;
 
 import com.roydon.library.R;
 
-
 /**
- *    author : codeestX & Android 轮子哥
- *    github : https://github.com/codeestX/ENViews
- *    time   : 2021/09/12
- *    desc   : 播放暂停动效的按钮
+ * desc   : 播放暂停动效的按钮
  */
 public final class PlayButton extends View {
 
-    /** 播放状态 */
+    /**
+     * 播放状态
+     */
     public static final int STATE_PLAY = 0;
-    /** 暂停状态 */
+    /**
+     * 暂停状态
+     */
     public static final int STATE_PAUSE = 1;
 
-    /** 当前状态 */
+    /**
+     * 当前状态
+     */
     private int mCurrentState = STATE_PAUSE;
 
-    /** 动画时间 */
+    /**
+     * 动画时间
+     */
     private int mAnimDuration;
 
     private final Paint mPaint;
@@ -98,7 +102,7 @@ public final class PlayButton extends View {
         mCenterY = height / 2;
         mRectF = new RectF(mCenterX - mCircleRadius, mCenterY + 0.6f * mCircleRadius,
                 mCenterX + mCircleRadius, mCenterY + 2.6f * mCircleRadius);
-        mBgRectF = new RectF(mCenterX - mWidth / 2f ,mCenterY - mHeight / 2f ,
+        mBgRectF = new RectF(mCenterX - mWidth / 2f, mCenterY - mHeight / 2f,
                 mCenterX + mWidth / 2f, mCenterY + mHeight / 2f);
         mPath.moveTo(mCenterX - mCircleRadius, mCenterY + 1.8f * mCircleRadius);
         mPath.lineTo(mCenterX - mCircleRadius, mCenterY - 1.8f * mCircleRadius);
@@ -145,7 +149,7 @@ public final class PlayButton extends View {
             canvas.drawLine(mCenterX - mCircleRadius, mCenterY - 1.6f * mCircleRadius,
                     mCenterX - mCircleRadius, mCenterY + 1.6f * mCircleRadius, mPaint);
 
-            canvas.drawArc(mBgRectF, -105 , 360 , false, mPaint);
+            canvas.drawArc(mBgRectF, -105, 360, false, mPaint);
         } else if (mFraction <= 0.3) {
             // 右侧直线和下方曲线
             canvas.drawLine(mCenterX + mCircleRadius, mCenterY - 1.6f * mCircleRadius + mCircleRadius * 3.2f / 0.3f * mFraction,
@@ -161,10 +165,10 @@ public final class PlayButton extends View {
             canvas.drawArc(mBgRectF, -105 + 360 * mFraction, 360 * (1 - mFraction), false, mPaint);
         } else if (mFraction <= 0.6) {
             // 下方曲线和三角形
-            canvas.drawArc(mRectF, 180f / 0.3f * (mFraction - 0.3f), 180 - 180f / 0.3f * (mFraction - 0.3f), false , mPaint);
+            canvas.drawArc(mRectF, 180f / 0.3f * (mFraction - 0.3f), 180 - 180f / 0.3f * (mFraction - 0.3f), false, mPaint);
 
             mDstPath.reset();
-            mPathMeasure.getSegment(0.02f * mPathLength, 0.38f * mPathLength + 0.42f * mPathLength / 0.3f * (mFraction - 0.3f) ,
+            mPathMeasure.getSegment(0.02f * mPathLength, 0.38f * mPathLength + 0.42f * mPathLength / 0.3f * (mFraction - 0.3f),
                     mDstPath, true);
             canvas.drawPath(mDstPath, mPaint);
 
@@ -173,7 +177,7 @@ public final class PlayButton extends View {
             // 三角形
             mDstPath.reset();
             mPathMeasure.getSegment(0.02f * mPathLength + 0.2f * mPathLength / 0.2f * (mFraction - 0.6f)
-                    , 0.8f * mPathLength + 0.2f * mPathLength / 0.2f * (mFraction - 0.6f) ,
+                    , 0.8f * mPathLength + 0.2f * mPathLength / 0.2f * (mFraction - 0.6f),
                     mDstPath, true);
             canvas.drawPath(mDstPath, mPaint);
 
@@ -182,7 +186,7 @@ public final class PlayButton extends View {
             // 弹性部分
             mDstPath.reset();
             mPathMeasure.getSegment(10 * mCircleRadius * (mFraction - 1)
-                    , mPathLength ,
+                    , mPathLength,
                     mDstPath, true);
             canvas.drawPath(mDstPath, mPaint);
         }

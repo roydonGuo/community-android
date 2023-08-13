@@ -9,10 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/08/18
- *    desc   : 自动显示和隐藏的 TextView
+ * desc   : 自动显示和隐藏的 TextView
  */
 public final class SmartTextView extends AppCompatTextView {
 

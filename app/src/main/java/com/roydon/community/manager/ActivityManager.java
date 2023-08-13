@@ -11,11 +11,7 @@ import androidx.collection.ArrayMap;
 
 import java.util.ArrayList;
 
-
 /**
- * author : Android 轮子哥
- * github : https://github.com/getActivity/AndroidProject
- * time   : 2018/11/18
  * desc   : Activity 管理类
  */
 public final class ActivityManager implements Application.ActivityLifecycleCallbacks {
