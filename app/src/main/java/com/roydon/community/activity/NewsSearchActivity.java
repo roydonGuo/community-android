@@ -8,11 +8,9 @@ import android.os.Message;
 import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.roydon.community.BaseActivity;
 import com.roydon.community.R;
+import com.roydon.community.action.StatusAction;
 import com.roydon.community.adapter.NewsAdapter;
 import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
@@ -29,6 +28,7 @@ import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.AppNews;
 import com.roydon.community.domain.vo.NewsListRes;
 import com.roydon.community.utils.string.StringUtil;
+import com.roydon.community.widget.HintLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.io.Serializable;
@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class NewsSearchActivity extends BaseActivity {
+public class NewsSearchActivity extends BaseActivity implements StatusAction {
 
     // 控件
     private ImageView ivReturn, ivNewsSearch;
@@ -50,6 +50,8 @@ public class NewsSearchActivity extends BaseActivity {
     // 适配器
     private NewsAdapter newsAdapter;
 
+    private HintLayout mHintLayout;
+
     private static final int SPEECH_REQUEST_CODE = 100;
 
     @SuppressLint("HandlerLeak")
@@ -62,8 +64,7 @@ public class NewsSearchActivity extends BaseActivity {
                 case 0:
                     newsAdapter.setDatas(newsList);
                     newsAdapter.notifyDataSetChanged();
-                    ProgressBar loadingSpinner = findViewById(R.id.loading_spinner);
-                    loadingSpinner.setVisibility(View.GONE);
+                    showComplete();
                     break;
                 default:
                     break;
@@ -85,9 +86,14 @@ public class NewsSearchActivity extends BaseActivity {
 
         refreshLayout = findViewById(R.id.refreshLayout);
         recyclerView = findViewById(R.id.recyclerView);
-        // 先禁用进度条
-        ProgressBar loadingSpinner = findViewById(R.id.loading_spinner);
-        loadingSpinner.setVisibility(View.GONE);
+
+        mHintLayout = findViewById(R.id.hl_status_hint);
+
+    }
+
+    @Override
+    public HintLayout getHintLayout() {
+        return mHintLayout;
     }
 
     @Override
@@ -126,13 +132,9 @@ public class NewsSearchActivity extends BaseActivity {
         // 点击搜索
         ivNewsSearch.setOnClickListener(v -> {
             if (StringUtil.isEmpty(queryStr.getText().toString())) {
-                // 显示加载动画
-                ProgressBar loadingSpinner = findViewById(R.id.loading_spinner);
-                loadingSpinner.setVisibility(View.VISIBLE);
+
             } else {
-                // 显示加载动画
-                ProgressBar loadingSpinner = findViewById(R.id.loading_spinner);
-                loadingSpinner.setVisibility(View.VISIBLE);
+                showLoading();
                 selNewsList(true, queryStr.getText().toString());
             }
         });
@@ -145,9 +147,6 @@ public class NewsSearchActivity extends BaseActivity {
                 //注意，这是一定要判断event != null。因为在某些输入法上会返回null。
                 if (i == EditorInfo.IME_ACTION_SEND || i == EditorInfo.IME_ACTION_DONE || (keyEvent != null && KeyEvent.KEYCODE_ENTER == keyEvent.getKeyCode() && KeyEvent.ACTION_DOWN == keyEvent.getAction())) {
                     //处理事件
-                    // 显示加载动画
-                    ProgressBar loadingSpinner = findViewById(R.id.loading_spinner);
-                    loadingSpinner.setVisibility(View.VISIBLE);
                     selNewsList(true, queryStr.getText().toString());
                 }
                 return false;

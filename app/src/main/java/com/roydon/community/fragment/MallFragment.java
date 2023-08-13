@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.roydon.community.R;
+import com.roydon.community.action.StatusAction;
 import com.roydon.community.activity.CartActivity;
 import com.roydon.community.activity.GoodDetailActivity;
 import com.roydon.community.adapter.MallGoodAdapter;
@@ -23,6 +24,7 @@ import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.MallGoodsVO;
 import com.roydon.community.domain.vo.MallGoodsRes;
+import com.roydon.community.widget.HintLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -31,9 +33,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import scut.carson_ho.kawaii_loadingview.Kawaii_LoadingView;
-
-public class MallFragment extends BaseLazyLoadFragment {
+public class MallFragment extends BaseLazyLoadFragment implements StatusAction {
 
     private RefreshLayout refreshLayout;
     private RecyclerView rvMallGoods;
@@ -42,14 +42,7 @@ public class MallFragment extends BaseLazyLoadFragment {
     private List<MallGoodsVO> goodsList = new ArrayList<>();
     private ImageView ivMallCart;
 
-    // 1. 定义控件变量
-    private Kawaii_LoadingView loadingView;
-
-    // 3. 使用动画（API说明）
-    // 3.1 启动动画
-//       Kawaii_LoadingView.startMoving();
-    // 3.2 停止动画
-//       Kawaii_LoadingView.stopMoving();
+    private HintLayout mHintLayout;
 
     @Override
     protected void lazyLoad() {
@@ -129,10 +122,16 @@ public class MallFragment extends BaseLazyLoadFragment {
                     mallGoodAdapter.setData(goodsList);
                     mallGoodAdapter.notifyDataSetChanged();
 //                    loadingView.stopMoving();
+                    showComplete();
                     break;
             }
         }
     };
+
+    @Override
+    public HintLayout getHintLayout() {
+        return mHintLayout;
+    }
 
     @Override
     protected int initLayout() {
@@ -147,7 +146,8 @@ public class MallFragment extends BaseLazyLoadFragment {
         rvMallGoods = mRootView.findViewById(R.id.rv_mall_goods);
         refreshLayout = mRootView.findViewById(R.id.rl_goods);
         ivMallCart = mRootView.findViewById(R.id.iv_mall_cart);
-
+        mHintLayout = mRootView.findViewById(R.id.hl_status_hint);
+        showLoading();
     }
 
     @Override

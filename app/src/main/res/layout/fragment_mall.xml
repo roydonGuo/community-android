@@ -74,28 +74,35 @@
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <!--商品展示-->
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/rl_goods"
+    <com.roydon.community.widget.HintLayout
+        android:id="@+id/hl_status_hint"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srlEnablePreviewInEditMode="true">
+        android:layout_height="match_parent">
 
-        <com.scwang.smartrefresh.header.MaterialHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!--商品-->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_mall_goods"
+        <!--商品展示-->
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/rl_goods"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:overScrollMode="never" />
+            app:srlEnablePreviewInEditMode="true">
 
-        <com.scwang.smartrefresh.layout.footer.BallPulseFooter
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <com.scwang.smartrefresh.header.MaterialHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+            <!--商品-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_mall_goods"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never" />
+
+            <com.scwang.smartrefresh.layout.footer.BallPulseFooter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    </com.roydon.community.widget.HintLayout>
 
 </LinearLayout>
