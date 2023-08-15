@@ -20,9 +20,7 @@ import com.roydon.library.R;
 /**
  * desc   : 密码隐藏显示 EditText
  */
-public final class PasswordEditText extends RegexEditText
-        implements View.OnTouchListener,
-        View.OnFocusChangeListener, TextWatcher {
+public final class PasswordEditText extends RegexEditText implements View.OnTouchListener, View.OnFocusChangeListener, TextWatcher {
 
     private Drawable mCurrentDrawable;
     private final Drawable mVisibleDrawable;
@@ -73,20 +71,12 @@ public final class PasswordEditText extends RegexEditText
 
         mCurrentDrawable.setVisible(visible, false);
         Drawable[] drawables = getCompoundDrawablesRelative();
-        setCompoundDrawablesRelative(
-                drawables[0],
-                drawables[1],
-                visible ? mCurrentDrawable : null,
-                drawables[3]);
+        setCompoundDrawablesRelative(drawables[0], drawables[1], visible ? mCurrentDrawable : null, drawables[3]);
     }
 
     private void refreshDrawableStatus() {
         Drawable[] drawables = getCompoundDrawablesRelative();
-        setCompoundDrawablesRelative(
-                drawables[0],
-                drawables[1],
-                mCurrentDrawable,
-                drawables[3]);
+        setCompoundDrawablesRelative(drawables[0], drawables[1], mCurrentDrawable, drawables[3]);
     }
 
     @Override
@@ -129,12 +119,10 @@ public final class PasswordEditText extends RegexEditText
         int layoutDirection = getLayoutDirection();
         if (layoutDirection == LAYOUT_DIRECTION_LTR) {
             // 从左往右
-            touchDrawable = x > getWidth() - mCurrentDrawable.getIntrinsicWidth() - getPaddingEnd() &&
-                    x < getWidth() - getPaddingEnd();
+            touchDrawable = x > getWidth() - mCurrentDrawable.getIntrinsicWidth() - getPaddingEnd() && x < getWidth() - getPaddingEnd();
         } else if (layoutDirection == LAYOUT_DIRECTION_RTL) {
             // 从右往左
-            touchDrawable = x > getPaddingStart() &&
-                    x < getPaddingStart() + mCurrentDrawable.getIntrinsicWidth();
+            touchDrawable = x > getPaddingStart() && x < getPaddingStart() + mCurrentDrawable.getIntrinsicWidth();
         }
 
         if (mCurrentDrawable.isVisible() && touchDrawable) {

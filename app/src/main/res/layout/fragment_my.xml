@@ -678,7 +678,7 @@
                             android:layout_toRightOf="@+id/iv_inoculation_history_report"
                             android:gravity="center|left"
                             android:paddingLeft="10dp"
-                            android:text="疫苗接种记录上报"
+                            android:text="疫苗接种记录"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
 

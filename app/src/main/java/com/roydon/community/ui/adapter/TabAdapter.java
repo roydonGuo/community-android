@@ -163,8 +163,7 @@ public final class TabAdapter extends AppAdapter<String> implements BaseAdapter.
         }
     }
 
-    private final class SlidingViewHolder extends AppAdapter<?>.ViewHolder
-            implements ValueAnimator.AnimatorUpdateListener {
+    private final class SlidingViewHolder extends AppAdapter<?>.ViewHolder implements ValueAnimator.AnimatorUpdateListener {
 
         private final int mDefaultTextSize;
         private final int mSelectedTextSize;

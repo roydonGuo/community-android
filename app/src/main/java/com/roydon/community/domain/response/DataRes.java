@@ -1,26 +1,26 @@
 package com.roydon.community.domain.response;
 
-public class DataRes extends BaseResponse{
+public class DataRes<T> extends BaseResponse {
 
-    private String data;
+    private T data;
 
     public DataRes() {
     }
 
-    public DataRes(String data) {
+    public DataRes(T data) {
         this.data = data;
     }
 
-    public DataRes(String msg, int code, String data) {
+    public DataRes(String msg, int code, T data) {
         super(msg, code);
         this.data = data;
     }
 
-    public String getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(T data) {
         this.data = data;
     }
 }

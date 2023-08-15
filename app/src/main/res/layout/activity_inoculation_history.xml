@@ -53,21 +53,13 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_main_size" />
 
-            <androidx.cardview.widget.CardView
+            <com.roydon.community.widget.RoundImageView
+                android:id="@+id/iv_inoculation_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/mg_10"
-                app:cardCornerRadius="10dp">
-
-                <ImageView
-                    android:id="@+id/iv_inoculation_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxHeight="300dp"
-                    android:scaleType="fitXY"
-                    android:src="@color/black" />
-            </androidx.cardview.widget.CardView>
+                android:maxHeight="300dp"
+                android:scaleType="fitXY"
+                android:src="@color/white" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

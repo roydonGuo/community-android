@@ -159,6 +159,7 @@ public class InoculationHistoryReportActivity extends BaseActivity {
 
             @Override
             public void onFailure(Exception e) {
+                showShortToast("提交失败");
             }
         });
     }

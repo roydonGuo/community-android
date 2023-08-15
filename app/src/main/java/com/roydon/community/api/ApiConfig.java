@@ -34,10 +34,21 @@ public class ApiConfig {
     public static final String HEALTH_CODE_GET = "/epidemic/health/code"; // 查询健康码
 
     /**
-     * 疫苗接种
+     * 疫苗接种审核
      */
     public static final String INOCULATION_AUDIT_REPORT = "/epidemic/inoculation/audit/report"; // 疫苗接种审核提交
     public static final String INOCULATION_AUDIT_UPLOAD_IMAGE = "/epidemic/inoculation/audit/upload-image"; // 疫苗接种审核图片上传
+
+    /**
+     * 疫苗接种审核记录
+     */
+    public static final String INOCULATION_HISTORY_USER = "/epidemic/inoculation/history/user"; // 用户疫苗接种记录
+
+    /**
+     * app消息
+     */
+    public static final String APP_MESSAGE_COUNT = "/app/message/count";
+    public static final String APP_MESSAGE_LIST = "/app/message/list";
 
     /**
      * 新闻模块接口

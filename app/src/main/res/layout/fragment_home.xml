@@ -24,13 +24,13 @@
             android:orientation="horizontal"
             android:padding="@dimen/pd_6">
 
-                <com.roydon.community.widget.RoundImageView
-                    android:id="@+id/index_user_avatar"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_vertical"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/avatar" />
+            <com.roydon.community.widget.RoundImageView
+                android:id="@+id/index_user_avatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY"
+                android:src="@mipmap/avatar" />
 
             <!--搜索框-->
             <LinearLayout
@@ -64,13 +64,37 @@
 
             </LinearLayout>
 
+            <!--消息-->
+            <RelativeLayout
+                android:layout_width="@dimen/icon_main_size"
+                android:layout_height="@dimen/icon_main_size"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_app_message"
+                    android:layout_width="@dimen/icon_main_size"
+                    android:layout_height="@dimen/icon_main_size"
+                    android:layout_gravity="center_vertical"
+                    android:padding="1dp"
+                    android:src="@mipmap/icon_message" />
+
+                <TextView
+                    android:id="@+id/tv_app_message_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/iv_app_message"
+                    android:text="1"
+                    android:textColor="@color/red"
+                    android:textSize="14sp" />
+            </RelativeLayout>
             <!--右侧二维码扫描-->
             <ImageView
                 android:id="@+id/iv_scan_code"
                 android:layout_width="@dimen/icon_main_size"
                 android:layout_height="@dimen/icon_main_size"
-                android:padding="2dp"
                 android:layout_gravity="center_vertical"
+                android:padding="3dp"
                 android:src="@mipmap/icon_scan_code" />
 
         </LinearLayout>
