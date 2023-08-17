@@ -1,15 +1,10 @@
 package com.roydon.community.fragment;
 
-import static android.content.Context.MODE_PRIVATE;
-
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -30,7 +25,6 @@ import com.roydon.community.activity.BDAddressSelectActivity;
 import com.roydon.community.activity.HealthCodeActivity;
 import com.roydon.community.activity.HotlineActivity;
 import com.roydon.community.activity.InoculationHistoryActivity;
-import com.roydon.community.activity.LoginActivity;
 import com.roydon.community.activity.MessageActivity;
 import com.roydon.community.activity.SettingActivity;
 import com.roydon.community.activity.UserAddressActivity;
@@ -40,8 +34,6 @@ import com.roydon.community.activity.WebviewActivity;
 import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
-import com.roydon.community.constants.CacheConstants;
-import com.roydon.community.constants.Constants;
 import com.roydon.community.domain.response.UserInfoRes;
 import com.roydon.community.domain.vo.AppUser;
 import com.roydon.community.enums.ThemeEnum;
@@ -50,7 +42,6 @@ import com.roydon.community.ui.dialog.AddressDialog;
 import com.roydon.community.utils.android.SystemUtils;
 import com.roydon.community.utils.cache.SPUtils;
 import com.roydon.community.utils.string.StringUtil;
-import com.roydon.community.view.AlertDialogX;
 import com.roydon.community.view.CircleTransform;
 import com.roydon.community.view.DialogX;
 import com.roydon.library.BaseDialog;
@@ -74,7 +65,7 @@ public class MyFragment extends BaseFragment {
     private ImageView ivShare, ivTheme;
     // 订单栏功能
     private LinearLayout llUserOrder;
-    private RelativeLayout rlUserAddress, rlAccessRecord, rlHotline, rlHealthCode, rlInoculationHistoryReport, rlAddressSelecter, rlReturnLogin, rlWebview, rlSetting;
+    private RelativeLayout rlUserAddress, rlAccessRecord, rlHotline, rlHealthCode, rlInoculationHistoryReport, rlAddressSelecter, rlWebview, rlSetting;
 
     // 测试功能区
     private RelativeLayout rlBDAddress, rlMessage;
@@ -118,7 +109,6 @@ public class MyFragment extends BaseFragment {
         rlAccessRecord = mRootView.findViewById(R.id.rl_access_record);
         rlHotline = mRootView.findViewById(R.id.rl_hotline);
         rlHealthCode = mRootView.findViewById(R.id.rl_health_code);
-        rlReturnLogin = mRootView.findViewById(R.id.rl_return_login);
         rlInoculationHistoryReport = mRootView.findViewById(R.id.rl_inoculation_history_report);
         rlAddressSelecter = mRootView.findViewById(R.id.rl_address_selecter);
 
@@ -198,7 +188,6 @@ public class MyFragment extends BaseFragment {
             navigateTo(InoculationHistoryActivity.class);
         });
         rlAddressSelecter.setOnClickListener(v -> {
-// 选择地区对话框
             new AddressDialog.Builder(getContext()).setTitle(getString(R.string.address_selecter_title))
                     // 设置默认省份
                     .setProvince("河南省")
@@ -244,34 +233,8 @@ public class MyFragment extends BaseFragment {
         rlAccessRecord.setOnClickListener(v -> {
             navigateTo(AccessRecordActivity.class);
         });
-        // 退出登录
-        rlReturnLogin.setOnClickListener(v -> {
-            String title = "退出登录";
-            String msg = "确定清除数据并退出登录吗？";
-            AlertDialogX.showCustomAlertDialog(getContext(), title, msg, new View.OnClickListener() {
-                @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
-                @Override
-                public void onClick(View view) {
-                    SharedPreferences sp = getContext().getSharedPreferences(Constants.AUTHORIZATION, MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sp.edit();
-                    editor.clear();
-                    editor.apply();
-                    // 清空缓存
-                    SPUtils.remove(CacheConstants.USERID, getContext());
-                    SPUtils.remove(CacheConstants.USERNAME, getContext());
-                    navigateToWithFlag(LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                }
-            }, new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
-        });
-        //getUserInfo
         getUserInfo();
     }
-
 
     /**
      * 用户信息
@@ -292,7 +255,6 @@ public class MyFragment extends BaseFragment {
                         mHandler.sendEmptyMessage(2);
                     } else {
                         showShortToastSync("请重新登陆");
-//                        getActivity().finish();
                     }
                 }
             }

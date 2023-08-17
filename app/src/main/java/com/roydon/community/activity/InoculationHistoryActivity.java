@@ -91,6 +91,8 @@ public class InoculationHistoryActivity extends BaseActivity {
         tvRealName.setText(inoculationHistory.getRealName());
         tvTelephone.setText(inoculationHistory.getTelephone());
         tvIdCard.setText(inoculationHistory.getIdCard());
+        // 禁用上报按钮
+//        btnInoculationHistoryReport.setEnabled(false);
     }
 
     /**

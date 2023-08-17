@@ -66,21 +66,17 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_inoculation_history_report"
+            style="@style/ButtonStyle"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/dimen_40dp"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_buy_btn"
-            android:gravity="center"
-            android:text="疫苗接种记录上报"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="疫苗接种记录上报" />
 
     </LinearLayout>
 

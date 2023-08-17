@@ -17,12 +17,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.roydon.community.constants.Constants;
 import com.roydon.library.action.BundleAction;
+import com.roydon.library.action.HandlerAction;
 
 /**
  * @author roydon
  * @date 2023/6/6 2:30
  */
-public abstract class BaseActivity extends AppCompatActivity implements BundleAction {
+public abstract class BaseActivity extends AppCompatActivity implements BundleAction, HandlerAction {
 
     public Context context;
 
