@@ -103,12 +103,12 @@ public class InoculationHistoryActivity extends BaseActivity {
         Api.build(ApiConfig.INOCULATION_HISTORY_USER, params).getRequestWithToken(this, new HttpCallback() {
             @Override
             public void onSuccess(final String res) {
+                Log.e("getInoculationHistory", res);
                 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
                 EpidemicInoculationHistoryRes response = gson.fromJson(res, EpidemicInoculationHistoryRes.class);
-                if (response != null && response.getCode() == 200) {
+                if (response != null && response.getCode() == 200 && response.getData() != null) {
                     inoculationHistory = response.getData();
                     mHandler.sendEmptyMessage(HANDLER_WHAT_HISTORY);
-                    Log.e("getInoculationHistory", inoculationHistory.toString());
                 }
             }
 

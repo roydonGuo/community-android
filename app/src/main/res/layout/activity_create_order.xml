@@ -9,53 +9,7 @@
     android:orientation="vertical"
     tools:context=".activity.CreateOrderActivity">
 
-    <!--标题 沉浸式-->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/element"
-        android:fitsSystemWindows="true"
-        app:contentInsetStart="0dp"
-        app:popupTheme="@style/AppTheme.PopupOverlay">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="@dimen/mg_6"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/iv_return"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="center_vertical|left"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/shape_background_icon_black"
-                android:padding="10dp"
-                app:srcCompat="@mipmap/icon_left" />
-
-            <TextView
-                android:id="@+id/tv_cart"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="创建订单"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_main_size" />
-
-            <ImageView
-                android:id="@+id/iv_edit"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="center_vertical|right"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp" />
-        </LinearLayout>
-    </androidx.appcompat.widget.Toolbar>
+    <include layout="@layout/layout_toolbar"/>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_view"
@@ -95,7 +49,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="@color/element" />
+                android:background="@mipmap/icon_address_select" />
 
             <!--商品-->
             <TextView

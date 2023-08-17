@@ -28,7 +28,8 @@
     <dimen name="mg_20">20dp</dimen>
 
     <!-- 顶部top-bar高度-->
-    <dimen name="top_bar_height">60dp</dimen>
+    <dimen name="top_bar_height">52dp</dimen>
+    <dimen name="toolbar_height">52dp</dimen>
     <dimen name="search_box_height">36dp</dimen>
 
     <!-- icon 图标大小 -->

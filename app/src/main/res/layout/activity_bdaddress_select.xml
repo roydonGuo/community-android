@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
     tools:context=".activity.BDAddressSelectActivity">
     <!--百度地图控件-->
     <com.baidu.mapapi.map.MapView

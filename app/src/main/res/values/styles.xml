@@ -1,6 +1,12 @@
 <resources>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="MyAppBarLayout" parent="Widget.Material3.AppBarLayout">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_margin">0dp</item>
+    </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
@@ -20,14 +26,6 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">10dp</item>
     </style>
-
-    <!-- 动画 -->
-    <!--    <style name="AppSlide" parent="@android:style/Animation.Activity">-->
-    <!--        <item name="android:activityOpenEnterAnimation">@anim/slide_top_in</item>-->
-    <!--        <item name="android:activityOpenExitAnimation">@anim/out_activity</item>-->
-    <!--        <item name="android:activityCloseEnterAnimation">@anim/in_activity_close</item>-->
-    <!--        <item name="android:activityCloseExitAnimation">@anim/slide_top_bottom</item>-->
-    <!--    </style>-->
 
     <!-- 自定义弹窗样式 -->
     <style name="MyDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">

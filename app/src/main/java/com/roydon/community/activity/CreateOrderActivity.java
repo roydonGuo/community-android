@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CreateOrderActivity extends BaseActivity {
+    private String TOOL_TITLE = "创建订单";
 
     private RefreshLayout refreshLayout;
     private TextView tvAddress;
@@ -58,19 +59,16 @@ public class CreateOrderActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        initToolBar(TOOL_TITLE);
         tvAddress = findViewById(R.id.rv_address);
         refreshLayout = findViewById(R.id.refreshLayout);
         rvGoods = findViewById(R.id.rv_goods);
         totalPrice = findViewById(R.id.tv_total_price);
-        ivReturn = findViewById(R.id.iv_return);
         pay = findViewById(R.id.btn_pay);
     }
 
     @Override
     protected void initData() {
-        ivReturn.setOnClickListener(v -> {
-            finish();
-        });
         linearLayoutManager = new LinearLayoutManager(CreateOrderActivity.this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvGoods.setLayoutManager(linearLayoutManager);

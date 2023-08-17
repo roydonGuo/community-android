@@ -34,6 +34,9 @@ public class HomeActivity extends BaseActivity {
     private ViewPager viewPager;
     private CommonTabLayout commonTabLayout;
 
+    //第一次点击退出事件发生的时间
+    private long mExitTime;
+
     @Override
     protected int initLayout() {
         return R.layout.activity_home;
@@ -87,11 +90,8 @@ public class HomeActivity extends BaseActivity {
         viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), mTitles, mFragments));
     }
 
-    //第一次点击事件发生的时间
-    private long mExitTime;
-
     /**
-     * 点击两次返回退出app
+     * 点击两次退出app
      */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

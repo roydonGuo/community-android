@@ -1,50 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <SurfaceView
-        android:id="@+id/svCameraScan"
-        android:layout_width="wrap_content"
+    <!-- 背景图片 -->
+    <ImageView
+        android:id="@+id/backgroundImageView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:src="@mipmap/user_bg"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:layout_alignParentTop="true" />
 
-<!--    <com.zxing.view.ViewfinderView-->
-<!--        android:id="@+id/vfvCameraScan"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content" />-->
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center"
-        android:orientation="vertical">
+    <!-- 文本信息 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_alignParentTop="true">
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerInParent="true"
-            android:background="#000000"
-            android:gravity="center"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:text="Scan Barcode"
-            android:textColor="@android:color/white"
+            android:text="这是一段文本信息"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/black" />
 
-        <Button
-            android:id="@+id/btn_cancel_scan"
-            android:layout_width="230dp"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="75dp"
-            android:text="Cancel"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+    </LinearLayout>
 
-    </RelativeLayout>
-
-</FrameLayout>
+</RelativeLayout>

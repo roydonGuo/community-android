@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/fragment_background"
-    android:fitsSystemWindows="false"
     android:orientation="vertical"
     tools:context=".activity.HomeActivity">
 
@@ -14,11 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/divider" />
 
     <com.flyco.tablayout.CommonTabLayout
         android:id="@+id/commonTabLayout"

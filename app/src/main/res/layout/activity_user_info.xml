@@ -16,26 +16,35 @@
         android:id="@+id/ll_edit_avatar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="horizontal"
-        android:padding="20dp">
+        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingRight="10dp"
-            android:text="头像"
-            android:textColor="@color/grey"
-            android:textSize="@dimen/font_main_size" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="248dp">
 
-        <com.roydon.community.widget.RoundImageView
-            android:id="@+id/ri_user_avatar"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:gravity="center"
-            android:scaleType="centerCrop"
-            android:src="@color/black" />
+            <!-- 背景 -->
+            <ImageView
+                android:id="@+id/iv_user_bg"
+                android:layout_width="match_parent"
+                android:layout_height="248dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/user_bg"
+                app:layout_constraintBottom_toTopOf="@id/ri_user_avatar"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--头像-->
+            <com.roydon.community.widget.RoundImageView
+                android:id="@+id/ri_user_avatar"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_marginBottom="-48dp"
+                android:scaleType="centerCrop"
+                android:src="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_user_bg"
+                app:layout_constraintEnd_toEndOf="@id/iv_user_bg"
+                app:layout_constraintStart_toStartOf="@id/iv_user_bg" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

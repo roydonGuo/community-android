@@ -1,42 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/fragment_background"
+    android:orientation="vertical"
     tools:context=".fragment.MyFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <!-- 背景图 -->
+        <ImageView
+            android:id="@+id/iv_user_bg"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@mipmap/user_bg" />
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            style="@style/MyAppBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <!-- 背景图 -->
-            <ImageView
-                android:id="@+id/iv_user_bg"
+            android:background="@color/transparent"
+            android:fitsSystemWindows="true">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="fitXY"
-                android:src="@mipmap/avatar_ganyu" />
-            <!-- 用户背景 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:gravity="right"
-                android:orientation="vertical">
+                android:layout_height="@dimen/toolbar_height"
+                app:contentInsetStart="0dp"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+
                 <!--顶部功能区域-->
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/top_bar_height"
-                    android:gravity="right"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|right"
                     android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:padding="6dp">
 
                     <!--功能-->
                     <ImageView
@@ -60,10 +66,26 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="10dp"
                         android:clickable="true"
+                        android:focusable="true"
                         android:padding="3dp"
                         android:src="@mipmap/icon_sun" />
 
                 </LinearLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/app_bar"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|right"
+                android:orientation="vertical">
 
                 <!--用户信息区域-->
                 <LinearLayout
@@ -84,17 +106,12 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:cardCornerRadius="32dp">
-
-                                <ImageView
-                                    android:id="@+id/img_header"
-                                    android:layout_width="64dp"
-                                    android:layout_height="64dp"
-                                    android:src="@mipmap/avatar" />
-                            </androidx.cardview.widget.CardView>
+                            <com.makeramen.roundedimageview.RoundedImageView
+                                android:id="@+id/img_header"
+                                android:layout_width="64dp"
+                                android:layout_height="64dp"
+                                android:src="@color/white"
+                                app:riv_corner_radius="32dp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -108,16 +125,17 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text=""
+                                android:text="admin"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/font_size_h1" />
+                                android:textSize="@dimen/font_size_h1"
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/user_dept"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text=""
+                                android:text="永兴社区"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/font_main_size" />
 
@@ -153,96 +171,19 @@
                                 android:src="@mipmap/icon_right" />
                         </LinearLayout>
                     </LinearLayout>
-                    <!--新闻数据区域-->
-                    <!--            <LinearLayout-->
-                    <!--                android:layout_width="match_parent"-->
-                    <!--                android:layout_height="62dp"-->
-                    <!--                android:gravity="center"-->
-                    <!--                android:orientation="horizontal">-->
-
-                    <!--                <LinearLayout-->
-                    <!--                    android:layout_width="95dp"-->
-                    <!--                    android:layout_height="match_parent"-->
-                    <!--                    android:gravity="center"-->
-                    <!--                    android:orientation="vertical">-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:text="10"-->
-                    <!--                        android:textColor="@color/black" />-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_marginTop="4dp"-->
-                    <!--                        android:text="阅读"-->
-                    <!--                        android:textColor="@color/black" />-->
-                    <!--                </LinearLayout>-->
-
-                    <!--                <LinearLayout-->
-                    <!--                    android:layout_width="95dp"-->
-                    <!--                    android:layout_height="match_parent"-->
-                    <!--                    android:gravity="center"-->
-                    <!--                    android:orientation="vertical">-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:text="30"-->
-                    <!--                        android:textColor="@color/black" />-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_marginTop="4dp"-->
-                    <!--                        android:text="点赞"-->
-                    <!--                        android:textColor="@color/black" />-->
-                    <!--                </LinearLayout>-->
-
-                    <!--                <LinearLayout-->
-                    <!--                    android:layout_width="95dp"-->
-                    <!--                    android:layout_height="match_parent"-->
-                    <!--                    android:gravity="center"-->
-                    <!--                    android:orientation="vertical">-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:text="60"-->
-                    <!--                        android:textColor="@color/black" />-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_marginTop="4dp"-->
-                    <!--                        android:text="评论"-->
-                    <!--                        android:textColor="@color/black" />-->
-                    <!--                </LinearLayout>-->
-
-                    <!--                <LinearLayout-->
-                    <!--                    android:layout_width="95dp"-->
-                    <!--                    android:layout_height="match_parent"-->
-                    <!--                    android:gravity="center"-->
-                    <!--                    android:orientation="vertical">-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:text="100"-->
-                    <!--                        android:textColor="@color/black" />-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_marginTop="4dp"-->
-                    <!--                        android:text="分享"-->
-                    <!--                        android:textColor="@color/black" />-->
-                    <!--                </LinearLayout>-->
-                    <!--            </LinearLayout>-->
                 </LinearLayout>
             </LinearLayout>
-        </RelativeLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical">
+
 
         <!--        </androidx.appcompat.widget.Toolbar>-->
 
@@ -994,4 +935,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

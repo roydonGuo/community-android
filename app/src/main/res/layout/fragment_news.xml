@@ -9,76 +9,81 @@
     android:orientation="vertical"
     tools:context=".fragment.NewsFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/element"
-        android:fitsSystemWindows="true"
-        app:contentInsetStart="0dp"
-        app:popupTheme="@style/AppTheme.PopupOverlay">
+        android:fitsSystemWindows="true">
 
-        <LinearLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/element"
-            android:orientation="vertical"
-            android:paddingLeft="@dimen/pd_6"
-            android:paddingTop="@dimen/pd_6"
-            android:paddingRight="@dimen/pd_6">
+            android:layout_height="52dp"
+            app:contentInsetStart="0dp"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/pd_6"
+                android:paddingTop="@dimen/pd_6"
+                android:paddingBottom="@dimen/pd_6"
+                android:paddingRight="@dimen/pd_6">
 
-                <!--搜索框-->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/search_box_height"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/shape_search_box"
-                    android:gravity="center_vertical"
+                    android:layout_height="40dp"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
-                        android:layout_marginLeft="10dp"
-                        android:src="@mipmap/search" />
-
-                    <TextView
-                        android:id="@+id/et_search"
+                    <!--搜索框-->
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
+                        android:layout_height="@dimen/search_box_height"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
-                        android:background="@null"
-                        android:gravity="center_vertical|left"
-                        android:text="新闻搜索"
-                        android:textColor="@color/grey"
-                        android:textSize="@dimen/font_second_size" />
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/shape_search_box"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
+                        <ImageView
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:layout_marginLeft="10dp"
+                            android:src="@mipmap/search" />
+
+                        <TextView
+                            android:id="@+id/et_search"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:background="@null"
+                            android:gravity="center_vertical|left"
+                            android:text="新闻搜索"
+                            android:textColor="@color/grey"
+                            android:textSize="@dimen/font_second_size" />
+
+                    </LinearLayout>
                 </LinearLayout>
+
             </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
-            <com.flyco.tablayout.SlidingTabLayout
-                android:id="@+id/slidingTabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@color/element"
-                tl:tl_indicator_color="@color/text_select_color"
-                tl:tl_indicator_corner_radius="2dp"
-                tl:tl_indicator_height="4dp"
-                tl:tl_indicator_width="20dp"
-                tl:tl_textSelectColor="@color/text_select_color"
-                tl:tl_textUnselectColor="@color/black"
-                tl:tl_textsize="@dimen/font_main_size" />
-
-        </LinearLayout>
-    </androidx.appcompat.widget.Toolbar>
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/slidingTabLayout"
+        android:layout_width="match_parent"
+        android:background="@color/element"
+        android:layout_height="30dp"
+        tl:tl_indicator_color="@color/text_select_color"
+        tl:tl_indicator_corner_radius="2dp"
+        tl:tl_indicator_height="4dp"
+        tl:tl_indicator_width="20dp"
+        tl:tl_textSelectColor="@color/text_select_color"
+        tl:tl_textUnselectColor="@color/black"
+        tl:tl_textsize="@dimen/font_main_size" />
 
     <com.roydon.community.view.FixedViewPager
         android:id="@+id/fixedViewPager"

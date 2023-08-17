@@ -13,7 +13,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,10 +65,6 @@ public class UserInfoActivity extends BaseActivity {
     private static final int HANDLER_WHAT_USERINFO = 0;
     private static final int HANDLER_REFRESH_USERINFO = 1;
 
-    // toolbar
-    private ImageView ivReturn;
-    private TextView tvToolTitle;
-
     // 头像
     private LinearLayout llEditAvatar;
     private Uri avatarUri;
@@ -113,10 +108,7 @@ public class UserInfoActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        ivReturn = findViewById(R.id.iv_return);
-        tvToolTitle = findViewById(R.id.tv_tool_title);
-        tvToolTitle.setText(TOOL_TITLE);
-
+        initToolBar(TOOL_TITLE);
         llEditAvatar = findViewById(R.id.ll_edit_avatar);
         // 用户头像
         riUserAvatar = findViewById(R.id.ri_user_avatar);
@@ -141,11 +133,8 @@ public class UserInfoActivity extends BaseActivity {
     @Override
     protected void initData() {
         getUserInfo();
-        ivReturn.setOnClickListener(v -> {
-            finish();
-        });
         // 头像点击事件
-        llEditAvatar.setOnClickListener(v -> {
+        riUserAvatar.setOnClickListener(v -> {
             showSelectDialog();
         });
         // 昵称点击编辑
@@ -418,8 +407,6 @@ public class UserInfoActivity extends BaseActivity {
         // 创建一个唯一的文件名
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         String imageFileName = timeStamp + "_";
-
-        //
 
         // 获取保存照片的目录创建文件
         File imageFile = File.createTempFile(imageFileName, ".jpg", getExternalFilesDir(Environment.DIRECTORY_PICTURES));
