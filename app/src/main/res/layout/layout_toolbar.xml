@@ -29,8 +29,7 @@
                     android:layout_height="@dimen/icon_main_size"
                     android:layout_gravity="center_vertical|left"
                     android:layout_marginStart="10dp"
-                    android:background="@drawable/shape_background_icon_black"
-                    android:padding="10dp"
+                    android:padding="6dp"
                     app:srcCompat="@mipmap/icon_left" />
 
                 <TextView
@@ -40,7 +39,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text=""
+                    android:text="标题"
                     android:textColor="@color/black"
                     android:textSize="@dimen/font_main_size" />
 

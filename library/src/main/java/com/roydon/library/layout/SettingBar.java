@@ -2,24 +2,20 @@ package com.roydon.library.layout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
@@ -30,25 +26,10 @@ import com.roydon.library.R;
  */
 public final class SettingBar extends FrameLayout {
 
-    /**
-     * 无色值
-     */
-    public static final int NO_COLOR = Color.TRANSPARENT;
-
     private final LinearLayout mMainLayout;
     private final TextView mLeftView;
     private final TextView mRightView;
     private final View mLineView;
-
-    /**
-     * 图标着色器
-     */
-    private int mLeftDrawableTint, mRightDrawableTint;
-
-    /**
-     * 图标显示大小
-     */
-    private int mLeftDrawableSize, mRightDrawableSize;
 
     public SettingBar(Context context) {
         this(context, null);
@@ -59,50 +40,41 @@ public final class SettingBar extends FrameLayout {
     }
 
     public SettingBar(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
-    }
-
-    public SettingBar(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
+        super(context, attrs, defStyleAttr);
 
         mMainLayout = new LinearLayout(getContext());
         mLeftView = new TextView(getContext());
         mRightView = new TextView(getContext());
-        mLineView = new View(getContext());
+        mLineView  = new View(getContext());
 
-        mMainLayout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, Gravity.CENTER_VERTICAL));
+        mRightView.setGravity(Gravity.END);
 
-        LinearLayout.LayoutParams leftParams = new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT);
+        mLeftView.setLineSpacing(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics()), mLeftView.getLineSpacingMultiplier());
+        mRightView.setLineSpacing(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics()), mRightView.getLineSpacingMultiplier());
+
+        mLeftView.setPaddingRelative((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics()),
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, getResources().getDisplayMetrics()),
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics()),
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, getResources().getDisplayMetrics()));
+        mRightView.setPaddingRelative((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics()),
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, getResources().getDisplayMetrics()),
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics()),
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, getResources().getDisplayMetrics()));
+
+        mLeftView.setCompoundDrawablePadding((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()));
+        mRightView.setCompoundDrawablePadding((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()));
+
+        LinearLayout.LayoutParams leftParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         leftParams.gravity = Gravity.CENTER_VERTICAL;
-        leftParams.weight = 1;
-        mLeftView.setLayoutParams(leftParams);
+        mMainLayout.addView(mLeftView, leftParams);
 
-        LinearLayout.LayoutParams rightParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams rightParams = new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT);
         rightParams.gravity = Gravity.CENTER_VERTICAL;
-        mRightView.setLayoutParams(rightParams);
+        rightParams.weight = 1;
+        mMainLayout.addView(mRightView, rightParams);
 
-        mLineView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 1, Gravity.BOTTOM));
-
-        mLeftView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
-        mRightView.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
-
-        mLeftView.setSingleLine(true);
-        mRightView.setSingleLine(true);
-
-        mLeftView.setEllipsize(TextUtils.TruncateAt.END);
-        mRightView.setEllipsize(TextUtils.TruncateAt.END);
-
-        mLeftView.setLineSpacing(getResources().getDimension(R.dimen.dp_5), mLeftView.getLineSpacingMultiplier());
-        mRightView.setLineSpacing(getResources().getDimension(R.dimen.dp_5), mRightView.getLineSpacingMultiplier());
-
-        mLeftView.setPaddingRelative((int) getResources().getDimension(R.dimen.dp_15),
-                (int) getResources().getDimension(R.dimen.dp_12),
-                (int) getResources().getDimension(R.dimen.dp_15),
-                (int) getResources().getDimension(R.dimen.dp_12));
-        mRightView.setPaddingRelative((int) getResources().getDimension(R.dimen.dp_15),
-                (int) getResources().getDimension(R.dimen.dp_12),
-                (int) getResources().getDimension(R.dimen.dp_15),
-                (int) getResources().getDimension(R.dimen.dp_12));
+        addView(mMainLayout, 0, new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, Gravity.CENTER_VERTICAL));
+        addView(mLineView, 1, new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, 1, Gravity.BOTTOM));
 
         final TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.SettingBar);
 
@@ -116,60 +88,34 @@ public final class SettingBar extends FrameLayout {
         }
 
         // 提示设置
-        if (array.hasValue(R.styleable.SettingBar_bar_leftTextHint)) {
-            setLeftTextHint(array.getString(R.styleable.SettingBar_bar_leftTextHint));
+        if (array.hasValue(R.styleable.SettingBar_bar_leftHint)) {
+            setLeftHint(array.getString(R.styleable.SettingBar_bar_leftHint));
         }
 
-        if (array.hasValue(R.styleable.SettingBar_bar_rightTextHint)) {
-            setRightTextHint(array.getString(R.styleable.SettingBar_bar_rightTextHint));
+        if (array.hasValue(R.styleable.SettingBar_bar_rightHint)) {
+            setRightHint(array.getString(R.styleable.SettingBar_bar_rightHint));
         }
-
-        // 图标显示的大小
-        if (array.hasValue(R.styleable.SettingBar_bar_leftDrawableSize)) {
-            setLeftDrawableSize(array.getDimensionPixelSize(R.styleable.SettingBar_bar_leftDrawableSize, 0));
-        }
-
-        if (array.hasValue(R.styleable.SettingBar_bar_rightDrawableSize)) {
-            setRightDrawableSize(array.getDimensionPixelSize(R.styleable.SettingBar_bar_rightDrawableSize, 0));
-        }
-
-        // 图标着色器
-        if (array.hasValue(R.styleable.SettingBar_bar_leftDrawableTint)) {
-            setLeftDraawbleTint(array.getColor(R.styleable.SettingBar_bar_leftDrawableTint, NO_COLOR));
-        }
-
-        if (array.hasValue(R.styleable.SettingBar_bar_rightDrawableTint)) {
-            setRightDrawableTint(array.getColor(R.styleable.SettingBar_bar_rightDrawableTint, NO_COLOR));
-        }
-
-        // 图标和文字之间的间距
-        setLeftDrawablePadding(array.hasValue(R.styleable.SettingBar_bar_leftDrawablePadding) ?
-                array.getDimensionPixelSize(R.styleable.SettingBar_bar_leftDrawablePadding, 0) :
-                (int) getResources().getDimension(R.dimen.dp_10));
-        setRightDrawablePadding(array.hasValue(R.styleable.SettingBar_bar_rightDrawablePadding) ?
-                array.getDimensionPixelSize(R.styleable.SettingBar_bar_rightDrawablePadding, 0) :
-                (int) getResources().getDimension(R.dimen.dp_10));
 
         // 图标设置
-        if (array.hasValue(R.styleable.SettingBar_bar_leftDrawable)) {
-            setLeftDrawable(array.getDrawable(R.styleable.SettingBar_bar_leftDrawable));
+        if (array.hasValue(R.styleable.SettingBar_bar_leftIcon)) {
+            setLeftIcon(array.getDrawable(R.styleable.SettingBar_bar_leftIcon));
         }
 
-        if (array.hasValue(R.styleable.SettingBar_bar_rightDrawable)) {
-            setRightDrawable(array.getDrawable(R.styleable.SettingBar_bar_rightDrawable));
+        if (array.hasValue(R.styleable.SettingBar_bar_rightIcon)) {
+            setRightIcon(array.getDrawable(R.styleable.SettingBar_bar_rightIcon));
         }
 
         // 文字颜色设置
-        setLeftTextColor(array.getColor(R.styleable.SettingBar_bar_leftTextColor, ContextCompat.getColor(getContext(), R.color.black80)));
-        setRightTextColor(array.getColor(R.styleable.SettingBar_bar_rightTextColor, ContextCompat.getColor(getContext(), R.color.black60)));
+        setLeftColor(array.getColor(R.styleable.SettingBar_bar_leftColor, ContextCompat.getColor(getContext(), R.color.black80)));
+        setRightColor(array.getColor(R.styleable.SettingBar_bar_rightColor, ContextCompat.getColor(getContext(), R.color.black60)));
 
         // 文字大小设置
-        setLeftTextSize(TypedValue.COMPLEX_UNIT_PX, array.getDimensionPixelSize(R.styleable.SettingBar_bar_leftTextSize, (int) getResources().getDimension(R.dimen.sp_15)));
-        setRightTextSize(TypedValue.COMPLEX_UNIT_PX, array.getDimensionPixelSize(R.styleable.SettingBar_bar_rightTextSize, (int) getResources().getDimension(R.dimen.sp_14)));
+        setLeftSize(TypedValue.COMPLEX_UNIT_SP, array.getDimensionPixelSize(R.styleable.SettingBar_bar_leftSize, 16));
+        setRightSize(TypedValue.COMPLEX_UNIT_SP, array.getDimensionPixelSize(R.styleable.SettingBar_bar_rightSize, 14));
 
         // 分割线设置
-        if (array.hasValue(R.styleable.SettingBar_bar_lineDrawable)) {
-            setLineDrawable(array.getDrawable(R.styleable.SettingBar_bar_lineDrawable));
+        if (array.hasValue(R.styleable.SettingBar_bar_lineColor)) {
+            setLineDrawable(array.getDrawable(R.styleable.SettingBar_bar_lineColor));
         } else {
             setLineDrawable(new ColorDrawable(0xFFECECEC));
         }
@@ -200,16 +146,10 @@ public final class SettingBar extends FrameLayout {
         }
 
         array.recycle();
-
-        mMainLayout.addView(mLeftView);
-        mMainLayout.addView(mRightView);
-
-        addView(mMainLayout, 0);
-        addView(mLineView, 1);
     }
 
     /**
-     * 设置左边的文本
+     * 设置左边的标题
      */
     public SettingBar setLeftText(@StringRes int id) {
         return setLeftText(getResources().getString(id));
@@ -227,11 +167,11 @@ public final class SettingBar extends FrameLayout {
     /**
      * 设置左边的提示
      */
-    public SettingBar setLeftTextHint(@StringRes int id) {
-        return setLeftTextHint(getResources().getString(id));
+    public SettingBar setLeftHint(@StringRes int id) {
+        return setLeftHint(getResources().getString(id));
     }
 
-    public SettingBar setLeftTextHint(CharSequence hint) {
+    public SettingBar setLeftHint(CharSequence hint) {
         mLeftView.setHint(hint);
         return this;
     }
@@ -256,11 +196,11 @@ public final class SettingBar extends FrameLayout {
     /**
      * 设置右边的提示
      */
-    public SettingBar setRightTextHint(@StringRes int id) {
-        return setRightTextHint(getResources().getString(id));
+    public SettingBar setRightHint(@StringRes int id) {
+        return setRightHint(getResources().getString(id));
     }
 
-    public SettingBar setRightTextHint(CharSequence hint) {
+    public SettingBar setRightHint(CharSequence hint) {
         mRightView.setHint(hint);
         return this;
     }
@@ -268,145 +208,65 @@ public final class SettingBar extends FrameLayout {
     /**
      * 设置左边的图标
      */
-    public SettingBar setLeftDrawable(@DrawableRes int id) {
-        setLeftDrawable(ContextCompat.getDrawable(getContext(), id));
+    public SettingBar setLeftIcon(@DrawableRes int id) {
+        setLeftIcon(ContextCompat.getDrawable(getContext(), id));
         return this;
     }
 
-    public SettingBar setLeftDrawable(Drawable drawable) {
+    public SettingBar setLeftIcon(Drawable drawable) {
         mLeftView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
-        setLeftDrawableSize(mLeftDrawableSize);
-        setLeftDraawbleTint(mLeftDrawableTint);
         return this;
     }
 
-    public Drawable getLeftDrawable() {
+    public Drawable getLeftIcon() {
         return mLeftView.getCompoundDrawables()[0];
     }
 
     /**
      * 设置右边的图标
      */
-    public SettingBar setRightDrawable(@DrawableRes int id) {
-        setRightDrawable(ContextCompat.getDrawable(getContext(), id));
+    public SettingBar setRightIcon(@DrawableRes int id) {
+        setRightIcon(ContextCompat.getDrawable(getContext(), id));
         return this;
     }
 
-    public SettingBar setRightDrawable(Drawable drawable) {
+    public SettingBar setRightIcon(Drawable drawable) {
         mRightView.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
-        setRightDrawableSize(mRightDrawableSize);
-        setRightDrawableTint(mRightDrawableTint);
         return this;
     }
 
-    public Drawable getRightDrawable() {
+    public Drawable getRightIcon() {
         return mRightView.getCompoundDrawables()[2];
     }
 
     /**
-     * 设置左边的图标间距
+     * 设置左标题颜色
      */
-    public SettingBar setLeftDrawablePadding(int padding) {
-        mLeftView.setCompoundDrawablePadding(padding);
-        return this;
-    }
-
-    /**
-     * 设置右边的图标间距
-     */
-    public SettingBar setRightDrawablePadding(int padding) {
-        mRightView.setCompoundDrawablePadding(padding);
-        return this;
-    }
-
-    /**
-     * 设置左边的图标大小
-     */
-    public SettingBar setLeftDrawableSize(int size) {
-        mLeftDrawableSize = size;
-        Drawable drawable = getLeftDrawable();
-        if (drawable != null) {
-            if (size > 0) {
-                drawable.setBounds(0, 0, size, size);
-            } else {
-                drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-            }
-            mLeftView.setCompoundDrawables(drawable, null, null, null);
-        }
-        return this;
-    }
-
-    /**
-     * 设置右边的图标大小
-     */
-    public SettingBar setRightDrawableSize(int size) {
-        mRightDrawableSize = size;
-        Drawable drawable = getRightDrawable();
-        if (drawable != null) {
-            if (size > 0) {
-                drawable.setBounds(0, 0, size, size);
-            } else {
-                drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-            }
-            mRightView.setCompoundDrawables(null, null, drawable, null);
-        }
-        return this;
-    }
-
-    /**
-     * 设置左边的图标着色器
-     */
-    public SettingBar setLeftDraawbleTint(int color) {
-        mLeftDrawableTint = color;
-        Drawable drawable = getLeftDrawable();
-        if (drawable != null && color != NO_COLOR) {
-            drawable.mutate();
-            drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN);
-        }
-        return this;
-    }
-
-    /**
-     * 设置右边的图标着色器
-     */
-    public SettingBar setRightDrawableTint(int color) {
-        mRightDrawableTint = color;
-        Drawable drawable = getRightDrawable();
-        if (drawable != null && color != NO_COLOR) {
-            drawable.mutate();
-            drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN);
-        }
-        return this;
-    }
-
-    /**
-     * 设置左边的文本颜色
-     */
-    public SettingBar setLeftTextColor(@ColorInt int color) {
+    public SettingBar setLeftColor(@ColorInt int color) {
         mLeftView.setTextColor(color);
         return this;
     }
 
     /**
-     * 设置右边的文本颜色
+     * 设置右标题颜色
      */
-    public SettingBar setRightTextColor(@ColorInt int color) {
+    public SettingBar setRightColor(@ColorInt int color) {
         mRightView.setTextColor(color);
         return this;
     }
 
     /**
-     * 设置左边的文字大小
+     * 设置左标题的文本大小
      */
-    public SettingBar setLeftTextSize(int unit, float size) {
+    public SettingBar setLeftSize(int unit, float size) {
         mLeftView.setTextSize(unit, size);
         return this;
     }
 
     /**
-     * 设置右边的文字大小
+     * 设置右标题的文本大小
      */
-    public SettingBar setRightTextSize(int unit, float size) {
+    public SettingBar setRightSize(int unit, float size) {
         mRightView.setTextSize(unit, size);
         return this;
     }
@@ -425,7 +285,6 @@ public final class SettingBar extends FrameLayout {
     public SettingBar setLineColor(@ColorInt int color) {
         return setLineDrawable(new ColorDrawable(color));
     }
-
     public SettingBar setLineDrawable(Drawable drawable) {
         mLineView.setBackground(drawable);
         return this;
@@ -435,12 +294,9 @@ public final class SettingBar extends FrameLayout {
      * 设置分割线的大小
      */
     public SettingBar setLineSize(int size) {
-        LayoutParams params = (LayoutParams) mLineView.getLayoutParams();
-        if (params == null) {
-            params = generateDefaultLayoutParams();
-        }
-        params.height = size;
-        mLineView.setLayoutParams(params);
+        ViewGroup.LayoutParams layoutParams = mLineView.getLayoutParams();
+        layoutParams.height = size;
+        mLineView.setLayoutParams(layoutParams);
         return this;
     }
 
@@ -448,10 +304,7 @@ public final class SettingBar extends FrameLayout {
      * 设置分割线边界
      */
     public SettingBar setLineMargin(int margin) {
-        LayoutParams params = (LayoutParams) mLineView.getLayoutParams();
-        if (params == null) {
-            params = generateDefaultLayoutParams();
-        }
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mLineView.getLayoutParams();
         params.leftMargin = margin;
         params.rightMargin = margin;
         mLineView.setLayoutParams(params);
@@ -466,14 +319,14 @@ public final class SettingBar extends FrameLayout {
     }
 
     /**
-     * 获取左 TextView
+     * 获取左标题
      */
     public TextView getLeftView() {
         return mLeftView;
     }
 
     /**
-     * 获取右 TextView
+     * 获取右标题
      */
     public TextView getRightView() {
         return mRightView;

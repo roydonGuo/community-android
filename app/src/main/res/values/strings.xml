@@ -25,6 +25,27 @@
     <string name="not_more">~ 没有更多啦 ~</string>
     <string name="share_to_people">点击分享</string>
 
+    <string name="common_network">当前没有网络连接，请检查网络设置</string>
+
+    <!-- 设置 -->
+    <string name="setting_title">设置</string>
+
+    <string name="setting_language">语言切换</string>
+    <string name="setting_language_simple">简体中文</string>
+    <string name="setting_language_complex">繁体中文</string>
+
+    <string name="setting_update">检查更新</string>
+    <string name="setting_cache">清空缓存</string>
+    <string name="setting_auto">自动登录</string>
+    <string name="setting_agreement">隐私协议</string>
+    <string name="setting_about">关于我们</string>
+    <string name="setting_exit">退出登录</string>
+    <!-- 关于 -->
+    <string name="about_title">关于我们</string>
+    <string name="about_author"><font color="#ff6699">roydon</font> gyc</string>
+
+    <string name="about_copyright">Copyright © 2022 &#8211; 2023</string>
+
     <!-- 提示布局 -->
     <string name="hint_layout_no_data">空空如也</string>
     <string name="hint_layout_error_request">请求出错，点击重试</string>

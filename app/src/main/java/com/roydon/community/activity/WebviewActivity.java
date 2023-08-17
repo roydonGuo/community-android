@@ -1,31 +1,41 @@
 package com.roydon.community.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.roydon.community.BaseActivity;
 import com.roydon.community.R;
+import com.roydon.community.action.StatusAction;
+import com.roydon.community.aop.CheckNet;
+import com.roydon.community.constants.IntentKey;
 import com.roydon.community.utils.string.StringUtil;
+import com.roydon.community.widget.HintLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 @SuppressLint("SetJavaScriptEnabled")
-public class WebviewActivity extends BaseActivity {
-
+public class WebviewActivity extends BaseActivity implements StatusAction {
     private String TOOL_TITLE = "浏览器";
 
-    // toolbar
-    private ImageView ivReturn;
-    private TextView tvToolTitle;
-
     private WebView mWebView;
-    private String url = "http://106.14.105.101:88";
+//    private String url = "http://106.14.105.101:88";
 
+    private HintLayout hintLayout;
     private SmartRefreshLayout refreshLayout;
+
+    @CheckNet
+    public static void start(Context context, String url) {
+        if (url == null || "".equals(url)) {
+            return;
+        }
+        Intent intent = new Intent(context, WebviewActivity.class);
+        intent.putExtra(IntentKey.URL, url);
+        context.startActivity(intent);
+    }
 
     @Override
     protected int initLayout() {
@@ -34,33 +44,35 @@ public class WebviewActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        initToolBar(TOOL_TITLE);
         mWebView = findViewById(R.id.webview);
-        ivReturn = findViewById(R.id.iv_return);
-        tvToolTitle = findViewById(R.id.tv_tool_title);
-        tvToolTitle.setText(TOOL_TITLE);
         initWebView();
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
                 if (StringUtil.isNotEmpty(title)) {
-                    tvToolTitle.setText(title);
+                    initToolBar(title);
                 }
             }
         });
+        hintLayout = findViewById(R.id.hl_webview_hint);
         refreshLayout = findViewById(R.id.refreshLayout);
 
     }
 
     @Override
     protected void initData() {
-        ivReturn.setOnClickListener(v -> {
-            finish();
-        });
+        String url = getString(IntentKey.URL);
         mWebView.loadUrl(url);
         refreshLayout.setOnRefreshListener(refreshLayout1 -> {
             mWebView.reload();
         });
+    }
+
+    @Override
+    public HintLayout getHintLayout() {
+        return hintLayout;
     }
 
     @Override

@@ -8,18 +8,21 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.roydon.community.constants.Constants;
+import com.roydon.library.action.BundleAction;
 
 /**
  * @author roydon
  * @date 2023/6/6 2:30
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements BundleAction {
 
     public Context context;
 
@@ -40,11 +43,26 @@ public abstract class BaseActivity extends AppCompatActivity {
         initData();
     }
 
+    @Override
+    public Bundle getBundle() {
+        return getIntent().getExtras();
+    }
+
     protected abstract int initLayout();
 
     protected abstract void initView();
 
     protected abstract void initData();
+
+    // 初始化 toolbar
+    public void initToolBar(String title) {
+        ImageView ivReturn = findViewById(R.id.iv_return);
+        ivReturn.setOnClickListener(v -> {
+            finish();
+        });
+        TextView tvToolTitle = findViewById(R.id.tv_tool_title);
+        tvToolTitle.setText(title);
+    }
 
     // 短toast
     public void showShortToast(String msg) {

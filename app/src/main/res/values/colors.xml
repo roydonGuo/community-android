@@ -6,6 +6,8 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
 
+    <color name="window_background">#F4F4F4</color>
+
     <!-- 鲜明色 -->
     <color name="gold">#ffd700</color>
 

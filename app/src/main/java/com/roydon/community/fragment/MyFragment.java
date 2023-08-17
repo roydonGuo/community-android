@@ -233,10 +233,8 @@ public class MyFragment extends BaseFragment {
             navigateTo(MessageActivity.class);
         });
         rlWebview.setOnClickListener(v -> {
-            navigateTo(WebviewActivity.class);
+            WebviewActivity.start(getActivity(), "http://106.14.105.101:88");
         });
-//        viewPager = mRootView.findViewById(R.id.fixedViewPager);
-//        slidingTabLayout = mRootView.findViewById(R.id.slidingTabLayout);
     }
 
     @Override

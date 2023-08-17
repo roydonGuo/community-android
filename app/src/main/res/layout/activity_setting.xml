@@ -8,190 +8,102 @@
     android:orientation="vertical"
     tools:context=".activity.SettingActivity">
 
-    <!--标题 沉浸式-->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <include layout="@layout/layout_toolbar" />
+
+    <com.roydon.library.layout.SettingBar
+        android:id="@+id/sb_setting_language"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/element"
-        android:fitsSystemWindows="true"
-        app:contentInsetStart="0dp"
-        app:popupTheme="@style/AppTheme.PopupOverlay">
+        android:layout_marginTop="15dp"
+        app:bar_leftColor="@color/black"
+        app:bar_leftText="@string/setting_language"
+        app:bar_rightColor="@color/gray"
+        app:bar_rightIcon="@mipmap/icon_right"
+        tools:bar_rightHint="@string/setting_language_simple" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="@dimen/mg_6"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/iv_return"
-                android:layout_width="@dimen/icon_main_size"
-                android:layout_height="@dimen/icon_main_size"
-                android:layout_gravity="center_vertical|left"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/shape_background_icon_black"
-                android:padding="8dp"
-                app:srcCompat="@mipmap/icon_left" />
-
-            <TextView
-                android:id="@+id/tv_news_title_top"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="设置"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_main_size" />
-
-            <ImageView
-                android:id="@+id/iv_more"
-                android:layout_width="@dimen/icon_main_size"
-                android:layout_height="@dimen/icon_main_size"
-                android:layout_gravity="center_vertical|right"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:padding="1dp"
-                android:src="@mipmap/icon_more" />
-        </LinearLayout>
-    </androidx.appcompat.widget.Toolbar>
-
-    <LinearLayout
+    <com.roydon.library.layout.SettingBar
+        android:id="@+id/sb_setting_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/pd_6">
+        app:bar_leftColor="@color/black"
+        app:bar_leftText="@string/setting_update"
+        app:bar_lineVisible="false"
+        app:bar_rightColor="@color/gray">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/mg_6"
-            android:background="@drawable/shape_radius"
-            android:orientation="vertical">
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/shape_buy_btn"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
+            android:paddingBottom="3dp"
+            android:text="new"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            tools:ignore="HardcodedText" />
 
-            <RelativeLayout
-                android:id="@+id/rl_user_address"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
+    </com.roydon.library.layout.SettingBar>
 
-                <ImageView
-                    android:id="@+id/iv_collect"
-                    android:layout_width="@dimen/icon_main_size"
-                    android:layout_height="@dimen/icon_main_size"
-                    android:layout_centerVertical="true"
-                    android:padding="2dp"
-                    android:src="@mipmap/icon_order_address" />
+    <com.roydon.library.layout.SettingBar
+        android:id="@+id/sb_setting_agreement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:bar_leftColor="@color/black"
+        app:bar_leftText="@string/setting_agreement"
+        app:bar_rightColor="@color/gray"
+        app:bar_rightIcon="@mipmap/icon_right" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:layout_toEndOf="@+id/iv_collect"
-                    android:layout_toRightOf="@+id/iv_collect"
-                    android:gravity="center|left"
-                    android:paddingLeft="10dp"
-                    android:text="收货地址管理"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+    <com.roydon.library.layout.SettingBar
+        android:id="@+id/sb_setting_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftColor="@color/black"
+        app:bar_leftText="@string/setting_about"
+        app:bar_lineVisible="false"
+        app:bar_rightColor="@color/gray"
+        app:bar_rightIcon="@mipmap/icon_right" />
 
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:src="@mipmap/icon_right" />
-            </RelativeLayout>
+    <com.roydon.library.layout.SettingBar
+        android:id="@+id/sb_setting_auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:bar_leftColor="@color/black"
+        app:bar_leftText="@string/setting_auto"
+        app:bar_lineVisible="false"
+        app:bar_rightColor="@color/gray">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:background="@color/fragment_background" />
+        <com.roydon.library.view.SwitchButton
+            android:id="@+id/sb_setting_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp" />
 
-            <RelativeLayout
-                android:id="@+id/rl_access_record"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
+    </com.roydon.library.layout.SettingBar>
 
-                <ImageView
-                    android:id="@+id/iv_record"
-                    android:layout_width="@dimen/icon_main_size"
-                    android:layout_height="@dimen/icon_main_size"
-                    android:layout_centerVertical="true"
-                    android:padding="2dp"
-                    android:src="@mipmap/icon_access_report" />
+    <com.roydon.library.layout.SettingBar
+        android:id="@+id/sb_setting_cache"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:bar_leftColor="@color/black"
+        app:bar_leftText="@string/setting_cache"
+        app:bar_lineVisible="false"
+        app:bar_rightColor="@color/gray"
+        app:bar_rightIcon="@mipmap/icon_right" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:layout_toEndOf="@+id/iv_record"
-                    android:layout_toRightOf="@+id/iv_record"
-                    android:gravity="center|left"
-                    android:paddingLeft="10dp"
-                    android:text="出入社区报备"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:src="@mipmap/icon_right" />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:background="@color/fragment_background" />
-
-            <RelativeLayout
-                android:id="@+id/rl_detail"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
-
-                <ImageView
-                    android:id="@+id/iv_detail"
-                    android:layout_width="@dimen/icon_main_size"
-                    android:layout_height="@dimen/icon_main_size"
-                    android:layout_centerVertical="true"
-                    android:padding="2dp"
-                    android:src="@mipmap/icon_user_profile" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:layout_toEndOf="@+id/iv_detail"
-                    android:layout_toRightOf="@+id/iv_detail"
-                    android:gravity="center|left"
-                    android:paddingLeft="10dp"
-                    android:text="个人信息"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:src="@mipmap/icon_right" />
-            </RelativeLayout>
-
-        </LinearLayout>
-    </LinearLayout>
+    <com.roydon.library.layout.SettingBar
+        android:id="@+id/sb_setting_exit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:bar_leftColor="@color/red"
+        app:bar_leftText="@string/setting_exit"
+        app:bar_lineVisible="false"
+        app:bar_rightColor="@color/gray" />
 </LinearLayout>
