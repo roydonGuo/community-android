@@ -15,7 +15,7 @@
         android:paddingVertical="@dimen/dp_12"
         android:textSize="@dimen/sp_15"
         app:shape_textColor="@color/black"
-        app:shape_textSelectedColor="@color/common_accent_color"
+        app:shape_textSelectedColor="@color/blue_deep"
         tools:text="我是标签" />
 
     <View
@@ -25,6 +25,6 @@
         android:layout_alignStart="@id/tv_tab_design_title"
         android:layout_alignEnd="@id/tv_tab_design_title"
         android:layout_alignBottom="@id/tv_tab_design_title"
-        android:background="@color/common_accent_color" />
+        android:background="@color/blue_deep" />
 
 </RelativeLayout>
