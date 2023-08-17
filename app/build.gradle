@@ -208,8 +208,11 @@ dependencies {
     // 标题栏框架：https://github.com/getActivity/TitleBar
     implementation 'com.github.getActivity:TitleBar:9.2'
 
+    // 标题栏框架：https://github.com/getActivity/TitleBar
+//    implementation 'com.hjq:titlebar:6.0'
+
     // 吐司框架：https://github.com/getActivity/ToastUtils
-    implementation 'com.github.getActivity:ToastUtils:9.5'
+    implementation 'com.hjq:toast:8.0'
 
     // 权限请求框架：https://github.com/getActivity/XXPermissions
     implementation 'com.hjq:xxpermissions:6.2'

@@ -38,7 +38,8 @@ public class AppMessageActivity extends BaseActivity implements StatusAction {
     private TextView tvToolTitle;
 
     // handler
-    private static final int HANDLER_WHAT_MESSAGE_LIST = 0;
+    private static final int HANDLER_WHAT_EMPTY = 0;
+    private static final int HANDLER_WHAT_MESSAGE_LIST = 1;
 
     private HintLayout mHintLayout;
     private RefreshLayout refreshLayout;
@@ -55,6 +56,9 @@ public class AppMessageActivity extends BaseActivity implements StatusAction {
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
+                case HANDLER_WHAT_EMPTY:
+                    showEmpty();
+                    break;
                 case HANDLER_WHAT_MESSAGE_LIST:
                     appMessageAdapter.setDatas(appMessageList);
                     appMessageAdapter.notifyDataSetChanged();
@@ -148,6 +152,7 @@ public class AppMessageActivity extends BaseActivity implements StatusAction {
                     } else {
                         if (isRefresh) {
                             Log.e("getAppMessageList", "暂时无数据");
+                            mHandler.sendEmptyMessage(HANDLER_WHAT_EMPTY);
                         } else {
                             Log.e("getAppMessageList", "没有更多数据");
                         }

@@ -26,7 +26,7 @@ public class InoculationHistoryActivity extends BaseActivity {
     private String TOOLBAR_TITLE = "疫苗接种记录";
 
     // handler
-    private static final int HANDLER_WHAT_HISTORY = 0;
+    private static final int HANDLER_WHAT_HISTORY = 1;
 
     // toolbar
     private ImageView ivReturn;
@@ -92,7 +92,7 @@ public class InoculationHistoryActivity extends BaseActivity {
         tvTelephone.setText(inoculationHistory.getTelephone());
         tvIdCard.setText(inoculationHistory.getIdCard());
         // 禁用上报按钮
-//        btnInoculationHistoryReport.setEnabled(false);
+        btnInoculationHistoryReport.setEnabled(false);
     }
 
     /**

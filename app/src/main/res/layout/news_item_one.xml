@@ -6,7 +6,7 @@
     android:layout_marginLeft="3dp"
     android:layout_marginTop="@dimen/mg_6"
     android:layout_marginRight="3dp"
-    android:background="@drawable/shape_radius"
+    android:background="@drawable/selector_click"
     android:padding="@dimen/pd_10">
 
     <LinearLayout

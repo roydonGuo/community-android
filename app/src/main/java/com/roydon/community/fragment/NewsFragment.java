@@ -21,7 +21,7 @@ import java.util.List;
 
 public class NewsFragment extends BaseLazyLoadFragment {
 
-    private TextView etSearch ;
+    private TextView etSearch;
 
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private String[] mTitles;
@@ -51,7 +51,7 @@ public class NewsFragment extends BaseLazyLoadFragment {
     @Override
     protected void lazyLoad() {
         getNewsCategoryList();
-        etSearch.setOnClickListener(v->{
+        etSearch.setOnClickListener(v -> {
             navigateTo(NewsSearchActivity.class);
         });
     }
@@ -78,7 +78,6 @@ public class NewsFragment extends BaseLazyLoadFragment {
 
     @Override
     protected void initData() {
-//        getNewsCategoryList();
     }
 
     /**
@@ -89,26 +88,25 @@ public class NewsFragment extends BaseLazyLoadFragment {
         Api.build(ApiConfig.NEWS_CATEGORY_LIST, params).getRequest(getActivity(), new HttpCallback() {
             @Override
             public void onSuccess(final String res) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        NewsCategoryRes response = new Gson().fromJson(res, NewsCategoryRes.class);
-                        if (response != null && response.getCode() == 200) {
-                            List<NewsCategoryRes.DataBean> data = response.getData();
-                            if (data != null && data.size() > 0) {
-                                mTitles = new String[data.size()];
-                                for (int i = 0; i < data.size(); i++) {
-                                    mTitles[i] = data.get(i).getDictLabel();
-                                    mFragments.add(NewsAppFragment.newInstance(data.get(i).getDictValue()));
+                getActivity().runOnUiThread(() -> {
+                            NewsCategoryRes response = new Gson().fromJson(res, NewsCategoryRes.class);
+                            if (response != null && response.getCode() == 200) {
+                                List<NewsCategoryRes.DataBean> data = response.getData();
+                                if (data != null && data.size() > 0) {
+                                    mTitles = new String[data.size()];
+                                    for (int i = 0; i < data.size(); i++) {
+                                        mTitles[i] = data.get(i).getDictLabel();
+                                        mFragments.add(NewsAppFragment.newInstance(data.get(i).getDictValue()));
+                                    }
+                                    viewPager.setOffscreenPageLimit(mFragments.size());
+                                    viewPager.setAdapter(new HomeAdapter(getFragmentManager(), mTitles, mFragments));
+                                    slidingTabLayout.setViewPager(viewPager);
                                 }
-                                viewPager.setOffscreenPageLimit(mFragments.size());
-                                viewPager.setAdapter(new HomeAdapter(getFragmentManager(), mTitles, mFragments));
-                                slidingTabLayout.setViewPager(viewPager);
                             }
                         }
-                    }
-                });
+                );
             }
+
             @Override
             public void onFailure(Exception e) {
             }

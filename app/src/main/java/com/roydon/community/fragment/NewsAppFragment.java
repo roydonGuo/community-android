@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.View;
-import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.roydon.community.R;
+import com.roydon.community.action.StatusAction;
 import com.roydon.community.activity.NewsDetailActivity;
 import com.roydon.community.adapter.NewsAdapter;
 import com.roydon.community.api.Api;
@@ -21,6 +20,7 @@ import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
 import com.roydon.community.domain.entity.AppNews;
 import com.roydon.community.domain.vo.NewsListRes;
+import com.roydon.community.widget.HintLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.io.Serializable;
@@ -28,7 +28,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class NewsAppFragment extends BaseFragment {
+public class NewsAppFragment extends BaseLazyLoadFragment implements StatusAction {
+
+    // handler
+    private static final int HANDLER_WHAT_EMPTY = 0;
+    private static final int HANDLER_WHAT_NEWS_LIST = 1;
 
     private String dictValue;
     private RecyclerView recyclerView;
@@ -38,6 +42,13 @@ public class NewsAppFragment extends BaseFragment {
     private List<AppNews> newsList = new ArrayList<>();
     private LinearLayoutManager linearLayoutManager;
 
+    private HintLayout mHintLayout;
+
+    @Override
+    public HintLayout getHintLayout() {
+        return mHintLayout;
+    }
+
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @SuppressLint("NotifyDataSetChanged")
@@ -45,11 +56,15 @@ public class NewsAppFragment extends BaseFragment {
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
-                case 0:
+                case HANDLER_WHAT_EMPTY:
+                    showEmpty();
+                    break;
+                case HANDLER_WHAT_NEWS_LIST:
                     newsAdapter.setDatas(newsList);
                     newsAdapter.notifyDataSetChanged();
-                    ProgressBar loadingSpinner = mRootView.findViewById(R.id.loading_spinner);
-                    loadingSpinner.setVisibility(View.GONE);
+                    showComplete();
+                    break;
+                default:
                     break;
             }
         }
@@ -65,21 +80,7 @@ public class NewsAppFragment extends BaseFragment {
     }
 
     @Override
-    protected int initLayout() {
-        return R.layout.fragment_news_app;
-    }
-
-    @Override
-    protected void initView() {
-        recyclerView = mRootView.findViewById(R.id.recyclerView);
-        refreshLayout = mRootView.findViewById(R.id.refreshLayout);
-        // 显示加载动画
-        ProgressBar loadingSpinner = mRootView.findViewById(R.id.loading_spinner);
-        loadingSpinner.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    protected void initData() {
+    protected void lazyLoad() {
         linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -105,10 +106,48 @@ public class NewsAppFragment extends BaseFragment {
         getNewsList(true);
     }
 
+    @Override
+    protected void visibleReLoad() {
+
+    }
+
+    @Override
+    protected void inVisibleRelease() {
+
+    }
+
+    @Override
+    protected void resume() {
+
+    }
+
+    @Override
+    protected void pause() {
+
+    }
+
+    @Override
+    protected int initLayout() {
+        return R.layout.fragment_news_app;
+    }
+
+    @Override
+    protected void initView() {
+        mHintLayout = mRootView.findViewById(R.id.hintLayout);
+        refreshLayout = mRootView.findViewById(R.id.refreshLayout);
+        recyclerView = mRootView.findViewById(R.id.recyclerView);
+        // 显示加载动画
+        showLoading();
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
     private void getNewsList(final boolean isRefresh) {
         HashMap<String, Object> params = new HashMap<>();
         params.put("pageNum", pageNum);
-//        showShortToast(pageNum+"");
         params.put("pageSize", ApiConfig.PAGE_SIZE);
         params.put("newsType", dictValue);
         params.put("showInApp", "1");
@@ -129,11 +168,11 @@ public class NewsAppFragment extends BaseFragment {
                         } else {
                             newsList.addAll(list);
                         }
-                        mHandler.sendEmptyMessage(0);
+                        mHandler.sendEmptyMessage(HANDLER_WHAT_NEWS_LIST);
                     } else {
                         if (isRefresh) {
                             Log.e("getNewsList", "暂时无数据");
-//                            showShortToastSync("暂时无数据");
+                            mHandler.sendEmptyMessage(HANDLER_WHAT_EMPTY);
                         } else {
                             Log.e("getNewsList", "没有更多数据");
                             showShortToastSync("没有更多数据");
@@ -149,6 +188,7 @@ public class NewsAppFragment extends BaseFragment {
                 } else {
                     refreshLayout.finishLoadMore(true);
                 }
+                mHandler.sendEmptyMessage(HANDLER_WHAT_EMPTY);
             }
         });
     }
