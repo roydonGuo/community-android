@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.roydon.community.BaseActivity;
@@ -18,6 +19,12 @@ import java.net.URI;
 import java.util.Date;
 
 public class MessageActivity extends BaseActivity {
+
+    private String TOOL_TITLE = "我的消息";
+
+    // toolbar
+    private ImageView ivReturn;
+    private TextView tvToolTitle;
 
     private TextView showMessage;
     private EditText editText;
@@ -44,6 +51,9 @@ public class MessageActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        ivReturn = findViewById(R.id.iv_return);
+        tvToolTitle = findViewById(R.id.tv_tool_title);
+        tvToolTitle.setText(TOOL_TITLE);
         showMessage = findViewById(R.id.show_message);
         editText = findViewById(R.id.edit_text);
         btnSend = findViewById(R.id.send);
@@ -51,6 +61,9 @@ public class MessageActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        ivReturn.setOnClickListener(v->{
+            finish();
+        });
         URI serverURI = URI.create("ws://106.14.105.101:8088/chat-server/" + SPUtils.getString(CacheConstants.USERNAME, "", this));
         webSocketClient = new WebSocketClient(serverURI) {
             @Override

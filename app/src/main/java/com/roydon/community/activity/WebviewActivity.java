@@ -2,6 +2,7 @@ package com.roydon.community.activity;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.roydon.community.BaseActivity;
 import com.roydon.community.R;
+import com.roydon.community.utils.string.StringUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -37,11 +39,17 @@ public class WebviewActivity extends BaseActivity {
         tvToolTitle = findViewById(R.id.tv_tool_title);
         tvToolTitle.setText(TOOL_TITLE);
         initWebView();
+        mWebView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                super.onReceivedTitle(view, title);
+                if (StringUtil.isNotEmpty(title)) {
+                    tvToolTitle.setText(title);
+                }
+            }
+        });
         refreshLayout = findViewById(R.id.refreshLayout);
 
-        // 不显示滚动条
-//        setVerticalScrollBarEnabled(false);
-//        setHorizontalScrollBarEnabled(false);
     }
 
     @Override
