@@ -105,5 +105,6 @@
         app:bar_leftColor="@color/red"
         app:bar_leftText="@string/setting_exit"
         app:bar_lineVisible="false"
-        app:bar_rightColor="@color/gray" />
+        app:bar_rightColor="@color/gray"
+        app:bar_rightIcon="@mipmap/icon_exit" />
 </LinearLayout>

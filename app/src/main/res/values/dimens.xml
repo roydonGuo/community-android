@@ -25,6 +25,7 @@
     <dimen name="mg_3">3dp</dimen>
     <dimen name="mg_6">6dp</dimen>
     <dimen name="mg_10">10dp</dimen>
+    <dimen name="mg_20">20dp</dimen>
 
     <!-- 顶部top-bar高度-->
     <dimen name="top_bar_height">60dp</dimen>

@@ -15,8 +15,11 @@
         android:layout_height="120dp"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:src="@mipmap/avatar_ganyu"
-        app:scaleRatio="1.2" />
+        app:scaleRatio="1.5" />
 
     <LinearLayout
         android:layout_width="match_parent"

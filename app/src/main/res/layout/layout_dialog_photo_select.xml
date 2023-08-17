@@ -56,7 +56,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="取 消"
-                android:textColor="@color/blue_deep"
+                android:textColor="@color/red"
                 android:textSize="@dimen/font_main_size" />
         </LinearLayout>
     </LinearLayout>
