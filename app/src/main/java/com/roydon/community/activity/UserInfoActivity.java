@@ -43,6 +43,7 @@ import com.roydon.community.utils.string.TelephoneUtils;
 import com.roydon.community.view.CircleTransform;
 import com.roydon.community.view.DialogX;
 import com.roydon.community.widget.RoundImageView;
+import com.roydon.library.layout.SettingBar;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -76,7 +77,9 @@ public class UserInfoActivity extends BaseActivity {
 
     private AppUser appUser;
 
-    private TextView tvUserId, tvUserName, tvNickName, tvRealName, tvPhonenumber, tvEmail, tvIdCard, tvSex, tvAge, tvIsTenant;
+    private SettingBar tvUserName;
+
+    private TextView tvUserId, tvNickName, tvRealName, tvPhonenumber, tvEmail, tvIdCard, tvSex, tvAge, tvIsTenant;
 
     private String mCurrentPhotoPath;
 
@@ -225,7 +228,7 @@ public class UserInfoActivity extends BaseActivity {
             Picasso.with(this).load(appUser.getAvatar()).transform(new CircleTransform()).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(riUserAvatar);
         }
         tvUserId.setText(appUser.getUserId() + "");
-        tvUserName.setText(appUser.getUserName());
+        tvUserName.setRightText(appUser.getUserName());
         tvNickName.setText(appUser.getNickName());
         tvRealName.setText(appUser.getRealName());
         tvPhonenumber.setText(appUser.getPhonenumber());

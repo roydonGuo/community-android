@@ -9,69 +9,36 @@
     android:orientation="vertical"
     tools:context=".activity.CartActivity">
 
-    <!--标题 沉浸式-->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <include layout="@layout/layout_toolbar" />
+
+    <!--数据区域-->
+    <com.roydon.community.widget.HintLayout
+        android:id="@+id/hintLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/element"
-        android:fitsSystemWindows="true"
-        app:contentInsetStart="0dp"
-        app:popupTheme="@style/AppTheme.PopupOverlay">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="@dimen/mg_6"
-            android:orientation="horizontal">
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refreshLayout"
+            style="@style/RefreshLayoutStyle">
 
-            <ImageView
-                android:id="@+id/iv_return"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical|left"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/shape_background_icon_black"
-                android:padding="10dp"
-                app:srcCompat="@mipmap/icon_left" />
+            <com.scwang.smartrefresh.header.MaterialHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-            <TextView
-                android:id="@+id/tv_cart"
-                android:layout_width="280dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="购物车"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_main_size" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_mall_cart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-            <ImageView
-                android:id="@+id/iv_edit"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:layout_gravity="center_vertical|right"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:src="@mipmap/icon_edit" />
-        </LinearLayout>
-    </androidx.appcompat.widget.Toolbar>
+            <com.scwang.smartrefresh.layout.footer.BallPulseFooter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refreshLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@color/fragment_background"
-        android:orientation="vertical">
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </com.roydon.community.widget.HintLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_mall_cart"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-
+    <!--底部操作栏-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -93,16 +60,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="100.0"
+            android:text="0.0"
             android:textColor="#F56C6C"
             android:textSize="20dp" />
-
-        <!--        <ImageView-->
-        <!--            android:id="@+id/deleteOrder"-->
-        <!--            android:layout_width="35dp"-->
-        <!--            android:layout_marginEnd="4sp"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:src="@drawable/ic_baseline_delete_24dp" />-->
 
         <Button
             android:id="@+id/btn_create_order"
@@ -110,10 +70,10 @@
             android:layout_height="@dimen/dimen_40dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:background="@drawable/shape_buy_btn"
+            android:background="@drawable/selector_button_red"
             android:text="下单"
             android:textColor="#fff"
-            android:textSize="18sp" />
+            android:textSize="@dimen/font_main_size" />
 
     </LinearLayout>
 

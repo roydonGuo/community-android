@@ -119,8 +119,8 @@
 
         <ImageView
             android:id="@+id/iv_relocated"
-            android:layout_width="@dimen/icon_main_size"
-            android:layout_height="@dimen/icon_main_size"
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_40dp"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="30dp"
             android:background="@drawable/shape_background_icon_white"

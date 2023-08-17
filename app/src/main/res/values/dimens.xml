@@ -65,6 +65,7 @@
 
     <!-- 默认按钮的圆角大小 -->
     <dimen name="button_round_size">10dp</dimen>
+    <dimen name="button_pay_size">20dp</dimen>
 
     <!-- 通用对话框圆角大小 -->
     <dimen name="dialog_ui_round_size">10dp</dimen>

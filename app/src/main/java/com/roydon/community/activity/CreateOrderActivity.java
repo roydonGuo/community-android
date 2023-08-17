@@ -39,7 +39,7 @@ public class CreateOrderActivity extends BaseActivity {
     private String TOOL_TITLE = "创建订单";
 
     private RefreshLayout refreshLayout;
-    private TextView tvAddress;
+    private TextView tvAddressTelephone, tvAddressComplete;
     private RecyclerView rvGoods;
     private LinearLayoutManager linearLayoutManager;
     private int pageNum = 1;
@@ -60,7 +60,8 @@ public class CreateOrderActivity extends BaseActivity {
     @Override
     protected void initView() {
         initToolBar(TOOL_TITLE);
-        tvAddress = findViewById(R.id.rv_address);
+        tvAddressTelephone = findViewById(R.id.tv_address_telephone);
+        tvAddressComplete = findViewById(R.id.tv_address_complete);
         refreshLayout = findViewById(R.id.refreshLayout);
         rvGoods = findViewById(R.id.rv_goods);
         totalPrice = findViewById(R.id.tv_total_price);
@@ -143,7 +144,8 @@ public class CreateOrderActivity extends BaseActivity {
 
     @SuppressLint("SetTextI18n")
     private void showAddressView(MallUserAddress address) {
-        tvAddress.setText(address.getNickname() + " " + address.getTelephone() + "\n" + address.getCompleteAddress());
+        tvAddressTelephone.setText(address.getNickname() + "，" + address.getTelephone());
+        tvAddressComplete.setText(address.getCompleteAddress());
     }
 
     private void getCartGoodsList() {

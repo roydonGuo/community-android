@@ -9,7 +9,7 @@
     android:orientation="vertical"
     tools:context=".activity.CreateOrderActivity">
 
-    <include layout="@layout/layout_toolbar"/>
+    <include layout="@layout/layout_toolbar" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_view"
@@ -33,18 +33,33 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_main_size" />
 
-            <TextView
-                android:id="@+id/rv_address"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:layout_marginRight="@dimen/dimen_10dp"
                 android:layout_marginBottom="@dimen/dimen_10dp"
                 android:background="@drawable/shape_radius"
-                android:padding="10dp"
-                android:text=""
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_main_size" />
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_20dp">
+
+                <TextView
+                    android:id="@+id/tv_address_telephone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="gyc， 182****7837"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_main_size" />
+
+                <TextView
+                    android:id="@+id/tv_address_complete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mg_10"
+                    android:text="中国河南省郑州市"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_main_size" />
+
+            </LinearLayout>
+
 
             <View
                 android:layout_width="match_parent"

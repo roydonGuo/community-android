@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.roydon.community.BaseActivity;
 import com.roydon.community.R;
+import com.roydon.community.action.StatusAction;
 import com.roydon.community.adapter.CartAdapter;
 import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
@@ -27,6 +28,7 @@ import com.roydon.community.domain.response.BaseResponse;
 import com.roydon.community.domain.vo.MallUserCartListRes;
 import com.roydon.community.view.AlertDialogX;
 import com.roydon.community.utils.DoubleUtils;
+import com.roydon.community.widget.HintLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -36,7 +38,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CartActivity extends BaseActivity {
+public class CartActivity extends BaseActivity implements StatusAction {
+    private String TOOLBAR_TITLE = "购物车";
+
+    // handler
+    private static final int HANDLER_WHAT_EMPTY = 0;
+    private static final int HANDLER_REFRESH_CART_LIST = 1;
 
     private RefreshLayout refreshLayout;
     private RecyclerView rvMallCart;
@@ -51,19 +58,39 @@ public class CartActivity extends BaseActivity {
     private TextView less, add;
     private ImageView ivGoodsImage, ivReturn;
 
+    private HintLayout mHintLayout;
+
+    @Override
+    public HintLayout getHintLayout() {
+        return mHintLayout;
+    }
+
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
+        @SuppressLint("NotifyDataSetChanged")
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
-                case 0:
-//                    Double collect = cartList.stream().mapToDouble(MallUserCartVO::getGoodsPrice).sum();
-                    List<Double> doubles = cartList.stream().map(MallUserCartVO::getGoodsPrice).collect(Collectors.toList());
-                    double v = DoubleUtils.addDoubleList(doubles);
-                    totalPrice.setText(v + "");
-                    cartAdapter.setDatas(cartList);
-                    cartAdapter.notifyDataSetChanged();
+                case HANDLER_WHAT_EMPTY:
+                    showEmpty();
+                    createOrder.setEnabled(false);
+                    break;
+                case HANDLER_REFRESH_CART_LIST:
+                    if (cartList.size() == 0) {
+                        createOrder.setEnabled(false);
+                        showEmpty();
+                    } else {
+                        List<Double> doubles = cartList.stream().map(MallUserCartVO::getGoodsPrice).collect(Collectors.toList());
+                        double v = DoubleUtils.addDoubleList(doubles);
+                        totalPrice.setText(v + "");
+                        cartAdapter.setDatas(cartList);
+                        cartAdapter.notifyDataSetChanged();
+                        showComplete();
+                    }
+                    break;
+                default:
+                    createOrder.setEnabled(false);
                     break;
             }
         }
@@ -76,6 +103,8 @@ public class CartActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        initToolBar(TOOLBAR_TITLE);
+        mHintLayout = findViewById(R.id.hintLayout);
         refreshLayout = findViewById(R.id.refreshLayout);
         rvMallCart = findViewById(R.id.rv_mall_cart);
         totalPrice = findViewById(R.id.tv_total_price);
@@ -87,13 +116,11 @@ public class CartActivity extends BaseActivity {
         less = findViewById(R.id.tv_goods_less);
         add = findViewById(R.id.tv_goods_add);
         createOrder = findViewById(R.id.btn_create_order);
+        showLoading();
     }
 
     @Override
     protected void initData() {
-        ivReturn.setOnClickListener(v -> {
-            finish();
-        });
         linearLayoutManager = new LinearLayoutManager(CartActivity.this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvMallCart.setLayoutManager(linearLayoutManager);
@@ -125,6 +152,11 @@ public class CartActivity extends BaseActivity {
                         Double collect = cartList.stream().mapToDouble(MallUserCartVO::getGoodsPrice).sum();
                         totalPrice.setText(collect + "");
                         cartAdapter.notifyDataSetChanged();
+                        // 若无商品，展示空页面
+                        if (cartList.size() == 0) {
+                            createOrder.setEnabled(false);
+                            showEmpty();
+                        }
                     }
                 }, new View.OnClickListener() {
                     @Override
@@ -153,7 +185,6 @@ public class CartActivity extends BaseActivity {
             List<String> goodsIds = cartList.stream().map(MallUserCartVO::getGoodsId).collect(Collectors.toList());
             Bundle bundle = new Bundle();
             bundle.putStringArrayList("goodsIds", (ArrayList<String>) goodsIds);
-//            showShortToast("goodsIds" + goodsIds);
             navigateToWithBundle(CreateOrderActivity.class, bundle);
         });
     }
@@ -182,14 +213,13 @@ public class CartActivity extends BaseActivity {
                         } else {
                             cartList.addAll(cartVOList);
                         }
-                        mHandler.sendEmptyMessage(0);
+                        mHandler.sendEmptyMessage(HANDLER_REFRESH_CART_LIST);
                     } else {
                         if (isRefresh) {
                             Log.e("getCartList", "暂时无数据");
-                            showSyncShortToast("暂时无数据");
+                            mHandler.sendEmptyMessage(HANDLER_WHAT_EMPTY);
                         } else {
                             Log.e("getCartList", "没有更多数据");
-                            showSyncShortToast("没有更多数据");
                         }
                     }
                 }
@@ -202,6 +232,7 @@ public class CartActivity extends BaseActivity {
                 } else {
                     refreshLayout.finishLoadMore(true);
                 }
+                mHandler.sendEmptyMessage(HANDLER_WHAT_EMPTY);
             }
         });
     }
