@@ -16,7 +16,7 @@ import com.roydon.community.manager.ActivityStackManager;
 import com.roydon.community.widget.HintLayout;
 
 /**
- * desc   : 界面状态提示
+ * desc   : 界面状态提示意图
  */
 public interface StatusAction {
 
