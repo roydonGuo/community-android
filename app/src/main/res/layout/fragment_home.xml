@@ -12,14 +12,13 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/element"
+        android:background="@drawable/shape_gradient"
         android:fitsSystemWindows="true">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/toolbar_height"
-            android:background="@color/element"
             app:contentInsetStart="0dp"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
@@ -35,7 +34,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center_vertical"
                     android:scaleType="fitXY"
-                    android:src="@color/white" />
+                    android:src="@mipmap/avatar_ganyu" />
 
                 <!--搜索框-->
                 <LinearLayout

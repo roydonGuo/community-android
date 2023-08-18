@@ -107,4 +107,14 @@
         app:bar_lineVisible="false"
         app:bar_rightColor="@color/gray"
         app:bar_rightIcon="@mipmap/icon_exit" />
+
+    <com.roydon.library.layout.SettingBar
+        android:id="@+id/sb_test_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:bar_leftColor="@color/blue_deep"
+        app:bar_leftText="测试titlebar"
+        app:bar_lineVisible="false"
+        app:bar_rightColor="@color/gray" />
 </LinearLayout>

@@ -77,14 +77,14 @@ public class UserInfoActivity extends BaseActivity {
 
     private AppUser appUser;
 
-    private SettingBar tvUserName;
+    private SettingBar tvUserName,sbNickName;
 
-    private TextView tvUserId, tvNickName, tvRealName, tvPhonenumber, tvEmail, tvIdCard, tvSex, tvAge, tvIsTenant;
+    private TextView  tvRealName, tvPhonenumber, tvEmail, tvIdCard, tvSex, tvAge, tvIsTenant;
 
     private String mCurrentPhotoPath;
 
     // 编辑组件
-    private LinearLayout llEditNickName, llEditRealName, llEditPhonenumber, llEditEmail;
+    private LinearLayout  llEditRealName, llEditPhonenumber, llEditEmail;
 
     @Override
     protected int initLayout() {
@@ -115,9 +115,8 @@ public class UserInfoActivity extends BaseActivity {
         llEditAvatar = findViewById(R.id.ll_edit_avatar);
         // 用户头像
         riUserAvatar = findViewById(R.id.ri_user_avatar);
-        tvUserId = findViewById(R.id.tv_user_id);
         tvUserName = findViewById(R.id.tv_user_name);
-        tvNickName = findViewById(R.id.tv_nick_name);
+        sbNickName = findViewById(R.id.sb_nick_name);
         tvRealName = findViewById(R.id.tv_real_name);
         tvPhonenumber = findViewById(R.id.tv_phonenumber);
         tvEmail = findViewById(R.id.tv_email);
@@ -127,7 +126,7 @@ public class UserInfoActivity extends BaseActivity {
         tvIsTenant = findViewById(R.id.tv_is_tenant);
 
         // 编辑组件
-        llEditNickName = findViewById(R.id.ll_edit_nick_name);
+//        llEditNickName = findViewById(R.id.ll_edit_nick_name);
         llEditRealName = findViewById(R.id.ll_edit_real_name);
         llEditPhonenumber = findViewById(R.id.ll_edit_phonenumber);
         llEditEmail = findViewById(R.id.ll_edit_email);
@@ -141,7 +140,7 @@ public class UserInfoActivity extends BaseActivity {
             showSelectDialog();
         });
         // 昵称点击编辑
-        llEditNickName.setOnClickListener(v -> {
+        sbNickName.setOnClickListener(v -> {
             String dialogTitle = "编辑昵称";
             DialogX.showEditTextDialog(this, dialogTitle, appUser.getNickName(), new OnConfirmDialogClickListener() {
                 @Override
@@ -225,11 +224,14 @@ public class UserInfoActivity extends BaseActivity {
     private void showUserInfo(AppUser appUser) {
         if (appUser.getAvatar() != null && !appUser.getAvatar().equals("")) {
             // 禁止Picasso缓存用户头像
-            Picasso.with(this).load(appUser.getAvatar()).transform(new CircleTransform()).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(riUserAvatar);
+            Picasso.with(this).load(appUser.getAvatar())
+                    .transform(new CircleTransform())
+                    .memoryPolicy(MemoryPolicy.NO_CACHE)
+                    .networkPolicy(NetworkPolicy.NO_CACHE)
+                    .into(riUserAvatar);
         }
-        tvUserId.setText(appUser.getUserId() + "");
-        tvUserName.setRightText(appUser.getUserName());
-        tvNickName.setText(appUser.getNickName());
+        tvUserName.setRightText(appUser.getUserName() + " : " + appUser.getUserId());
+        sbNickName.setRightText(appUser.getNickName());
         tvRealName.setText(appUser.getRealName());
         tvPhonenumber.setText(appUser.getPhonenumber());
         tvEmail.setText(appUser.getEmail());

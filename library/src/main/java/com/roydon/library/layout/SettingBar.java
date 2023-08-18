@@ -111,7 +111,7 @@ public final class SettingBar extends FrameLayout {
 
         // 文字大小设置
         setLeftSize(TypedValue.COMPLEX_UNIT_SP, array.getDimensionPixelSize(R.styleable.SettingBar_bar_leftSize, 16));
-        setRightSize(TypedValue.COMPLEX_UNIT_SP, array.getDimensionPixelSize(R.styleable.SettingBar_bar_rightSize, 14));
+        setRightSize(TypedValue.COMPLEX_UNIT_SP, array.getDimensionPixelSize(R.styleable.SettingBar_bar_rightSize, 16));
 
         // 分割线设置
         if (array.hasValue(R.styleable.SettingBar_bar_lineColor)) {

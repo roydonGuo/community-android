@@ -2,6 +2,7 @@ package com.roydon.community.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -62,7 +63,7 @@ public class MyFragment extends BaseFragment {
     private ImageView userBg, userAvatar;
     private TextView userNickName, userDept;
     // top-bar
-    private ImageView ivShare, ivTheme;
+    private ImageView ivSetting, ivShare, ivTheme;
     // 订单栏功能
     private LinearLayout llUserOrder;
     private RelativeLayout rlUserAddress, rlAccessRecord, rlHotline, rlHealthCode, rlInoculationHistoryReport, rlAddressSelecter, rlWebview, rlSetting;
@@ -102,6 +103,7 @@ public class MyFragment extends BaseFragment {
     protected void initView() {
         // 顶部功能icon
         ivShare = mRootView.findViewById(R.id.iv_share);
+        ivSetting = mRootView.findViewById(R.id.iv_setting);
         ivTheme = mRootView.findViewById(R.id.iv_theme);
 
         mLinearLayout = mRootView.findViewById(R.id.layout_my_detail);
@@ -126,8 +128,9 @@ public class MyFragment extends BaseFragment {
         rlWebview = mRootView.findViewById(R.id.rl_webview);
 
         // 设置
-        rlSetting = mRootView.findViewById(R.id.rl_setting);
-
+        ivSetting.setOnClickListener(v -> {
+            navigateTo(SettingActivity.class);
+        });
         // 分享
         ivShare.setOnClickListener(v -> {
             DialogX.showShareDialog(getContext(), new OnShareDialogClickListener() {
@@ -158,9 +161,6 @@ public class MyFragment extends BaseFragment {
                 }
             });
         });
-//        userBg.setOnClickListener(v -> {
-//            v.getLayoutParams().height = 164 * 2;
-//        });
         // 昼夜切换
         ivTheme.setOnClickListener(v -> {
             int current = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
@@ -214,9 +214,6 @@ public class MyFragment extends BaseFragment {
         });
         llUserOrder.setOnClickListener(v -> {
             navigateTo(UserOrderActivity.class);
-        });
-        rlSetting.setOnClickListener(v -> {
-            navigateTo(SettingActivity.class);
         });
         rlMessage.setOnClickListener(v -> {
             navigateTo(MessageActivity.class);
@@ -272,6 +269,10 @@ public class MyFragment extends BaseFragment {
                     .into(userAvatar);
         }
         userNickName.setText(appUser.getNickName());
+        if (appUser.getDeptId() != 1) {
+            // 已设置归属
+            userNickName.setTextColor(Color.YELLOW);
+        }
         userDept.setText(appUser.getDept().getDeptName());
     }
 

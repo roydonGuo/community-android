@@ -46,7 +46,7 @@
 
                     <!--功能-->
                     <ImageView
-                        android:id="@+id/iv_mall_cart"
+                        android:id="@+id/iv_setting"
                         android:layout_width="@dimen/icon_main_size"
                         android:layout_height="match_parent"
                         android:padding="3dp"
@@ -110,7 +110,7 @@
                                 android:id="@+id/img_header"
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
-                                android:src="@color/white"
+                                android:src="@mipmap/avatar_ganyu"
                                 app:riv_corner_radius="32dp" />
                         </LinearLayout>
 
@@ -120,33 +120,36 @@
                             android:orientation="vertical"
                             android:paddingLeft="10dp">
 
-                            <TextView
-                                android:id="@+id/user_nick_name"
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="admin"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/font_size_h1"
-                                android:textStyle="bold" />
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/user_nick_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="admin"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/font_size_h1"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:id="@+id/iv_user_vip"
+                                    android:layout_width="@dimen/icon_main_size"
+                                    android:layout_height="@dimen/icon_main_size"
+                                    android:padding="@dimen/dimen_3dp"
+                                    android:src="@mipmap/icon_vip" />
+                            </LinearLayout>
 
                             <TextView
                                 android:id="@+id/user_dept"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:text="永兴社区"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/font_main_size" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:layout_weight="1"
-                                android:text="欢迎来到此平台"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -162,7 +165,7 @@
                                 android:layout_marginRight="@dimen/mg_6"
                                 android:text="空间"
                                 android:textColor="@color/black"
-                                android:textSize="10sp" />
+                                android:textSize="@dimen/font_second_size" />
 
                             <ImageView
                                 android:layout_width="16dp"
@@ -874,48 +877,6 @@
                             android:gravity="center|left"
                             android:paddingLeft="10dp"
                             android:text="地址选择弹窗"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/font_main_size" />
-
-                        <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="match_parent"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:src="@mipmap/icon_right" />
-                    </RelativeLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:background="@color/fragment_background" />
-
-                    <RelativeLayout
-                        android:id="@+id/rl_setting"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp">
-
-                        <ImageView
-                            android:id="@+id/iv_setting"
-                            android:layout_width="@dimen/icon_main_size"
-                            android:layout_height="@dimen/icon_main_size"
-                            android:layout_centerVertical="true"
-                            android:padding="2dp"
-                            android:src="@mipmap/icon_setting" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_centerInParent="true"
-                            android:layout_toEndOf="@+id/iv_setting"
-                            android:layout_toRightOf="@+id/iv_setting"
-                            android:gravity="center|left"
-                            android:paddingLeft="10dp"
-                            android:text="设置"
                             android:textColor="@color/black"
                             android:textSize="@dimen/font_main_size" />
 

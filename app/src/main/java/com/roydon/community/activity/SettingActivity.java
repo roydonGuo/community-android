@@ -45,6 +45,11 @@ public class SettingActivity extends BaseActivity {
      */
     private SettingBar sbSettingExit;
 
+    /**
+     * 测试
+     */
+    private SettingBar sbTestTitleBar;
+
     @Override
     protected int initLayout() {
         return R.layout.activity_setting;
@@ -142,7 +147,10 @@ public class SettingActivity extends BaseActivity {
                         }
                     }).show();
         });
-
+        sbTestTitleBar = findViewById(R.id.sb_test_title_bar);
+        sbTestTitleBar.setOnClickListener(v->{
+            navigateTo(TestTitlebarActivity.class);
+        });
 
     }
 
