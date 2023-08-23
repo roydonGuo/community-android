@@ -1,8 +1,11 @@
 package com.roydon.community.fragment;
 
+import static com.roydon.community.constants.BundleConstants.APPUSER;
+
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -27,6 +30,7 @@ import com.roydon.community.activity.HealthCodeActivity;
 import com.roydon.community.activity.HotlineActivity;
 import com.roydon.community.activity.InoculationHistoryActivity;
 import com.roydon.community.activity.MessageActivity;
+import com.roydon.community.activity.NatOrderActivity;
 import com.roydon.community.activity.SettingActivity;
 import com.roydon.community.activity.UserAddressActivity;
 import com.roydon.community.activity.UserInfoActivity;
@@ -65,7 +69,7 @@ public class MyFragment extends BaseFragment {
     // top-bar
     private ImageView ivSetting, ivShare, ivTheme;
     // 订单栏功能
-    private LinearLayout llUserOrder;
+    private LinearLayout llUserOrder, llNatOrder;
     private RelativeLayout rlUserAddress, rlAccessRecord, rlHotline, rlHealthCode, rlInoculationHistoryReport, rlAddressSelecter, rlWebview, rlSetting;
 
     // 测试功能区
@@ -121,6 +125,8 @@ public class MyFragment extends BaseFragment {
         userDept = mRootView.findViewById(R.id.user_dept);
         // 订单栏功能
         llUserOrder = mRootView.findViewById(R.id.ll_user_order);
+        // 疫情防控
+        llNatOrder = mRootView.findViewById(R.id.ll_nat_order);
 
         // 功能测试区
         rlBDAddress = mRootView.findViewById(R.id.rl_bd_address);
@@ -214,6 +220,11 @@ public class MyFragment extends BaseFragment {
         });
         llUserOrder.setOnClickListener(v -> {
             navigateTo(UserOrderActivity.class);
+        });
+        llNatOrder.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(APPUSER, appUser);
+            navigateToWithBundle(NatOrderActivity.class, bundle);
         });
         rlMessage.setOnClickListener(v -> {
             navigateTo(MessageActivity.class);

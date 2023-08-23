@@ -389,6 +389,31 @@
 
                     </LinearLayout>
 
+
+                    <LinearLayout
+                        android:id="@+id/ll_nat_order"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/icon_main_size"
+                            android:padding="2dp"
+                            android:src="@mipmap/icon_mall_comment" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="预约核酸"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/font_second_size" />
+
+                    </LinearLayout>
+
                     <!-- 紧急热线 -->
                     <LinearLayout
                         android:id="@+id/ll_epidemic_hotline"
@@ -412,29 +437,6 @@
                             android:textColor="@color/black"
                             android:textSize="@dimen/font_second_size"
                             android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:padding="10dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/icon_main_size"
-                            android:padding="2dp"
-                            android:src="@mipmap/icon_mall_comment" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:text="待评价"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/font_second_size" />
 
                     </LinearLayout>
 

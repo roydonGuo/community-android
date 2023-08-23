@@ -44,6 +44,9 @@
         android:theme="@style/Theme.Communityandroid"
         tools:targetApi="31">
         <activity
+            android:name=".activity.NatOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.TestTitlebarActivity"
             android:exported="false" />
         <activity
