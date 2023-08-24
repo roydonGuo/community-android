@@ -100,4 +100,14 @@ public class ApiConfig {
      */
     public static final String APP_HOTLINE_ALL = "/app/hotline/all"; // list
 
+    /**
+     * 核酸预约
+     */
+    public static final String NAT_ORDER_QUICK = "/epidemic/nat/order/quick"; // quick
+
+    /**
+     * 功能反馈
+     */
+    public static final String SYS_FEEDBACK_ADD = "/system/feedback"; // 添加系统反馈
+
 }

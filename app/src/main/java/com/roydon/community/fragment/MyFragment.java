@@ -26,6 +26,7 @@ import com.google.gson.GsonBuilder;
 import com.roydon.community.R;
 import com.roydon.community.activity.AccessRecordActivity;
 import com.roydon.community.activity.BDAddressSelectActivity;
+import com.roydon.community.activity.FeedbackActivity;
 import com.roydon.community.activity.HealthCodeActivity;
 import com.roydon.community.activity.HotlineActivity;
 import com.roydon.community.activity.InoculationHistoryActivity;
@@ -70,7 +71,7 @@ public class MyFragment extends BaseFragment {
     private ImageView ivSetting, ivShare, ivTheme;
     // 订单栏功能
     private LinearLayout llUserOrder, llNatOrder;
-    private RelativeLayout rlUserAddress, rlAccessRecord, rlHotline, rlHealthCode, rlInoculationHistoryReport, rlAddressSelecter, rlWebview, rlSetting;
+    private RelativeLayout rlUserAddress, rlAccessRecord, rlHotline, rlHealthCode, rlInoculationHistoryReport, rlAddressSelecter, rlWebview, rlFeedback;
 
     // 测试功能区
     private RelativeLayout rlBDAddress, rlMessage;
@@ -125,8 +126,12 @@ public class MyFragment extends BaseFragment {
         userDept = mRootView.findViewById(R.id.user_dept);
         // 订单栏功能
         llUserOrder = mRootView.findViewById(R.id.ll_user_order);
+
         // 疫情防控
         llNatOrder = mRootView.findViewById(R.id.ll_nat_order);
+
+        //功能反馈
+        rlFeedback = mRootView.findViewById(R.id.rl_feedback);
 
         // 功能测试区
         rlBDAddress = mRootView.findViewById(R.id.rl_bd_address);
@@ -180,6 +185,9 @@ public class MyFragment extends BaseFragment {
         });
         mLinearLayout.setOnClickListener(v -> {
             navigateTo(UserInfoActivity.class);
+        });
+        rlFeedback.setOnClickListener(v->{
+            navigateTo(FeedbackActivity.class);
         });
         rlUserAddress.setOnClickListener(v -> {
             navigateTo(UserAddressActivity.class);
