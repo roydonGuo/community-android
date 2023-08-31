@@ -92,6 +92,7 @@ public class HomeFragment extends BaseFragment {
                     // 设置用户缓存
                     SPUtils.putLong(CacheConstants.USERID, appUser.getUserId(), getContext());
                     SPUtils.putString(CacheConstants.USERNAME, appUser.getUserName(), getContext());
+                    SPUtils.putString(CacheConstants.USER_AVATAR, appUser.getAvatar(), getContext());
                     showUserInfo(appUser);
                     break;
             }

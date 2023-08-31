@@ -7,5 +7,6 @@ public class CacheConstants {
      */
     public static final String USERID = "userId";
     public static final String USERNAME = "userName";
+    public static final String USER_AVATAR = "userAvatar";
 
 }

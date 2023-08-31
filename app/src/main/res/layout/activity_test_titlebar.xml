@@ -7,58 +7,10 @@
     android:background="#F4F4F4"
     tools:context=".activity.TestTitlebarActivity">
 
-    <!--    <declare-styleable name="TitleBar" >-->
-    <!--        &lt;!&ndash; 整体样式 &ndash;&gt;-->
-    <!--        <attr name="barStyle">-->
-    <!--            <enum name="light" value="0x10" />-->
-    <!--            <enum name="night" value="0x20" />-->
-    <!--            <enum name="transparent" value="0x30" />-->
-    <!--        </attr>-->
-    <!--        &lt;!&ndash; 中间 &ndash;&gt;-->
-    <!--        <attr name="title" format="string" />-->
-    <!--        <attr name="titleColor" format="color" />-->
-    <!--        <attr name="titleSize" format="dimension" />-->
-    <!--        &lt;!&ndash; 左边 &ndash;&gt;-->
-    <!--        <attr name="leftTitle" format="string"/>-->
-    <!--        <attr name="leftIcon" format="reference" />&lt;!&ndash; leftIcon 优先于 backButton &ndash;&gt;-->
-    <!--        <attr name="backButton" format="boolean" />&lt;!&ndash; 返回按钮（默认开） &ndash;&gt;-->
-    <!--        <attr name="leftColor" format="color" />-->
-    <!--        <attr name="leftSize" format="dimension" />-->
-    <!--        <attr name="leftBackground" format="reference|color" />-->
-    <!--        &lt;!&ndash; 右边 &ndash;&gt;-->
-    <!--        <attr name="rightTitle" format="string" />-->
-    <!--        <attr name="rightIcon" format="reference" />-->
-    <!--        <attr name="rightColor" format="color" />-->
-    <!--        <attr name="rightSize" format="dimension" />-->
-    <!--        <attr name="rightBackground" format="reference|color" />-->
-    <!--        &lt;!&ndash; 分割线 &ndash;&gt;-->
-    <!--        <attr name="lineVisible" format="boolean" />-->
-    <!--        <attr name="lineColor" format="reference|color" />-->
-    <!--        <attr name="lineSize" format="dimension" />-->
-    <!--    </declare-styleable>-->
-
-    <!--    mTitleBar.setOnTitleBarListener(new OnTitleBarListener() {-->
-
-    <!--    @Override-->
-    <!--    public void onLeftClick(View v) {-->
-    <!--    ToastUtils.show("左项View被点击");-->
-    <!--    }-->
-
-    <!--    @Override-->
-    <!--    public void onTitleClick(View v) {-->
-    <!--    ToastUtils.show("中间View被点击");-->
-    <!--    }-->
-
-    <!--    @Override-->
-    <!--    public void onRightClick(View v) {-->
-    <!--    ToastUtils.show("右项View被点击");-->
-    <!--    }-->
-    <!--    });-->
-
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="256dp"
-        android:background="@color/element"
+        android:background="@drawable/title_bar_head"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -141,7 +93,7 @@
                     app:rightIconPadding="2dp"
                     app:rightIconWidth="@dimen/icon_main_size"
                     app:title="默认的标题栏"
-                    app:titleColor="@color/black"
+                    app:titleColor="@color/blue_deep"
                     app:titleSize="@dimen/font_main_size" />
 
                 <com.hjq.bar.TitleBar

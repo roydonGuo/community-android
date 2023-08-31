@@ -13,7 +13,6 @@ import com.google.gson.Gson;
 import com.roydon.community.BaseActivity;
 import com.roydon.community.R;
 import com.roydon.community.action.StatusAction;
-import com.roydon.community.action.ToastAction;
 import com.roydon.community.api.Api;
 import com.roydon.community.api.ApiConfig;
 import com.roydon.community.api.HttpCallback;
@@ -23,7 +22,7 @@ import com.roydon.community.widget.HintLayout;
 
 import java.util.HashMap;
 
-public class FeedbackActivity extends BaseActivity implements StatusAction, ToastAction {
+public class FeedbackActivity extends BaseActivity implements StatusAction {
     private String TOOL_TITLE = "功能反馈";
 
     // handler
@@ -98,14 +97,14 @@ public class FeedbackActivity extends BaseActivity implements StatusAction, Toas
                 Log.e("addFeedback", res);
                 BaseResponse response = new Gson().fromJson(res, BaseResponse.class);
                 if (response != null && response.getCode() == 200) {
-                    toast("上报成功");
+                    toast("反馈成功");
                     mHandler.sendEmptyMessage(HANDLER_WHAT_COMPLETE);
                 }
             }
 
             @Override
             public void onFailure(Exception e) {
-                toast("上报失败");
+                toast("反馈失败");
             }
         });
     }

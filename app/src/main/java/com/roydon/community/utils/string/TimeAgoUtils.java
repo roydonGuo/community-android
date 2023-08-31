@@ -1,9 +1,5 @@
 package com.roydon.community.utils.string;
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -22,7 +18,6 @@ public class TimeAgoUtils {
     private static final String ONE_MONTH_AGO = "月前";
     private static final String ONE_YEAR_AGO = "年前";
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public static String smartTime(LocalDateTime time) {
         long compareTime = getTimestampOfDateTime(time);
         LocalDateTime now = LocalDateTime.now();
@@ -32,6 +27,34 @@ public class TimeAgoUtils {
             long seconds = toSeconds(delta);
             return (seconds <= 0 ? 1 : seconds) + ONE_SECOND_AGO;
         }
+        if (delta < 45L * ONE_MINUTE) {
+            long minutes = toMinutes(delta);
+            return (minutes <= 0 ? 1 : minutes) + ONE_MINUTE_AGO;
+        }
+        if (delta < 24L * ONE_HOUR) {
+            long hours = toHours(delta);
+            return (hours <= 0 ? 1 : hours) + ONE_HOUR_AGO;
+        }
+        if (delta < 48L * ONE_HOUR) {
+            return "昨天";
+        }
+        if (delta < 30L * ONE_DAY) {
+            long days = toDays(delta);
+            return (days <= 0 ? 1 : days) + ONE_DAY_AGO;
+        }
+        if (delta < 12L * 4L * ONE_WEEK) {
+            long months = toMonths(delta);
+            return (months <= 0 ? 1 : months) + ONE_MONTH_AGO;
+        } else {
+            long years = toYears(delta);
+            return (years <= 0 ? 1 : years) + ONE_YEAR_AGO;
+        }
+    }
+
+    public static String smartTimeFromDate(LocalDateTime now, LocalDateTime time) {
+        long compareTime = getTimestampOfDateTime(time);
+        long rightTime = getTimestampOfDateTime(now);
+        long delta = rightTime - compareTime;
         if (delta < 45L * ONE_MINUTE) {
             long minutes = toMinutes(delta);
             return (minutes <= 0 ? 1 : minutes) + ONE_MINUTE_AGO;
@@ -80,7 +103,6 @@ public class TimeAgoUtils {
         return toMonths(date) / 365L;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public static long getTimestampOfDateTime(LocalDateTime localDateTime) {
         ZoneId zone = ZoneId.systemDefault();
         Instant instant = localDateTime.atZone(zone).toInstant();

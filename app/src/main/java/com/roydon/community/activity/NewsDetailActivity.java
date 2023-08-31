@@ -85,7 +85,6 @@ public class NewsDetailActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-//        LoadingDialog.getInstance(this).show();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             newsId = bundle.getString("newsId");
@@ -96,6 +95,11 @@ public class NewsDetailActivity extends BaseActivity {
         });
     }
 
+    /**
+     * 获取新闻详情
+     *
+     * @param newsId
+     */
     private void getNewsDetail(String newsId) {
         HashMap<String, Object> params = new HashMap<>();
         Api.build(ApiConfig.NEWS_DETAIL + "/" + newsId, params).getRequest(this, new HttpCallback() {
@@ -157,7 +161,7 @@ public class NewsDetailActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         RichText.clear(this);
+        super.onDestroy();
     }
 }

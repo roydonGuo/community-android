@@ -139,6 +139,7 @@ public class SettingActivity extends BaseActivity {
                             // 清空缓存
                             SPUtils.remove(CacheConstants.USERID, SettingActivity.this);
                             SPUtils.remove(CacheConstants.USERNAME, SettingActivity.this);
+                            SPUtils.remove(CacheConstants.USER_AVATAR, SettingActivity.this);
                             navigateToWithFlag(LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         }
 

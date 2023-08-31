@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/white80" /> <!-- 设置消息框的背景颜色 -->
+    <corners android:radius="@dimen/pd_6" /> <!-- 设置消息框的圆角半径 -->
+    <padding
+        android:bottom="@dimen/pd_6"
+        android:left="@dimen/pd_10"
+        android:right="@dimen/pd_10"
+        android:top="@dimen/pd_6" /> <!-- 设置消息框的内边距 -->
+</shape>

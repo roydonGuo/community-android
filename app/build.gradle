@@ -32,10 +32,10 @@ android {
 
     defaultConfig {
         applicationId "com.roydon.community"
-        minSdkVersion 24
+        minSdkVersion 26
         targetSdkVersion 32
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -70,6 +70,20 @@ android {
     sourceSets {
         main {
             jniLibs.srcDir 'libs'
+        }
+    }
+
+    // 执行配置
+    applicationVariants.all { variant ->
+
+        // Apk 输出配置
+        variant.outputs.all { output ->
+//            outputFileName = rootProject.getName() + '_v' + variant.versionName + '_' + variant.buildType.name
+            outputFileName = '智慧社区_v' + variant.versionName + '_' + variant.buildType.name
+            if (variant.buildType.name == buildTypes.release.getName()) {
+                outputFileName += '_' + new Date().format("yyyyMMdd")
+            }
+            outputFileName += '.apk'
         }
     }
 
@@ -115,7 +129,7 @@ dependencies {
     // AOP 插件库：https://mvnrepository.com/artifact/org.aspectj/aspectjrt
     implementation 'org.aspectj:aspectjrt:1.9.6'
     // fastjson
-//    implementation 'com.alibaba:fastjson:1.2.54'
+    implementation 'com.alibaba:fastjson:2.0.34'
     // 底部导航栏flycoTabLayout
     implementation 'io.github.h07000223:flycoTabLayout:3.0.0'
     // BaseRecyclerViewAdapterHelper库

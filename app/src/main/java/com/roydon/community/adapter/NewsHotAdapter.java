@@ -3,7 +3,6 @@ package com.roydon.community.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.roydon.community.R;
@@ -48,7 +46,6 @@ public class NewsHotAdapter extends RecyclerView.Adapter<NewsHotAdapter.NewsHotH
         return new NewsHotAdapter.NewsHotHolder(view);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint({"SimpleDateFormat", "SetTextI18n"})
     @Override
     public void onBindViewHolder(@NonNull NewsHotAdapter.NewsHotHolder holder, int position) {

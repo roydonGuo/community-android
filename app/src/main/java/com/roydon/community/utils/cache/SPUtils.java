@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
- * sharepref工具类
+ * SharedPreferences 工具类
  */
 public class SPUtils {
     private static final String NAME = "config";

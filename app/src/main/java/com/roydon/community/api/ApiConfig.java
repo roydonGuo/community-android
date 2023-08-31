@@ -8,6 +8,9 @@ public class ApiConfig {
     public static final String BASE_URl = "http://106.14.105.101:8088";
 //    public static final String BASE_URl = "http://192.168.0.101:8088";
 //    public static final String BASE_URl = "http://192.168.68.179:8088";
+    public static final String WS_URl = "ws://106.14.105.101:8088";
+//    public static final String WS_URl = "ws://192.168.0.101:8088";
+//    public static final String WS_URl = "ws://192.168.68.179:8088";
 
     /**
      * app前缀接口
@@ -109,5 +112,10 @@ public class ApiConfig {
      * 功能反馈
      */
     public static final String SYS_FEEDBACK_ADD = "/system/feedback"; // 添加系统反馈
+
+    /**
+     * 聊天chat-list
+     */
+    public static final String CHAT_LIST_NORMAL = "/chat/list/normal";
 
 }

@@ -65,4 +65,9 @@
     <!-- 对话框取消按钮的文本颜色 -->
     <color name="common_cancel_text_color">#F44336</color>
 
+    <!-- 聊天框背景色 -->
+    <!--发送者-->
+    <color name="chat_box_sender_color">#0A8A43</color>
+    <!--   接收者-->
+
 </resources>

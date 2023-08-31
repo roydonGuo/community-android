@@ -174,5 +174,7 @@
     <string name="address_selecter_title">请选择地区</string>
     <string name="address_selecter_hint">请选择</string>
 
+    <!-- 功能反馈 -->
+    <string name="feedback_success">反馈成功</string>
 
 </resources>

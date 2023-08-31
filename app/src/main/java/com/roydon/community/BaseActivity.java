@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.roydon.community.action.ToastAction;
 import com.roydon.community.constants.Constants;
 import com.roydon.library.action.BundleAction;
 import com.roydon.library.action.HandlerAction;
@@ -23,21 +24,16 @@ import com.roydon.library.action.HandlerAction;
  * @author roydon
  * @date 2023/6/6 2:30
  */
-public abstract class BaseActivity extends AppCompatActivity implements BundleAction, HandlerAction {
+public abstract class BaseActivity extends AppCompatActivity implements BundleAction, HandlerAction, ToastAction {
 
     public Context context;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        StatusBarUtil.setColorStatus(this, 0xFF3700B3);
         Window window = this.getWindow();
-        /*如果之前是办透明模式，要加这一句需要取消半透明的Flag
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);*/
-        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         window.setStatusBarColor(Color.TRANSPARENT);
-//        getDelegate().setLocalNightMode(SPUtils.getTheme("theme", 1, this));
-//        recreate();
         context = this;
         setContentView(initLayout());
         initView();
@@ -55,13 +51,20 @@ public abstract class BaseActivity extends AppCompatActivity implements BundleAc
 
     protected abstract void initData();
 
+    TextView tvToolTitle;
+
     // 初始化 toolbar
     public void initToolBar(String title) {
         ImageView ivReturn = findViewById(R.id.iv_return);
         ivReturn.setOnClickListener(v -> {
             finish();
         });
-        TextView tvToolTitle = findViewById(R.id.tv_tool_title);
+        tvToolTitle = findViewById(R.id.tv_tool_title);
+        tvToolTitle.setText(title);
+    }
+
+    // 重新设置 toolbar title
+    public void resetToolBarTitle(String title) {
         tvToolTitle.setText(title);
     }
 

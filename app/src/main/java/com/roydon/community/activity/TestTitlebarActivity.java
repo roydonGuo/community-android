@@ -4,13 +4,11 @@ import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.roydon.community.BaseActivity;
 import com.roydon.community.R;
-import com.roydon.community.action.ToastAction;
 import com.roydon.community.ui.popup.MenuPopup;
 
-public class TestTitlebarActivity extends BaseActivity implements ToastAction {
+public class TestTitlebarActivity extends BaseActivity  {
 
     private TitleBar mTitleBar;
-
 
     @Override
     protected int initLayout() {
