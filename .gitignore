@@ -10,3 +10,5 @@
 local.properties
 
 /library/build
+
+/app/release
